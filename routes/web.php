@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchAccountController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\DashboardController;
@@ -47,13 +48,12 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::get('ajax/product/branches', [App\Http\Controllers\ProductController::class, 'ajaxProductBranches'])->name('product.ajax');
         Route::resource('packages', PackageController::class);
         Route::get('ajax/table/branches', [App\Http\Controllers\TableController::class, 'ajaxTableBranches'])->name('table.ajax');
-
         Route::post('ajax/package/status', [App\Http\Controllers\PackageController::class, 'ajaxPackageStatus'])->name('package.status');
-
         Route::get('/product', [DashboardController::class, 'product'])->name('product');
         Route::get('/lounge/{id}', [LoungeController::class, 'index'])->name('lounge.index');
         Route::post('/tables/{id}', [TableController::class, 'store'])->name('tables.store');
         Route::post('/lounge/{id}', [LoungeController::class, 'store'])->name('lounge.store');
+        Route::resource('clients', ClientController::class);
     }
 );
 
@@ -64,6 +64,8 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/branch/halls', [App\Http\Controllers\PosController::class, 'halls'])->name('branch.halls');
     Route::get('/branch/reservation', [App\Http\Controllers\PosController::class, 'reservation'])->name('branch.reservation');
     Route::get('/branch/halls/ajax', [App\Http\Controllers\PosController::class, '_hallesBranch'])->name('branch.halls.ajax');
+    Route::get('/clients/ajax', [App\Http\Controllers\PosController::class, '_client'])->name('clients.ajax');
+    Route::post('/clients', [ClientController::class, 'store'])->name('branch_client.store');
 });
 
 Route::get('/error', function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Lounge;
 use App\Models\Package;
 use App\Models\ProductCategory;
@@ -27,8 +28,10 @@ class PosController extends Controller
                     ->where('end_time', '>=', $time);
             })
             ->get();
+        $clients = Client::paginate(10);
+
         $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
-        return response()->view('branch.reservation', compact('halles', 'packages'));
+        return response()->view('branch.reservation', compact('halles', 'packages', 'clients'));
     }
     public function _hallesBranch(Request $request)
     {
@@ -48,6 +51,7 @@ class PosController extends Controller
         $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
         return view('branch._home', compact('halles'))->render();
     }
+
     public function products()
     {
         $products = ProductCategory::with(['Product' => function ($query) {
@@ -66,5 +70,13 @@ class PosController extends Controller
     {
         $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
         return  $render = view('branch._halls', compact('halles'));
+    }
+
+    public function _client(Request $request)
+    {
+        $clients = Client::when($request->phone, function ($query) use ($request) {
+            $query->where('phone', $request->phone);
+        })->paginate(10);
+        return  $render = view('branch._clients', compact('clients'));
     }
 }

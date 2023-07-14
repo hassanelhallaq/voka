@@ -303,7 +303,8 @@
                                     <div class="col-3">
                                         <div class="seacr-bar mb-5">
                                             <form class="d-flex search w-100 " role="search">
-                                                <input class="form-control" type="search" aria-label="Search">
+                                                <input class="form-control" oninput="clients()" type="search"
+                                                    aria-label="Search">
                                                 <button class="btn search-btn"><i
                                                         class="fa-solid fa-magnifying-glass"></i></button>
                                             </form>
@@ -348,7 +349,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">اغلاق</button>
-                                                                <button type="submit"
+                                                                <button type="button" onclick="performStore()"
                                                                     class="btn btn-primary add-gust">تسجيل</button>
                                                             </div>
                                                         </form>
@@ -364,133 +365,8 @@
 
                                     </div>
                                 </div>
-                                <div class="row gust-cards">
-                                    <div class="col-12 col-md-4">
-                                        <div class="card mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-md-3">
-                                                    <img src="images/avatar.png" class="img-fluid rounded-start"
-                                                        alt="...">
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="card-body text-right">
-                                                        <h5 class="card-title">عبدالرحمن على أحمد</h5>
-                                                        <h4 class="card-text">
-                                                            <a class="tel"
-                                                                href="tel:+966545255177">966545255177+</a>
-                                                        </h4>
-                                                        <div class="card-text">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row pb-4">
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">3</span>
-                                                            <span class="key">حجوزات</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">15</span>
-                                                            <span class="key">زيارة</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">عمليات دفع</span>
-                                                            <span class="key">1,300 $</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="card mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-md-3">
-                                                    <img src="images/avatar.png" class="img-fluid rounded-start"
-                                                        alt="...">
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="card-body text-right">
-                                                        <h5 class="card-title">عبدالرحمن على أحمد</h5>
-                                                        <h4 class="card-text">
-                                                            <a class="tel"
-                                                                href="tel:+966545255177">966545255177+</a>
-                                                        </h4>
-                                                        <div class="card-text">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row pb-4">
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">3</span>
-                                                            <span class="key">حجوزات</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">15</span>
-                                                            <span class="key">زيارة</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">عمليات دفع</span>
-                                                            <span class="key">1,300 $</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="card mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-md-3">
-                                                    <img src="images/avatar.png" class="img-fluid rounded-start"
-                                                        alt="...">
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="card-body text-right">
-                                                        <h5 class="card-title">عبدالرحمن على أحمد</h5>
-                                                        <h4 class="card-text">
-                                                            <a class="tel"
-                                                                href="tel:+966545255177">966545255177+</a>
-                                                        </h4>
-                                                        <div class="card-text">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row pb-4">
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">3</span>
-                                                            <span class="key">حجوزات</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">15</span>
-                                                            <span class="key">زيارة</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="upcoming d-flex flex-column text-center ">
-                                                            <span class="number">عمليات دفع</span>
-                                                            <span class="key">1,300 $</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="row gust-cards" id="clients">
+                                    @include('branch._clients')
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2">
@@ -850,7 +726,9 @@
     <script src="{{ asset('front/js/date.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
     <script src="{{ asset('front/js/main.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('crudjs/crud.js') }}"></script>
     <script>
         function pack(id) {
 
@@ -859,6 +737,23 @@
             }).done(function(data) {
                 $('#all-tables').html(data); // Show the new content
             });
+        }
+
+        function clients() {
+            var phone = $("#phone").val();
+
+            $.get('/branch/clients/ajax', {
+                phone: phone,
+            }).done(function(data) {
+                $('#clients').html(data); // Show the new content
+            });
+        }
+
+        function performStore() {
+            let formData = new FormData();
+            formData.append('name', document.getElementById('name').value);
+            formData.append('phone', document.getElementById('phone').value);
+            store('/branch/clients', formData)
         }
     </script>
 </body>
