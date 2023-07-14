@@ -303,8 +303,8 @@
                                     <div class="col-3">
                                         <div class="seacr-bar mb-5">
                                             <form class="d-flex search w-100 " role="search">
-                                                <input class="form-control" oninput="clients()" type="search"
-                                                    aria-label="Search">
+                                                <input class="form-control" oninput="clients()" id="search"
+                                                    type="search" aria-label="Search">
                                                 <button class="btn search-btn"><i
                                                         class="fa-solid fa-magnifying-glass"></i></button>
                                             </form>
@@ -349,7 +349,8 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">اغلاق</button>
-                                                                <button type="button" onclick="performStore()"
+                                                                <button type="button" data-bs-dismiss="modal"
+                                                                    onclick="performStore()"
                                                                     class="btn btn-primary add-gust">تسجيل</button>
                                                             </div>
                                                         </form>
@@ -740,7 +741,7 @@
         }
 
         function clients() {
-            var phone = $("#phone").val();
+            var phone = $("#search").val();
 
             $.get('/branch/clients/ajax', {
                 phone: phone,
@@ -754,6 +755,8 @@
             formData.append('name', document.getElementById('name').value);
             formData.append('phone', document.getElementById('phone').value);
             store('/branch/clients', formData)
+            this.clients()
+
         }
     </script>
 </body>
