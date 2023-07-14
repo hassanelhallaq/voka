@@ -41,3 +41,16 @@
             </div>
         </div>
     @endforeach
+    <script src="{{ asset('front/js/jquery.js') }}"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('front/js/date.js') }}"></script>
+    <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
+    <script src="{{ asset('front/js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('crudjs/crud.js') }}"></script>
