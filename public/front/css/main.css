@@ -988,3 +988,11 @@ tbody td:active {
 .no-border {
     border-bottom: 0 !important;
 }
+input[type="checkbox"], input[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+	opacity: 0;
+}
+.choos-btn {
+    padding-left: 30px;
+}
