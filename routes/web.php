@@ -66,6 +66,7 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/branch/halls/ajax', [App\Http\Controllers\PosController::class, '_hallesBranch'])->name('branch.halls.ajax');
     Route::get('/clients/ajax', [App\Http\Controllers\PosController::class, '_client'])->name('clients.ajax');
     Route::post('/clients', [ClientController::class, 'store'])->name('branch_client.store');
+    Route::get('/packages/ajax', [App\Http\Controllers\PosController::class, 'packages'])->name('packages.ajax');
 });
 
 Route::get('/error', function () {

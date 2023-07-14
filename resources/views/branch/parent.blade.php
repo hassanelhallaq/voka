@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
-    
-    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-				
-    
+
+    <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+
+
     <script src="{{ asset('front/js/jquery.js') }}"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('front/js/slick.min.js') }}"></script>
-     
+
 </head>
 
 <body>
@@ -60,9 +60,9 @@
                                         <span>الحجوزات</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item package">
                                     <a class="nav-link d-flex flex-column  justify-content-center align-items-center"
-                                        href="packages.html">
+                                        onclick="packages()">
                                         <i class="fa-solid fa-box-open"></i>
                                         <span>الباقات</span>
                                     </a>
@@ -91,7 +91,7 @@
             </div>
         </div>
     </section>
-    
+
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -100,31 +100,30 @@
     </script>
     <script src="{{ asset('front/js/date.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
-   
+
     <script src="{{ asset('front/js/main.js') }}"></script>
 </body>
 
 </html>
 <script>
-
-//   $(document).ready(function() {
-//     $('.owl-carousel').owlCarousel({
-//         loop:true,
-//         margin:10,
-//         nav:false,
-//         responsive:{
-//             0:{
-//                 items:1
-//             },
-//             600:{
-//                 items:3
-//             },
-//             1000:{
-//                 items:5
-//             }
-//         }
-//     });
-//   });
+    //   $(document).ready(function() {
+    //     $('.owl-carousel').owlCarousel({
+    //         loop:true,
+    //         margin:10,
+    //         nav:false,
+    //         responsive:{
+    //             0:{
+    //                 items:1
+    //             },
+    //             600:{
+    //                 items:3
+    //             },
+    //             1000:{
+    //                 items:5
+    //             }
+    //         }
+    //     });
+    //   });
     function products() {
         // Remove active class from "الرئيسية" link
         $('.nav-item.active').removeClass('active');
@@ -151,6 +150,18 @@
         });
     }
 
+    function packages() {
+        // Remove active class from "الرئيسية" link
+        $('.nav-item.active').removeClass('active');
+
+        // Add active class to "القائمة" link
+        $('.package').addClass('active');
+
+        $('#mainPage').empty(); // Clear the previous page content
+        $.get('/branch/packages/ajax', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        });
+    }
 
     function home() {
         $('.nav-item.active').removeClass('active');

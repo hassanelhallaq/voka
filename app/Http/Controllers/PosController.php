@@ -79,4 +79,18 @@ class PosController extends Controller
         })->paginate(10);
         return  $render = view('branch._clients', compact('clients'));
     }
+
+    public function packages()
+    {
+        $dayOfWeek = Carbon::now()->format('l');
+        $time = Carbon::now()->format('H:i:s');
+        $packages = Package::where('branch_id', Auth::user()->branch_id)
+            ->whereHas('schedules', function ($query) use ($dayOfWeek, $time) {
+                $query->where('day_of_week', strtolower($dayOfWeek)) // Convert to lowercase for case-insensitive comparison
+                    ->where('start_time', '<=', $time)
+                    ->where('end_time', '>=', $time);
+            })
+            ->get();
+        return response()->view('branch.packages', compact('packages'));
+    }
 }

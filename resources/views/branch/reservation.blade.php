@@ -28,7 +28,7 @@
                     <span class="top-title">حجز جديد</span>
                 </div>
                 <div class="col-4 text-left px-5">
-                    <a href="index.html" class="close-icon">
+                    <a href="{{ route('branch.home') }}" class="close-icon">
                         الإغلاق والذهاب الى الرئيسية
                         <i class="fa-solid fa-xmark"></i>
                     </a>
