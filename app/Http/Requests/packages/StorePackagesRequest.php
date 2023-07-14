@@ -45,7 +45,7 @@ class StorePackagesRequest extends FormRequest
             'discount' => 'required|integer',
             'time' => 'required',
             'branch_id' => 'required|exists:branches,id',
-            'table_id' => 'required|exists:tables,id',
+            'table_id.*' => 'required|exists:tables,id',
         ];
     }
 

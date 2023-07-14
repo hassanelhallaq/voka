@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('name_en');
             $table->foreignId('branch_id');
-            $table->foreign('branch_id')->on('branches')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('branch_id')->on('branches');
             $table->foreignId('table_id');
             $table->foreign('table_id')->on('tables')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('price');

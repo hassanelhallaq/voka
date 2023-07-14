@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lounge;
 use App\Models\Package;
 use App\Models\ProductCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,20 +18,28 @@ class PosController extends Controller
     }
     public function reservation()
     {
-        $date = date('Y-m-d'); // Get the current date
-        $time = date('H:i:s'); // Get the current time
-        $packages = Package::where('branch_id', Auth::user()->branch_id)->whereHas('schedules', function ($query) use ($date, $time) {
-            $query->where('day_of_week', strtolower(date('l', strtotime($date))))
-                ->where('start_time', '<=', $time)
-                ->where('end_time', '>=', $time);
-        })->get();
+        $dayOfWeek = Carbon::now()->format('l');
+        $time = Carbon::now()->format('H:i:s');
+        $packages = Package::where('branch_id', Auth::user()->branch_id)
+            ->whereHas('schedules', function ($query) use ($dayOfWeek, $time) {
+                $query->where('day_of_week', strtolower($dayOfWeek)) // Convert to lowercase for case-insensitive comparison
+                    ->where('start_time', '<=', $time)
+                    ->where('end_time', '>=', $time);
+            })
+            ->get();
         $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
         return response()->view('branch.reservation', compact('halles', 'packages'));
     }
     public function _hallesBranch(Request $request)
     {
-        $halles = Lounge::with('tables')->whereHas('tables', function ($query) use ($request) {
-            $query->where('lounge_id', $request->id);
+        $halles = Lounge::with(['tables' => function ($query) use ($request) {
+            $query->whereHas('packages', function ($q) use ($request) {
+                $q->where('package_id', $request->id);
+            });
+        }])->whereHas('tables', function ($query) use ($request) {
+            $query->with('packages')->whereHas('packages', function ($q) use ($request) {
+                $q->where('package_id', $request->id);
+            });
         })->get();
         return view('branch._halles_branch', compact('halles'))->render();
     }

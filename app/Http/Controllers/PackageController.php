@@ -26,7 +26,6 @@ class PackageController extends Controller
 
     public function store(StorePackagesRequest $request)
     {
-
         $package =   new Package();
         $package->name = $request->name;
         $package->name_en = $request->name_en;
@@ -34,7 +33,6 @@ class PackageController extends Controller
         $package->discount = $request->discount;
         $package->time = $request->time;
         $package->branch_id = $request->branch_id;
-        $package->table_id = $request->table_id;
         $package->save();
         $dayOfWeeks = $request->input('day_of_week');
         $startTimes = $request->input('start_time');
@@ -52,6 +50,7 @@ class PackageController extends Controller
             $imageName = time() . '_' . $package->id . '.' . $file->getClientOriginalExtension();
             $package->addMedia($file)->usingFileName($imageName)->toMediaCollection('package');
         }
+        $package->tables()->attach($request->table_id);
         if ($package) {
             toastr()->success('Coupon store successfully.');
         } else {

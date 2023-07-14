@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Table extends Model
 {
     use HasFactory;
+
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, PackageTables::class);
+    }
 }

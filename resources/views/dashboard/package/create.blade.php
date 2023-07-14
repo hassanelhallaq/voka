@@ -73,7 +73,7 @@
                                          <span class="text-danger">*</span>
                                      </label>
                                      <select class="form-select" multiple data-control="select2" id="table_id" required
-                                         name="table_id">
+                                         name="table_id[]">
                                          <option value="0" disabled="true">
                                              {{ __('tables') }}
                                          </option>

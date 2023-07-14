@@ -25,4 +25,9 @@ class Package extends Model implements HasMedia
     {
         return $this->hasMany(PackageSchedule::class);
     }
+
+    public function tables()
+    {
+        return $this->belongsToMany(Table::class, PackageTables::class);
+    }
 }
