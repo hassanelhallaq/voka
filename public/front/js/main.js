@@ -50,10 +50,25 @@ console.log(formattedDate);
 $('.statue').on('click', function(){
   $('.statue').css('opacity', '0.5');
   $(this).css('opacity', '1');
-
+   var dataTable = $(this).data('table');
+   var dataname = $(this).data('name');
+   var dataguests = $(this).data('guests');
+   var dataphone = $(this).data('phone');
+   var datapackage = $(this).data('package');
+   var datastute = $(this).data('stute');
+   var datapoints = $(this).data('guests');
+$('.reservations-table-nmber').text(dataTable);
+$('.guest-name').text(dataname);
+$('.guest-number').text(dataguests);
+$('.reservations-phone').text(dataphone);
+$('.reservations-package').text(datapackage);
+$('.reservations-statue').text(datastute);
+$('.reservations-points').text(datapoints);
 
 
 });
+
+// نهاية صفحة الحجوزات
 
   $('.search .search-btn').on('click', function(e) {
     e.preventDefault();
