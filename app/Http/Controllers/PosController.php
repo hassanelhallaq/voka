@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Lounge;
 use App\Models\Package;
 use App\Models\ProductCategory;
+use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,11 +23,12 @@ class PosController extends Controller
         $dayOfWeek = Carbon::now()->format('l');
         $time = Carbon::now()->format('H:i:s');
         $packages = Package::where('branch_id', Auth::user()->branch_id)
-            ->whereHas('schedules', function ($query) use ($dayOfWeek, $time) {
-                $query->where('day_of_week', strtolower($dayOfWeek)) // Convert to lowercase for case-insensitive comparison
-                    ->where('start_time', '<=', $time)
-                    ->where('end_time', '>=', $time);
-            })
+
+            // ->whereHas('schedules', function ($query) use ($dayOfWeek, $time) {
+            //     $query->where('day_of_week', strtolower($dayOfWeek)) // Convert to lowercase for case-insensitive comparison
+            //         ->where('start_time', '<=', $time)
+            //         ->where('end_time', '>=', $time);
+            // })
             ->get();
         $clients = Client::paginate(10);
 
@@ -92,5 +94,12 @@ class PosController extends Controller
             })
             ->get();
         return response()->view('branch.packages', compact('packages'));
+    }
+    public function resver()
+    {
+        $dayOfWeek = Carbon::now()->format('l');
+        $time = Carbon::now()->format('H:i:s');
+        $reservations = Reservation::all();
+        return  $render = view('branch.reserv', compact('reservations'));
     }
 }

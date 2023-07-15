@@ -9,7 +9,7 @@
                     <div class="col-md-9">
                         <div class="card-body text-right">
                             <h5 class="card-title">{{ $client->name }}</h5>
-                             
+                            <input hidden id="client_id" value="{{ $client->id }}">
                             <h4 class="card-text">
                                 <a class="tel" href="tel:+966545255177">{{ $client->phone }}</a>
                             </h4>

@@ -1,4 +1,4 @@
-    <div class="col-md-3">
+    <div class="col-md-3" id="casher-section">
         <div class="side-place">
             <div id="tab-place" class="c-tab-pane fade show active">
                 <ol class="table-list list-group list-group-numbered reversed">

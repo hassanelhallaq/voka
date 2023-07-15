@@ -107,7 +107,7 @@
                                     </ul>
                                 </div>
                                 <!-- عناصر التاب -->
-                                @include('branch._tab_casher')
+                                
                             </div>
 
 

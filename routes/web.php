@@ -10,6 +10,7 @@ use App\Http\Controllers\LoungeController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\TableController;
@@ -54,6 +55,7 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::post('/tables/{id}', [TableController::class, 'store'])->name('tables.store');
         Route::post('/lounge/{id}', [LoungeController::class, 'store'])->name('lounge.store');
         Route::resource('clients', ClientController::class);
+        Route::resource('reservations', ReservationController::class);
     }
 );
 
@@ -67,6 +69,8 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/clients/ajax', [App\Http\Controllers\PosController::class, '_client'])->name('clients.ajax');
     Route::post('/clients', [ClientController::class, 'store'])->name('branch_client.store');
     Route::get('/packages/ajax', [App\Http\Controllers\PosController::class, 'packages'])->name('packages.ajax');
+    Route::post('/reservations', [ReservationController::class, 'store'])->name('branch.reservations.store');
+    Route::get('/resver/ajax', [App\Http\Controllers\PosController::class, 'resver'])->name('resver.ajax');
 });
 
 Route::get('/error', function () {

@@ -39,55 +39,58 @@
                         <div class="nav-body">
                             <ul class="navbar-nav justify-content-center flex-grow-1">
                                 <li class="nav-item home active">
-                                    <a class="nav-link d-flex flex-column  justify-content-center align-items-center active"
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center active"
                                         aria-current="page" onclick="home()">
                                         <i class="fa-solid fa-house"></i>
                                         <span>الرئيسية</span>
                                     </a>
                                 </li>
                                 <li class="nav-item halls dropdown">
-                                    <a class="nav-link d-flex flex-column  justify-content-center align-items-center"
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                         onclick="halls()" role="button">
                                         <i class="fa-solid fa-table-cells-large"></i>
                                         <span>الصالات</span>
                                     </a>
-
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex flex-column  justify-content-center align-items-center"
-                                        href="reservations.html">
+                                <li class="nav-item resver">
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                        onclick="resver()">
                                         <i class="fa-solid fa-utensils"></i>
                                         <span>الحجوزات</span>
                                     </a>
                                 </li>
                                 <li class="nav-item package">
-                                    <a class="nav-link d-flex flex-column  justify-content-center align-items-center"
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                         onclick="packages()">
                                         <i class="fa-solid fa-box-open"></i>
                                         <span>الباقات</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex flex-column  justify-content-center align-items-center"
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                         href="waitingList.html">
                                         <i class="fa-regular fa-clock"></i>
                                         <span>الأنتظار</span>
                                     </a>
                                 </li>
                                 <li class="nav-item product">
-                                    <a class="nav-link d-flex flex-column  justify-content-center align-items-center"
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                         onclick="products()">
                                         <i class="fa-solid fa-clipboard-list "></i>
                                         <span>القائمة</span>
                                     </a>
                                 </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
                 @yield('contentFront')
                 @include('branch._casher')
+                @unless (view()->exists('branch.home'))
+                    @include('branch.reservSide')
+                @else
+                    @include('branch.reservSide')
+                @endunless
             </div>
         </div>
     </section>
@@ -134,6 +137,9 @@
         $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/products', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide(); // Show the reserv main section
         });
     }
 
@@ -147,7 +153,14 @@
         $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide(); // Show the reserv main section
         });
+    }
+
+    function isPageReloaded() {
+        return performance.navigation.type === 1; // 1 represents PAGE_RELOAD
     }
 
     function packages() {
@@ -160,6 +173,9 @@
         $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/packages/ajax', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide(); // Show the reserv main section
         });
     }
 
@@ -171,6 +187,23 @@
         $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/_home', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide(); // Show the reserv main section
+        });
+    }
+
+    function resver() {
+        $('.nav-item.active').removeClass('active');
+
+        // Add active class to "الحجوزات" link
+        $('.resver').addClass('active');
+        $('#mainPage').empty(); // Clear the previous page content
+        $.get('/branch/resver/ajax', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').hide(); // Hide the casher section
+            $('#reserv-main-section').show(); // Show the reserv main section
         });
     }
 </script>

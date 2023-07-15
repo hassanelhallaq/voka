@@ -1,5 +1,59 @@
-$(document).ready(function(){
 
+$(document).ready(function () {
+// كود صفحة الحجوزات
+var currentDate = new Date();
+var daysOfWeek = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+
+// عرض تاريخ الأسبوع الحالي
+function displayCurrentWeek() {
+  $('.days').each(function(i) {
+    var currentDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + i);
+    var options = { weekday: 'long', month: 'long', day: 'numeric' };
+    var formattedDate = currentDay.toLocaleDateString('ar-EG', options);
+
+    $(this).text(formattedDate);
+  });
+}
+
+// زر الأسبوع السابق
+$('.prev-btn').on('click', function() {
+  currentDate.setDate(currentDate.getDate() - 7);
+  displayCurrentWeek();
+});
+
+// زر الأسبوع التالى
+$('.next-btn').on('click', function() {
+  currentDate.setDate(currentDate.getDate() + 7);
+  displayCurrentWeek();
+});
+
+// عرض الأسبوع الحالي عند تحميل الصفحة
+displayCurrentWeek();
+
+// كود وضع وازالة كلاس الاكتف على يوم الاسبوع ونقل التاريخ الى محتوى التاريخ  فى اعلى الصفحة
+$('.days').on('click', function(){
+  $('.days').removeClass
+  $(this).addClass('active-day');
+  console.log($(this).text());
+  $('.the-day').text($(this).text());
+});
+
+
+var currentDate = new Date();
+var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+var formattedDate = currentDate.toLocaleDateString('ar-EG', options);
+
+$('.reservations-container .the-day').text(formattedDate);
+console.log(formattedDate);
+
+// كود عند الضغط على الحجز داخل الجدول
+$('.statue').on('click', function(){
+  $('.statue').css('opacity', '0.5');
+  $(this).css('opacity', '1');
+
+
+
+});
 
   $('.search .search-btn').on('click', function(e) {
     e.preventDefault();
@@ -138,8 +192,8 @@ $(".halls-tab .tab-pane").first().addClass("active");
     $('.tab-content ' + activeTab).addClass('active');
 
   });
-  
- 
+
+
 
     // الكود الخاص باظهار واخفاء قائمة الطعام حسب كل تصنيف
     $('.all-items').hide(); // إخفاء جميع العناصر all-items في البداية
@@ -247,7 +301,7 @@ $(".halls-tab .tab-pane").first().addClass("active");
     }
     $this.toggleClass('dragged');
     });
-    
+
     // دالة لجمع المجموع قبل الضرائب
     function updateSubTotal() {
       var total = 0;
@@ -349,9 +403,9 @@ $(".halls-tab .tab-pane").first().addClass("active");
     var formattedTime = hours + ':' + minutes + ' ' + ampm;
 
     $('.reserv-time').text(formattedTime).attr('data-v', 1);
-    
-    // كود اخفاء واظهار محتوى التبويبات فى صفحة حجز جديد 
-   
+
+    // كود اخفاء واظهار محتوى التبويبات فى صفحة حجز جديد
+
 
 //  $('.show-content').on('click', function(){
 //         $('.show-content').removeClass('active-list');
@@ -361,7 +415,7 @@ $(".halls-tab .tab-pane").first().addClass("active");
 //         $(contentId).show();
 //     });
 
- 
+
        $('.change-content').on('click', function() {
           var contentId = $(this).data('id');
           var sideTab = $('.show-content[data-id="' + contentId + '"]');
@@ -371,8 +425,8 @@ $(".halls-tab .tab-pane").first().addClass("active");
           $('.reservation-tabs').hide();
           $(contentId).show();
         });
-        
-        
+
+
         $('.save-all').on('click', function() {
         //   var jsonData = {
         //     package: $('.package-name').text(),
@@ -384,26 +438,30 @@ $(".halls-tab .tab-pane").first().addClass("active");
         //   };
             // console.log(jsonData); // يطبع الكائن JSON في وحدة التحكم (console)
 
-        
-        var data = {}; // كائن JSON لتخزين القيم
-          
+
+            var data = {
+            date: $('.reserv-date').text(),
+            time: $('.reserv-time').text(),
+            status: $('.nav-statues').text()
+             }; // كائن JSON لتخزين القيم
+
           // جمع قيم العناصر ووضعها في الكائن JSON
           data.guest = $('#guest-input #client_id').val();
           data.package = $('#package-input #package_id').val();
           data.table = $('#table-input #table_id').val();
-          
+
           // طباعة الكائن JSON في وحدة التحكم
           console.log(data);
-                
-        
+
+
           var contentId = $(this).data('id');
           var sideTab = $('.show-content[data-id="' + contentId + '"]');
           $('.reservation-tabs').hide();
           $(contentId).show();
         });
-        
-       
-        
+
+
+
 
 
     // تحديد العنصر الهدف
@@ -542,7 +600,7 @@ $(".halls-tab .tab-pane").first().addClass("active");
       var cardTitle = parentElement.find('.card-title').text();
       $('.package-name').text(cardTitle);
 ;    });
-    
+
     $('.gust-cards .card').on('click', function(){
         var personeName = $(this).find('.card-title');
         $('.guest-name').text(personeName.text())
@@ -606,15 +664,15 @@ $(".halls-tab .tab-pane").first().addClass("active");
     var cardTitle = $(this).find('.card-title').text();
     $('.table-name').text(cardTitle)
   });
-  
- 
-  
+
+
+
   $('.voka-slider').slick({
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 3
     });
-    
-    
+
+
 
   });

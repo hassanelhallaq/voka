@@ -261,19 +261,19 @@
                             <div class="container  py-5">
                                 <div class="row py-5">
                                     <!--<div class="col-md-2"></div>-->
-                                    @foreach ($packages as $item)
+                                    @foreach ($packages as $package)
                                         <div class="col-md-4">
-                                            <div class="card class="catch-id"  btn-dark  text-center">
+                                            <div class="card catch-id  btn-dark  text-center" id="package-input">
                                                 <div class="card-body">
-                                                    <h2 class="card-title">{{ $item->name }}</h2>
-                                                    <p class="card-text package-text mt-2">باقة {{ $item->time }}
+                                                    <h2 class="card-title">{{ $package->name }}</h2>
+                                                    <p class="card-text package-text mt-2">باقة {{ $package->time }}
                                                         ساعة مع
-                                                        {{ $item->price }} نقطة رصيد</p>
+                                                        {{ $package->price }} نقطة رصيد</p>
                                                     <div class="choos-btn btn btn-primary mt-4">
-                                                        <input type="radio" value="{{ $item->id }}"
-                                                            id="package_id" name="package"
-                                                            onclick="pack({{ $item->id }})">
-                                                        <label for="package_id">اختر الباقة</label>
+                                                        <input type="radio" value="{{ $package->id }}"
+                                                            id="package_id">
+                                                        <label onclick="pack({{ $package->id }})"
+                                                            for="package_id">اختر الباقة</label>
 
                                                     </div>
 
@@ -609,7 +609,8 @@
                                     </div>
                                     <div class="col-md-7"></div>
                                     <div class="col-md-3">
-                                        <div class="save-all btn btn-lg btn-primary" data-id="#pay">
+                                        <div class="save-all btn btn-lg btn-primary" onclick="storeReaervation()"
+                                            data-id="#pay">
                                             حفظ التغييرات
                                         </div>
 
@@ -756,6 +757,31 @@
             formData.append('phone', document.getElementById('phone').value);
             store('/branch/clients', formData)
             this.clients()
+
+        }
+
+        function storeReaervation() {
+            // var data = {
+            //     date: $('.reserv-date').text(),
+            //     time: $('.reserv-time').text(),
+            //     status: $('.nav-statues').text()
+            // }; // كائن JSON لتخزين القيم
+
+            // // جمع قيم العناصر ووضعها في الكائن JSON
+            // data.guest = $('#guest-input #client_id').val();
+            // data.package = $('#package-input #package_id').val();
+            // data.table = $('#table-input #table_id').val();
+
+
+            let formData = new FormData();
+            formData.append('client_id', $('#guest-input #client_id').val());
+            formData.append('package_id', $('#package-input #package_id').val());
+            formData.append('table_id', $('#table-input #table_id').val());
+            formData.append('date', $('.reserv-date').text());
+            formData.append('time', $('.reserv-time').text());
+            formData.append('status', $('.nav-statues').text());
+            store('/branch/reservations', formData)
+
 
         }
     </script>
