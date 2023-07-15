@@ -374,16 +374,27 @@ $(".halls-tab .tab-pane").first().addClass("active");
         
         
         $('.save-all').on('click', function() {
-          var jsonData = {
-            package: $('.package-name').text(),
-            table: $('.table-name').text(),
-            guest: $('.guest-name').text(),
-            date: $('.reserv-date').text(),
-            time: $('.reserv-time').text(),
-            status: $('.nav-statues').text()
-          };
+        //   var jsonData = {
+        //     package: $('.package-name').text(),
+        //     table: $('.table-name').text(),
+        //     guest: $('.guest-name').text(),
+        //     date: $('.reserv-date').text(),
+        //     time: $('.reserv-time').text(),
+        //     status: $('.nav-statues').text()
+        //   };
+            // console.log(jsonData); // يطبع الكائن JSON في وحدة التحكم (console)
+
         
-          console.log(jsonData); // يطبع الكائن JSON في وحدة التحكم (console)
+        var data = {}; // كائن JSON لتخزين القيم
+          
+          // جمع قيم العناصر ووضعها في الكائن JSON
+          data.guest = $('#guest-input #client_id').val();
+          data.package = $('#package-input #package_id').val();
+          data.table = $('#table-input #table_id').val();
+          
+          // طباعة الكائن JSON في وحدة التحكم
+          console.log(data);
+                
         
           var contentId = $(this).data('id');
           var sideTab = $('.show-content[data-id="' + contentId + '"]');

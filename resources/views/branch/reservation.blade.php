@@ -263,7 +263,7 @@
                                     <!--<div class="col-md-2"></div>-->
                                     @foreach ($packages as $item)
                                         <div class="col-md-4">
-                                            <div class="card btn-dark  text-center">
+                                            <div class="card class="catch-id"  btn-dark  text-center">
                                                 <div class="card-body">
                                                     <h2 class="card-title">{{ $item->name }}</h2>
                                                     <p class="card-text package-text mt-2">باقة {{ $item->time }}
