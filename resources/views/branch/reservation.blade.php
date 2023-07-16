@@ -263,19 +263,17 @@
                                     <!--<div class="col-md-2"></div>-->
                                     @foreach ($packages as $package)
                                         <div class="col-md-4">
-                                            <div class="card catch-id  btn-dark  text-center" id="package-input">
+                                            <div class="card catch-id  btn-dark  text-center" id="package-input" data-choosen="{{ $package->id }}">
                                                 <div class="card-body">
                                                     <h2 class="card-title">{{ $package->name }}</h2>
                                                     <p class="card-text package-text mt-2">باقة {{ $package->time }}
                                                         ساعة مع
                                                         {{ $package->price }} نقطة رصيد</p>
-                                                    <div class="choos-btn btn btn-primary mt-4">
-                                                        <input type="radio" value="{{ $package->id }}"
-                                                            id="package_id">
-                                                        <label onclick="pack({{ $package->id }})"
-                                                            for="package_id">اختر الباقة</label>
-
-                                                    </div>
+                                                   
+                                                    <label class="choos-btn btn btn-primary mt-4 pr-4" for="package_id" onclick="pack({{ $package->id }})">
+                                                          <input type="radio" value="{{ $package->id }}" id="package_{{ $package->id }}" style="display: none;" >
+                                                          اختر الباقة
+                                                    </label>
 
                                                 </div>
                                                 <div class="card-footer btn-dark text-light text-body-secondary">

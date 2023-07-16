@@ -609,17 +609,48 @@ $(".halls-tab .tab-pane").first().addClass("active");
       });
     });
 
+    //  getting package id  
     $('.choos-btn').on('click', function(){
       var parentElement = $(this).parent(); // الوصول إلى العنصر الأب لزر الإضافة
       var forDataV = parentElement.find('.card-title');
       var cardTitle = parentElement.find('.card-title').text();
       $('.package-name').text(cardTitle);
-;    });
-
-    $('.gust-cards .card').on('click', function(){
-        var personeName = $(this).find('.card-title');
-        $('.guest-name').text(personeName.text())
+      
+      var itemId = $(this).closest('.card').data('choosen');
+      $('.package-name').attr('data-choos', itemId);
+  
+       });
+       
+       
+       //  getting table id 
+       $('.new-reservation-tables .card').on('click', function(){
+        $('.new-reservation-tables .card').removeClass('active-card');
+        $(this).addClass('active-card');
+        var cardTitle = $(this).find('.card-title').text();
+        $('.table-name').text(cardTitle)
+        
+        var itemId = $(this).data('choosen');
+        $('.table-name').attr('data-choos', itemId);
+      });
+    
+    //  getting guest  id 
+    $('.gust-cards .card').on('click', function(event) {
+      event.stopPropagation();
+      
+      var personeName = $(this).find('.card-title');
+      $('.guest-name').text(personeName.text());
+      console.log($(this));
+      
+      var itemId = $(this).data('choosen');
+      $('.guest-name').attr('data-choos', itemId);
     });
+    
+    var newReservationData = {
+      packageId: $('.package-name').data('data-choos'),
+      tableId: $('.table-name').data('data-choos'),
+      guestId: $('.guest-name').data('data-choos')
+    };
+
 
     var registerButton = document.querySelector('.modal .add-gust');
     registerButton.addEventListener('click', function(e) {
@@ -673,13 +704,7 @@ $(".halls-tab .tab-pane").first().addClass("active");
     gustCardsContainer.appendChild(newGuestCard);
   });
 
-  $('.new-reservation-tables .card').on('click', function(){
-    $('.new-reservation-tables .card').removeClass('active-card');
-    $(this).addClass('active-card');
-    var cardTitle = $(this).find('.card-title').text();
-    $('.table-name').text(cardTitle)
-  });
-
+  
 
 
   $('.voka-slider').slick({
