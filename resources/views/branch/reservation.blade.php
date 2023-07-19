@@ -263,16 +263,19 @@
                                     <!--<div class="col-md-2"></div>-->
                                     @foreach ($packages as $package)
                                         <div class="col-md-4">
-                                            <div class="card catch-id  btn-dark  text-center" id="package-input" data-choosen="{{ $package->id }}">
+                                            <div class="card catch-id  btn-dark  text-center" id="package-input"
+                                                data-choosen="{{ $package->id }}">
                                                 <div class="card-body">
                                                     <h2 class="card-title">{{ $package->name }}</h2>
                                                     <p class="card-text package-text mt-2">باقة {{ $package->time }}
                                                         ساعة مع
                                                         {{ $package->price }} نقطة رصيد</p>
-                                                   
-                                                    <label class="choos-btn btn btn-primary mt-4 pr-4" for="package_id" onclick="pack({{ $package->id }})">
-                                                          <input type="radio" value="{{ $package->id }}" id="package_{{ $package->id }}" style="display: none;" >
-                                                          اختر الباقة
+
+                                                    <label class="choos-btn btn btn-primary mt-4 pr-4"
+                                                        for="package_id" onclick="pack({{ $package->id }})">
+                                                        <input type="radio" value="{{ $package->id }}"
+                                                            id="package_{{ $package->id }}" style="display: none;">
+                                                        اختر الباقة
                                                     </label>
 
                                                 </div>
@@ -757,31 +760,54 @@
             this.clients()
 
         }
+        $('.new-reservation-tables .card').on('click', function() {
+            $('.new-reservation-tables .card').removeClass('active-card');
+            $(this).addClass('active-card');
+            var cardTitle = $(this).find('.card-title').text();
+            $('.table-name').text(cardTitle);
 
+            var itemId = $(this).data('choosen');
+            $('.table-name').attr('data-choos', itemId);
+        });
+
+        // Function for guest click event
+        $('.gust-cards .card').on('click', function(event) {
+            event.stopPropagation();
+
+            var personeName = $(this).find('.card-title');
+            $('.guest-name').text(personeName.text());
+            console.log($(this));
+
+            var itemId = $(this).data('choosen');
+            $('.guest-name').attr('data-choos', itemId);
+        });
+
+        // Function to handle form submission
         function storeReaervation() {
-            // var data = {
-            //     date: $('.reserv-date').text(),
-            //     time: $('.reserv-time').text(),
-            //     status: $('.nav-statues').text()
-            // }; // كائن JSON لتخزين القيم
-
-            // // جمع قيم العناصر ووضعها في الكائن JSON
-            // data.guest = $('#guest-input #client_id').val();
-            // data.package = $('#package-input #package_id').val();
-            // data.table = $('#table-input #table_id').val();
-
+            var packageId = $('.package-name').attr('data-choos');
+            var tableId = $('.table-name').attr('data-choos');
+            var guestId = $('.guest-name').attr('data-choos');
+            var date = $('.reserv-date').text();
+            var time = $('.reserv-time').text();
+            var status = $('.nav-statues').text();
 
             let formData = new FormData();
-            formData.append('client_id', $('#guest-input #client_id').val());
-            formData.append('package_id', $('#package-input #package_id').val());
-            formData.append('table_id', $('#table-input #table_id').val());
-            formData.append('date', $('.reserv-date').text());
-            formData.append('time', $('.reserv-time').text());
-            formData.append('status', $('.nav-statues').text());
-            store('/branch/reservations', formData)
+            formData.append('client_id', guestId);
+            formData.append('package_id', packageId);
+            formData.append('table_id', tableId);
+            formData.append('date', date);
+            formData.append('time', time);
+            formData.append('status', status);
 
-
+            // Call the 'store' function to handle the form data submission
+            store('/branch/reservations', formData);
         }
+
+        // Add event listener to form submission
+        $('#reservation-form').on('submit', function(event) {
+            event.preventDefault();
+            handleFormSubmission();
+        });
     </script>
 </body>
 

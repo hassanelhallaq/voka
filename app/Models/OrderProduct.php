@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reservation extends Model
+class OrderProduct extends Model
 {
     use HasFactory;
-
-    public function package()
-    {
-        return $this->belongsTo(Package::class, 'package_id', 'id');
-    }
 }

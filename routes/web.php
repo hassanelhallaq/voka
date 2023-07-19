@@ -71,6 +71,10 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/packages/ajax', [App\Http\Controllers\PosController::class, 'packages'])->name('packages.ajax');
     Route::post('/reservations', [ReservationController::class, 'store'])->name('branch.reservations.store');
     Route::get('/resver/ajax', [App\Http\Controllers\PosController::class, 'resver'])->name('resver.ajax');
+    Route::get('/product-order/ajax/{id}', [App\Http\Controllers\PosController::class, 'productOrder'])->name('productOrder.ajax');
+    Route::post('/order-product/store', [App\Http\Controllers\OrderProductController::class, 'store'])->name('order-product.store');
+
+    Route::get('/path/to/branch.reservSide', [App\Http\Controllers\PosController::class, 'sideReser'])->name('sideReser.ajax');
 });
 
 Route::get('/error', function () {

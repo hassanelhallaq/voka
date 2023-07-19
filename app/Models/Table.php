@@ -13,4 +13,9 @@ class Table extends Model
     {
         return $this->belongsToMany(Package::class, PackageTables::class);
     }
+
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class, 'id', 'table_id');
+    }
 }

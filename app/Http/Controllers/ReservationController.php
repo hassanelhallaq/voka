@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -23,6 +24,9 @@ class ReservationController extends Controller
         $reservation->note = $request->note;
         $reservation->status = $request->status;
         $isSaved = $reservation->save();
+        $table = Table::find($request->table_id);
+        $table->status = 'in_service';
+        $table->save();
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
 }

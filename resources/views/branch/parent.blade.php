@@ -86,11 +86,8 @@
                 </div>
                 @yield('contentFront')
                 @include('branch._casher')
-                @unless (view()->exists('branch.home'))
-                    @include('branch.reservSide')
-                @else
-                    @include('branch.reservSide')
-                @endunless
+                @include('branch.reservSide')
+
             </div>
         </div>
     </section>
@@ -109,24 +106,16 @@
 
 </html>
 <script>
-    //   $(document).ready(function() {
-    //     $('.owl-carousel').owlCarousel({
-    //         loop:true,
-    //         margin:10,
-    //         nav:false,
-    //         responsive:{
-    //             0:{
-    //                 items:1
-    //             },
-    //             600:{
-    //                 items:3
-    //             },
-    //             1000:{
-    //                 items:5
-    //             }
-    //         }
-    //     });
-    //   });
+    $(document).ready(function() {
+        // Load 'branch.reservSide' view using jQuery's $.get() method
+        $.get('/branch/path/to/branch.reservSide', function(data) {
+            // Once the view is loaded, place its content inside the container
+            $('#reservSideContainer').html(data);
+            // Hide the container after loading the view
+            $('#reservSideContainer').hide();
+        });
+    });
+
     function products() {
         // Remove active class from "الرئيسية" link
         $('.nav-item.active').removeClass('active');

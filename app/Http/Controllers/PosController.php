@@ -7,6 +7,7 @@ use App\Models\Lounge;
 use App\Models\Package;
 use App\Models\ProductCategory;
 use App\Models\Reservation;
+use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,11 @@ class PosController extends Controller
 {
     public function home()
     {
-        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        $halles = Lounge::with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->with('package')->where('status', '!=', 'done');
+            }]);
+        }])->where('branch_id', Auth::user()->branch_id)->get();
         return response()->view('branch.home', compact('halles'));
     }
     public function reservation()
@@ -37,7 +42,7 @@ class PosController extends Controller
     }
     public function _hallesBranch(Request $request)
     {
-        $halles = Lounge::with(['tables' => function ($query) use ($request) {
+        $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
             $query->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
             });
@@ -101,5 +106,24 @@ class PosController extends Controller
         $time = Carbon::now()->format('H:i:s');
         $reservations = Reservation::all();
         return  $render = view('branch.reserv', compact('reservations'));
+    }
+    public function sideReser()
+    {
+        return  $render = view('branch.reservSide');
+    }
+
+    public function productOrder($id)
+    {
+        $products = ProductCategory::with(['Product' => function ($query) {
+            $query->whereHas('branches', function ($query) {
+                $query->where('branch_id', Auth::user()->branch_id);
+            });
+        }])->whereHas('Product', function ($q) {
+            $q->whereHas('branches', function ($q) {
+                $q->where('branch_id', Auth::user()->branch_id);
+            });
+        })->get();
+        $table = Table::find($id);
+        return  $render = view('branch.products_orders', compact('products', 'table'));
     }
 }
