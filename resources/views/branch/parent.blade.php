@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fron/slick/slick.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fron/slick/slick-theme.css') }}" />
 
 
     <script src="{{ asset('front/js/jquery.js') }}"></script>
@@ -93,7 +93,7 @@
     </section>
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">

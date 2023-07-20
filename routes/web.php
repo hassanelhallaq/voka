@@ -7,6 +7,7 @@ use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoungeController;
+use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -56,6 +57,7 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::post('/lounge/{id}', [LoungeController::class, 'store'])->name('lounge.store');
         Route::resource('clients', ClientController::class);
         Route::resource('reservations', ReservationController::class);
+        Route::get('/order-product', [OrderProductController::class, 'index'])->name('order-product');
     }
 );
 
@@ -73,6 +75,7 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/resver/ajax', [App\Http\Controllers\PosController::class, 'resver'])->name('resver.ajax');
     Route::get('/product-order/ajax/{id}', [App\Http\Controllers\PosController::class, 'productOrder'])->name('productOrder.ajax');
     Route::post('/order-product/store', [App\Http\Controllers\OrderProductController::class, 'store'])->name('order-product.store');
+    Route::get('/calender/ajax', [App\Http\Controllers\PosController::class, 'ajaxCalender'])->name('ajaxCalender');
 
     Route::get('/path/to/branch.reservSide', [App\Http\Controllers\PosController::class, 'sideReser'])->name('sideReser.ajax');
 });

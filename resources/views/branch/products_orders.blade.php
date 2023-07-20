@@ -10,6 +10,8 @@
         <div class="menu-category-wrap d-flex mb-4">
             <input value="{{ $table->id }}" id="table_id" hidden>
             <input value="{{ $table->reservation->package->id }}" id="package_id" hidden>
+            <input value="{{ $table->reservation->client_id }}" id="client_id" hidden>
+
             <div class="voka-slider">
                 @foreach ($products as $key => $item)
                     <div class="item">
@@ -74,30 +76,20 @@
 <script src="{{ asset('crudjs/crud.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
 <script>
-    pluss.on('click', function() {
-        var currentValue = parseInt($(this).siblings('.number').text());
-        $(this).siblings('.number').text(currentValue + 1);
-    });
-
-    // Decrement button click event handler
-    mins.on('click', function() {
-        var currentValue = parseInt($(this).siblings('.number').text());
-        if (currentValue > 0) {
-            $(this).siblings('.number').text(currentValue - 1);
-        }
-    });
-
     // Function to store product information
     function storeProduct(id) {
-        console.log($('.number'));
         let formData = new FormData();
         formData.append('table_id', document.getElementById('table_id').value);
         formData.append('product_id', id);
         formData.append('package_id', document.getElementById('package_id').value);
 
+        formData.append('client_id', document.getElementById('client_id').value);
+
         // Get the quantity value from the element with class name 'number'
-        var quantityValue = parseInt($('.number').text());
-        formData.append('quantity', quantityValue);
+        let quantityText = $('.number').text().replace(/,/g, ''); // Remove commas from the text
+        let quantity = parseInt(quantityText);
+
+        formData.append('quantity', quantity);
 
         // Call the 'store' function to handle the form data submission
         store('order-product/store', formData);

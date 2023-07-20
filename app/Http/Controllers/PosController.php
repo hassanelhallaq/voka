@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Lounge;
+use App\Models\OrderProduct;
 use App\Models\Package;
 use App\Models\ProductCategory;
 use App\Models\Reservation;
@@ -16,11 +17,14 @@ class PosController extends Controller
 {
     public function home()
     {
+
         $halles = Lounge::with(['tables' => function ($q) {
-            $q->with(['reservation' => function ($q) {
-                $q->with('package')->where('status', '!=', 'done');
+            $q->with(['orders', 'reservation' => function ($q) {
+                $q->with('package')->where('status', '!=', 'انتهى');
             }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
+
+
         return response()->view('branch.home', compact('halles'));
     }
     public function reservation()
@@ -100,12 +104,55 @@ class PosController extends Controller
             ->get();
         return response()->view('branch.packages', compact('packages'));
     }
-    public function resver()
+    public function resver(Request $request)
     {
-        $dayOfWeek = Carbon::now()->format('l');
-        $time = Carbon::now()->format('H:i:s');
+        $date = \Carbon\Carbon::now();
+        $lastMonth =  $date->subMonth();
         $reservations = Reservation::all();
-        return  $render = view('branch.reserv', compact('reservations'));
+        $data = Reservation::whereBetween('date', [Carbon::now()->subMonth(2), Carbon::now()->addMonth(6)])
+            ->get();
+
+        $data = Reservation::get();
+        $newData = [];
+        foreach ($data as $index => $item) {
+            $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
+            $reservationDateTime = $item->date . ' ' . $formattedTime . ':00';
+            $date =  $item->date . ' ' . $formattedTime;
+            $color = '#48cfcf';
+            $newData[$index]['id']        = $item->id;
+            $str = explode(' ', $item->package->name);
+            $client_name = $str[0];
+            $newData[$index]['title']     = "\n" . $item->package->name . "\n";
+            $newData[$index]['start']     = '2023-07-20 12:00:00';
+            $newData[$index]['color']       = $color;
+        }
+
+        return  $render = view('branch.reserv', compact('newData'))->render();
+    }
+    public function ajaxCalender(Request $request)
+    {
+        $date = \Carbon\Carbon::now();
+        $lastMonth =  $date->subMonth();
+        $reservations = Reservation::all();
+        $data = Reservation::whereBetween('date', [Carbon::now()->subMonth(2), Carbon::now()->addMonth(6)])
+            ->get();
+
+        $data = Reservation::get();
+        $newData = [];
+        foreach ($data as $index => $item) {
+            $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
+            $reservationDateTime = $item->date . ' ' . $formattedTime . ':00';
+            $date =  $item->date . ' ' . $formattedTime;
+            $color = '#48cfcf';
+            $newData[$index]['id']        = $item->id;
+            $str = explode(' ', $item->package->name);
+            $client_name = $str[0];
+            $newData[$index]['title']     = "\n" . $item->package->name . "\n";
+            $newData[$index]['start']     = '2023-07-20 12:00:00';
+            $newData[$index]['color']       = $color;
+        }
+
+        return response()->json($newData);
     }
     public function sideReser()
     {

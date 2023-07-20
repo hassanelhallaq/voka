@@ -235,17 +235,17 @@ $(".halls-tab .tab-pane").first().addClass("active");
     var pluss = $('.fa-plus');
     var number = $('.number');
 
-    pluss.on('click', function() {
-      var currentValue = parseInt($(this).siblings('.number').text()); // الحصول على القيمة الحالية للنص وتحويلها إلى عدد صحيح
-      $(this).siblings('.number').text(currentValue + 1); // زيادة القيمة بواحد وتحديث النص في العنصر number فقط
-    });
+  pluss.on('click', function() {
+  var currentValue = parseInt($(this).siblings('.number').text().replace(/,/g, '')); // Remove commas from the text
+  $(this).siblings('.number').text((currentValue + 1).toLocaleString()); // Increment and format the number with thousand separators
+});
 
-    mins.on('click', function() {
-      var currentValue = parseInt($(this).siblings('.number').text()); // الحصول على القيمة الحالية للنص وتحويلها إلى عدد صحيح
-      if (currentValue > 0 && currentValue >= 0) {
-        $(this).siblings('.number').text(currentValue - 1); // زيادة القيمة بواحد وتحديث النص
-      }
-    });
+mins.on('click', function() {
+  var currentValue = parseInt($(this).siblings('.number').text().replace(/,/g, '')); // Remove commas from the text
+  if (currentValue > 0 && currentValue >= 0) {
+    $(this).siblings('.number').text((currentValue - 1).toLocaleString()); // Decrement and format the number with thousand separators
+  }
+});
 
     // كود قائمة كل طاولة فى صفحة القائمة
     $('.addBtn').on('click', function() {

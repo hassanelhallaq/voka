@@ -40,9 +40,17 @@
             <div class="row home-card">
                 @foreach ($halles as $item)
                     @foreach ($item->tables as $table)
+                        @php
+                            if ($table->reservation) {
+                                $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                $reservationDateTime = $table->reservation->date . ' ' . $formattedTime . ':00';
+                            }
+                            
+                        @endphp
                         <div class="col-md-3 card-col  d-flex justify-content-center align-items-center"
                             data-tableNumber="{{ $item->name }}"
-                            data-start="{{ $table->reservation->package->time ?? 0 }}" data-updatedTime="45"
+                            data-package-time="{{ $table->reservation->package->time ?? 0 }}"
+                            data-start="{{ $reservationDateTime ?? 0 }}" data-updatedTime="45"
                             data-h="hall{{ $item->id }}"
                             @if ($table->status == 'in_service') data-stat="serv" @elseif($table->status == 'available') data-pstat ="available"
                              @elseif ($table->status == 'reserved') data-pstat ="reserved" @endif>
@@ -60,7 +68,18 @@
                                 <div class="card-header primary-bg-color">
                                     <div class="top d-flex justify-content-between ">
                                         <h5 class="card-title"> طاولة رقم {{ $table->name }}</h5>
-                                        <span class="start"> </span>
+                                        <!-- Add the countdown timer element where you want to display the remaining time -->
+                                        <!-- Assuming $formattedTime contains the time in "H:i" format -->
+                                        <div class="countdown-timer"
+                                            data-start="{{ $table->reservation ? $table->reservation->date . ' ' . $formattedTime : '' }}"
+                                            data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                            <!-- Add a span to display the countdown timer -->
+                                            @if ($table->reservation)
+                                                <span class="countdown-timer-text">00:00:00</span>
+                                            @else
+                                                <span>انتهى</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -118,42 +137,15 @@
                                 <div class="tab-content">
                                     <div id="the-menu" class="c-tab-pane active">
                                         <ol class="list-group list-group-numbered reversed">
-                                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">لحم سيشوان</div>
-                                                </div>
-                                                <span>150 ريال</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">سبرنج رولز</div>
-                                                </div>
-                                                <span> 50 ريال</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">سلطة آسيوية</div>
-                                                </div>
-                                                <span>15 ريال</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">سلطة آسيوية</div>
-                                                </div>
-                                                <span>15 ريال</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">سلطة آسيوية</div>
-                                                </div>
-                                                <span>15 ريال</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">سلطة آسيوية</div>
-                                                </div>
-                                                <span>15 ريال</span>
-                                            </li>
+                                            @foreach ($table->orders as $item)
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold">{{ $item->name }}</div>
+                                                    </div>
+                                                    <span>{{ $item->pivot->price }} ريال</span>
+                                                </li>
+                                            @endforeach
                                             <li
                                                 class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
                                                 <a onclick="product({{ $table->id }})" class="me-2">
@@ -459,4 +451,49 @@
             $('#reserv-main-section').hide(); // Show the reserv main section
         });
     }
+</script>
+<script>
+    // Function to update the countdown timer display
+    function updateCountdown() {
+        // Get all the countdown-timer elements
+        const countdownTimers = document.querySelectorAll('.countdown-timer');
+
+        countdownTimers.forEach(countdownTimer => {
+            const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
+
+            // Get the data-start and data-package-time values from the data attributes
+            const startTimeString = countdownTimer.getAttribute('data-start');
+            const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
+
+            // Convert the startTimeString to a Date object
+            const startTime = new Date(startTimeString);
+
+            // Calculate the target end time by adding the packageTime in minutes to the start time
+            const endTime = new Date(startTime.getTime() + packageTime * 60000);
+
+            const currentTime = new Date().getTime();
+            const timeRemaining = endTime - currentTime;
+
+            if (timeRemaining <= 0) {
+                // Timer has ended
+                countdownTimerText.textContent = 'انتهى';
+            } else {
+                // Calculate hours, minutes, and seconds
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                // Format the time and update the countdown display
+                const formattedTime =
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                countdownTimerText.textContent = formattedTime;
+            }
+        });
+    }
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+
+    // Initialize the countdown on page load
+    updateCountdown();
 </script>

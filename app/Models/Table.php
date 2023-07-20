@@ -13,7 +13,10 @@ class Table extends Model
     {
         return $this->belongsToMany(Package::class, PackageTables::class);
     }
-
+    public function orders()
+    {
+        return $this->belongsToMany(Product::class, OrderProduct::class, 'product_id', 'table_id')->withPivot('price', 'quantity');
+    }
     public function reservation()
     {
         return $this->belongsTo(Reservation::class, 'id', 'table_id');
