@@ -12,6 +12,7 @@ use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PosController extends Controller
 {
@@ -20,7 +21,18 @@ class PosController extends Controller
 
         $halles = Lounge::with(['tables' => function ($q) {
             $q->with(['orders', 'reservation' => function ($q) {
-                $q->with('package')->where('status', '!=', 'انتهى');
+                $now = Carbon::now(); // Get the current date and time
+                $q->with(['package' => function ($q) use ($now) {
+                    $q->select('id', 'time'); // Select the necessary columns from the package table
+                }])
+                    ->where('status', '!=', 'انتهى')
+                    ->where(function ($q) use ($now) {
+                        $q->where('date', '>', $now)
+                            ->orWhere(function ($q) use ($now) {
+                                $q->where('date', $now->toDateString())
+                                    ->whereTime('time', '>=', $now->addMinutes(DB::raw('`package`.`time`'))->format('H:i:s'));
+                            });
+                    });
             }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
 
@@ -108,7 +120,6 @@ class PosController extends Controller
     {
         $date = \Carbon\Carbon::now();
         $lastMonth =  $date->subMonth();
-        $reservations = Reservation::all();
         $data = Reservation::whereBetween('date', [Carbon::now()->subMonth(2), Carbon::now()->addMonth(6)])
             ->get();
 
@@ -123,7 +134,7 @@ class PosController extends Controller
             $str = explode(' ', $item->package->name);
             $client_name = $str[0];
             $newData[$index]['title']     = "\n" . $item->package->name . "\n";
-            $newData[$index]['start']     = '2023-07-20 12:00:00';
+            $newData[$index]['start']     = $reservationDateTime;
             $newData[$index]['color']       = $color;
         }
 
@@ -131,13 +142,8 @@ class PosController extends Controller
     }
     public function ajaxCalender(Request $request)
     {
-        $date = \Carbon\Carbon::now();
-        $lastMonth =  $date->subMonth();
-        $reservations = Reservation::all();
-        $data = Reservation::whereBetween('date', [Carbon::now()->subMonth(2), Carbon::now()->addMonth(6)])
+        $data = Reservation::whereDate('date', '>=', $request->start)
             ->get();
-
-        $data = Reservation::get();
         $newData = [];
         foreach ($data as $index => $item) {
             $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
@@ -148,7 +154,7 @@ class PosController extends Controller
             $str = explode(' ', $item->package->name);
             $client_name = $str[0];
             $newData[$index]['title']     = "\n" . $item->package->name . "\n";
-            $newData[$index]['start']     = '2023-07-20 12:00:00';
+            $newData[$index]['start']     = $reservationDateTime;
             $newData[$index]['color']       = $color;
         }
 

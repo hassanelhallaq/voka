@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Order;
 use App\Models\Package;
 use App\Models\Reservation;
 use App\Models\Table;
@@ -62,6 +63,9 @@ class EndReservationJob implements ShouldQueue
                 $table = Table::find($reservation->table_id);
                 $table->status = 'available';
                 $table->update();
+                $order = Order::where([['table_id', $reservation->table_id], ['package_id', $reservation->package_id], ['is_done', 0]])->first();
+                $order->is_done = 1;
+                $order->update();
             }
         }
     }

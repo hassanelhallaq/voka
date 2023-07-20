@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
@@ -27,6 +28,12 @@ class ReservationController extends Controller
         $table = Table::find($request->table_id);
         $table->status = 'in_service';
         $table->save();
+        $order = new Order();
+        $order->table_id = $request->table_id;
+        $order->package_id = $request->package_id;
+        $order->client_id = $request->client_id;
+        $order->is_done = 0;
+        $order->save();
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
 }

@@ -11,10 +11,10 @@
                                 <!--begin::Title-->
                                 <h1
                                     class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                                    Customer Orders Report</h1>
+                                    {{ __('orders') }}</h1>
                                 <!--end::Title-->
                                 <!--begin::Breadcrumb-->
-                                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                                {{-- <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                                     <!--begin::Item-->
                                     <li class="breadcrumb-item text-muted">
                                         <a href="../../demo1/dist/index.html"
@@ -37,7 +37,7 @@
                                     <!--begin::Item-->
                                     <li class="breadcrumb-item text-muted">Reports</li>
                                     <!--end::Item-->
-                                </ul>
+                                </ul> --}}
                                 <!--end::Breadcrumb-->
                             </div>
                             <!--end::Page title-->
@@ -46,13 +46,13 @@
                                 <!--begin::Filter menu-->
                                 <div class="m-0">
                                     <!--begin::Menu toggle-->
-                                    <a href="#"
+                                    {{-- <a href="#"
                                         class="btn btn-sm btn-flex bg-body btn-color-gray-700 btn-active-color-primary fw-bold"
                                         data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                         <i class="ki-duotone ki-filter fs-6 text-muted me-1">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
-                                        </i>Filter</a>
+                                        </i>Filter</a> --}}
                                     <!--end::Menu toggle-->
                                     <!--begin::Menu 1-->
                                     <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true"
@@ -164,7 +164,7 @@
                             <!--begin::Products-->
                             <div class="card card-flush">
                                 <!--begin::Card header-->
-                                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                                {{-- <div class="card-header align-items-center py-5 gap-2 gap-md-5">
                                     <!--begin::Card title-->
                                     <div class="card-title">
                                         <!--begin::Search-->
@@ -182,9 +182,9 @@
                                         <div id="kt_ecommerce_report_customer_orders_export" class="d-none"></div>
                                         <!--end::Export buttons-->
                                     </div>
-                                    <!--end::Card title==
+                                         <!--end::Card title==
 
-        <!==begin::Card toolbar-->
+                                          <!==begin::Card toolbar-->
                                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                                         <!--begin::Daterangepicker-->
                                         <input class="form-control form-control-solid w-100 mw-250px"
@@ -250,7 +250,7 @@
                                         <!--end::Export dropdown-->
                                     </div>
                                     <!--end::Card toolbar-->
-                                </div>
+                                </div> --}}
                                 <!--end::Card header-->
                                 <!--begin::Card body-->
                                 <div class="card-body pt-0">
@@ -259,34 +259,49 @@
                                         id="kt_ecommerce_report_customer_orders_table">
                                         <thead>
                                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                                <th class="min-w-100px">Customer Name</th>
-                                                <th class="min-w-100px">Email</th>
-                                                <th class="min-w-100px">Status</th>
-                                                <th class="min-w-100px">Date Joined</th>
-                                                <th class="text-end min-w-75px">No. Orders</th>
-                                                <th class="text-end min-w-75px">No. Products</th>
-                                                <th class="text-end min-w-100px">Total</th>
+                                                <th>{{ __('table') }}</th>
+                                                <th>{{ __('client name') }}</th>
+                                                <th>{{ __('client phone') }}</th>
+                                                <th>{{ __('package name') }}</th>
+                                                <th>{{ __('package time') }}</th>
+                                                <th>{{ __('package price') }}</th>
+                                                <th>{{ __('Total orders') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody class="fw-semibold text-gray-600">
 
                                             @foreach ($order as $item)
                                                 <tr>
-
                                                     <td>
-                                                        <a href="#"
-                                                            class="text-dark text-hover-primary">max@kt.com</a>
+                                                        {{ $item->table->name }}
                                                     </td>
                                                     <td>
-                                                        <div class="badge badge-light-success">Active</div>
+                                                        {{ $item->client->name }}
                                                     </td>
-                                                    <td>21 Feb 2023, 5:20 pm</td>
-                                                    <td class="text-end pe-0">15</td>
-                                                    <td class="text-end pe-0">25</td>
-                                                    <td class="text-end">$2819.00</td>
+                                                    <td>
+                                                        {{ $item->client->phone }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->package->name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->package->time }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->package->price }}
+                                                    </td>
+                                                    @php
+                                                        $totalSum = $item->products->sum(function ($product) {
+                                                            return $product->pivot->price * $product->pivot->quantity;
+                                                        });
+                                                    @endphp
+                                                    <td> {{ $totalSum }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
+                                        <span class="span">
+                                            {!! $order->links() !!}
+                                        </span>
                                     </table>
                                     <!--end::Table-->
                                 </div>

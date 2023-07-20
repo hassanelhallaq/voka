@@ -7,6 +7,7 @@ use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoungeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PermissionController;
@@ -57,7 +58,7 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::post('/lounge/{id}', [LoungeController::class, 'store'])->name('lounge.store');
         Route::resource('clients', ClientController::class);
         Route::resource('reservations', ReservationController::class);
-        Route::get('/order-product', [OrderProductController::class, 'index'])->name('order-product');
+        Route::get('/order-product', [OrderController::class, 'index'])->name('order-product');
     }
 );
 

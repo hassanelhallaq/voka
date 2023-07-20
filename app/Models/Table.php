@@ -15,7 +15,7 @@ class Table extends Model
     }
     public function orders()
     {
-        return $this->belongsToMany(Product::class, OrderProduct::class, 'product_id', 'table_id')->withPivot('price', 'quantity');
+        return $this->belongsToMany(Order::class, OrderProduct::class, 'product_id', 'order_id')->withPivot('price', 'quantity');
     }
     public function reservation()
     {

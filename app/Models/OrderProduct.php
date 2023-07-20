@@ -13,13 +13,5 @@ class OrderProduct extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
-    public function package()
-    {
-        return $this->belongsTo(Package::class);
-    }
 
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
 }
