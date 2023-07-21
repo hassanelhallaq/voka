@@ -2,7 +2,7 @@
     <h2 class="text-center mb-5">بيانات الحجز</h2>
     <ol class="list-group list-group-numbered reservations-list">
         <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="me-2 ms-auto">
+            <div class="me-2 ms-auto">a
                 <div class="fw-bold"> رقم الطاولة</div>
             </div>
             <span class="reservations-table-nmber">...</span>
