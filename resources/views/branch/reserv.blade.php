@@ -3,11 +3,11 @@
         color: #fff;
    }
     .fc-widget-header thead tr{
-            color: #fff;
-            font-size: 20px;
+        color: #fff;
+        font-size: 20px;
     }
     tbody td{
-             border-radius: 0;
+        border-radius: 0;
     }
     .fc-unthemed td.fc-today .fc-day-number{
         color:#fff;
@@ -25,17 +25,18 @@
     .fc-unthemed td.fc-today{
         background-color:#e5772a !important;
     }
+    tbody tr{
+        color: #fff;
+    }
+    .fc-event, .fc-event-dot{
+        background-color:#d59161 !important;
+    }
    </style>
    <div id="mainPage">
-       <div class="col-md-12">
            <div class="container mt-5">
                <div id="calendar">
-
                </div>
            </div>
-
-       </div>
-
    </div>
    <meta name="csrf-token" content="{{ csrf_token() }}" />
    @csrf
