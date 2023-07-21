@@ -758,7 +758,6 @@
             formData.append('phone', document.getElementById('phone').value);
             store('/branch/clients', formData)
             this.clients()
-
         }
         $('.new-reservation-tables .card').on('click', function() {
             $('.new-reservation-tables .card').removeClass('active-card');

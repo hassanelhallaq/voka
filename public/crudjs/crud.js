@@ -128,7 +128,16 @@ function updateReload (url, data, redirectUrl) {
         });
 }
 
-
+function storeReload (url, data, redirectUrl) {
+    axios.post( url, data)
+        .then(function (response) {
+            console.log(response);
+            location.reload()
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
+}
 function confirmDestroy(url, td) {
     Swal.fire({
         title: 'هل أنت متأكد من عملية الحذف ؟',

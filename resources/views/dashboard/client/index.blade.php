@@ -11,7 +11,7 @@
                                 <!--begin::Title-->
                                 <h1
                                     class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                                    {{ __('orders') }}</h1>
+                                    {{ __('clients') }}</h1>
                                 <!--end::Title-->
                                 <!--begin::Breadcrumb-->
                                 {{-- <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -55,7 +55,7 @@
                                         </i>Filter</a> --}}
                                     <!--end::Menu toggle-->
                                     <!--begin::Menu 1-->
-                                    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true"
+                                    {{-- <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true"
                                         id="kt_menu_641ac417384b2">
                                         <!--begin::Header-->
                                         <div class="px-7 py-5">
@@ -141,15 +141,16 @@
                                             <!--end::Actions-->
                                         </div>
                                         <!--end::Form-->
-                                    </div>
+                                    </div> --}}
                                     <!--end::Menu 1-->
                                 </div>
                                 <!--end::Filter menu-->
                                 <!--begin::Secondary button-->
                                 <!--end::Secondary button-->
                                 <!--begin::Primary button-->
-                                {{-- <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_create_app">Create</a> --}}
+                                <a data-bs-toggle="modal" data-bs-target="#clients"
+                                    class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#kt_modal_create_app">{{ __('Create') }}</a>
                                 <!--end::Primary button-->
                             </div>
                             <!--end::Actions-->
@@ -259,50 +260,118 @@
                                         id="kt_ecommerce_report_customer_orders_table">
                                         <thead>
                                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                                <th>{{ __('table') }}</th>
                                                 <th>{{ __('client name') }}</th>
                                                 <th>{{ __('client phone') }}</th>
-                                                <th>{{ __('package name') }}</th>
-                                                <th>{{ __('package time') }}</th>
-                                                <th>{{ __('package price') }}</th>
-                                                <th>{{ __('Total orders') }}</th>
+                                                <th>{{ __('settings') }}</th>
+
                                             </tr>
                                         </thead>
                                         <tbody class="fw-semibold text-gray-600">
 
-                                            @foreach ($order as $item)
+                                            @foreach ($clients as $item)
                                                 <tr>
                                                     <td>
-                                                        {{ $item->table->name }}
+                                                        {{ $item->name }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->client->name }}
+                                                        {{ $item->phone }}
                                                     </td>
+
                                                     <td>
-                                                        {{ $item->client->phone }}
+                                                        <a href="#"
+                                                            class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
+                                                            data-kt-menu-trigger="click"
+                                                            data-kt-menu-placement="bottom-end">Actions
+                                                            <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
+                                                        <!--begin::Menu-->
+                                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
+                                                            data-kt-menu="true">
+                                                            <!--begin::Menu item-->
+                                                            <div class="menu-item px-3">
+                                                                <a href="{{ route('clients.show', [$item->id]) }}"
+                                                                    class="menu-link px-3">View</a>
+                                                            </div>
+                                                            <!--end::Menu item-->
+                                                            <!--begin::Menu item-->
+                                                            <div class="menu-item px-3">
+                                                                <a href="#" class="menu-link px-3"
+                                                                    data-kt-customer-table-filter="delete_row">Delete</a>
+                                                            </div>
+                                                            <!--end::Menu item-->
+                                                        </div>
+                                                        <!--end::Menu-->
                                                     </td>
-                                                    <td>
-                                                        {{ $item->package->name }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->package->time }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $item->package->price }}
-                                                    </td>
-                                                    @php
-                                                        $totalSum = $item->products->sum(function ($product) {
-                                                            return $product->pivot->price * $product->pivot->quantity;
-                                                        });
-                                                    @endphp
-                                                    <td> {{ $totalSum }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <span class="span">
-                                            {!! $order->links() !!}
+                                            {!! $clients->links() !!}
                                         </span>
                                     </table>
+                                    <div class="modal fade" id="clients" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered mw-750px">
+                                            <div class="modal-content">
+                                                <div class="modal-body scroll-y mx-lg-5 my-7">
+                                                    <!--begin::Form-->
+                                                    <form id="kt_modal_add_role_form" class="form">
+                                                        @csrf
+                                                        <!--begin::Scroll-->
+                                                        <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                                                            <div class="row">
+                                                                <div class="form-group mb-6">
+                                                                    <label>{{ __('Name') }}</label>
+
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="text"
+                                                                            class="form-control meal_price"
+                                                                            name="name" required id='name'
+                                                                            value="{{ old('name') }}">
+                                                                    </div>
+                                                                    @if ($errors->has('name'))
+                                                                        <p style="color: red">
+                                                                            {{ $errors->first('name') }}
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="form-group mb-6">
+                                                                    <label>{{ __('client phone') }}</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="number"
+                                                                            class="form-control meal_price"
+                                                                            name="phone" required id='phone'
+                                                                            value="{{ old('phone') }}">
+                                                                    </div>
+                                                                    @if ($errors->has('phone'))
+                                                                        <p style="color: red">
+                                                                            {{ $errors->first('phone') }}
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Scroll-->
+                                                        <!--begin::Actions-->
+                                                        <div class="text-center pt-15">
+                                                            <button type="reset" class="btn btn-light me-3"
+                                                                data-bs-dismiss="modal"
+                                                                data-kt-roles-modal-action="cancel">
+                                                                {{ __('Discard') }}</button>
+                                                            <button onclick="performStore()" type="submit"
+                                                                class="btn btn-primary"
+                                                                data-kt-roles-modal-action="submit">
+                                                                {{ __('Submit') }}
+                                                            </button>
+                                                        </div>
+                                                        <!--end::Actions-->
+                                                    </form>
+                                                    <!--end::Form-->
+                                                </div>
+                                                <!--end::Modal body-->
+                                            </div>
+                                            <!--end::Modal content-->
+                                        </div>
+                                        <!--end::Modal dialog-->
+                                    </div>
                                     <!--end::Table-->
                                 </div>
                                 <!--end::Card body-->
@@ -319,3 +388,14 @@
                 <!--end::Footer-->
             </div>
         </x-default-layout>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="{{ asset('crudjs/crud.js') }}"></script>
+        <script>
+            function performStore() {
+                let formData = new FormData();
+                formData.append('name', document.getElementById('name').value);
+                formData.append('phone', document.getElementById('phone').value);
+                storeReload('/admin/clients', formData)
+            }
+        </script>
