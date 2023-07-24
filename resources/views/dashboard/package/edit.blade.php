@@ -77,9 +77,9 @@
                                      <select class="form-select" multiple data-control="select2" id="table_id" required
                                          name="table_id[]">
 
-                                         @foreach ($tables->tables as $item)
+                                         @foreach ($tables as $table)
                                              @foreach ($package->tables as $item)
-                                                 @if ($item->id == $item->id)
+                                                 @if ($table->id == $item->id)
                                                      <option value="0" disabled="true">
                                                          {{ __('tables') }}
                                                      </option>
