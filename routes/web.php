@@ -59,6 +59,7 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::resource('clients', ClientController::class);
         Route::resource('reservations', ReservationController::class);
         Route::get('/order-product', [OrderController::class, 'index'])->name('order-product');
+        Route::put('/tables/{id}', [TableController::class, 'update'])->name('tables.update');
     }
 );
 
