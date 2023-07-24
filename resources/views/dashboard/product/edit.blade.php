@@ -116,7 +116,7 @@
                                                 <div class="input-group mb-3">
 
                                                     <input type="number" class="form-control meal_price"
-                                                        name="calories" id='calories' value="{{ $product->calories}}"
+                                                        name="calories" id='calories' value="{{ $product->calories }}"
                                                         value="{{ $product->calories }}">
                                                 </div>
                                                 @if ($errors->has('calories'))
@@ -288,3 +288,11 @@
             </div>
         </div>
 </x-default-layout>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error('{{ $error }}');
+        @endforeach
+    @endif
+</script>
