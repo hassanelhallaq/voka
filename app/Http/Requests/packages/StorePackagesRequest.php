@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 
 class StorePackagesRequest extends FormRequest
@@ -21,16 +22,11 @@ class StorePackagesRequest extends FormRequest
     {
         $data = $request->except(array('_token'));
         $validator = Validator::make($data, $this->rules(), $this->messages());
-        return Redirect::back()->with('locale', app()->getLocale())
-            ->withErrors($validator)
-            ->withInput();
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
         $response = new JsonResponse(['errors' => $validator->errors()], 422);
         throw new HttpResponseException($response);
     }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -81,4 +77,6 @@ class StorePackagesRequest extends FormRequest
             ];
         }
     }
+
+
 }
