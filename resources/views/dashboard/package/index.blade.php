@@ -24,6 +24,7 @@
                                   <th></th>
                                   <th><strong>{{ __('status') }}</strong></th>
                                   <th><strong>{{ __('image') }}</strong></th>
+                                  <th><strong>{{ __('setting') }}</strong></th>
 
                                   {{-- <th>التفعيل</th> --}}
                               </tr>
@@ -53,6 +54,11 @@
 
                                           <img src="{{ $item->getFirstMediaUrl('package', 'thumb') }}"
                                               style="width: 20px;height: 30px">
+                                      </td>
+                                      <td>
+                                          <a class="btn btn-icon btn-sm btn-success"
+                                              href="{{ route('packages.edit', [$item->id]) }}">
+                                              <i class="fa fa-edit"></i></a>
                                       </td>
                                   </tr>
                               @endforeach

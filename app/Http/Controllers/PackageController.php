@@ -52,14 +52,54 @@ class PackageController extends Controller
         }
         $package->tables()->attach($request->table_id);
         if ($package) {
-            toastr()->success('Coupon store successfully.');
+            toastr()->success('Package store successfully.');
         } else {
-            toastr()->error('Coupon store unsuccessfully.');
+            toastr()->error('Package store unsuccessfully.');
         }
         return redirect()->back();
     }
 
+    public function edit($id)
+    {
+        $package = Package::with('tables')->find($id);
+        $branches = Branch::all();
+        return view('dashboard.package.create', compact('branches', 'package'));
+    }
 
+    public function update(StorePackagesRequest $request, $id)
+    {
+        $package =    Package::find();
+        $package->name = $request->name;
+        $package->name_en = $request->name_en;
+        $package->price = $request->price;
+        $package->discount = $request->discount;
+        $package->time = $request->time;
+        $package->branch_id = $request->branch_id;
+        $package->save();
+        $dayOfWeeks = $request->input('day_of_week');
+        $startTimes = $request->input('start_time');
+        $endTimes = $request->input('end_time');
+        foreach ($dayOfWeeks as $key => $dayOfWeek) {
+            $schedule = new PackageSchedule();
+            $schedule->day_of_week = $dayOfWeek;
+            $schedule->start_time = $startTimes[$key];
+            $schedule->end_time = $endTimes[$key];
+            $schedule->package_id = $package->id;
+            $schedule->save();
+        }
+        if ($request->hasFile('avatar')) {
+            $file = $request->avatar;
+            $imageName = time() . '_' . $package->id . '.' . $file->getClientOriginalExtension();
+            $package->addMedia($file)->usingFileName($imageName)->toMediaCollection('package');
+        }
+        $package->tables()->attach($request->table_id);
+        if ($package) {
+            toastr()->success('Package updated successfully.');
+        } else {
+            toastr()->error('Package updated unsuccessfully.');
+        }
+        return redirect()->back();
+    }
     public function ajaxPackageStatus(Request $request)
     {
         $setting = Package::find($request->id);
