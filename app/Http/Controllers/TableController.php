@@ -37,8 +37,7 @@ class TableController extends Controller
     {
         $table =  Table::find($id);
         $table->name = $request->get('name');
-        $isSaved = $table->save();
-        $table->save();
+        $isSaved = $table->update();
         if ($isSaved) {
             toastr()->success('Table updated successfully.');
         } else {
