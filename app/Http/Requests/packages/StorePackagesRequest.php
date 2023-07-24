@@ -21,8 +21,8 @@ class StorePackagesRequest extends FormRequest
     {
         $data = $request->except(array('_token'));
         $validator = Validator::make($data, $this->rules(), $this->messages());
-        return Redirect::back()->toastr()->error($validator)
-            ->withInput();
+        toastr()->error($validator);
+        return redirect()->back()->withInput();
     }
 
 
