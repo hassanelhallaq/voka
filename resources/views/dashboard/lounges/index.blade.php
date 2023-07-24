@@ -187,7 +187,7 @@
                                              <div class="modal-body scroll-y mx-lg-5 my-7">
                                                  <!--begin::Form-->
                                                  <form id="kt_modal_add_role_form" class="form"
-                                                     action="{{ route('tables.update', ['id' => $lounge->id]) }}"
+                                                     action="{{ route('tables.update', ['id' => $tables->id]) }}"
                                                      method="POST">
                                                      @method('put')
                                                      @csrf
