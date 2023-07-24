@@ -93,5 +93,6 @@
 
         // Call the 'store' function to handle the form data submission
         store('order-product/store', formData);
+        
     }
 </script>

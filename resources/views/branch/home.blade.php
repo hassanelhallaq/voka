@@ -145,6 +145,7 @@
                                                     </div>
                                                     <span>{{ $item->pivot->price }} ريال</span>
                                                 </li>
+                                                نمتنمتمن
                                             @endforeach
                                             <li
                                                 class="new-menu-li list-group-item d-flex justify-content-center align-items-start">

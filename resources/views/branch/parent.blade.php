@@ -110,7 +110,7 @@
         // Load 'branch.reservSide' view using jQuery's $.get() method
         $.get('/branch/path/to/branch.reservSide', function(data) {
             // Once the view is loaded, place its content inside the container
-            $('#reservSideContainer').html(data);
+            // $('#reservSideContainer').html(data);
             // Hide the container after loading the view
             $('#reservSideContainer').hide();
         });
@@ -192,7 +192,8 @@
             $('#mainPage').html(data); // Show the new content
         }).done(function() {
             $('#casher-section').hide(); // Hide the casher section
-            $('#reserv-main-section').show(); // Show the reserv main section
+            $('#reservSideContainer').show();
+            // $('#reserv-main-section').show(); // Show the reserv main section
         });
     }
 </script>
