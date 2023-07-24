@@ -193,7 +193,7 @@
                                          <span class="text-danger">*</span>
                                      </label>
                                      <select class="default-select wide form-control mb-3"
-                                         onchange="product(this.value)" name="package_id" id="package_id" required>
+                                         onchange="product(this.value)" name="package_id" id="package_id" multiple required>
                                          <option value="0"> .... </option>
                                          @foreach ($packages as $package)
                                              <option value="{{ $package->id }}">
