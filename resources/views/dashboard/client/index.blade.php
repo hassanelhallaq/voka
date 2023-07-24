@@ -356,7 +356,7 @@
                                                                 data-bs-dismiss="modal"
                                                                 data-kt-roles-modal-action="cancel">
                                                                 {{ __('Discard') }}</button>
-                                                            <button onclick="performStore()" type="submit"
+                                                            <button onclick="performStore()" type="button"
                                                                 class="btn btn-primary"
                                                                 data-kt-roles-modal-action="submit">
                                                                 {{ __('Submit') }}
