@@ -82,8 +82,8 @@
                                                  @foreach ($package->tables as $item)
                                                  @if ($table->id == $item->id)
                                                      selected @endif @endforeach
-                                                  value="0" disabled="true">
-                                                 {{ $item->name }}
+                                                 value="0" disabled="true">
+                                                 {{ $table->name }}
                                              </option>
                                          @endforeach
                                      </select>
