@@ -63,7 +63,7 @@ class PackageController extends Controller
     {
         $package = Package::with('tables')->find($id);
         $branches = Branch::all();
-        return view('dashboard.package.edit', compact('branches', 'package'));
+        return view('dashboard.package.create', compact('branches', 'package'));
     }
 
     public function update(StorePackagesRequest $request, $id)
