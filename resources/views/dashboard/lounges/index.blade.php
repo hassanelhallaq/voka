@@ -109,7 +109,7 @@
                                                                  </label>
                                                                  <div class="input-group mb-3">
 
-                                                                     <input type="number"
+                                                                     <input type="text"
                                                                          class="form-control meal_price" name="name"
                                                                          required id='name'
                                                                          value="{{ old('table number') }}">

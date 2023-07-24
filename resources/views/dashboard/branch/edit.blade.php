@@ -18,7 +18,7 @@
              <div class="card">
                  <div class="card-body">
                      <div class="form-validation">
-                         <form class="needs-validation" action="{{ route('branch.update', ['id' => $branch->id]) }}"
+                         <form class="needs-validation" action="{{ route('branch.update', [ $branch->id]) }}"
                              method="post" novalidate>
                              @csrf
                              {{-- <div class="row">
