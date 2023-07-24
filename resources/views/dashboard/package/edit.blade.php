@@ -156,10 +156,11 @@
 
                                      <!--begin::Image input-->
                                      <div class="image-input image-input-outline" data-kt-image-input="true"
-                                         style="background-image: url(/assets/media/svg/avatars/blank.svg)">
+                                         style="background-image: url({{ $package->getFirstMediaUrl('package', 'thumb') }})">
                                          <!--begin::Image preview wrapper-->
                                          <div class="image-input-wrapper w-125px h-125px"
-                                             style="background-image: url(/assets/media/avatars/300-1.jpg)"></div>
+                                             style="background-image: url({{ $package->getFirstMediaUrl('package', 'thumb') }})">
+                                         </div>
                                          <!--end::Image preview wrapper-->
 
                                          <!--begin::Edit button-->
@@ -202,7 +203,7 @@
                                      <!--end::Image input-->
                                  </center>
                              </div>
-                             <div class="row" id="schedule-container">
+                             {{-- <div class="row" id="schedule-container">
                                  <div class="schedule-item">
                                      <label for="day_of_week_1">{{ __('Day of the Week') }}:</label>
                                      <select name="day_of_week[]"
@@ -224,6 +225,39 @@
                                      <input class="form-control mb-3" type="time" name="end_time[]"
                                          class="end-time">
                                  </div>
+                             </div> --}}
+                             <div class="row" id="schedule-container">
+                                 @foreach ($package->schedules as $index => $schedule)
+                                     <div class="schedule-item">
+                                         <label
+                                             for="day_of_week_{{ $index }}">{{ __('Day of the Week') }}:</label>
+                                         <select name="day_of_week[]"
+                                             class="default-select wide form-control mb-3 day-of-week">
+                                             <option value="monday" @if ($schedule['day_of_week'] === 'monday') selected @endif>
+                                                 Monday</option>
+                                             <option value="tuesday"
+                                                 @if ($schedule['day_of_week'] === 'tuesday') selected @endif>Tuesday</option>
+                                             <option value="wednesday"
+                                                 @if ($schedule['day_of_week'] === 'wednesday') selected @endif>Wednesday</option>
+                                             <option value="thursday"
+                                                 @if ($schedule['day_of_week'] === 'thursday') selected @endif>Thursday</option>
+                                             <option value="friday" @if ($schedule['day_of_week'] === 'friday') selected @endif>
+                                                 Friday</option>
+                                             <option value="saturday"
+                                                 @if ($schedule['day_of_week'] === 'saturday') selected @endif>Saturday</option>
+                                             <option value="sunday" @if ($schedule['day_of_week'] === 'sunday') selected @endif>
+                                                 Sunday</option>
+                                         </select>
+
+                                         <label for="start_time_{{ $index }}"> {{ __('Start Time') }}:</label>
+                                         <input class="form-control mb-3" type="time" name="start_time[]"
+                                             class="start-time" value="{{ $schedule['start_time'] }}">
+
+                                         <label for="end_time_{{ $index }}"> {{ __('End Time') }}:</label>
+                                         <input class="form-control mb-3" type="time" name="end_time[]"
+                                             class="end-time" value="{{ $schedule['end_time'] }}">
+                                     </div>
+                                 @endforeach
                              </div>
                              <button type="button" class="btn btn-success" id="add-schedule">
                                  {{ __('Add Schedule') }}</button>

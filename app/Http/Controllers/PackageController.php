@@ -62,13 +62,10 @@ class PackageController extends Controller
 
     public function edit($id)
     {
-        $package = Package::with('tables')->find($id);
+        $package = Package::with('tables', 'schedules')->find($id);
         $tables = Table::where('branch_id', $package->branch_id)->get();
         $branches = Branch::all();
- 
-  
         return view('dashboard.package.edit', compact('branches', 'package', 'tables'));
- 
     }
 
     public function update(StorePackagesRequest $request, $id)
