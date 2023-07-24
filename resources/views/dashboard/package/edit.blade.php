@@ -78,13 +78,13 @@
                                          name="table_id[]">
 
                                          @foreach ($tables as $table)
-                                             @foreach ($package->tables as $item)
+                                             <option
+                                                 @foreach ($package->tables as $item)
                                                  @if ($table->id == $item->id)
-                                                     <option value="0" disabled="true">
-                                                         {{ __('tables') }}
-                                                     </option>
-                                                 @endif
-                                             @endforeach
+                                                     selected @endforeach
+                                                 @endif value="0" disabled="true">
+                                                 {{ $item->name }}
+                                             </option>
                                          @endforeach
                                      </select>
                                      @if ($errors->has('table_id'))
