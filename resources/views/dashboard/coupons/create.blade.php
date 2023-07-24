@@ -192,8 +192,9 @@
                                          for="validationCustom01">{{ __('packages') }}
                                          <span class="text-danger">*</span>
                                      </label>
-                                     <select class="default-select wide form-control mb-3"
-                                         onchange="product(this.value)" name="package_id" id="package_id" multiple required>
+                                     <select class="form-select" data-control="select2"
+                                         onchange="product(this.value)" name="package_id[]" id="package_id" multiple
+                                         required>
                                          <option value="0"> .... </option>
                                          @foreach ($packages as $package)
                                              <option value="{{ $package->id }}">

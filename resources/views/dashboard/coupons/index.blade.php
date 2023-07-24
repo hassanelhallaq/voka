@@ -26,9 +26,9 @@
                               </tr>
                           </thead>
                           <tbody>
-                              @foreach ($coupons as $item)
+                              @foreach ($coupons as $key =>$item)
                                   <tr>
-                                      <td class="text-black"><strong>01</strong></td>
+                                      <td class="text-black"><strong>{{ $key }}</strong></td>
                                       <td>{{ $item->name }}</td>
                                       <td>{{ $item->code }}</td>
                                       <td>{{ $item->from }}</td>
