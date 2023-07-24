@@ -76,15 +76,16 @@
                                      </label>
                                      <select class="form-select" multiple data-control="select2" id="table_id" required
                                          name="table_id[]">
-                                         <option
-                                          {{-- @foreach ($package->tables as $item)
-                                            @if ($item->table_id == )
 
-                                            @endif
-                                         @endforeach --}}
-                                         value="0" disabled="true">
-                                             {{ __('tables') }}
-                                         </option>
+                                         @foreach ($tables->tables as $item)
+                                             @foreach ($package->tables as $item)
+                                                 @if ($item->id == $item->id)
+                                                     <option value="0" disabled="true">
+                                                         {{ __('tables') }}
+                                                     </option>
+                                                 @endif
+                                             @endforeach
+                                         @endforeach
                                      </select>
                                      @if ($errors->has('table_id'))
                                          <p style="color: red">{{ $errors->first('table_id') }}
