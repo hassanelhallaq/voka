@@ -18,11 +18,7 @@ class StorePackagesRequest extends FormRequest
      */
     public function authorize(Request $request)
     {
-        $data = $request->except(array('_token'));
-        $validator = Validator::make($data, $this->rules(), $this->messages());
-        return Redirect::back()->with('locale', app()->getLocale())
-            ->withErrors($validator)
-            ->withInput();
+        return Auth::check();
     }
     protected function formatErrors(Request $request)
     {
