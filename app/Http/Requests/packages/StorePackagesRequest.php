@@ -4,12 +4,11 @@ namespace App\Http\Requests\packages;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
+use Brian2694\Toastr\Facades\Toastr;
 
+use Illuminate\Contracts\Validation\Validator;
 
 class StorePackagesRequest extends FormRequest
 {
@@ -22,11 +21,20 @@ class StorePackagesRequest extends FormRequest
     {
         $data = $request->except(array('_token'));
         $validator = Validator::make($data, $this->rules(), $this->messages());
-        $response = new JsonResponse(['errors' => $validator->errors()], 422);
-        throw new HttpResponseException($response);
+        return Redirect::back()->with('locale', app()->getLocale())
+            ->withErrors($validator)
+            ->withInput();
     }
+    protected function formatErrors(Validator $validator)
+    {
 
+        $messages = $validator->messages();
 
+        foreach ($messages->all() as $message) {
+            Toastr::error($message, 'Failed', ['timeOut' => 10000]);
+        }
+        return $validator->errors()->all();
+    }
     /**
      * Get the validation rules that apply to the request.
      *
