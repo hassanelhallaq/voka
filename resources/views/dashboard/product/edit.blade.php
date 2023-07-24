@@ -15,6 +15,19 @@
                                 enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
+                                @if (session('errors'))
+                                    @foreach (session('errors')->all() as $error)
+                                        <script>
+                                            toastr.error('{{ $error }}');
+                                        </script>
+                                    @endforeach
+                                @endif
+
+                                @if (session('success'))
+                                    <script>
+                                        toastr.success('{{ session('success') }}');
+                                    </script>
+                                @endif
                                 <div class="body">
                                     <div class="row">
 
@@ -288,11 +301,3 @@
             </div>
         </div>
 </x-default-layout>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            toastr.error('{{ $error }}');
-        @endforeach
-    @endif
-</script>

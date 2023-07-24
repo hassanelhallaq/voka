@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
 
 class StorePackagesRequest extends FormRequest
@@ -21,8 +22,8 @@ class StorePackagesRequest extends FormRequest
     {
         $data = $request->except(array('_token'));
         $validator = Validator::make($data, $this->rules(), $this->messages());
-        toastr()->error($validator);
-        return redirect()->back()->withInput();
+        $response = new JsonResponse(['errors' => $validator->errors()], 422);
+        throw new HttpResponseException($response);
     }
 
 
