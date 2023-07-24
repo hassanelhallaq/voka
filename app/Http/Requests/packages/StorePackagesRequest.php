@@ -24,7 +24,14 @@ class StorePackagesRequest extends FormRequest
             ->withErrors($validator)
             ->withInput();
     }
-
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($validator->failed()) {
+                $validator->errors()->add('field', 'Something is wrong with this field!'); // handle your new error message here
+            }
+        });
+    }
     /**
      * Get the validation rules that apply to the request.
      *
