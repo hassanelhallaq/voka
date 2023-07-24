@@ -7,6 +7,7 @@ use App\Models\Branch;
 use App\Models\Package;
 use App\Models\PackageSchedule;
 use App\Models\Product;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -62,8 +63,9 @@ class PackageController extends Controller
     public function edit($id)
     {
         $package = Package::with('tables')->find($id);
+        $tables = Table::where('branch_id', $package->branch_id)->get();
         $branches = Branch::all();
-        return view('dashboard.package.edit', compact('branches', 'package'));
+        return view('dashboard.package.edit', compact('branches', 'package', 'tables'));
     }
 
     public function update(StorePackagesRequest $request, $id)
