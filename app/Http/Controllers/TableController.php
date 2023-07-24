@@ -33,6 +33,19 @@ class TableController extends Controller
         return redirect()->back();
     }
 
+    public function update(StoreTableRequest $request, $id)
+    {
+        $table =  Table::find($id);
+        $table->name = $request->get('name');
+        $isSaved = $table->save();
+        $table->save();
+        if ($isSaved) {
+            toastr()->success('Table updated successfully.');
+        } else {
+            toastr()->error('Table updated unsuccessfully.');
+        }
+        return redirect()->back();
+    }
 
     public function ajaxTableBranches(Request $request)
     {

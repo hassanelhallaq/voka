@@ -168,8 +168,74 @@
                                                 @else value="in_service" @endif>
                                              <span> </span>
                                          </div>
+                                         <a class="btn btn-icon btn-sm btn-success" data-bs-toggle="modal"
+                                             data-bs-target="#editTable_{{ $tables->id }}" data-toggle="modal"
+                                             href="">
+                                             <i class="fa fa-edit"></i></a>
                                      </td>
                                  </tr>
+
+                                 <div class="modal fade" id="editTable_{{ $tables->id }}" tabindex="-1"
+                                     aria-hidden="true">
+                                     <div class="modal-dialog modal-dialog-centered mw-750px">
+                                         <div class="modal-content">
+                                             <div class="modal-header">
+
+                                             </div>
+                                             <!--end::Modal header-->
+                                             <!--begin::Modal body-->
+                                             <div class="modal-body scroll-y mx-lg-5 my-7">
+                                                 <!--begin::Form-->
+                                                 <form id="kt_modal_add_role_form" class="form"
+                                                     action="{{ route('tables.update', ['id' => $lounge->id]) }}"
+                                                     method="POST">
+                                                     @method('put')
+                                                     @csrf
+                                                     <!--begin::Scroll-->
+                                                     <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                                                         <div class="col-lg-6">
+                                                             <div class="form-group mb-6">
+                                                                 <label for="basic-url">
+                                                                     <small class="text-danger">*</small>
+                                                                     {{ __('table number') }}
+                                                                 </label>
+                                                                 <div class="input-group mb-3">
+
+                                                                     <input type="text"
+                                                                         class="form-control meal_price" name="name"
+                                                                         required id='name'
+                                                                         value="{{ old('table number') }}">
+                                                                 </div>
+                                                                 @if ($errors->has('name'))
+                                                                     <p style="color: red">
+                                                                         {{ $errors->first('name') }}
+                                                                     </p>
+                                                                 @endif
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                     <!--end::Scroll-->
+                                                     <!--begin::Actions-->
+                                                     <div class="text-center pt-15">
+                                                         <button type="reset" class="btn btn-light me-3"
+                                                             data-bs-dismiss="modal"
+                                                             data-kt-roles-modal-action="cancel">
+                                                             {{ __('Discard') }}</button>
+                                                         <button type="submit" class="btn btn-primary"
+                                                             data-kt-roles-modal-action="submit">
+                                                             {{ __('Submit') }}
+                                                         </button>
+                                                     </div>
+                                                     <!--end::Actions-->
+                                                 </form>
+                                                 <!--end::Form-->
+                                             </div>
+                                             <!--end::Modal body-->
+                                         </div>
+                                         <!--end::Modal content-->
+                                     </div>
+                                     <!--end::Modal dialog-->
+                                 </div>
                              @endforeach
                          </tbody>
                      @endforeach
@@ -196,8 +262,8 @@
                                  <div class="form-group mb-6">
                                      <label>{{ __('name') }}</label>
                                      <div class="input-group mb-3">
-                                         <input type="text" class="form-control meal_price" name="name" required
-                                             id='name' value="{{ old('name') }}">
+                                         <input type="text" class="form-control meal_price" name="name"
+                                             required id='name' value="{{ old('name') }}">
                                      </div>
                                      @if ($errors->has('name'))
                                          <p style="color: red">
@@ -209,8 +275,8 @@
                                      <label>{{ __('name_en') }}</label>
 
                                      <div class="input-group mb-3">
-                                         <input type="text" class="form-control meal_price" name="name_en" required
-                                             id='name_en' value="{{ old('name_en') }}">
+                                         <input type="text" class="form-control meal_price" name="name_en"
+                                             required id='name_en' value="{{ old('name_en') }}">
                                      </div>
                                      @if ($errors->has('name_en'))
                                          <p style="color: red">
