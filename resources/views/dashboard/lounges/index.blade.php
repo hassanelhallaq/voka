@@ -172,6 +172,10 @@
                                              data-bs-target="#editTable_{{ $tables->id }}" data-toggle="modal"
                                              href="">
                                              <i class="fa fa-edit"></i></a>
+
+                                         <a class="btn btn-icon btn-sm btn-success"
+                                             onclick="performDestroy({{ $tables->id }}, this)">
+                                             <i class="fa fa-trash"></i></a>
                                      </td>
                                  </tr>
 
@@ -306,3 +310,13 @@
          <!--end::Modal dialog-->
      </div>
  </x-default-layout>
+ <script src="{{ asset('crudjs/crud.js') }}"></script>
+ <script>
+     function performDestroy(id, reference) {
+
+         let url = '/admin/tables/' + id;
+
+         confirmDestroy(url, reference);
+
+     }
+ </script>

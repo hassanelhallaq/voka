@@ -53,4 +53,11 @@ class TableController extends Controller
             ->get();
         return response()->json($tables);
     }
+
+    public function destroy($id)
+    {
+
+        $isDeleted = Table::destroy($id);
+        return response()->json(['icon' => 'success', 'title' => 'تم حذف الطاولة'], $isDeleted ? 200 : 400);
+    }
 }
