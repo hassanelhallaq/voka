@@ -1,10 +1,10 @@
         <x-default-layout>
+            <div id="kt_app_content_container" class="app-container container-xxl">
+                <a data-bs-toggle="modal" data-bs-target="#clients" class="btn btn-sm fw-bold btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">{{ __('Create') }}</a>
+                <div id="kt_app_content" class="app-content flex-column-fluid">
+                    <!--begin::Content container-->
 
-            <div id="kt_app_content" class="app-content flex-column-fluid">
-                <!--begin::Content container-->
-                <div id="kt_app_content_container" class="app-container container-xxl">
-                    <a data-bs-toggle="modal" data-bs-target="#clients" class="btn btn-sm fw-bold btn-primary"
-                        data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">{{ __('Create') }}</a>
                     @foreach ($clients as $item)
                         <div class="card mb-5 mb-xxl-8">
                             <div class="card-body pt-9 pb-0">
