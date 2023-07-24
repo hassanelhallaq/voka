@@ -10,7 +10,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = Client::with('orders')->paginate(50);
+        $clients = Client::with('orders', 'wallet', 'reservation', 'packages')->withCount('packages', 'orders')->withSum('packages', 'price')->paginate(50);
         return view('dashboard.client.index', compact('clients'));
     }
 

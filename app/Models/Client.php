@@ -13,9 +13,22 @@ class Client extends Model
     {
         return $this->hasMany(Order::class);
     }
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
 
     public function packages()
     {
         return $this->belongsToMany(Package::class, Order::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    public function reservation()
+    {
+        return $this->hasOne(Reservation::class)->latest();;
     }
 }
