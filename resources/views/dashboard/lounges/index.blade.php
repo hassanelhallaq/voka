@@ -173,7 +173,7 @@
                                              href="">
                                              <i class="fa fa-edit"></i></a>
 
-                                         <a class="btn btn-icon btn-sm btn-success"
+                                         <a class="btn btn-icon btn-sm btn-danger"
                                              onclick="performDestroy({{ $tables->id }}, this)">
                                              <i class="fa fa-trash"></i></a>
                                      </td>
