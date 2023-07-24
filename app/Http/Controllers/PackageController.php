@@ -70,7 +70,12 @@ class PackageController extends Controller
 
     public function update(StorePackagesRequest $request, $id)
     {
-        $package =    Package::find($id);
+        $package = Package::find($id);
+        if (!$package) {
+            return redirect()->back()->withErrors('Package not found.');
+        }
+
+        // Update the package details
         $package->name = $request->name;
         $package->name_en = $request->name_en;
         $package->price = $request->price;
@@ -78,6 +83,11 @@ class PackageController extends Controller
         $package->time = $request->time;
         $package->branch_id = $request->branch_id;
         $package->save();
+
+        // Delete existing PackageSchedules for the package
+        $package->schedules()->delete();
+
+        // Create new PackageSchedules based on the updated data
         $dayOfWeeks = $request->input('day_of_week');
         $startTimes = $request->input('start_time');
         $endTimes = $request->input('end_time');
@@ -89,17 +99,16 @@ class PackageController extends Controller
             $schedule->package_id = $package->id;
             $schedule->save();
         }
+
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
             $imageName = time() . '_' . $package->id . '.' . $file->getClientOriginalExtension();
             $package->addMedia($file)->usingFileName($imageName)->toMediaCollection('package');
         }
+
         $package->tables()->attach($request->table_id);
-        if ($package) {
-            toastr()->success('Package updated successfully.');
-        } else {
-            toastr()->error('Package updated unsuccessfully.');
-        }
+
+        toastr()->success('Package updated successfully.');
         return redirect()->back();
     }
     public function ajaxPackageStatus(Request $request)
