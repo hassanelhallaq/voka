@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\coupons\StoreCouponsRequest;
 use App\Models\Branch;
 use App\Models\Coupon;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 class CouponsController extends Controller
@@ -18,7 +19,8 @@ class CouponsController extends Controller
     public function create()
     {
         $branches = Branch::all();
-        return view('dashboard.coupons.create', compact('branches'));
+        $packages = Package::all();
+        return view('dashboard.coupons.create', compact('branches', 'packages'));
     }
 
     public function store(StoreCouponsRequest $request)
@@ -26,6 +28,7 @@ class CouponsController extends Controller
         $data = $request->all();
         $data['is_customer'] = $request->is_customer == 'on' ? 1 : 0;
         $isSaved =   Coupon::create($data);
+        $isSaved->packages()->attach($request->package_id);
         if ($isSaved) {
             toastr()->success('Coupon store successfully.');
         } else {

@@ -42,7 +42,7 @@ class StoreCouponsRequest extends FormRequest
             'from' => 'required|date',
             'to' => 'required|date',
             'branch_id' => 'required|exists:branches,id',
-            'product_id' => 'required|exists:products,product_id',
+            'package_id.*' => 'required|exists:packages,id',
         ];
     }
 

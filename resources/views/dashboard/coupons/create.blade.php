@@ -189,24 +189,27 @@
                                  </div>
                                  <div class="form-group col-md-6">
                                      <label class="col-lg-4 col-form-label"
-                                         for="validationCustom01">{{ __('products') }}
+                                         for="validationCustom01">{{ __('packages') }}
                                          <span class="text-danger">*</span>
                                      </label>
-                                     <select class="default-select wide form-control mb-3" id="product_id" required
-                                         name="product_id">
-                                         <option value="0" disabled="true" selected="true">
-                                             {{ __('products') }}
-                                         </option>
-
+                                     <select class="default-select wide form-control mb-3"
+                                         onchange="product(this.value)" name="package_id" id="package_id" required>
+                                         <option value="0"> .... </option>
+                                         @foreach ($packages as $package)
+                                             <option value="{{ $package->id }}">
+                                                 @if (app()->getLocale() == 'ar')
+                                                     {{ $package->name }}
+                                                 @else
+                                                     {{ $package->name_en }}
+                                                 @endif
+                                             </option>
+                                         @endforeach
                                      </select>
 
-
-                                     @if ($errors->has('product_id'))
-                                         <p style="color: red">{{ $errors->first('product_id') }}
+                                     @if ($errors->has('package_id'))
+                                         <p style="color: red">{{ $errors->first('package_id') }}
                                          </p>
                                      @endif
-
-
                                  </div>
                              </div>
                              <div class="input-group mb-3">
