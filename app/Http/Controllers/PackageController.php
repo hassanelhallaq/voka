@@ -70,7 +70,7 @@ class PackageController extends Controller
 
     public function update(StorePackagesRequest $request, $id)
     {
-        $package =    Package::find();
+        $package =    Package::find($id);
         $package->name = $request->name;
         $package->name_en = $request->name_en;
         $package->price = $request->price;

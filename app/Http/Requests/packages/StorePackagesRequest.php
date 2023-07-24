@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 
 class StorePackagesRequest extends FormRequest
@@ -25,6 +26,11 @@ class StorePackagesRequest extends FormRequest
             ->withInput();
     }
 
+    protected function failedValidation(Validator $validator)
+    {
+        $response = new JsonResponse(['errors' => $validator->errors()], 422);
+        throw new HttpResponseException($response);
+    }
     /**
      * Get the validation rules that apply to the request.
      *
