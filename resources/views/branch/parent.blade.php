@@ -124,11 +124,14 @@
         $('.product').addClass('active');
 
         $('#mainPage').empty(); // Clear the previous page content
-        $.get('/branch/branch/products', {}).done(function(data) {
+        $.get('/branch/branch/products', {
+
+        }).done(function(data) {
             $('#mainPage').html(data); // Show the new content
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section
-            $('#reserv-main-section').hide(); // Show the reserv main section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
         });
     }
 
@@ -144,7 +147,8 @@
             $('#mainPage').html(data); // Show the new content
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section
-            $('#reserv-main-section').hide(); // Show the reserv main section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
         });
     }
 
@@ -178,7 +182,8 @@
             $('#mainPage').html(data); // Show the new content
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section
-            $('#reserv-main-section').hide(); // Show the reserv main section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
         });
     }
 

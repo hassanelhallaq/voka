@@ -307,8 +307,7 @@
                                             <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal"
                                                 data-kt-roles-modal-action="cancel">
                                                 {{ __('Discard') }}</button>
-                                            <button onclick="performStore()" type="z" class="btn btn-primary"
-                                                data-kt-roles-modal-action="submit">
+                                            <button onclick="performStore()" type="button" class="btn btn-primary">
                                                 {{ __('Submit') }}
                                             </button>
                                         </div>

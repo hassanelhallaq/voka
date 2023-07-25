@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Package;
 use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
@@ -16,8 +17,11 @@ class ReservationController extends Controller
         $dateString = $request->date;
         $date = Carbon::createFromFormat('j F - Y', $dateString);
         $formattedDate = $date->format('Y-m-d');
+        $package = Package::find($request->package_id);
         $reservation = new Reservation();
         $reservation->package_id = $request->package_id;
+        $reservation->price = $package->price;
+        $reservation->time = $package->time;
         $reservation->table_id = $request->table_id;
         $reservation->client_id = $request->client_id;
         $reservation->date = $formattedDate;

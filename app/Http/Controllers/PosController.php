@@ -58,12 +58,12 @@ class PosController extends Controller
     }
     public function _hallesBranch(Request $request)
     {
-        $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
-            $query->whereHas('packages', function ($q) use ($request) {
+        return  $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
+            $query->where('status', 'available')->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
             });
         }])->whereHas('tables', function ($query) use ($request) {
-            $query->with('packages')->whereHas('packages', function ($q) use ($request) {
+            $query->where('status', 'available')->with('packages')->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
             });
         })->get();
@@ -71,7 +71,22 @@ class PosController extends Controller
     }
     public function _home()
     {
-        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        $halles = Lounge::with(['tables' => function ($q) {
+            $q->with(['orders', 'reservation' => function ($q) {
+                $now = Carbon::now(); // Get the current date and time
+                $q->with(['package' => function ($q) use ($now) {
+                    $q->select('id', 'time'); // Select the necessary columns from the package table
+                }])
+                    ->where('status', '!=', 'انتهى')
+                    ->where(function ($q) use ($now) {
+                        $q->where('date', '>', $now)
+                            ->orWhere(function ($q) use ($now) {
+                                $q->where('date', $now->toDateString())
+                                    ->whereTime('time', '>=', $now->addMinutes(DB::raw('`package`.`time`'))->format('H:i:s'));
+                            });
+                    });
+            }]);
+        }])->where('branch_id', Auth::user()->branch_id)->get();
         return view('branch._home', compact('halles'))->render();
     }
 
@@ -125,19 +140,24 @@ class PosController extends Controller
 
         $data = Reservation::get();
         $newData = [];
-        foreach ($data as $index => $item) {
-            $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
-            $reservationDateTime = $item->date . ' ' . $formattedTime . ':00';
-            $date =  $item->date . ' ' . $formattedTime;
-            $color = '#48cfcf';
-            $newData[$index]['id']        = $item->id;
-            $str = explode(' ', $item->package->name);
-            $client_name = $str[0];
-            $newData[$index]['title']     = "\n" . $item->package->name . "\n";
-            $newData[$index]['start']     = $reservationDateTime;
-            $newData[$index]['color']       = $color;
+        if ($request->ajax()) {
+            foreach ($data as $index => $item) {
+                $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
+                $reservationDateTime = $item->date . ' ' . $formattedTime . ':00';
+                $date =  $item->date . ' ' . $formattedTime;
+                $color = '#48cfcf';
+                $newData[$index]['id']        = $item->id;
+                $str = explode(' ', $item->package->name);
+                $client_name = $str[0];
+                $newData[$index]['title']     = "\n" . $item->package->name . "\n";
+                $newData[$index]['start']     = $reservationDateTime;
+                $newData[$index]['color']       = $color;
+            }
+            return response()->json([
+                view('branch.reserv')->with($newData)->render()
+            ]);
+            return response()->json($newData);
         }
-
         return  $render = view('branch.reserv', compact('newData'))->render();
     }
     public function ajaxCalender(Request $request)
@@ -160,9 +180,12 @@ class PosController extends Controller
 
         return response()->json($newData);
     }
-    public function sideReser()
+    public function sideReser(Request $request)
     {
-        return  $render = view('branch.reservSide');
+
+        $reservation = Reservation::find($request->id);
+
+        return  $render = view('branch.reservSide', compact('reservation'));
     }
 
     public function productOrder($id)

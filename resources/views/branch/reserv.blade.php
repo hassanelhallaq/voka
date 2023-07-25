@@ -1,48 +1,63 @@
    <style>
-    .fc-day-number{
-        color: #fff;
-   }
-    .fc-widget-header thead tr{
-        color: #fff;
-        font-size: 20px;
-    }
-    tbody td{
-        border-radius: 0;
-    }
-    .fc-unthemed td.fc-today .fc-day-number{
-        color:#fff;
-    }
-    .fc-state-active, .fc-state-disabled, .fc-state-down, .fc-state-top, .fc-state-hover{
-    color: #fff !important;
-    background-color:#e5772a !important;
-    }
-    .fc-state-hover{
-        background-position: 0 2.1em !important;
-    }
-    tbody td:hover{
-        border:1px solid #ddd;
-    }
-    .fc-unthemed td.fc-today{
-        background-color:#e5772a !important;
-    }
-    tbody tr{
-        color: #fff;
-    }
-    .fc-event, .fc-event-dot{
-        background-color:#d59161 !important;
-    }
+       .fc-day-number {
+           color: #fff;
+       }
+
+       .fc-widget-header thead tr {
+           color: #fff;
+           font-size: 20px;
+       }
+
+       tbody td {
+           border-radius: 0;
+       }
+
+       .fc-unthemed td.fc-today .fc-day-number {
+           color: #fff;
+       }
+
+       .fc-state-active,
+       .fc-state-disabled,
+       .fc-state-down,
+       .fc-state-top,
+       .fc-state-hover {
+           color: #fff !important;
+           background-color: #e5772a !important;
+       }
+
+       .fc-state-hover {
+           background-position: 0 2.1em !important;
+       }
+
+       tbody td:hover {
+           border: 1px solid #ddd;
+       }
+
+       .fc-unthemed td.fc-today {
+           background-color: #e5772a !important;
+       }
+
+       tbody tr {
+           color: #fff;
+       }
+
+       .fc-event,
+       .fc-event-dot {
+           background-color: #d59161 !important;
+       }
    </style>
    <div id="mainPage">
-           <div class="container mt-5">
-               <div id="calendar">
-               </div>
+       <div class="container mt-5">
+           <div id="calendar">
            </div>
+       </div>
    </div>
    <meta name="csrf-token" content="{{ csrf_token() }}" />
    @csrf
    <!-- FullCalendar CSS -->
    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
-   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.print.css" media="print">
+   <link rel="stylesheet" type="text/css"
+       href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.print.css" media="print">
 
    <!-- jQuery -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -84,7 +99,11 @@
                selectHelper: true,
                firstDay: 0,
                eventClick: function(event) {
-                   $('#reservation_' + event.id).modal('show');
+                   $.get('/branch/path/to/branch.reservSide', {
+                       id: event.id,
+                   }).done(function(data) {
+                       $('#reservSideContainer').html(data); // Show the new content
+                   });
                },
 
            });
