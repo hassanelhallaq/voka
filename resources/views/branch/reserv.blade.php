@@ -103,6 +103,7 @@
                        id: event.id,
                    }).done(function(data) {
                        $('#reservSideContainer').html(data); // Show the new content
+                        $('#reservSideContainer #reservSideContainer').css("width","100%");
                    });
                },
 

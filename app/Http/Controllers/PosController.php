@@ -58,7 +58,7 @@ class PosController extends Controller
     }
     public function _hallesBranch(Request $request)
     {
-        return  $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
+         $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
             $query->where('status', 'available')->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
             });
