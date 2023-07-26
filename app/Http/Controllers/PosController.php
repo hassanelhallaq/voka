@@ -18,12 +18,11 @@ class PosController extends Controller
 {
     public function home()
     {
-
         $halles = Lounge::with(['tables' => function ($q) {
             $q->with(['orders', 'reservation' => function ($q) {
                 $now = Carbon::now(); // Get the current date and time
                 $q->with(['package' => function ($q) use ($now) {
-                    $q->select('id', 'time'); // Select the necessary columns from the package table
+                    $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
                 }])
                     ->where('status', '!=', 'انتهى')
                     ->where(function ($q) use ($now) {
@@ -58,7 +57,7 @@ class PosController extends Controller
     }
     public function _hallesBranch(Request $request)
     {
-         $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
+        $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
             $query->where('status', 'available')->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
             });
@@ -199,7 +198,9 @@ class PosController extends Controller
                 $q->where('branch_id', Auth::user()->branch_id);
             });
         })->get();
-        $table = Table::find($id);
+        $table = Table::with(['reservation' => function ($q) {
+            $q->where('status', 'مؤكد');
+        }])->find($id);
         return  $render = view('branch.products_orders', compact('products', 'table'));
     }
 }
