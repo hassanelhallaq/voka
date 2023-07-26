@@ -503,7 +503,7 @@
                                     <!-- Input group, just add class 'clockpicker', and optional data-* -->
                                     <div class="input-group clockpicker" data-placement="right" data-align="top"
                                         data-autoclose="true">
-                                        <input type="text" class="form-control clock" value="09:32">
+                                        <input id="date-time" type="text" class="form-control clock" value="09:32">
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
@@ -807,6 +807,10 @@
             event.preventDefault();
             handleFormSubmission();
         });
+    </script>
+     <script>
+        var dt = new Date().toLocaleTimeString();
+        document.getElementById('date-time').value=dt;
     </script>
 </body>
 

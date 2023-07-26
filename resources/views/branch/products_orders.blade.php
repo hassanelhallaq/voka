@@ -51,7 +51,7 @@
                                     </header>
                                     <footer>
                                         <i class="fa-solid fa-minus"></i>
-                                        <span class="number mx-3">0</span>
+                                        <span id="number" class="number mx-3">0</span>
                                         <i class="fa-solid fa-plus"></i>
                                     </footer>
                                     <div class="addBtn btn btn-primary btn-lg w-100 mt-3"
@@ -87,13 +87,15 @@
         formData.append('client_id', document.getElementById('client_id').value);
 
         // Get the quantity value from the element with class name 'number'
-        let quantityText = $('.number').text().replace(/,/g, ''); // Remove commas from the text
+         let quantityText = document.getElementById("number").textContent;
+         
+        // let quantityText = $('.number').text().replace(/,/g, ''); // Remove commas from the text
         let quantity = parseInt(quantityText);
-
+        
         formData.append('quantity', quantity);
-
+        
         // Call the 'store' function to handle the form data submission
         store('order-product/store', formData);
-
+        
     }
 </script>
