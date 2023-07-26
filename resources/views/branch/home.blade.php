@@ -52,8 +52,7 @@
                             data-package-time="{{ $table->reservation->package->time ?? 0 }}"
                             data-start="{{ $reservationDateTime ?? 0 }}" data-updatedTime="45"
                             data-h="hall{{ $item->id }}"
-                            id="tableclick"
-                            value="hgjh"
+                          
                             @if ($table->status == 'in_service') data-stat="serv" @elseif($table->status == 'available') data-pstat ="available"
                              @elseif ($table->status == 'reserved') data-pstat ="reserved" @endif>
 
@@ -499,14 +498,4 @@
 
     // Initialize the countdown on page load
     updateCountdown();
-</script>
-<script>
-    
-    var tableclick = document.getElementById("tableclick").value;
-    console.log(tableclick);
-    var x = document.getElementById("casher-section");
-    if(tableclick==="available"){
-        x.style.display = "block";
-    }
-    
 </script>

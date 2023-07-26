@@ -16,7 +16,7 @@
 <div class="card-body ">
     <div class="tab-content text-center">
         @foreach ($halles as $key => $item)
-            <div class="tab-pane {{ $key === 0 ? ' active show' : '' }}" id="hall{{ $item->id }}">
+            <div class="change-content tab-pane {{ $key === 0 ? ' active show' : '' }}" id="hall{{ $item->id }}"  data-id="#allguests">
                 <div class="row new-reservation-tables">
                     <h2 class="text-center text-light">{{ $item->name }}</h2>
                     <div class="col-12">
@@ -85,9 +85,9 @@
         <div class="change-content  btn btn-primary" data-id="#all-packages">السابق</div>
     </div>
     <div class="col-md-8"></div>
-    <div class="col-md-2">
-        <div class="change-content btn btn-primary" data-id="#allguests">التالى</div>
-    </div>
+    <!--<div class="col-md-2">-->
+    <!--    <div class="change-content btn btn-primary" data-id="#allguests">التالى</div>-->
+    <!--</div>-->
 </div>
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
