@@ -8,8 +8,9 @@
             </form>
         </div>
         <div class="menu-category-wrap d-flex mb-4">
+
             <input value="{{ $table->id }}" id="table_id" hidden>
-            <input value="{{ $table->reservation->package->id }}" id="package_id" hidden>
+            <input value="{{ $table->reservation->package_id }}" id="package_id" hidden>
             <input value="{{ $table->reservation->client_id }}" id="client_id" hidden>
 
             <div class="voka-slider">
@@ -93,6 +94,6 @@
 
         // Call the 'store' function to handle the form data submission
         store('order-product/store', formData);
-        
+
     }
 </script>

@@ -50,7 +50,7 @@
                             data-tableNumber="{{ $item->name }}"
                             data-package-time="{{ $table->reservation->package->time ?? 0 }}"
                             data-start="{{ $reservationDateTime ?? 0 }}" data-updatedTime="45"
-                            data-h="hall{{ $item->id }}"
+                            data-h="hall{{ $item->id }}" id="tableclick" value="hgjh"
                             @if ($table->status == 'in_service') data-stat="serv" @elseif($table->status == 'available') data-pstat ="available"
                              @elseif ($table->status == 'reserved') data-pstat ="reserved" @endif>
 
@@ -119,338 +119,443 @@
                                 </div>
 
                             </div>
-                            <div class="table-side-bar" id="table{{ $table->id }}">
-                                <h2 class="text-center mb-4">طاولة رقم {{ $table->name }}</h2>
-                                <div class="tab-nav-wraper">
-                                    <ul class="nav c-nav-tabs d-flex justify-content-between home-tab">
-                                        <li class="nav-item">
-                                            <a class="nav-link " data-tab="reservations" href="#"> الحجوزات</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-tab="orders" href="#"> الطلبات</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-tab="the-menu" href="#"> القائمة</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- عناصر التاب -->
-                                <div class="tab-content">
-                                    <div id="the-menu" class="c-tab-pane active">
-                                        <ol class="list-group list-group-numbered reversed">
-                                            @foreach ($table->orders as $item)
+                            @if ($table->status == 'in_service')
+                                <div class="table-side-bar" id="table{{ $table->id }}">
+                                    <h2 class="text-center mb-4">طاولة رقم {{ $table->name }}</h2>
+                                    <div class="tab-nav-wraper">
+                                        <ul class="nav c-nav-tabs d-flex justify-content-between home-tab">
+                                            <li class="nav-item">
+                                                <a class="nav-link " data-tab="reservations" href="#">
+                                                    الحجوزات</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-tab="orders" href="#"> الطلبات</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-tab="the-menu" href="#">
+                                                    القائمة</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- عناصر التاب -->
+                                    <div class="tab-content">
+                                        <div id="the-menu" class="c-tab-pane active">
+                                            <ol class="list-group list-group-numbered reversed">
+                                                @foreach ($table->orders as $item)
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold">{{ $item->name }}</div>
+                                                        </div>
+                                                        <span>{{ $item->pivot->price }} ريال</span>
+                                                    </li>
+                                                @endforeach
+                                                <li
+                                                    class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
+                                                    <a onclick="product({{ $table->id }})" class="me-2">
+                                                        <div class="fw-bold">اضف عنصر جديد</div>
+                                                    </a>
+                                                </li>
+
+                                            </ol>
+                                            <ol class="list-group reversed  mt-5">
+                                                <li class="list-group-item no-number  ">
+                                                    <div
+                                                        class="sub-total d-flex justify-content-between align-items-start">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold"> حاصل الجمع</div>
+                                                        </div>
+                                                        <span>260 ريال</span>
+                                                    </div>
+
+                                                    <div
+                                                        class="tax d-flex justify-content-between align-items-start mt-4">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold"> ضريبة</div>
+                                                        </div>
+                                                        <span>10%</span>
+                                                    </div>
+                                                    <div
+                                                        class="tax d-flex justify-content-between align-items-start mt-4 total">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold"> الإجمالى</div>
+                                                        </div>
+                                                        <span>286 ريال</span>
+                                                    </div>
+                                                    <div class="payment-method">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div
+                                                                    class="payment-icon d-flex justify-content-center align-items-center">
+                                                                    <i class="fa-solid fa-sack-dollar"></i>
+                                                                </div>
+                                                                <p class="text-center">كاش</p>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div
+                                                                    class="payment-icon d-flex justify-content-center align-items-center">
+                                                                    <i class="fa-solid fa-credit-card"></i>
+                                                                </div>
+                                                                <p class="text-center">بطاقة ائتمان</p>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div
+                                                                    class="payment-icon d-flex justify-content-center align-items-center">
+                                                                    <i class="fa-solid fa-wallet"></i>
+                                                                </div>
+                                                                <p class="text-center">المحفظة</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="payment-btn my-3 text-center">
+                                                            <div class="btn btn-primary btn-lg w-100"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal6">
+                                                                ادفع الآن</div>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal6" tabindex="-1"
+                                                                aria-labelledby="exampleModalLabel6"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="exampleModalLabel">
+                                                                                تأكيد الدفع</h5>
+                                                                            <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p class="consfirm-text">هل تريد تأكيد
+                                                                                الدفع
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-primary">تأكيد</button>
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">لا </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+
+                                            </ol>
+
+                                        </div>
+                                        <div id="orders" class="c-tab-pane ">
+                                            <ol class="list-group list-group-numbered reversed bill-info">
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-start">
                                                     <div class="me-2 ms-auto">
-                                                        <div class="fw-bold">{{ $item->name }}</div>
+                                                        <div class="fw-bold"> طلب باسم</div>
                                                     </div>
-                                                    <span>{{ $item->pivot->price }} ريال</span>
+                                                    <span>على محمد احمد </span>
                                                 </li>
-                                                نمتنمتمن
-                                            @endforeach
-                                            <li
-                                                class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                <a onclick="product({{ $table->id }})" class="me-2">
-                                                    <div class="fw-bold">اضف عنصر جديد</div>
-                                                </a>
-                                            </li>
-
-                                        </ol>
-                                        <ol class="list-group reversed  mt-5">
-                                            <li class="list-group-item no-number  ">
-                                                <div
-                                                    class="sub-total d-flex justify-content-between align-items-start">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
                                                     <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> حاصل الجمع</div>
+                                                        <div class="fw-bold">اسم الباقة</div>
                                                     </div>
-                                                    <span>260 ريال</span>
-                                                </div>
-
-                                                <div class="tax d-flex justify-content-between align-items-start mt-4">
+                                                    <span> باقة 3 ساعات </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
                                                     <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> ضريبة</div>
+                                                        <div class="fw-bold"> الرصيد</div>
                                                     </div>
-                                                    <span>10%</span>
-                                                </div>
-                                                <div
-                                                    class="tax d-flex justify-content-between align-items-start mt-4 total">
+                                                    <span>1500 </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
                                                     <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الإجمالى</div>
+                                                        <div class="fw-bold"> الحالة</div>
                                                     </div>
-                                                    <span>286 ريال</span>
-                                                </div>
-                                                <div class="payment-method">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
-                                                                <i class="fa-solid fa-sack-dollar"></i>
-                                                            </div>
-                                                            <p class="text-center">كاش</p>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
-                                                                <i class="fa-solid fa-credit-card"></i>
-                                                            </div>
-                                                            <p class="text-center">بطاقة ائتمان</p>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
-                                                                <i class="fa-solid fa-wallet"></i>
-                                                            </div>
-                                                            <p class="text-center">المحفظة</p>
-                                                        </div>
+                                                    <span class="badge bg-info">تم الدفع </span>
+                                                </li>
+                                                <li
+                                                    class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
+                                                    <div class="me-2">
+                                                        <div class="fw-bold"> طباعة الطلب</div>
                                                     </div>
-                                                    <div class="payment-btn my-3 text-center">
-                                                        <div class="btn btn-primary btn-lg w-100"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal6">
-                                                            ادفع الآن</div>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModal6" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel6" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="exampleModalLabel">
-                                                                            تأكيد الدفع</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p class="consfirm-text">هل تريد تأكيد الدفع
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">تأكيد</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">لا </button>
+                                                </li>
+                                            </ol>
+                                            <ol class="list-group list-group-numbered reversed bill-info">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold"> طلب باسم</div>
+                                                    </div>
+                                                    <span>على محمد احمد </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold">اسم الباقة</div>
+                                                    </div>
+                                                    <span> باقة 3 ساعات </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold"> الرصيد</div>
+                                                    </div>
+                                                    <span>1500 </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold"> الحالة</div>
+                                                    </div>
+                                                    <span class="badge bg-info">تم الدفع </span>
+                                                </li>
+                                                <li
+                                                    class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
+                                                    <div class="me-2">
+                                                        <div class="fw-bold"> طباعة الطلب</div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                            <ol class="list-group list-group-numbered reversed bill-info">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold"> طلب باسم</div>
+                                                    </div>
+                                                    <span>على محمد احمد </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold">اسم الباقة</div>
+                                                    </div>
+                                                    <span> باقة 3 ساعات </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold"> الرصيد</div>
+                                                    </div>
+                                                    <span>1500 </span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold"> الحالة</div>
+                                                    </div>
+                                                    <span class="badge bg-info">تم الدفع </span>
+                                                </li>
+                                                <li
+                                                    class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
+                                                    <div class="me-2">
+                                                        <div class="fw-bold"> طباعة الطلب</div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        <div id="reservations" class="c-tab-pane ">
+                                            <div class="hour-col">
+                                                <div class="body-hour-cel">
+                                                    <div class="row gx-0 p-2 text-center">
+                                                        <div class="col-md-2">
+                                                            <p class="hour mb-0">05:00 AM</p>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="row gx-0">
+                                                                <div class="col-md-9">
+                                                                    <div
+                                                                        class="d-flex h-100 justify-content-around align-items-center">
+                                                                        <div class="gusts">
+                                                                            <span class="table-gusts px-2"> 4</span>
+                                                                            <span> <i
+                                                                                    class="fa-solid fa-users"></i></span>
+                                                                        </div>
+                                                                        <div class="table-res">
+                                                                            طاولة 1
+                                                                        </div>
+                                                                        <span class="badge bg-secondary">مؤكد</span>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-md-3">
+                                                                    <span>رصيد متبقى 600</span>
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>
-
-
-
-                                        </ol>
-
-                                    </div>
-                                    <div id="orders" class="c-tab-pane ">
-                                        <ol class="list-group list-group-numbered reversed bill-info">
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> طلب باسم</div>
-                                                </div>
-                                                <span>على محمد احمد </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">اسم الباقة</div>
-                                                </div>
-                                                <span> باقة 3 ساعات </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> الرصيد</div>
-                                                </div>
-                                                <span>1500 </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> الحالة</div>
-                                                </div>
-                                                <span class="badge bg-info">تم الدفع </span>
-                                            </li>
-                                            <li
-                                                class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                <div class="me-2">
-                                                    <div class="fw-bold"> طباعة الطلب</div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                        <ol class="list-group list-group-numbered reversed bill-info">
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> طلب باسم</div>
-                                                </div>
-                                                <span>على محمد احمد </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">اسم الباقة</div>
-                                                </div>
-                                                <span> باقة 3 ساعات </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> الرصيد</div>
-                                                </div>
-                                                <span>1500 </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> الحالة</div>
-                                                </div>
-                                                <span class="badge bg-info">تم الدفع </span>
-                                            </li>
-                                            <li
-                                                class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                <div class="me-2">
-                                                    <div class="fw-bold"> طباعة الطلب</div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                        <ol class="list-group list-group-numbered reversed bill-info">
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> طلب باسم</div>
-                                                </div>
-                                                <span>على محمد احمد </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold">اسم الباقة</div>
-                                                </div>
-                                                <span> باقة 3 ساعات </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> الرصيد</div>
-                                                </div>
-                                                <span>1500 </span>
-                                            </li>
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> الحالة</div>
-                                                </div>
-                                                <span class="badge bg-info">تم الدفع </span>
-                                            </li>
-                                            <li
-                                                class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                <div class="me-2">
-                                                    <div class="fw-bold"> طباعة الطلب</div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                    <div id="reservations" class="c-tab-pane ">
-                                        <div class="hour-col">
-                                            <div class="body-hour-cel">
-                                                <div class="row gx-0 p-2 text-center">
-                                                    <div class="col-md-2">
-                                                        <p class="hour mb-0">05:00 AM</p>
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="row gx-0">
-                                                            <div class="col-md-9">
-                                                                <div
-                                                                    class="d-flex h-100 justify-content-around align-items-center">
-                                                                    <div class="gusts">
-                                                                        <span class="table-gusts px-2"> 4</span>
-                                                                        <span> <i class="fa-solid fa-users"></i></span>
+                                                <div class="body-hour-cel">
+                                                    <div class="row gx-0 p-2 text-center">
+                                                        <div class="col-md-2">
+                                                            05:15 AM
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="row gx-0">
+                                                                <div class="col-md-9">
+                                                                    <div
+                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        <span>لا يوجد حجز</span>
                                                                     </div>
-                                                                    <div class="table-res">
-                                                                        طاولة 1
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <span>لا يوجد رصيد</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="body-hour-cel">
+                                                    <div class="row gx-0 p-2 text-center">
+                                                        <div class="col-md-2">
+                                                            05:30 AM
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="row gx-0">
+                                                                <div class="col-md-9">
+                                                                    <div
+                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        <span>لا يوجد حجز</span>
                                                                     </div>
-                                                                    <span class="badge bg-secondary">مؤكد</span>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <span>لا يوجد رصيد</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                <span>رصيد متبقى 600</span>
-                                                            </div>
-                                                        </div>
 
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="body-hour-cel">
-                                                <div class="row gx-0 p-2 text-center">
-                                                    <div class="col-md-2">
-                                                        05:15 AM
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="row gx-0">
-                                                            <div class="col-md-9">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center">
-                                                                    <span>لا يوجد حجز</span>
+                                                <div class="body-hour-cel">
+                                                    <div class="row gx-0 p-2 text-center">
+                                                        <div class="col-md-2">
+                                                            05:45 AM
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="row gx-0">
+                                                                <div class="col-md-9">
+                                                                    <div
+                                                                        class="d-flex justify-content-center align-items-center">
+                                                                        <span>لا يوجد حجز</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <span>لا يوجد رصيد</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                <span>لا يوجد رصيد</span>
-                                                            </div>
-                                                        </div>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="body-hour-cel">
-                                                <div class="row gx-0 p-2 text-center">
-                                                    <div class="col-md-2">
-                                                        05:30 AM
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="row gx-0">
-                                                            <div class="col-md-9">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center">
-                                                                    <span>لا يوجد حجز</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <span>لا يوجد رصيد</span>
-                                                            </div>
                                                         </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="body-hour-cel">
-                                                <div class="row gx-0 p-2 text-center">
-                                                    <div class="col-md-2">
-                                                        05:45 AM
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div class="row gx-0">
-                                                            <div class="col-md-9">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center">
-                                                                    <span>لا يوجد حجز</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <span>لا يوجد رصيد</span>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="table-side-bar" id="table{{ $table->id }}">
+                                    <ol class="table-list list-group list-group-numbered reversed">
+                                        <li
+                                            class="menu-info-list list-group-item d-flex  flex-column justify-content-center align-items-center text-center p-0">
+                                            <a class="new-reserv-btn btn btn-link w-100"
+                                                href="{{ route('branch.reservation') }}">
+                                                <i class="fa-solid fa-plus"></i>
+                                                <p>انشاء حجز جديد </p>
+                                            </a>
+                                        </li>
 
+                                    </ol>
+                                    <ol class="list-group reversed  mt-5">
+                                        <li class="list-group-item no-number  ">
+                                            <div class="sub-total d-flex justify-content-between align-items-start">
+                                                <div class="me-2 ms-auto">
+                                                    <div class="fw-bold"> حاصل الجمع</div>
+                                                </div>
+                                                <span class="sub-total-number"> 260 </span>
+                                                <span> ريال</span>
+                                            </div>
+
+                                            <div class="tax d-flex justify-content-between align-items-start mt-4">
+                                                <div class="me-2 ms-auto">
+                                                    <div class="fw-bold"> ضريبة</div>
+                                                </div>
+                                                <span class="taxes">10%</span>
+                                            </div>
+                                            <div
+                                                class="tax d-flex justify-content-between align-items-start mt-4 total">
+                                                <div class="me-2 ms-auto">
+                                                    <div class="fw-bold"> الإجمالى</div>
+                                                </div>
+                                                <span class="table-total">286 </span>
+                                                <span> ريال</span>
+                                            </div>
+                                            <div class="payment-method">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div
+                                                            class="payment-icon active d-flex justify-content-center align-items-center">
+                                                            <i class="fa-solid fa-sack-dollar"></i>
+                                                        </div>
+                                                        <p class="text-center">كاش</p>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div
+                                                            class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <i class="fa-solid fa-credit-card"></i>
+                                                        </div>
+                                                        <p class="text-center">بطاقة ائتمان</p>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div
+                                                            class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <i class="fa-solid fa-wallet"></i>
+                                                        </div>
+                                                        <p class="text-center">المحفظة</p>
+                                                    </div>
+                                                </div>
+                                                <div class="payment-btn my-3 text-center">
+                                                    <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">
+                                                        ادفع الآن</div>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        تأكيد الدفع</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p class="consfirm-text">هل تريد تأكيد
+                                                                        الدفع</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary">تأكيد</button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">لا </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+
+
+
+                                </div>
+                            @endif
 
                         </div>
                     @endforeach
