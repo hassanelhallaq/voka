@@ -51,7 +51,12 @@
                             data-tableNumber="{{ $item->name }}"
                             data-package-time="{{ $table->reservation->package->time ?? 0 }}"
                             data-start="{{ $reservationDateTime ?? 0 }}" data-updatedTime="45"
+
+
+
+
                             data-h="hall{{ $item->id }}" id="tableclick" value="hgjh"
+
                             @if ($table->status == 'in_service') data-stat="serv" @elseif($table->status == 'available') data-pstat ="available"
                              @elseif ($table->status == 'reserved') data-pstat ="reserved" @endif>
 
@@ -147,20 +152,14 @@
                                                         </div>
                                                         <span>{{ $item->pivot->price }} ريال</span>
                                                     </li>
-
+                                                @endforeach
                                                 <li
                                                     class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
                                                     <a onclick="product({{ $table->id }})" class="me-2">
-                                                        @foreach ($item->product as $product)
-                                                            <div class="fw-bold"><span class="title">
-                                                                {{ $product->name }}</span><span class="count-wrap mr-2"><i
-                                                                        class="fa-solid fa-x"></i><span
-                                                                        class="count">1</span></span></div>
-                                                        @endforeach
                                                         <div class="fw-bold">اضف عنصر جديد</div>
                                                     </a>
                                                 </li>
-                                                  @endforeach
+
                                             </ol>
                                             <ol class="list-group reversed  mt-5">
                                                 <li class="list-group-item no-number  ">
