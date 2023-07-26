@@ -618,8 +618,7 @@
     // Initialize the countdown on page load
     updateCountdown();
 </script>
-<<<<<<< HEAD
-=======
+
 <script>
     var tableclick = document.getElementById("tableclick").value;
     console.log(tableclick);
@@ -628,4 +627,3 @@
         x.style.display = "block";
     }
 </script>
->>>>>>> 1449f75e5ee4ffbf3af6e27760d4e6c3b45137b8
