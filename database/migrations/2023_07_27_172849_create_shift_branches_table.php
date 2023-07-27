@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('shift_id');
-            $table->timestamps();
-            $table->foreign('branch_account_id')->references('id')->on('branch_accounts')->onDelete('cascade');
+            $table->integer('branch_account_id');
             $table->foreign('shift_id')->references('id')->on('shifts')->onDelete('cascade');
             $table->timestamps();
         });

@@ -21,7 +21,6 @@
                          <th>{{ __('name') }}</th>
                          <th>{{ __('phone') }}</th>
                          <th>{{ __('Role') }}</th>
-
                          <th>{{ __('Settings') }}</th>
                      </tr>
                  </thead>

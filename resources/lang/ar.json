@@ -14,6 +14,11 @@
     "Cancel": "الغاء",
         "branch incomes": "مبيعات الفرع اليوم",
     "reports": "تقارير",
+        "client categories": "client categories",
+    "Submit": "حفظ",
+    "Discard": "الغاء",
+    "client category": "client category",
+
 
     "Create": "إنشاء",
     "Created At": "أنشئت في",
@@ -62,6 +67,12 @@
     "images": "الصورة",
     "lounges": "الصالات",
     "orders": "الطلبات",
+        "clients": "العملاء",
+                "packages": "الباقات",
+        "coupons": "الكبونات",
+        "Roles": "الصلاحيات",
+        "setting": "الاعدادات",
+
     "package name": "اسم الباقة",
     "package price": "سعر الباقة",
     "package time": "وقت الباقة",

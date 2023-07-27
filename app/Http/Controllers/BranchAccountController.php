@@ -17,7 +17,12 @@ class BranchAccountController extends Controller
         $users  =  BranchAccount::where('branch_id', $id)->paginate(10);
         return view('dashboard.branch.accounts', compact('users', 'id', 'roles'));
     }
-
+    public function index()
+    {
+        $roles = Role::where('guard_name', 'branch')->paginate(10);
+        $users  =  BranchAccount::paginate(10);
+        return view('dashboard.branch.branchAccounts', compact('users', 'roles'));
+    }
     public function store(StoreBranchAccounRequest $request, $id)
     {
 

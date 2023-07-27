@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchAccountController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ClientCategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProductCategoryController;
@@ -58,6 +59,10 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::post('/lounge/{id}', [LoungeController::class, 'store'])->name('lounge.store');
         Route::resource('clients', ClientController::class);
         Route::resource('reservations', ReservationController::class);
+        Route::resource('categories', ClientCategoryController::class);
+        Route::get('/branch-account', [BranchAccountController::class, 'index'])->name('branch-account.index');
+
+
         Route::get('/order-product', [OrderController::class, 'index'])->name('order-product');
         Route::put('/tables/{id}', [TableController::class, 'update'])->name('tables.update');
         Route::delete('/tables/{id}', [TableController::class, 'destroy'])->name('tables.destroy');

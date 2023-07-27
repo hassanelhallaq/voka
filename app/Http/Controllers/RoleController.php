@@ -32,7 +32,7 @@ class RoleController extends Controller
         // if (ControllersService::checkPermission('index-role', 'admin')) {
         $page_title = 'Role';
         $page_description = '';
-        $roles = Role::withCount('users')->paginate(10);
+        $roles = Role::withCount('users')->paginate(100);
         $permissionGroups = PermissionGroup::with('permissions')->get();
         return response()->view('dashboard.spatie.role.index', compact('roles', 'page_title', 'page_description', 'permissionGroups'));
         // } else {

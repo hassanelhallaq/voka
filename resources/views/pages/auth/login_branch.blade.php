@@ -109,7 +109,7 @@ License: For each use you must have a valid license purchased only from above li
 
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="text" placeholder="Email" name="phone" id="phone"
+                                <input type="text" placeholder="phone" name="phone" id="phone"
                                     autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>

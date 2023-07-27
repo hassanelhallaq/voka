@@ -81,6 +81,9 @@
 
                                                             <a href="{{ route('clients.show', [$item->id]) }}"
                                                                 class="menu-link px-3">View</a>
+                                                            <a data-bs-toggle="modal"
+                                                                data-bs-target="#clients_{{ $item->id }}"
+                                                                class="menu-link px-3">Edit</a>
 
                                                         </div>
                                                         <!--end::Menu item-->
@@ -258,6 +261,93 @@
 
                             </div>
                         </div>
+                        <div class="modal fade" id="clients_{{ $item->id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered mw-750px">
+                                <div class="modal-content">
+                                    <div class="modal-body scroll-y mx-lg-5 my-7">
+                                        <!--begin::Form-->
+                                        <form id="kt_modal_add_role_form" class="form">
+                                            @csrf
+                                            <!--begin::Scroll-->
+                                            <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                                                <div class="row">
+                                                    <div class="form-group mb-6">
+                                                        <label>{{ __('Name') }}</label>
+
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control meal_price"
+                                                                name="name" required id='name_{{ $item->id }}'
+                                                                value="_{{ $item->name }}">
+                                                        </div>
+                                                        @if ($errors->has('name'))
+                                                            <p style="color: red">
+                                                                {{ $errors->first('name') }}
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group mb-6">
+                                                        <label>{{ __('client phone') }}</label>
+                                                        <div class="input-group mb-3">
+                                                            <input type="number" class="form-control meal_price"
+                                                                name="phone" required
+                                                                id='phone_{{ $item->id }}'
+                                                                value="_{{ $item->phone }}">
+                                                        </div>
+                                                        @if ($errors->has('phone'))
+                                                            <p style="color: red">
+                                                                {{ $errors->first('phone') }}
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group mb-6">
+                                                        <label class="col-lg-4 col-form-label"
+                                                            for="validationCustom01">{{ __('category') }}
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        <select class="form-select" data-control="select2"
+                                                            name="client_category_id_{{ $item->id }}"
+                                                            id="client_category_id_{{ $item->id }}" required>
+                                                            <option value="0"> .... </option>
+                                                            @foreach ($clientCategory as $category)
+                                                                <option
+                                                                    @if ($item->client_category_id == $category->id) selected @endif
+                                                                    value="{{ $category->id }}">
+                                                                    {{ $category->name }}
+
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('client_category_id'))
+                                                            <p style="color: red">
+                                                                {{ $errors->first('client_category_id') }}
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--end::Scroll-->
+                                            <!--begin::Actions-->
+                                            <div class="text-center pt-15">
+                                                <button type="reset" class="btn btn-light me-3"
+                                                    data-bs-dismiss="modal" data-kt-roles-modal-action="cancel">
+                                                    {{ __('Discard') }}</button>
+                                                <button onclick="performUpdate({{ $item->id }})" type="button"
+                                                    class="btn btn-primary">
+                                                    {{ __('Submit') }}
+                                                </button>
+                                            </div>
+                                            <!--end::Actions-->
+                                        </form>
+                                        <!--end::Form-->
+                                    </div>
+                                    <!--end::Modal body-->
+                                </div>
+                                <!--end::Modal content-->
+                            </div>
+                            <!--end::Modal dialog-->
+                        </div>
                     @endforeach
                     <span class="span">
                         {!! $clients->links() !!}
@@ -299,7 +389,29 @@
                                                         </p>
                                                     @endif
                                                 </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="col-lg-4 col-form-label"
+                                                        for="validationCustom01">{{ __('client category') }}
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select class="form-select" data-control="select2"
+                                                        name="client_category_id" id="client_category_id" required>
+                                                        <option value="0"> .... </option>
+                                                        @foreach ($clientCategory as $category)
+                                                            <option value="{{ $category->id }}">
+                                                                {{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    @if ($errors->has('client_category_id'))
+                                                        <p style="color: red">
+                                                            {{ $errors->first('client_category_id') }}
+                                                        </p>
+                                                    @endif
+                                                </div>
                                             </div>
+
                                         </div>
                                         <!--end::Scroll-->
                                         <!--begin::Actions-->
@@ -337,6 +449,17 @@
                 let formData = new FormData();
                 formData.append('name', document.getElementById('name').value);
                 formData.append('phone', document.getElementById('phone').value);
+                formData.append('client_category_id', document.getElementById('client_category_id').value);
                 storeReload('/admin/clients', formData)
+            }
+        </script>
+        <script>
+            function performUpdate(id) {
+                let formData = new FormData();
+                formData.append("_method", "PUT")
+                formData.append('name', document.getElementById('name_' + id).value);
+                formData.append('phone', document.getElementById('phone_' + id).value);
+                formData.append('client_category_id', document.getElementById('client_category_id_' + id).value);
+                storeReload('/admin/clients/' + id, formData)
             }
         </script>
