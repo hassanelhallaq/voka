@@ -22,7 +22,8 @@ class BranchAccountController extends Controller
     {
 
         $branch = new BranchAccount();
-        $branch->email = $request->get('email');
+        $branch->phone = $request->get('phone');
+        $branch->name = $request->get('name');
         $branch->password = Hash::make($request->get('password'));
         $branch->branch_id = $id;
         $isSaved = $branch->save();

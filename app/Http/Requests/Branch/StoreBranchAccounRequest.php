@@ -33,7 +33,7 @@ class StoreBranchAccounRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email|unique:branch_accounts,email',
+            'phone' => 'required|string|unique:branch_accounts,phone',
             'password' => 'required|string',
         ];
     }
@@ -45,7 +45,6 @@ class StoreBranchAccounRequest extends FormRequest
             return [
                 'name.required' => 'Please Enter  Name In Arabic',
                 'name_en.required' => 'Please Enter  Name In English',
-                'email.unique' => 'Please Enter unique email ',
                 'phone.required' => 'Please Enter phone',
                 'phone.unique' => 'Please Enter unique phone ',
                 'manger.required' => 'Please Enter manger name ',
@@ -56,11 +55,9 @@ class StoreBranchAccounRequest extends FormRequest
             return [
                 'name.required' => 'الرجاء إدخال الاسم بالعربية',
                 'name_en.required' => 'الرجاء إدخال الاسم بالانجليزية',
-                'email.unique' => 'الرجاء ادخال اميل غير مسجل مسبقا',
                 'phone.unique' => 'الرجاء ادخال رقم هاتف غير مسجل مسبقا',
                 'phone.required' => 'الرجاء ادخال رقم الهاتف',
                 'manger.required' => 'الرجاء ادخال اسم المدير',
-                'email.required' => 'الرجاء ادخال اميل  ',
                 'password.required' => 'الرجاء ادخال كملة مرور  ',
 
             ];

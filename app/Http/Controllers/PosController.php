@@ -28,14 +28,7 @@ class PosController extends Controller
                     $q->with(['package' => function ($q) use ($now) {
                         $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
                     }])
-                        ->where('status', '!=', 'انتهى')
-                        ->where(function ($q) use ($now) {
-                            $q->where('date', '>', $now)
-                                ->orWhere(function ($q) use ($now) {
-                                    $q
-                                        ->where('time', '>=', $now->addMinutes(DB::raw('`package`.`time`'))->format('H:i:s'));
-                                });
-                        });
+                        ->where('status', '!=', 'انتهى');
                 }
             ]);
         }])->where('branch_id', Auth::user()->branch_id)->get();

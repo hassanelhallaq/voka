@@ -35,7 +35,8 @@
                  <tbody>
                      @foreach ($users as $user)
                          <tr>
-                             <td>{{ $user->email }}</td>
+                             <td>{{ $user->name }}</td>
+                             <td>{{ $user->phone }}</td>
                              <td>
                                  {{ $user->getRoleNames() }}
                              </td>
@@ -98,15 +99,15 @@
                              </div>
                              <div class="row">
                                  <div class="form-group mb-6">
-                                     <label>{{ __('email') }}</label>
+                                     <label>{{ __('phone') }}</label>
 
                                      <div class="input-group mb-3">
-                                         <input type="text" class="form-control meal_price" name="email" required
-                                             id='email' value="{{ old('email') }}">
+                                         <input type="text" class="form-control meal_price" name="phone" required
+                                             id='phone' value="{{ old('phone') }}">
                                      </div>
-                                     @if ($errors->has('email'))
+                                     @if ($errors->has('phone'))
                                          <p style="color: red">
-                                             {{ $errors->first('email') }}
+                                             {{ $errors->first('phone') }}
                                          </p>
                                      @endif
                                  </div>

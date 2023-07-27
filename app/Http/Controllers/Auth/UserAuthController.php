@@ -30,16 +30,15 @@ class UserAuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator($request->all(), [
-            'email' => 'required|email|string',
+            'phone' => 'required|phone|string',
             'password' => 'required|string|min:6',
         ], [
-            'email.required' => 'Email is required',
-            'email.email' => 'Please enter the correct e-mail',
+            'phone.required' => 'phone is required',
             'password.required' => 'Password is required',
             'guard.in' => 'Enter the correct user'
         ]);
         $credentials = [
-            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
             'password' => $request->get('password'),
         ];
         if (!$validator->fails()) {

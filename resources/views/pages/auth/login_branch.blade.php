@@ -109,7 +109,7 @@ License: For each use you must have a valid license purchased only from above li
 
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="text" placeholder="Email" name="email" id="email"
+                                <input type="text" placeholder="Email" name="phone" id="phone"
                                     autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>
@@ -171,7 +171,7 @@ License: For each use you must have a valid license purchased only from above li
     function login() {
         var guard = 'branch';
         axios.post('/' + guard + '/login', {
-                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
                 password: document.getElementById('password').value,
                 guard: guard
             })
