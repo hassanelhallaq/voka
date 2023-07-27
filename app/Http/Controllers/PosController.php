@@ -32,7 +32,7 @@ class PosController extends Controller
                         ->where(function ($q) use ($now) {
                             $q->where('date', '>', $now)
                                 ->orWhere(function ($q) use ($now) {
-                                    $q
+                                    $q->where('date', $now->toDateString())
                                         ->whereTime('time', '>=', $now->addMinutes(DB::raw('`package`.`time`'))->format('H:i:s'));
                                 });
                         });
