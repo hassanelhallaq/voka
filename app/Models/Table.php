@@ -29,6 +29,6 @@ class Table extends Model
 
     public function reservation()
     {
-        return $this->hasMany(Reservation::class)->latest();
+        return $this->hasMany(Reservation::class)->orderBy('created_at','desc')->first();
     }
 }
