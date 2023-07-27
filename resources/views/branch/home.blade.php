@@ -1,3 +1,4 @@
+
 @extends('branch.parent')
 @section('contentFront')
     <div class="col-md-8" id="mainPage">
@@ -51,7 +52,7 @@
                             data-tableNumber="{{ $item->name }}"
                             data-package-time="{{ $table->reservation->package->time ?? 0 }}"
                             data-start="{{ $reservationDateTime ?? 0 }}" data-updatedTime="45"
-                            data-h="hall{{ $item->id }}" id="tableclick" value="hgjh"
+                            data-h="hall{{ $item->id }}" 
                             @if ($table->status == 'in_service') data-stat="serv" @elseif($table->status == 'available') data-pstat ="available"
                              @elseif ($table->status == 'reserved') data-pstat ="reserved" @endif>
 
@@ -148,13 +149,7 @@
                                                         <span>{{ $item->pivot->price }} ريال</span>
                                                     </li>
                                                 @endforeach
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold">1</div>
-                                                    </div>
-                                                    <span> ريال</span>
-                                                </li>
+                                              
                                                 <li
                                                     class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
                                                     <a onclick="product({{ $table->id }})" class="me-2">
@@ -501,10 +496,15 @@
         // Add active class to "القائمة" link
         $.get('product-order/ajax/' + id, {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
+         
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section
+            
             $('#reserv-main-section').hide(); // Show the reserv main section
+           
         });
+        
+        
     }
 </script>
 <script>
@@ -553,11 +553,11 @@
     updateCountdown();
 </script>
 
-<script>
-    var tableclick = document.getElementById("tableclick").value;
-    console.log(tableclick);
-    var x = document.getElementById("casher-section");
-    if (tableclick === "available") {
-        x.style.display = "block";
-    }
-</script>
+// <script>
+//     var tableclick = document.getElementById("tableclick").value;
+//     console.log(tableclick);
+//     var x = document.getElementById("casher-section");
+//     if (tableclick === "available") {
+//         x.style.display = "block";
+//     }
+// </script>
