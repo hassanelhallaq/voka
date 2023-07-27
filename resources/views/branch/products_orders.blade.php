@@ -1,4 +1,18 @@
+<style>
+    #boxItemOrder{
+        display:none !important;
+    }
+</style>
 <div id="mainPage">
+    <div class="col-md-12">
+         <li
+            id="boxItemOrder" class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="me-2 ms-auto">
+                <div class="fw-bold">1</div>
+            </div>
+            <span> ريال</span>
+        </li>
+    </div>
     <div class="col-md-12">
 
         <div class="seacr-bar mb-5">
@@ -7,6 +21,7 @@
                 <button class="btn search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
+       
         <div class="menu-category-wrap d-flex mb-4">
 
             <input value="{{ $table->id }}" id="table_id" hidden>
@@ -54,7 +69,7 @@
                                         <span id="number_{{ $product->product_id }}" class="number mx-3">0</span>
                                         <i class="fa-solid fa-plus"></i>
                                     </footer>
-                                    <div class="addBtn btn btn-primary btn-lg w-100 mt-3"
+                                    <div id="testAdd" class="addBtn btn btn-primary btn-lg w-100 mt-3"
                                         onclick="storeProduct({{ $product->product_id }})">
                                         أضف
                                     </div>
@@ -93,9 +108,11 @@
         let quantity = parseInt(quantityText);
 
         formData.append('quantity', quantity);
-
+        
         // Call the 'store' function to handle the form data submission
         store('order-product/store', formData);
 
+        let boxItemOrder = document.getElementById("boxItemOrder");
+        boxItemOrder.style.display = "block";        
     }
 </script>
