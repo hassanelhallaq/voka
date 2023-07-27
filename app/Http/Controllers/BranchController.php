@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Branch\StoreBranchRequest;
 use App\Models\Branch;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -12,7 +13,9 @@ class BranchController extends Controller
 {
     public function index()
     {
-        $branches = Branch::withCount('lounges', 'tables')->with(['reservations'])->get();
+        $branches = Branch::withCount('lounges', 'tables')->with(['reservations' => function ($q) {
+            $q->where('date', Carbon::today());
+        }])->get();
 
         return view('dashboard.branch.branches', compact('branches'));
     }

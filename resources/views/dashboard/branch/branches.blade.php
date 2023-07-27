@@ -46,6 +46,13 @@
                                              <div class="fs-6 fw-bold text-gray-700"> {{ $branch->tables_count }}</div>
                                              <div class="fw-semibold text-gray-400"> {{ __('tables') }}</div>
                                          </div>
+
+                                         <div
+                                             class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                             <div class="fs-6 fw-bold text-gray-700">
+                                                 {{ $branch->reservations->sum('total') ?? 0 }}</div>
+                                             <div class="fw-semibold text-gray-400"> {{ __('branch incomes') }}</div>
+                                         </div>
                                      </div>
                                      <div class="body text-center">
                                          <a class="btn btn-warning btn-sm" class="text-white"
