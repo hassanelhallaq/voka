@@ -12,7 +12,7 @@ class BranchController extends Controller
 {
     public function index()
     {
-        $branches = Branch::withCount('lounges', 'tables')->get();
+        $branches = Branch::withCount('lounges', 'tables')->with(['reservations'])->get();
 
         return view('dashboard.branch.branches', compact('branches'));
     }

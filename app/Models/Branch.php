@@ -19,6 +19,11 @@ class Branch extends Model
     {
         return $this->hasMany(Table::class);
     }
+
+    public function reservations()
+    {
+        return $this->hasManyThrough(Reservation::class, Table::class, 'table_id', 'branch_id');
+    }
     protected $fillable = [
         'name',
         'email',
