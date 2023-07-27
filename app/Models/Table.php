@@ -18,12 +18,17 @@ class Table extends Model
     {
         return $this->belongsToMany(Order::class, OrderProduct::class, 'product_id', 'order_id')->withPivot('price', 'quantity');
     }
-    public function reservation()
-    {
-        return $this->belongsTo(Reservation::class, 'id', 'table_id');
-    }
+    // public function reservation()
+    // {
+    //     return $this->belongsTo(Reservation::class, 'id', 'table_id');
+    // }
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class)->latest();
     }
 }
