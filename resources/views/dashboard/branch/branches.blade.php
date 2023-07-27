@@ -67,6 +67,10 @@
                                              href="{{ route('branch-account.create', ['id' => $branch->id]) }}"
                                              class="text-white">
                                              {{ __('accounts') }}</a>
+                                               <a class="btn btn-info btn-sm"
+                                             href="{{ route('branch-account.create', ['id' => $branch->id]) }}"
+                                             class="text-white">
+                                             {{ __('reports') }}</a>
                                      </div>
                                  </div>
                              </div>
