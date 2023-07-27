@@ -22,4 +22,8 @@ class Table extends Model
     {
         return $this->belongsTo(Reservation::class, 'id', 'table_id');
     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

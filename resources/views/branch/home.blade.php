@@ -148,12 +148,12 @@
                                                         <span>{{ $item->pivot->price }} ريال</span>
                                                     </li>
                                                 @endforeach
-                                                 <li
-                                                        class="list-group-item d-flex justify-content-between align-items-start">
-                                                        <div class="me-2 ms-auto">
-                                                            <div class="fw-bold">1</div>
-                                                        </div>
-                                                        <span> ريال</span>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold">1</div>
+                                                    </div>
+                                                    <span> ريال</span>
                                                 </li>
                                                 <li
                                                     class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
@@ -163,7 +163,7 @@
                                                 </li>
 
                                             </ol>
-                                            
+
                                             <ol class="list-group reversed  mt-5">
                                                 <li class="list-group-item no-number  ">
                                                     <div
@@ -252,7 +252,7 @@
 
                                         </div>
                                         <div id="orders" class="c-tab-pane ">
-                                            @foreach ($table->reservation as $reservation)
+                                            @foreach ($table->reservations as $reservation)
                                                 <ol class="list-group list-group-numbered reversed bill-info">
                                                     <li
                                                         class="list-group-item d-flex justify-content-between align-items-start">
