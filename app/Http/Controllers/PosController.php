@@ -21,7 +21,7 @@ class PosController extends Controller
         $halles = Lounge::with(['tables' => function ($q) {
             $q->with(['orders', 'reservation' => function ($q) {
                 $now = Carbon::now(); // Get the current date and time
-                $q->with(['package' => function ($q) use ($now) {
+                $q->whereDate('date', $now)->with(['package' => function ($q) use ($now) {
                     $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
                 }])
                     ->where('status', '!=', 'انتهى')
