@@ -18,7 +18,7 @@ class PosController extends Controller
 {
     public function home()
     {
-        $halles = Lounge::with(['tables' => function ($q) {
+        return $halles = Lounge::with(['tables' => function ($q) {
             $q->with([
                 'reservations' => function ($q) {
                     $now = Carbon::now();
@@ -32,7 +32,7 @@ class PosController extends Controller
                         ->where(function ($q) use ($now) {
                             $q->where('date', '>', $now)
                                 ->orWhere(function ($q) use ($now) {
-                                    $q->where('date', $now->toDateString())
+                                    $q
                                         ->whereTime('time', '>=', $now->addMinutes(DB::raw('`package`.`time`'))->format('H:i:s'));
                                 });
                         });
