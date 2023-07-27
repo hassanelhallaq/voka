@@ -22,7 +22,7 @@ class Branch extends Model
 
     public function reservations()
     {
-        return $this->hasManyThrough(Reservation::class, Table::class, 'id', 'branch_id');
+        return $this->hasManyThrough(Reservation::class, Table::class, 'id', 'table_id');
     }
     protected $fillable = [
         'name',
