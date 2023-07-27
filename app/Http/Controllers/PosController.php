@@ -18,7 +18,7 @@ class PosController extends Controller
 {
     public function home()
     {
-        return  $halles = Lounge::with(['tables' => function ($q) {
+        $halles = Lounge::with(['tables' => function ($q) {
             $q->with([
                 'reservations' => function ($q) {
                     $now = Carbon::now();
