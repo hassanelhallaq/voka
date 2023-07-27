@@ -1,18 +1,10 @@
 <style>
-    #boxItemOrder{
-        display:none !important;
-    }
+    /*#boxItemOrder{*/
+    /*    visibility: hidden;*/
+    /*}*/
 </style>
 <div id="mainPage">
-    <div class="col-md-12">
-         <li
-            id="boxItemOrder" class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="me-2 ms-auto">
-                <div class="fw-bold">1</div>
-            </div>
-            <span> ريال</span>
-        </li>
-    </div>
+   
     <div class="col-md-12">
 
         <div class="seacr-bar mb-5">
@@ -21,7 +13,7 @@
                 <button class="btn search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
-       
+     
         <div class="menu-category-wrap d-flex mb-4">
 
             <input value="{{ $table->id }}" id="table_id" hidden>
@@ -49,6 +41,15 @@
                 @endforeach
             </div>
         </div>
+    <!--<div class="col-md-6 mb-5">-->
+    <!--     <li-->
+    <!--        id="boxItemOrder" class="list-group-item d-flex justify-content-between align-items-start">-->
+    <!--        <div class="me-2 ms-auto">-->
+    <!--            <div class="fw-bold">1</div>-->
+    <!--        </div>-->
+    <!--        <span> ريال</span>-->
+    <!--    </li>-->
+    <!--</div>-->
         @foreach ($products as $item)
             <div class="all-items cat{{ $item->category_id }}">
                 <div class="row menu-items my-4">
@@ -103,7 +104,19 @@
 
         // Get the quantity value from the element with class name 'number'
         let quantityText = document.getElementById("number_" + id).textContent;
-
+        
+          $.get('branch/_home', + id, {}).done(function(data) {
+            // Create a temporary element to hold the content of the external page
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = data;
+            
+            // Find and extract the specific div you want to call
+            const externalDiv = tempElement.querySelector('#divToCall');
+            externalDiv.style.background="red";
+            });
+        // let boxItemOrder = document.getElementById("boxItemOrder");
+        // boxItemOrder.style.visibility = "visible"; 
+       
         // let quantityText = $('.number').text().replace(/,/g, ''); // Remove commas from the text
         let quantity = parseInt(quantityText);
 
@@ -112,7 +125,16 @@
         // Call the 'store' function to handle the form data submission
         store('order-product/store', formData);
 
-        let boxItemOrder = document.getElementById("boxItemOrder");
-        boxItemOrder.style.display = "block";        
+         
     }
 </script>
+<script>
+  
+</script>
+<!--<script>-->
+<!--     let testAdd = document.getElementById("testAdd");-->
+<!--     testAdd.addEventListener("mouseover",function(){-->
+<!--     let boxItemOrder = document.getElementById("boxItemOrder");-->
+<!--        boxItemOrder.style.display = "block";        -->
+<!--     });-->
+<!--</script>-->
