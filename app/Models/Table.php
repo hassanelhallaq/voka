@@ -18,14 +18,14 @@ class Table extends Model
     // {
     //     return $this->belongsToMany(Order::class, OrderProduct::class)->withPivot('price', 'quantity');
     // }
-    public function orders()
-    {
-        return $this->hasManyThrough(OrderProduct::class, Order::class);
-    }
     // public function orders()
     // {
-    //     return $this->hasMany(Order::class);
+    //     return $this->hasManyThrough(OrderProduct::class, Order::class);
     // }
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'table_id', 'id')->where('is_done', 0);
+    }
     public function reservation()
     {
         return $this->hasOne(Reservation::class)->orderByDesc('created_at');
