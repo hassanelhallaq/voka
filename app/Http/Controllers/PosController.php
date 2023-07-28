@@ -19,10 +19,10 @@ class PosController extends Controller
     public function home()
     {
         $halles = Lounge::with(['tables' => function ($q) {
-            $q->with(['reservation' => function ($q) {
+            $q->with(['orders', 'reservation' => function ($q) {
                 $now = Carbon::now(); // Get the current date and time
                 $q->with(['package' => function ($q) use ($now) {
-                    $q->select('id', 'time'); // Select the necessary columns from the package table
+                    $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
                 }])
                     ->where('status', '!=', 'انتهى')
                     ->where(function ($q) use ($now) {
@@ -73,7 +73,7 @@ class PosController extends Controller
             $q->with(['orders', 'reservation' => function ($q) {
                 $now = Carbon::now(); // Get the current date and time
                 $q->with(['package' => function ($q) use ($now) {
-                    $q->select('id', 'time'); // Select the necessary columns from the package table
+                    $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
                 }])
                     ->where('status', '!=', 'انتهى')
                     ->where(function ($q) use ($now) {
