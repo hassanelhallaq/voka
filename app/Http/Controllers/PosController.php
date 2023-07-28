@@ -19,18 +19,20 @@ class PosController extends Controller
     public function home()
     {
         $halles = Lounge::with(['tables' => function ($q) {
-            $q->with([
-                'reservations' => function ($q) {
-                    $now = Carbon::now();
-                    $q->whereDate('date', $now);
-                }, 'reservation' => function ($q) {
-                    $now = Carbon::now(); // Get the current date and time
-                    $q->with(['package' => function ($q) use ($now) {
-                        $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
-                    }])
-                        ->where('status', '!=', 'انتهى');
-                }
-            ]);
+            $q->with(['reservation' => function ($q) {
+                $now = Carbon::now(); // Get the current date and time
+                $q->with(['package' => function ($q) use ($now) {
+                    $q->select('id', 'time'); // Select the necessary columns from the package table
+                }])
+                    ->where('status', '!=', 'انتهى')
+                    ->where(function ($q) use ($now) {
+                        $q->where('date', '>', $now)
+                            ->orWhere(function ($q) use ($now) {
+                                $q->where('date', $now->toDateString())
+                                    ->whereTime('time', '>=', $now->addMinutes(DB::raw('`package`.`time`'))->format('H:i:s'));
+                            });
+                    });
+            }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
 
         return response()->view('branch.home', compact('halles'));

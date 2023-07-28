@@ -142,15 +142,26 @@
                                     <div class="tab-content">
                                         <div id="the-menu" class="c-tab-pane active">
                                             <ol class="list-group list-group-numbered reversed">
-                                                @foreach ($table->orders as $item)
+                                                @php
+                                                    $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
+                                                        ->where('table_id', $table->id)
+                                                        ->where('is_done', 0)
+                                                        ->with('products')
+                                                        ->first();
+                                                    
+                                                @endphp
+
+                                                @foreach ($orders->products as $product)
                                                     <li
                                                         class="list-group-item d-flex justify-content-between align-items-start">
                                                         <div class="me-2 ms-auto">
-                                                            <div class="fw-bold">{{ $item->product->name }}</div>
+                                                            <div class="fw-bold">{{ $product->name }}</div>
                                                         </div>
-                                                        <span>{{ $item->price }} ريال</span>
+
+                                                        <span>{{ $product->pivot->price }} ريال</span>
                                                     </li>
                                                 @endforeach
+
                                                 <li
                                                     class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
                                                     <a onclick="product({{ $table->id }})" class="me-2">
