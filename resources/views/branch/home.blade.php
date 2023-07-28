@@ -149,13 +149,6 @@
                                                         <span>{{ $item->pivot->price }} ريال</span>
                                                     </li>
                                                 @endforeach
-                                              <li id="divToCall"
-                                                        class="list-group-item d-flex justify-content-between align-items-start">
-                                                        <div class="me-2 ms-auto">
-                                                            <div class="fw-bold">name</div>
-                                                        </div>
-                                                        <span> ريال</span>
-                                                    </li>
                                                 <li
                                                     class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
                                                     <a onclick="product({{ $table->id }})" class="me-2">

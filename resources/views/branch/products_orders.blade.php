@@ -41,16 +41,18 @@
                 @endforeach
             </div>
         </div>
-    <!--<div class="col-md-6 mb-5">-->
-    <!--     <li-->
-    <!--        id="boxItemOrder" class="list-group-item d-flex justify-content-between align-items-start">-->
-    <!--        <div class="me-2 ms-auto">-->
-    <!--            <div class="fw-bold">1</div>-->
-    <!--        </div>-->
-    <!--        <span> ريال</span>-->
-    <!--    </li>-->
-    <!--</div>-->
-        @foreach ($products as $item)
+        <!--<div class="col-md-6 mb-5">-->
+        <!-- <li-->
+        <!--    id="boxItemOrder" class="list-group-item d-flex justify-content-between align-items-start">-->
+        <!--    <div class="me-2 ms-auto">-->
+        <!--        <div class="fw-bold">1</div>-->
+        <!--    </div>-->
+        <!--    <span> ريال</span>-->
+        <!--</li>-->
+        <!--</div>-->
+        
+            <div class="col-md-12">
+                 @foreach ($products as $item)
             <div class="all-items cat{{ $item->category_id }}">
                 <div class="row menu-items my-4">
                     @foreach ($item->Product as $product)
@@ -81,8 +83,14 @@
                 </div>
             </div>
         @endforeach
-
+            </div>
+       
+        
+       
+        
     </div>
+   
+   
 </div>
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -95,6 +103,7 @@
 <script>
     // Function to store product information
     function storeProduct(id) {
+      
         let formData = new FormData();
         formData.append('table_id', document.getElementById('table_id').value);
         formData.append('product_id', id);
@@ -105,15 +114,7 @@
         // Get the quantity value from the element with class name 'number'
         let quantityText = document.getElementById("number_" + id).textContent;
         
-          $.get('branch/_home', + id, {}).done(function(data) {
-            // Create a temporary element to hold the content of the external page
-            const tempElement = document.createElement('div');
-            tempElement.innerHTML = data;
-            
-            // Find and extract the specific div you want to call
-            const externalDiv = tempElement.querySelector('#divToCall');
-            externalDiv.style.background="red";
-            });
+        
         // let boxItemOrder = document.getElementById("boxItemOrder");
         // boxItemOrder.style.visibility = "visible"; 
        
@@ -127,9 +128,6 @@
 
          
     }
-</script>
-<script>
-  
 </script>
 <!--<script>-->
 <!--     let testAdd = document.getElementById("testAdd");-->
