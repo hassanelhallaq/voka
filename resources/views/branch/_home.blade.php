@@ -50,7 +50,7 @@
                             data-tableNumber="{{ $item->name }}"
                             data-package-time="{{ $table->reservation->package->time ?? 0 }}"
                             data-start="{{ $reservationDateTime ?? 0 }}" data-updatedTime="45"
-                            data-h="hall{{ $item->id }}" id="tableclick" value="hgjh"
+                            data-h="hall{{ $item->id }}"
                             @if ($table->status == 'in_service') data-stat="serv" @elseif($table->status == 'available') data-pstat ="available"
                              @elseif ($table->status == 'reserved') data-pstat ="reserved" @endif>
 
@@ -94,6 +94,7 @@
                                             @endif
                                         </span>
                                     </div>
+
                                     <div class="body-package d-flex justify-content-between">
                                         <p class="hall-name">
                                             {{ $table->reservation->package->name ?? 'لا يوجد باقة ' }}
@@ -145,9 +146,9 @@
                                                     <li
                                                         class="list-group-item d-flex justify-content-between align-items-start">
                                                         <div class="me-2 ms-auto">
-                                                            <div class="fw-bold">{{ $item->name }}</div>
+                                                            <div class="fw-bold">{{ $item->product->name }}</div>
                                                         </div>
-                                                        <span>{{ $item->pivot->price }} ريال</span>
+                                                        <span>{{ $item->price }} ريال</span>
                                                     </li>
                                                 @endforeach
                                                 <li
@@ -158,6 +159,7 @@
                                                 </li>
 
                                             </ol>
+
                                             <ol class="list-group reversed  mt-5">
                                                 <li class="list-group-item no-number  ">
                                                     <div
@@ -250,114 +252,45 @@
 
                                         </div>
                                         <div id="orders" class="c-tab-pane ">
-                                            <ol class="list-group list-group-numbered reversed bill-info">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> طلب باسم</div>
-                                                    </div>
-                                                    <span>على محمد احمد </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold">اسم الباقة</div>
-                                                    </div>
-                                                    <span> باقة 3 ساعات </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الرصيد</div>
-                                                    </div>
-                                                    <span>1500 </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الحالة</div>
-                                                    </div>
-                                                    <span class="badge bg-info">تم الدفع </span>
-                                                </li>
-                                                <li
-                                                    class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                    <div class="me-2">
-                                                        <div class="fw-bold"> طباعة الطلب</div>
-                                                    </div>
-                                                </li>
-                                            </ol>
-                                            <ol class="list-group list-group-numbered reversed bill-info">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> طلب باسم</div>
-                                                    </div>
-                                                    <span>على محمد احمد </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold">اسم الباقة</div>
-                                                    </div>
-                                                    <span> باقة 3 ساعات </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الرصيد</div>
-                                                    </div>
-                                                    <span>1500 </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الحالة</div>
-                                                    </div>
-                                                    <span class="badge bg-info">تم الدفع </span>
-                                                </li>
-                                                <li
-                                                    class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                    <div class="me-2">
-                                                        <div class="fw-bold"> طباعة الطلب</div>
-                                                    </div>
-                                                </li>
-                                            </ol>
-                                            <ol class="list-group list-group-numbered reversed bill-info">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> طلب باسم</div>
-                                                    </div>
-                                                    <span>على محمد احمد </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold">اسم الباقة</div>
-                                                    </div>
-                                                    <span> باقة 3 ساعات </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الرصيد</div>
-                                                    </div>
-                                                    <span>1500 </span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الحالة</div>
-                                                    </div>
-                                                    <span class="badge bg-info">تم الدفع </span>
-                                                </li>
-                                                <li
-                                                    class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                    <div class="me-2">
-                                                        <div class="fw-bold"> طباعة الطلب</div>
-                                                    </div>
-                                                </li>
-                                            </ol>
+                                            @foreach ($table->reservations as $reservation)
+                                                <ol class="list-group list-group-numbered reversed bill-info">
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold"> طلب باسم</div>
+                                                        </div>
+                                                        <span>{{ $reservation->client->name }}</span>
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold">اسم الباقة</div>
+                                                        </div>
+                                                        <span> {{ $reservation->package->name }}</span>
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold"> الرصيد</div>
+                                                        </div>
+                                                        <span>{{ $reservation->package->price }} </span>
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                        <div class="me-2 ms-auto">
+                                                            <div class="fw-bold"> الحالة</div>
+                                                        </div>
+                                                        <span class="badge bg-info">تم الدفع </span>
+                                                    </li>
+                                                    <li
+                                                        class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
+                                                        <div class="me-2">
+                                                            <div class="fw-bold"> طباعة الطلب</div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                            @endforeach
+
                                         </div>
                                         <div id="reservations" class="c-tab-pane ">
                                             <div class="hour-col">
@@ -580,10 +513,15 @@
         // Add active class to "القائمة" link
         $.get('product-order/ajax/' + id, {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
+
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section
+
             $('#reserv-main-section').hide(); // Show the reserv main section
+
         });
+
+
     }
 </script>
 <script>
@@ -630,4 +568,15 @@
 
     // Initialize the countdown on page load
     updateCountdown();
+</script>
+
+//
+<script>
+    //     var tableclick = document.getElementById("tableclick").value;
+    //     console.log(tableclick);
+    //     var x = document.getElementById("casher-section");
+    //     if (tableclick === "available") {
+    //         x.style.display = "block";
+    //     }
+    //
 </script>

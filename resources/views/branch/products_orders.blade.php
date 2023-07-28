@@ -1,25 +1,13 @@
-<style>
-    /*#boxItemOrder{*/
-    /*    visibility: hidden;*/
-    /*}*/
-</style>
 <div id="mainPage">
-   
-    <div class="col-md-12">
 
+    <div class="col-md-12">
         <div class="seacr-bar mb-5">
             <form class="d-flex search " role="search">
                 <input class="form-control" type="search" aria-label="Search">
                 <button class="btn search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
-     
         <div class="menu-category-wrap d-flex mb-4">
-
-            <input value="{{ $table->id }}" id="table_id" hidden>
-            <input value="{{ $table->reservation->package_id }}" id="package_id" hidden>
-            <input value="{{ $table->reservation->client_id }}" id="client_id" hidden>
-
             <div class="voka-slider">
                 @foreach ($products as $key => $item)
                     <div class="item">
@@ -41,18 +29,62 @@
                 @endforeach
             </div>
         </div>
-        <!--<div class="col-md-6 mb-5">-->
-        <!-- <li-->
-        <!--    id="boxItemOrder" class="list-group-item d-flex justify-content-between align-items-start">-->
-        <!--    <div class="me-2 ms-auto">-->
-        <!--        <div class="fw-bold">1</div>-->
-        <!--    </div>-->
-        <!--    <span> ريال</span>-->
-        <!--</li>-->
-        <!--</div>-->
-        
-            <div class="col-md-12">
-                 @foreach ($products as $item)
+        {{-- <div class="col-md-2">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="card cat-tap mb-3" style="max-width: 540px;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                                <img src="images/soup.png" class="img-fluid rounded-start"
+                                                    alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">الشربة</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card cat-tap mb-3" style="max-width: 540px;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                                <img src="images/checkien.png" class="img-fluid rounded-start"
+                                                    alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">دجاج</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card cat-tap mb-3" style="max-width: 540px;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                                <img src="images/bizza.png" class="img-fluid rounded-start"
+                                                    alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">بيتزا</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> --}}
+        @foreach ($products as $item)
             <div class="all-items cat{{ $item->category_id }}">
                 <div class="row menu-items my-4">
                     @foreach ($item->Product as $product)
@@ -69,13 +101,10 @@
                                     </header>
                                     <footer>
                                         <i class="fa-solid fa-minus"></i>
-                                        <span id="number_{{ $product->product_id }}" class="number mx-3">0</span>
+                                        <span class="number mx-3">0</span>
                                         <i class="fa-solid fa-plus"></i>
                                     </footer>
-                                    <div id="testAdd" class="addBtn btn btn-primary btn-lg w-100 mt-3"
-                                        onclick="storeProduct({{ $product->product_id }})">
-                                        أضف
-                                    </div>
+                                    <div class="addBtn btn btn-primary btn-lg w-100 mt-3">أضف</div>
                                 </div>
                             </div>
                         </div>
@@ -83,14 +112,13 @@
                 </div>
             </div>
         @endforeach
-            </div>
-       
-        
-       
-        
+
+
+
+
     </div>
-   
-   
+
+
 </div>
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -103,7 +131,7 @@
 <script>
     // Function to store product information
     function storeProduct(id) {
-      
+
         let formData = new FormData();
         formData.append('table_id', document.getElementById('table_id').value);
         formData.append('product_id', id);
@@ -113,26 +141,42 @@
 
         // Get the quantity value from the element with class name 'number'
         let quantityText = document.getElementById("number_" + id).textContent;
-        
-        
+
+
         // let boxItemOrder = document.getElementById("boxItemOrder");
-        // boxItemOrder.style.visibility = "visible"; 
-       
+        // boxItemOrder.style.visibility = "visible";
+
         // let quantityText = $('.number').text().replace(/,/g, ''); // Remove commas from the text
         let quantity = parseInt(quantityText);
 
         formData.append('quantity', quantity);
-        
+
         // Call the 'store' function to handle the form data submission
         store('order-product/store', formData);
 
-         
+
     }
 </script>
-<!--<script>-->
-<!--     let testAdd = document.getElementById("testAdd");-->
-<!--     testAdd.addEventListener("mouseover",function(){-->
-<!--     let boxItemOrder = document.getElementById("boxItemOrder");-->
-<!--        boxItemOrder.style.display = "block";        -->
-<!--     });-->
-<!--</script>-->
+<!--<script>
+    -- >
+    <
+    !--
+    let testAdd = document.getElementById("testAdd");
+    -- >
+    <
+    !--testAdd.addEventListener("mouseover", function() {
+        -- >
+        <
+        !--
+        let boxItemOrder = document.getElementById("boxItemOrder");
+        -- >
+        <
+        !--boxItemOrder.style.display = "block";
+        -- >
+        <
+        !--
+    });
+    -- >
+    <
+    !--
+</script>-->

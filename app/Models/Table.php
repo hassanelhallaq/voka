@@ -14,10 +14,18 @@ class Table extends Model
     {
         return $this->belongsToMany(Package::class, PackageTables::class);
     }
+    // public function orders()
+    // {
+    //     return $this->belongsToMany(Order::class, OrderProduct::class)->withPivot('price', 'quantity');
+    // }
     public function orders()
     {
-        return $this->belongsToMany(Order::class, OrderProduct::class, 'product_id', 'order_id')->withPivot('price', 'quantity');
+        return $this->hasManyThrough(OrderProduct::class, Order::class);
     }
+    // public function orders()
+    // {
+    //     return $this->hasMany(Order::class);
+    // }
     public function reservation()
     {
         return $this->hasOne(Reservation::class)->orderByDesc('created_at');
