@@ -85,7 +85,8 @@
                     </div>
                 </div>
                 @yield('contentFront')
-                @include('branch._casher')
+                
+                 @include('branch._casher')
                 @include('branch.reservSide')
 
             </div>

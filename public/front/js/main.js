@@ -1,5 +1,23 @@
 
 $(document).ready(function () {
+    
+   
+    $('.reversed').addClass('casher-box');
+    $('.table-list').removeClass('casher-box');
+    
+    $('.new-menu-li').on('click', function(){
+        console.log('clickeeeeeeed');
+        $('#mainPage').removeClass('col-md-8').addClass('col-md-11');
+        $('.cash').hide();
+    });
+    
+    $('.home').on('click', function(){
+        $('.cash').show();
+        $('#mainPage').removeClass('col-md-11').addClass('col-md-8');
+    });
+
+    
+    
 // كود صفحة الحجوزات
 var currentDate = new Date();
 var daysOfWeek = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];

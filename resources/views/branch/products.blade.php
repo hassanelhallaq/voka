@@ -1,5 +1,6 @@
 <div id="mainPage">
-    <div class="col-md-12">
+    <div class="row">
+    <div class="col-md-9">
 
         <div class="seacr-bar mb-5">
             <form class="d-flex search " role="search">
@@ -113,6 +114,95 @@
         @endforeach
 
     </div>
+    <!--<div class="col-md-3">-->
+    <!--              <h2 class="text-center mb-4">طاولة رقم 1</h2>-->
+    <!--                   عناصر التاب -->
+    <!--                  <div class="tab-content">-->
+    <!--                    <div id="tab1" class="tab-pane fade show active">-->
+    <!--                        <ol class="table-list list-group list-group-numbered reversed">-->
+    <!--                            <li class="menu-info-list list-group-item d-flex justify-content-center align-items-center text-center">-->
+    <!--                                <p>لا يوجد عناصر</p>-->
+    <!--                            </li>-->
+
+    <!--                          </ol>-->
+    <!--                          <ol class="list-group reversed  mt-5">-->
+    <!--                            <li class="list-group-item no-number  ">-->
+    <!--                                <div class="sub-total d-flex justify-content-between align-items-start">-->
+    <!--                                    <div class="me-2 ms-auto">-->
+    <!--                                        <div class="fw-bold"> حاصل الجمع</div>-->
+    <!--                                      </div>-->
+    <!--                                      <span class="sub-total-number"> 260 </span>-->
+    <!--                                      <span> ريال</span>-->
+    <!--                                </div>-->
+
+    <!--                                <div class="tax d-flex justify-content-between align-items-start mt-4">-->
+    <!--                                    <div class="me-2 ms-auto">-->
+    <!--                                        <div class="fw-bold"> ضريبة</div>-->
+    <!--                                      </div>-->
+    <!--                                      <span class="taxes">10%</span>-->
+    <!--                                </div>-->
+    <!--                                <div class="tax d-flex justify-content-between align-items-start mt-4 total">-->
+    <!--                                    <div class="me-2 ms-auto">-->
+    <!--                                        <div class="fw-bold"> الإجمالى</div>-->
+    <!--                                      </div>-->
+    <!--                                      <span class="table-total">286 </span>-->
+    <!--                                      <span> ريال</span>-->
+    <!--                                </div>-->
+    <!--                                <div class="payment-method">-->
+    <!--                                    <div class="row">-->
+    <!--                                        <div class="col-4">-->
+    <!--                                            <div class="payment-icon active d-flex justify-content-center align-items-center">-->
+    <!--                                                <i class="fa-solid fa-sack-dollar"></i>-->
+    <!--                                            </div>-->
+    <!--                                            <p class="text-center">كاش</p>-->
+    <!--                                        </div>-->
+    <!--                                        <div class="col-4">-->
+    <!--                                          <div class="payment-icon d-flex justify-content-center align-items-center">-->
+    <!--                                            <i class="fa-solid fa-credit-card"></i>-->
+    <!--                                          </div>-->
+    <!--                                          <p class="text-center">بطاقة  ائتمان</p>-->
+    <!--                                      </div>-->
+    <!--                                      <div class="col-4">-->
+    <!--                                        <div class="payment-icon d-flex justify-content-center align-items-center">-->
+    <!--                                          <i class="fa-solid fa-wallet"></i>-->
+    <!--                                        </div>-->
+    <!--                                        <p class="text-center">المحفظة</p>-->
+    <!--                                    </div>-->
+    <!--                                    </div>-->
+    <!--                                    <div class="payment-btn my-3 text-center">-->
+    <!--                                        <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ادفع الآن</div>-->
+    <!--                                         Modal -->
+    <!--                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+    <!--                                          <div class="modal-dialog">-->
+    <!--                                            <div class="modal-content">-->
+    <!--                                              <div class="modal-header">-->
+    <!--                                                <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>-->
+    <!--                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+    <!--                                              </div>-->
+    <!--                                              <div class="modal-body">-->
+    <!--                                                <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
+    <!--                                              </div>-->
+    <!--                                              <div class="modal-footer">-->
+    <!--                                                <button type="button" class="btn btn-primary">تأكيد</button>-->
+    <!--                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>-->
+    <!--                                              </div>-->
+    <!--                                            </div>-->
+    <!--                                          </div>-->
+    <!--                                        </div>-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                              </li>-->
+
+
+
+    <!--                          </ol>-->
+
+    <!--                    </div>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    </div>
+                    </div>
+                </div>
 </div>
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>

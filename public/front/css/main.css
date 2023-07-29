@@ -1057,3 +1057,12 @@ table .active-day {
   padding: 4px 8px;
   border-radius: 4px;
 }
+#casher-section{
+    width:24%;
+}
+.casher-box {
+    display: none;
+}
+.tab-content .casher-box {
+    display: flex;
+}

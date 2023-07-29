@@ -1,4 +1,4 @@
-    <div class="col-md-3" id="casher-section">
+    <div class="col-md-12" id="casher-section">
         <div class="side-place">
             <div id="tab-place" class="c-tab-pane fade show active">
                 <ol class="table-list list-group list-group-numbered reversed">
@@ -11,7 +11,7 @@
                     </li>
 
                 </ol>
-                <ol class="list-group reversed  mt-5">
+                <ol class="list-group reversed casher-box mt-5">
                     <li class="list-group-item no-number  ">
                         <div class="sub-total d-flex justify-content-between align-items-start">
                             <div class="me-2 ms-auto">
