@@ -52,7 +52,7 @@
                             data-package-time="{{ $table->reservation->package->time ?? 0 }}"
                             data-start="{{ $reservationDateTime ?? 0 }}" data-updatedTime="45"
                             data-h="hall{{ $item->id }}"
-                            @if ($table->status == 'in_service') data-stat="serv" @elseif($table->status == 'available') data-pstat ="available"
+                            @if ($table->status == 'in_service') data-pstat="in_service" @elseif($table->status == 'available') data-pstat ="available"
                              @elseif ($table->status == 'reserved') data-pstat ="reserved" @endif>
 
 

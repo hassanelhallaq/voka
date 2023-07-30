@@ -1066,3 +1066,6 @@ table .active-day {
 .tab-content .casher-box {
     display: flex;
 }
+#pay .reversed  {
+    display: flex;
+}

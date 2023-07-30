@@ -612,7 +612,7 @@
                                     <div class="col-md-3">
                                         <div class="save-all btn btn-lg btn-primary" onclick="storeReaervation()"
                                             data-id="#pay">
-                                            حفظ التغييرات
+                                            تقدم للدفع 
                                         </div>
 
                                     </div>

@@ -8,6 +8,7 @@ use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log; 
 
 class ReservationCron extends Command
 {
@@ -33,15 +34,8 @@ class ReservationCron extends Command
         $currentDateTime = Carbon::now();
 
 
-        $expiredReservations = Reservation::where(function ($query) use ($currentDateTime) {
-            // Combine 'reservation_date' and 'time' columns and compare with the current date and time
-            $query->whereDate('date', '<', $currentDateTime->toDateString())
-                ->orWhere(function ($query) use ($currentDateTime) {
-                    $query->whereDate('date', '=', $currentDateTime->toDateString())
-                        ->whereTime('time', '<', $currentDateTime->toTimeString());
-                });
-        })->where('status', '!=', 'انتهى')->get();
-
+        $expiredReservations = Reservation::where('status', '!=', 'انتهى')->get();
+            //  log::info($expiredReservations);
         // Update the status of the expired reservations
         foreach ($expiredReservations as $reservation) {
             $package = Package::find($reservation->package_id);
@@ -52,10 +46,11 @@ class ReservationCron extends Command
 
             // Calculate the new end time by adding the package time to the reservation time
             $reservationEndTime = Carbon::createFromFormat('Y-m-d H:i:s', $reservationDateTime)
-                ->addMinutes($packageTimeInMinutes);
-
+                ->addMinutes($reservation->minutes);
+                // log::info($currentDateTime .'_'. $reservationEndTime);
             // Check if the new end time has passed
             if ($currentDateTime >= $reservationEndTime) {
+                //  log::info($currentDateTime .'_'. $reservationEndTime.'t');
                 // If the end time has passed, update the reservation status to 'انتهى' (or 'ended')
                 $reservation->status = 'انتهى';
                 $reservation->update();

@@ -16,15 +16,15 @@
 <div class="card-body ">
     <div class="tab-content text-center">
         @foreach ($halles as $key => $item)
-            <div class="change-content tab-pane {{ $key === 0 ? ' active show' : '' }}" id="hall{{ $item->id }}"  data-id="#allguests">
+            <div class="tab-pane {{ $key === 0 ? ' active show' : '' }}" id="hall{{ $item->id }}"  >
                 <div class="row new-reservation-tables">
                     <h2 class="text-center text-light">{{ $item->name }}</h2>
                     <div class="col-12">
                         <div class="row">
                             @foreach ($item->tables as $table)
                                 <div class="col-md-3 card-col  d-flex justify-content-center align-items-center ">
-                                    <div class="card catch-id  bg-success active-card" id="table-input"
-                                        data-id="{{ $table->id }}" data-choosen="{{ $table->id }}">
+                                    <div class="change-content event-test card catch-id  bg-success active-card" id="table-input"
+                                        data-id="#allguests" data-choosen="{{ $table->id }}">
                                         <input hidden id="table_id" value="{{ $table->id }}">
                                         <div class="card-header primary-bg-color">
                                             <div class="top d-flex justify-content-between ">
