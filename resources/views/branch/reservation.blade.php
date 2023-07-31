@@ -282,11 +282,12 @@
                                                         for="package_id" onclick="pack({{ $package->id }})">
                                                         <input type="radio" value="{{ $package->id }}"
                                                             id="package_{{ $package->id }}" style="display: none;">
+                                                            <input type="hidden" id="packageprice" name="packageprice" value="{{ $package->price }}">
                                                         اختر الباقة
                                                     </label>
 
                                                 </div>
-                                                <div class="card-footer btn-dark text-light text-body-secondary">
+                                                <div class="card-footer btn-dark text-light text-body-secondary package-price">
                                                     الباقة الأولى
                                                 </div>
                                             </div>
