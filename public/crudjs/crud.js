@@ -203,7 +203,7 @@ function clearForm() {
 function showMessage(data) {
     console.log(data);
     Swal.fire({
-        position: 'center',
+        position: 'bottom',
         icon: data.icon,
         title: data.title,
         showConfirmButton: false,

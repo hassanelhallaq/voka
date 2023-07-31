@@ -456,30 +456,53 @@ mins.on('click', function() {
     });
 
     // اضافة التاريخ
+    // var currentDate = new Date();
+    // var monthNames = [
+    //   "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+    //   "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+    // ];
+    // var monthIndex = currentDate.getMonth();
+    // var month = monthNames[monthIndex];
+    // var day = currentDate.getDate();
+    // var year = currentDate.getFullYear();
+    // var formattedDate = day + ' ' +  month + ', ' + year;
+    // $('.reserv-date').text(formattedDate).attr('data-v', 1);
     var currentDate = new Date();
     var monthNames = [
-      "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
-      "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
     var monthIndex = currentDate.getMonth();
     var month = monthNames[monthIndex];
     var day = currentDate.getDate();
     var year = currentDate.getFullYear();
-    var formattedDate = day + ' ' +  month + ', ' + year;
+    var formattedDate = month + " - " + year + " " + day;
+    
     $('.reserv-date').text(formattedDate).attr('data-v', 1);
 
-    // اضافة الوقت
+
+
+    // // اضافة الوقت
     var currentDate = new Date();
     var hours = currentDate.getHours();
     var minutes = currentDate.getMinutes();
+    
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    
     var ampm = hours >= 12 ? 'PM' : 'AM';
-
-    // تحويل الوقت إلى تنسيق 12 ساعة
     hours = hours % 12;
     hours = hours ? hours : 12; // يعيد 0 إلى 12
+    
+    if(hours < 10){
+        hours = '0' + hours;
+    } else {
+        hours = hours;
+    }
     var formattedTime = hours + ':' + minutes + ' ' + ampm;
-
     $('.reserv-time').text(formattedTime).attr('data-v', 1);
+    
+    
+
 
     // كود اخفاء واظهار محتوى التبويبات فى صفحة حجز جديد
 
@@ -491,6 +514,11 @@ mins.on('click', function() {
 //         var contentId = $(this).data('id');
 //         $(contentId).show();
 //     });
+
+        $('.clock').on("blur", function(){
+            var tlheClock = $(this).val(); 
+            $('.reserv-time').text(tlheClock)
+        });
 
 
        $('.change-content').on('click', function() {
@@ -647,7 +675,8 @@ mins.on('click', function() {
       var forDataV = parentElement.find('.card-title');
       var cardTitle = parentElement.find('.card-title').text();
       var packagePrice = parentElement.find('#packageprice').val();
-      $('.package-name').html(cardTitle + ' <span class="the-price"> ' + packagePrice + '</span>');
+      $('.package-name').html(cardTitle );
+      $('.payment-price').text(packagePrice + ' ريال ');
 
       var itemId = $(this).closest('.card').data('choosen');
       $('.package-name').attr('data-choos', itemId);

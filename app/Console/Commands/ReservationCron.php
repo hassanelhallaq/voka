@@ -47,10 +47,10 @@ class ReservationCron extends Command
             // Calculate the new end time by adding the package time to the reservation time
             $reservationEndTime = Carbon::createFromFormat('Y-m-d H:i:s', $reservationDateTime)
                 ->addMinutes($reservation->minutes);
-                // log::info($currentDateTime .'_'. $reservationEndTime);
+                log::info($currentDateTime .'_'. $reservationEndTime);
             // Check if the new end time has passed
-            if ($currentDateTime >= $reservationEndTime) {
-                //  log::info($currentDateTime .'_'. $reservationEndTime.'t');
+            if ($currentDateTime <= $reservationEndTime) {
+                 log::info($currentDateTime .'_'. $reservationEndTime.'t');
                 // If the end time has passed, update the reservation status to 'انتهى' (or 'ended')
                 $reservation->status = 'انتهى';
                 $reservation->update();

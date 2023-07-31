@@ -1069,3 +1069,6 @@ table .active-day {
 #pay .reversed  {
     display: flex;
 }
+#today {
+    color: var(--orange);
+}
