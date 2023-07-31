@@ -33,6 +33,7 @@ $(document).ready(function () {
           data.guest = $('#guest-input #client_id').val();
           data.package = $('#package-input #package_id').val();
           data.table = $('#table-input #table_id').val();
+          data.packagePrice = $('.the-price').text();
 
           // طباعة الكائن JSON في وحدة التحكم
           console.log(data);
@@ -645,7 +646,8 @@ mins.on('click', function() {
       var parentElement = $(this).parent(); // الوصول إلى العنصر الأب لزر الإضافة
       var forDataV = parentElement.find('.card-title');
       var cardTitle = parentElement.find('.card-title').text();
-      $('.package-name').text(cardTitle);
+      var packagePrice = parentElement.find('#packageprice').val();
+      $('.package-name').html(cardTitle + ' <span class="the-price"> ' + packagePrice + '</span>');
 
       var itemId = $(this).closest('.card').data('choosen');
       $('.package-name').attr('data-choos', itemId);
