@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap-clockpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
-        tbody td:hover, .selected{
+        tbody td:hover,
+        .selected {
             color: #e5772a;
         }
     </style>
@@ -269,14 +270,15 @@
                                     @foreach ($packages as $package)
                                         <div class="col-md-4">
                                             <div class="card catch-id  btn-dark  text-center" id="package-input"
-                                                data-choosen="{{ $package->id }}" >
+                                                data-choosen="{{ $package->id }}">
                                                 <div class="card-body">
                                                     <h2 class="card-title">{{ $package->name }}</h2>
                                                     <p class="card-text package-text mt-2">باقة {{ $package->time }}
                                                         ساعة مع
                                                         {{ $package->price }} نقطة رصيد</p>
- 
-                                                    <label data-id="#all-tables" class="choos-btn btn change-content btn-primary mt-4 pr-4"
+
+                                                    <label data-id="#all-tables"
+                                                        class="choos-btn btn change-content btn-primary mt-4 pr-4"
                                                         for="package_id" onclick="pack({{ $package->id }})">
                                                         <input type="radio" value="{{ $package->id }}"
                                                             id="package_{{ $package->id }}" style="display: none;">
@@ -393,94 +395,98 @@
                                     <div class="col-md-6 text-center mb-5">
                                         <h2 class="heading-section">Calendar #02</h2>
                                     </div>
-                            <div class="elegant-calencar d-md-flex mb-5">
-                            <div class="wrap-header d-flex align-items-center">
-                              <p id="reset">reset</p>
-                              <div id="header" class="p-0">
-                                <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div>
-                                <div class="head-info">
-                                    <div class="head-day"></div>
-                                    <div class="head-month"></div>
-                                </div>
-                                <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div>
-                              </div>
-                            </div>
-                            <div class="calendar-wrap">
-                              <table id="calendar">
-                                <thead>
-                                    <tr>
-                                        <th>Sun</th>
-                                        <th>Mon</th>
-                                        <th>Tue</th>
-                                        <th>Wed</th>
-                                        <th>Thu</th>
-                                        <th>Fri</th>
-                                        <th>Sat</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td  data-id="#alltime" class=""></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
+                                    <div class="elegant-calencar d-md-flex mb-5">
+                                        <div class="wrap-header d-flex align-items-center">
+                                            <p id="reset">reset</p>
+                                            <div id="header" class="p-0">
+                                                <div
+                                                    class="pre-button d-flex align-items-center justify-content-center">
+                                                    <i class="fa fa-chevron-left"></i></div>
+                                                <div class="head-info">
+                                                    <div class="head-day"></div>
+                                                    <div class="head-month"></div>
+                                                </div>
+                                                <div
+                                                    class="next-button d-flex align-items-center justify-content-center">
+                                                    <i class="fa fa-chevron-right"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-wrap">
+                                            <table id="calendar">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sun</th>
+                                                        <th>Mon</th>
+                                                        <th>Tue</th>
+                                                        <th>Wed</th>
+                                                        <th>Thu</th>
+                                                        <th>Fri</th>
+                                                        <th>Sat</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td data-id="#alltime" class=""></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                       
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -503,7 +509,8 @@
                                     <!-- Input group, just add class 'clockpicker', and optional data-* -->
                                     <div class="input-group clockpicker" data-placement="right" data-align="top"
                                         data-autoclose="true">
-                                        <input id="date-time" type="text" class="form-control clock" value="09:32">
+                                        <input id="date-time" type="text" class="form-control clock"
+                                            value="09:32">
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
@@ -530,29 +537,36 @@
                                     <div class="col-8 d-flex justify-content-center">
                                         <form class="text-center" action="">
                                             <div class="row">
-                                                <input data-id="#notes" type="checkbox" class="btn-check change-content" id="confirmed" checked
+                                                <input data-id="#notes" type="checkbox"
+                                                    class="btn-check change-content" id="confirmed" checked
                                                     autocomplete="off">
                                                 <label class="btn btn-secondary" for="confirmed">مؤكد</label>
-                                                <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"
+                                                <input data-id="#notes" type="radio"
+                                                    class="btn-check change-content" name="options-outlined"
                                                     id="finished" autocomplete="off">
                                                 <label class="btn btn-secondary" for="finished">منتهى</label>
-                                                <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"
+                                                <input data-id="#notes" type="radio"
+                                                    class="btn-check change-content" name="options-outlined"
                                                     id="canceld" autocomplete="off">
                                                 <label class="btn btn-secondary" for="canceld">ملغى</label>
-                                                <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"
+                                                <input data-id="#notes" type="radio"
+                                                    class="btn-check change-content" name="options-outlined"
                                                     id="not-confirm" autocomplete="off">
                                                 <label class="btn btn-secondary" for="not-confirm">لم يتم
                                                     التأكيد</label>
                                             </div>
                                             <div class="row">
-                                                <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"
+                                                <input data-id="#notes" type="radio"
+                                                    class="btn-check change-content" name="options-outlined"
                                                     id="no-answer" autocomplete="off">
                                                 <label class="btn btn-secondary" for="no-answer">لم يتم
                                                     الإجابة</label>
-                                                <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"
+                                                <input data-id="#notes" type="radio"
+                                                    class="btn-check change-content" name="options-outlined"
                                                     id="late" autocomplete="off">
                                                 <label class="btn btn-secondary" for="late">متأخر</label>
-                                                <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"
+                                                <input data-id="#notes" type="radio"
+                                                    class="btn-check change-content" name="options-outlined"
                                                     id="arrived" autocomplete="off">
                                                 <label class="btn btn-secondary" for="arrived">تم الوصول</label>
                                             </div>
@@ -610,9 +624,8 @@
                                     </div>
                                     <div class="col-md-7"></div>
                                     <div class="col-md-3">
-                                        <div class="save-all btn btn-lg btn-primary" onclick="storeReaervation()"
-                                            data-id="#pay">
-                                            تقدم للدفع 
+                                        <div class="save-all btn btn-lg btn-primary" data-id="#pay">
+                                            تقدم للدفع
                                         </div>
 
                                     </div>
@@ -693,8 +706,8 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">تأكيد</button>
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            onclick="storeReaervation()">تأكيد</button>
                                                                         <button type="button"
                                                                             class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">لا </button>
@@ -808,9 +821,9 @@
             handleFormSubmission();
         });
     </script>
-     <script>
+    <script>
         var dt = new Date().toLocaleTimeString();
-        document.getElementById('date-time').value=dt;
+        document.getElementById('date-time').value = dt;
     </script>
 </body>
 
