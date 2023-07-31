@@ -282,12 +282,14 @@
                                                         for="package_id" onclick="pack({{ $package->id }})">
                                                         <input type="radio" value="{{ $package->id }}"
                                                             id="package_{{ $package->id }}" style="display: none;">
-                                                            <input type="hidden" id="packageprice" name="packageprice" value="{{ $package->price }}">
+                                                        <input type="hidden" id="packageprice" name="packageprice"
+                                                            value="{{ $package->price }}">
                                                         اختر الباقة
                                                     </label>
 
                                                 </div>
-                                                <div class="card-footer btn-dark text-light text-body-secondary package-price">
+                                                <div
+                                                    class="card-footer btn-dark text-light text-body-secondary package-price">
                                                     الباقة الأولى
                                                 </div>
                                             </div>
@@ -402,14 +404,16 @@
                                             <div id="header" class="p-0">
                                                 <div
                                                     class="pre-button d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-chevron-left"></i></div>
+                                                    <i class="fa fa-chevron-left"></i>
+                                                </div>
                                                 <div class="head-info">
                                                     <div class="head-day"></div>
                                                     <div class="head-month"></div>
                                                 </div>
                                                 <div
                                                     class="next-button d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-chevron-right"></i></div>
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="calendar-wrap">
@@ -664,22 +668,22 @@
                                                 <div class="payment-method w-100">
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="cash">
                                                                 <i class="fa-solid fa-sack-dollar"></i>
                                                             </div>
                                                             <p class="text-center">كاش</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="credit-card">
                                                                 <i class="fa-solid fa-credit-card"></i>
                                                             </div>
                                                             <p class="text-center">بطاقة ائتمان</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="wallet">
                                                                 <i class="fa-solid fa-wallet"></i>
                                                             </div>
                                                             <p class="text-center">المحفظة</p>
@@ -794,6 +798,30 @@
             var itemId = $(this).data('choosen');
             $('.guest-name').attr('data-choos', itemId);
         });
+        let selectedOption = null;
+
+        // Get references to the payment option elements
+        const cashElement = document.getElementById("cash");
+        const creditCardElement = document.getElementById("credit-card");
+        const walletElement = document.getElementById("wallet");
+
+        // Add event listeners to each element
+        cashElement.addEventListener("click", function() {
+            handlePaymentOption("كاش");
+        });
+
+        creditCardElement.addEventListener("click", function() {
+            handlePaymentOption("بطاقة ائتمان");
+        });
+
+        walletElement.addEventListener("click", function() {
+            handlePaymentOption("المحفظة");
+        });
+
+        // Function to handle the selected payment option
+        function handlePaymentOption(option) {
+            selectedOption = option;
+        }
 
         // Function to handle form submission
         function storeReaervation() {
@@ -803,7 +831,6 @@
             var date = $('.reserv-date').text();
             var time = $('.reserv-time').text();
             var status = $('.nav-statues').text();
-
             let formData = new FormData();
             formData.append('client_id', guestId);
             formData.append('package_id', packageId);
@@ -811,9 +838,10 @@
             formData.append('date', date);
             formData.append('time', time);
             formData.append('status', status);
+            formData.append('payment', selectedOption);
 
             // Call the 'store' function to handle the form data submission
-            store('/branch/reservations', formData);
+            storeRoute('/branch/reservations', formData);
         }
 
         // Add event listener to form submission
