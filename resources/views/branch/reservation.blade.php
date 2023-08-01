@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap-clockpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
-        tbody td:hover, .selected{
+        tbody td:hover,
+        .selected {
             color: #e5772a;
         }
     </style>
@@ -269,23 +270,26 @@
                                     @foreach ($packages as $package)
                                         <div class="col-md-4">
                                             <div class="card catch-id  btn-dark  text-center" id="package-input"
-                                                data-choosen="{{ $package->id }}" >
+                                                data-choosen="{{ $package->id }}">
                                                 <div class="card-body">
                                                     <h2 class="card-title">{{ $package->name }}</h2>
                                                     <p class="card-text package-text mt-2">باقة {{ $package->time }}
                                                         ساعة مع
                                                         {{ $package->price }} نقطة رصيد</p>
- 
-                                                    <label data-id="#all-tables" class="choos-btn btn change-content btn-primary mt-4 pr-4"
+
+                                                    <label data-id="#all-tables"
+                                                        class="choos-btn btn change-content btn-primary mt-4 pr-4"
                                                         for="package_id" onclick="pack({{ $package->id }})">
                                                         <input type="radio" value="{{ $package->id }}"
                                                             id="package_{{ $package->id }}" style="display: none;">
-                                                            <input type="hidden" id="packageprice" name="packageprice" value="{{ $package->price }}">
+                                                        <input type="hidden" id="packageprice" name="packageprice"
+                                                            value="{{ $package->price }}">
                                                         اختر الباقة
                                                     </label>
 
                                                 </div>
-                                                <div class="card-footer btn-dark text-light text-body-secondary package-price">
+                                                <div
+                                                    class="card-footer btn-dark text-light text-body-secondary package-price">
                                                     الباقة الأولى
                                                 </div>
                                             </div>
@@ -394,94 +398,98 @@
                                     <div class="col-md-6 text-center mb-5">
                                         <h2 class="heading-section">Calendar #02</h2>
                                     </div>
-                            <div class="elegant-calencar d-md-flex mb-5">
-                            <div class="wrap-header d-flex align-items-center">
-                              <p id="reset">reset</p>
-                              <div id="header" class="p-0">
-                                <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div>
-                                <div class="head-info">
-                                    <div class="head-day"></div>
-                                    <div class="head-month"></div>
-                                </div>
-                                <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div>
-                              </div>
-                            </div>
-                            <div class="calendar-wrap">
-                              <table id="calendar">
-                                <thead>
-                                    <tr>
-                                        <th>Sun</th>
-                                        <th>Mon</th>
-                                        <th>Tue</th>
-                                        <th>Wed</th>
-                                        <th>Thu</th>
-                                        <th>Fri</th>
-                                        <th>Sat</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td  data-id="#alltime" class=""></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
+                                    <div class="elegant-calencar d-md-flex mb-5">
+                                        <div class="wrap-header d-flex align-items-center">
+                                            <p id="reset">reset</p>
+                                            <div id="header" class="p-0">
+                                                <div
+                                                    class="pre-button d-flex align-items-center justify-content-center">
+                                                    <i class="fa fa-chevron-left"></i></div>
+                                                <div class="head-info">
+                                                    <div class="head-day"></div>
+                                                    <div class="head-month"></div>
+                                                </div>
+                                                <div
+                                                    class="next-button d-flex align-items-center justify-content-center">
+                                                    <i class="fa fa-chevron-right"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-wrap">
+                                            <table id="calendar">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sun</th>
+                                                        <th>Mon</th>
+                                                        <th>Tue</th>
+                                                        <th>Wed</th>
+                                                        <th>Thu</th>
+                                                        <th>Fri</th>
+                                                        <th>Sat</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td data-id="#alltime" class=""></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                       
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -504,7 +512,8 @@
                                     <!-- Input group, just add class 'clockpicker', and optional data-* -->
                                     <div class="input-group clockpicker" data-placement="right" data-align="top"
                                         data-autoclose="true">
-                                        <input id="date-time" type="text" class="form-control clock" value="09:32">
+                                        <input id="date-time" type="text" class="form-control clock"
+                                            value="09:32">
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
@@ -569,10 +578,10 @@
                         <!--                <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>-->
                         <!--            </div>-->
                         <!--            <div class="col-md-8"></div>-->
-                                    <!--<div class="col-md-2">-->
-                                    <!--    <button class="change-content btn btn-primary"-->
-                                    <!--        data-id="#notes">التالى</button>-->
-                                    <!--</div>-->
+                        <!--<div class="col-md-2">-->
+                        <!--    <button class="change-content btn btn-primary"-->
+                        <!--        data-id="#notes">التالى</button>-->
+                        <!--</div>-->
                         <!--        </div>-->
                         <!--    </div>-->
 
@@ -611,9 +620,8 @@
                                     </div>
                                     <div class="col-md-7"></div>
                                     <div class="col-md-3">
-                                        <div class="save-all btn btn-lg btn-primary" onclick="storeReaervation()"
-                                            data-id="#pay">
-                                            تقدم للدفع 
+                                        <div class="save-all btn btn-lg btn-primary" data-id="#pay">
+                                            تقدم للدفع
                                         </div>
 
                                     </div>
@@ -677,38 +685,35 @@
                                                             data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                                             ادفع الآن</div>
                                                         <!-- Modal -->
-                                                       
+
 
                                                     </div>
                                                 </div>
                                             </li>
                                         </ol>
-                                         <div class="modal fade" id="exampleModal1" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="exampleModalLabel">تأكيد الدفع
-                                                                        </h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p class="consfirm-text">هل تريد تأكيد الدفع
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">تأكيد</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">لا </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                        <div class="modal fade" id="exampleModal1" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع
+                                                        </h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="consfirm-text">هل تريد تأكيد الدفع
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" onclick="storeReaervation()"
+                                                            class="btn btn-primary">تأكيد</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">لا </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -735,87 +740,87 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
     <script>
-    $(document).ready(function () {
-        function pack(id) {
+        $(document).ready(function() {
+            function pack(id) {
 
-            $.get('/branch/branch/halls/ajax', {
-                id: id,
-            }).done(function(data) {
-                $('#all-tables').html(data); // Show the new content
+                $.get('/branch/branch/halls/ajax', {
+                    id: id,
+                }).done(function(data) {
+                    $('#all-tables').html(data); // Show the new content
+                });
+            }
+
+            function clients() {
+                var phone = $("#search").val();
+
+                $.get('/branch/clients/ajax', {
+                    phone: phone,
+                }).done(function(data) {
+                    $('#clients').html(data); // Show the new content
+                });
+            }
+
+            function performStore() {
+                let formData = new FormData();
+                formData.append('name', document.getElementById('name').value);
+                formData.append('phone', document.getElementById('phone').value);
+                store('/branch/clients', formData)
+                this.clients()
+            }
+            $('.new-reservation-tables .card').on('click', function() {
+                console.log('table name');
+                $('.new-reservation-tables .card').removeClass('active-card');
+                $(this).addClass('active-card');
+                var cardTitle = $(this).find('.card-title').text();
+                $('.table-name').text(cardTitle);
+
+                var itemId = $(this).data('choosen');
+                $('.table-name').attr('data-choos', itemId);
             });
-        }
 
-        function clients() {
-            var phone = $("#search").val();
+            // Function for guest click event
+            $('.gust-cards .card').on('click', function(event) {
+                event.stopPropagation();
 
-            $.get('/branch/clients/ajax', {
-                phone: phone,
-            }).done(function(data) {
-                $('#clients').html(data); // Show the new content
+                var personeName = $(this).find('.card-title');
+                $('.guest-name').text(personeName.text());
+                console.log($(this));
+
+                var itemId = $(this).data('choosen');
+                $('.guest-name').attr('data-choos', itemId);
             });
-        }
 
-        function performStore() {
-            let formData = new FormData();
-            formData.append('name', document.getElementById('name').value);
-            formData.append('phone', document.getElementById('phone').value);
-            store('/branch/clients', formData)
-            this.clients()
-        }
-        $('.new-reservation-tables .card').on('click', function() {
-            console.log('table name');
-            $('.new-reservation-tables .card').removeClass('active-card');
-            $(this).addClass('active-card');
-            var cardTitle = $(this).find('.card-title').text();
-            $('.table-name').text(cardTitle);
+            // Function to handle form submission
+            function storeReaervation() {
+                var packageId = $('.package-name').attr('data-choos');
+                var tableId = $('.table-name').attr('data-choos');
+                var guestId = $('.guest-name').attr('data-choos');
+                var date = $('.reserv-date').text();
+                var time = $('.reserv-time').text();
+                var status = $('.nav-statues').text();
 
-            var itemId = $(this).data('choosen');
-            $('.table-name').attr('data-choos', itemId);
+                let formData = new FormData();
+                formData.append('client_id', guestId);
+                formData.append('package_id', packageId);
+                formData.append('table_id', tableId);
+                formData.append('date', date);
+                formData.append('time', time);
+                formData.append('status', status);
+
+                // Call the 'store' function to handle the form data submission
+                store('/branch/reservations', formData);
+            }
+
+            // Add event listener to form submission
+            $('#reservation-form').on('submit', function(event) {
+                event.preventDefault();
+                handleFormSubmission();
+            });
         });
-
-        // Function for guest click event
-        $('.gust-cards .card').on('click', function(event) {
-            event.stopPropagation();
-
-            var personeName = $(this).find('.card-title');
-            $('.guest-name').text(personeName.text());
-            console.log($(this));
-
-            var itemId = $(this).data('choosen');
-            $('.guest-name').attr('data-choos', itemId);
-        });
-
-        // Function to handle form submission
-        function storeReaervation() {
-            var packageId = $('.package-name').attr('data-choos');
-            var tableId = $('.table-name').attr('data-choos');
-            var guestId = $('.guest-name').attr('data-choos');
-            var date = $('.reserv-date').text();
-            var time = $('.reserv-time').text();
-            var status = $('.nav-statues').text();
-
-            let formData = new FormData();
-            formData.append('client_id', guestId);
-            formData.append('package_id', packageId);
-            formData.append('table_id', tableId);
-            formData.append('date', date);
-            formData.append('time', time);
-            formData.append('status', status);
-
-            // Call the 'store' function to handle the form data submission
-            store('/branch/reservations', formData);
-        }
-
-        // Add event listener to form submission
-        $('#reservation-form').on('submit', function(event) {
-            event.preventDefault();
-            handleFormSubmission();
-        });
-    });
     </script>
-     <script>
+    <script>
         var dt = new Date().toLocaleTimeString();
-        document.getElementById('date-time').value=dt;
+        document.getElementById('date-time').value = dt;
     </script>
 </body>
 
