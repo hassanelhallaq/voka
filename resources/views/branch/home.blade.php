@@ -105,6 +105,16 @@
                                         <p class="hall-name">{{ $table->reservation->date ?? 'لا يوجد تاريخ ' }}</p>
                                         <span class="sta">{{ $table->reservation->time ?? 'لا يوجد وقت ' }} </span>
                                     </div>
+                                    <div class="body-activation d-flex justify-content-between">
+                                          <p class="hall-name">التفعيل</p>
+                                    	<div class="table-activation">
+                                    		<input type="radio" id="radio-1" name="tabs" checked="">
+                                    		<label class="tab" for="radio-1">نشط</label>
+                                    		<input type="radio" id="radio-2" name="tabs">
+                                    		<label class="tab" for="radio-2">غير نشط</label>
+                                    	
+                                    		<span class="glider"></span>
+                                    	</div>
                                 </div>
                                 <div class="card-footer">
                                     <p class="hall-name"> الرصيد :
