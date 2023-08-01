@@ -17,8 +17,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap-clockpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
-        tbody td:hover,
-        .selected {
+        tbody td:hover, .selected{
             color: #e5772a;
         }
     </style>
@@ -147,22 +146,22 @@
 
                       </a>
                     </li> -->
-                            <li class="nav-item py-3 show-content" data-id="#status" data-v="0">
-                                <a class="nav-link" href="#">
-                                    <div class="d-flex w-100 ">
-                                        <div class="icon text-right">
-                                            <i class="fa-solid fa-calendar-check"></i> الحالة
-                                        </div>
-                                        <div class="guests nav-statues text-center">
-                                            مؤكد
-                                        </div>
-                                        <div class="chevro text-left">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                    </div>
+                            <!--<li class="nav-item py-3 show-content" data-id="#status" data-v="0">-->
+                            <!--    <a class="nav-link" href="#">-->
+                            <!--        <div class="d-flex w-100 ">-->
+                            <!--            <div class="icon text-right">-->
+                            <!--                <i class="fa-solid fa-calendar-check"></i> الحالة-->
+                            <!--            </div>-->
+                            <!--            <div class="guests nav-statues text-center">-->
+                            <!--                مؤكد-->
+                            <!--            </div>-->
+                            <!--            <div class="chevro text-left">-->
+                            <!--                <i class="fas fa-chevron-left"></i>-->
+                            <!--            </div>-->
+                            <!--        </div>-->
 
-                                </a>
-                            </li>
+                            <!--    </a>-->
+                            <!--</li>-->
 
                             <li class="nav-item py-3 show-content no-border" data-id="#notes" data-v="0">
                                 <a class="nav-link" href="#">
@@ -270,26 +269,23 @@
                                     @foreach ($packages as $package)
                                         <div class="col-md-4">
                                             <div class="card catch-id  btn-dark  text-center" id="package-input"
-                                                data-choosen="{{ $package->id }}">
+                                                data-choosen="{{ $package->id }}" >
                                                 <div class="card-body">
                                                     <h2 class="card-title">{{ $package->name }}</h2>
                                                     <p class="card-text package-text mt-2">باقة {{ $package->time }}
                                                         ساعة مع
                                                         {{ $package->price }} نقطة رصيد</p>
-
-                                                    <label data-id="#all-tables"
-                                                        class="choos-btn btn change-content btn-primary mt-4 pr-4"
+ 
+                                                    <label data-id="#all-tables" class="choos-btn btn change-content btn-primary mt-4 pr-4"
                                                         for="package_id" onclick="pack({{ $package->id }})">
                                                         <input type="radio" value="{{ $package->id }}"
                                                             id="package_{{ $package->id }}" style="display: none;">
-                                                        <input type="hidden" id="packageprice" name="packageprice"
-                                                            value="{{ $package->price }}">
+                                                            <input type="hidden" id="packageprice" name="packageprice" value="{{ $package->price }}">
                                                         اختر الباقة
                                                     </label>
 
                                                 </div>
-                                                <div
-                                                    class="card-footer btn-dark text-light text-body-secondary package-price">
+                                                <div class="card-footer btn-dark text-light text-body-secondary package-price">
                                                     الباقة الأولى
                                                 </div>
                                             </div>
@@ -398,100 +394,94 @@
                                     <div class="col-md-6 text-center mb-5">
                                         <h2 class="heading-section">Calendar #02</h2>
                                     </div>
-                                    <div class="elegant-calencar d-md-flex mb-5">
-                                        <div class="wrap-header d-flex align-items-center">
-                                            <p id="reset">reset</p>
-                                            <div id="header" class="p-0">
-                                                <div
-                                                    class="pre-button d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-chevron-left"></i>
-                                                </div>
-                                                <div class="head-info">
-                                                    <div class="head-day"></div>
-                                                    <div class="head-month"></div>
-                                                </div>
-                                                <div
-                                                    class="next-button d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="calendar-wrap">
-                                            <table id="calendar">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sun</th>
-                                                        <th>Mon</th>
-                                                        <th>Tue</th>
-                                                        <th>Wed</th>
-                                                        <th>Thu</th>
-                                                        <th>Fri</th>
-                                                        <th>Sat</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td data-id="#alltime" class=""></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                            <div class="elegant-calencar d-md-flex mb-5">
+                            <div class="wrap-header d-flex align-items-center">
+                              <p id="reset">reset</p>
+                              <div id="header" class="p-0">
+                                <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div>
+                                <div class="head-info">
+                                    <div class="head-day"></div>
+                                    <div class="head-month"></div>
+                                </div>
+                                <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div>
+                              </div>
+                            </div>
+                            <div class="calendar-wrap">
+                              <table id="calendar">
+                                <thead>
+                                    <tr>
+                                        <th>Sun</th>
+                                        <th>Mon</th>
+                                        <th>Tue</th>
+                                        <th>Wed</th>
+                                        <th>Thu</th>
+                                        <th>Fri</th>
+                                        <th>Sat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td  data-id="#alltime" class=""></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-
+                                       
                                     </div>
                                 </div>
                                 <div class="row">
@@ -500,7 +490,7 @@
                                     </div>
                                     <div class="col-md-8"></div>
                                     <div class="col-md-2">
-                                        <button class="change-content btn btn-primary"
+                                        <button class="date-checker change-content btn btn-primary"
                                             data-id="#alltime">التالى</button>
                                     </div>
                                 </div>
@@ -514,8 +504,7 @@
                                     <!-- Input group, just add class 'clockpicker', and optional data-* -->
                                     <div class="input-group clockpicker" data-placement="right" data-align="top"
                                         data-autoclose="true">
-                                        <input id="date-time" type="text" class="form-control clock"
-                                            value="09:32">
+                                        <input id="date-time" type="text" class="form-control clock" value="09:32">
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
@@ -531,70 +520,63 @@
                                 </div>
                                 <div class="col-md-8"></div>
                                 <div class="col-md-2">
-                                    <button class="change-content btn btn-primary" data-id="#status">التالى</button>
+                                    <button class="change-content btn btn-primary" data-id="#notes">التالى</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="reservation-tabs allstatus" id="status">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-2"></div>
-                                    <div class="col-8 d-flex justify-content-center">
-                                        <form class="text-center" action="">
-                                            <div class="row">
-                                                <input data-id="#notes" type="checkbox"
-                                                    class="btn-check change-content" id="confirmed" checked
-                                                    autocomplete="off">
-                                                <label class="btn btn-secondary" for="confirmed">مؤكد</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="finished" autocomplete="off">
-                                                <label class="btn btn-secondary" for="finished">منتهى</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="canceld" autocomplete="off">
-                                                <label class="btn btn-secondary" for="canceld">ملغى</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="not-confirm" autocomplete="off">
-                                                <label class="btn btn-secondary" for="not-confirm">لم يتم
-                                                    التأكيد</label>
-                                            </div>
-                                            <div class="row">
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="no-answer" autocomplete="off">
-                                                <label class="btn btn-secondary" for="no-answer">لم يتم
-                                                    الإجابة</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="late" autocomplete="off">
-                                                <label class="btn btn-secondary" for="late">متأخر</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="arrived" autocomplete="off">
-                                                <label class="btn btn-secondary" for="arrived">تم الوصول</label>
-                                            </div>
+                        <!--<div class="reservation-tabs allstatus" id="status">-->
+                        <!--    <div class="container">-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-2"></div>-->
+                        <!--            <div class="col-8 d-flex justify-content-center">-->
+                        <!--                <form class="text-center" action="">-->
+                        <!--                    <div class="row">-->
+                        <!--                        <input data-id="#notes" type="checkbox" class="btn-check change-content" id="confirmed" checked-->
+                        <!--                            autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="confirmed">مؤكد</label>-->
+                        <!--                        <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="finished" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="finished">منتهى</label>-->
+                        <!--                        <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="canceld" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="canceld">ملغى</label>-->
+                        <!--                        <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="not-confirm" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="not-confirm">لم يتم-->
+                        <!--                            التأكيد</label>-->
+                        <!--                    </div>-->
+                        <!--                    <div class="row">-->
+                        <!--                        <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="no-answer" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="no-answer">لم يتم-->
+                        <!--                            الإجابة</label>-->
+                        <!--                        <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="late" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="late">متأخر</label>-->
+                        <!--                        <input data-id="#notes" type="radio" class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="arrived" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="arrived">تم الوصول</label>-->
+                        <!--                    </div>-->
 
 
-                                        </form>
+                        <!--                </form>-->
 
-                                    </div>
-                                    <div class="col-2"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>
-                                    </div>
-                                    <div class="col-md-8"></div>
+                        <!--            </div>-->
+                        <!--            <div class="col-2"></div>-->
+                        <!--        </div>-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-md-2">-->
+                        <!--                <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>-->
+                        <!--            </div>-->
+                        <!--            <div class="col-md-8"></div>-->
                                     <!--<div class="col-md-2">-->
                                     <!--    <button class="change-content btn btn-primary"-->
                                     <!--        data-id="#notes">التالى</button>-->
                                     <!--</div>-->
-                                </div>
-                            </div>
+                        <!--        </div>-->
+                        <!--    </div>-->
 
-                        </div>
+                        <!--</div>-->
                         <div class="reservation-tabs notes pt-5 mt-5" id="notes">
                             <div class="container">
                                 <div class="row">
@@ -629,8 +611,9 @@
                                     </div>
                                     <div class="col-md-7"></div>
                                     <div class="col-md-3">
-                                        <div class="save-all btn btn-lg btn-primary" data-id="#pay">
-                                            تقدم للدفع
+                                        <div class="save-all btn btn-lg btn-primary" onclick="storeReaervation()"
+                                            data-id="#pay">
+                                            تقدم للدفع 
                                         </div>
 
                                     </div>
@@ -649,7 +632,7 @@
                                                     <div class="me-2 ms-auto">
                                                         <div class="fw-bold"> حاصل الجمع</div>
                                                     </div>
-                                                    <span>260 ريال</span>
+                                                    <span class="payment-price">260 ريال</span>
                                                 </div>
                                                 <div
                                                     class="tax d-flex justify-content-between align-items-start mt-4 w-100">
@@ -663,27 +646,27 @@
                                                     <div class="me-2 ms-auto">
                                                         <div class="fw-bold"> الإجمالى</div>
                                                     </div>
-                                                    <span>286 ريال</span>
+                                                    <span class="with-tax">286 ريال</span>
                                                 </div>
                                                 <div class="payment-method w-100">
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
-                                                                id="cash">
+                                                            <div
+                                                                class="payment-icon d-flex justify-content-center align-items-center">
                                                                 <i class="fa-solid fa-sack-dollar"></i>
                                                             </div>
                                                             <p class="text-center">كاش</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
-                                                                id="credit-card">
+                                                            <div
+                                                                class="payment-icon d-flex justify-content-center align-items-center">
                                                                 <i class="fa-solid fa-credit-card"></i>
                                                             </div>
                                                             <p class="text-center">بطاقة ائتمان</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
-                                                                id="wallet">
+                                                            <div
+                                                                class="payment-icon d-flex justify-content-center align-items-center">
                                                                 <i class="fa-solid fa-wallet"></i>
                                                             </div>
                                                             <p class="text-center">المحفظة</p>
@@ -694,7 +677,13 @@
                                                             data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                                             ادفع الآن</div>
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModal1" tabindex="-1"
+                                                       
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                         <div class="modal fade" id="exampleModal1" tabindex="-1"
                                                             aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
@@ -711,8 +700,8 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-primary"
-                                                                            onclick="storeReaervation()">تأكيد</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-primary">تأكيد</button>
                                                                         <button type="button"
                                                                             class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">لا </button>
@@ -720,11 +709,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ol>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -751,6 +735,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
     <script>
+    $(document).ready(function () {
         function pack(id) {
 
             $.get('/branch/branch/halls/ajax', {
@@ -778,6 +763,7 @@
             this.clients()
         }
         $('.new-reservation-tables .card').on('click', function() {
+            console.log('table name');
             $('.new-reservation-tables .card').removeClass('active-card');
             $(this).addClass('active-card');
             var cardTitle = $(this).find('.card-title').text();
@@ -798,31 +784,6 @@
             var itemId = $(this).data('choosen');
             $('.guest-name').attr('data-choos', itemId);
         });
-        let selectedOption = null;
-
-        // Get references to the payment option elements
-        const cashElement = document.getElementById("cash");
-        const creditCardElement = document.getElementById("credit-card");
-        const walletElement = document.getElementById("wallet");
-
-        // Add event listeners to each element
-        cashElement.addEventListener("click", function() {
-            handlePaymentOption("كاش");
-        });
-
-        creditCardElement.addEventListener("click", function() {
-            handlePaymentOption("بطاقة ائتمان");
-        });
-
-        walletElement.addEventListener("click", function() {
-            handlePaymentOption("المحفظة");
-        });
-
-        // Function to handle the selected payment option
-        function handlePaymentOption(option) {
-            selectedOption = option;
-
-        }
 
         // Function to handle form submission
         function storeReaervation() {
@@ -832,6 +793,7 @@
             var date = $('.reserv-date').text();
             var time = $('.reserv-time').text();
             var status = $('.nav-statues').text();
+
             let formData = new FormData();
             formData.append('client_id', guestId);
             formData.append('package_id', packageId);
@@ -839,10 +801,9 @@
             formData.append('date', date);
             formData.append('time', time);
             formData.append('status', status);
-            formData.append('payment', selectedOption);
 
             // Call the 'store' function to handle the form data submission
-            storeRoute('/branch/reservations', formData);
+            store('/branch/reservations', formData);
         }
 
         // Add event listener to form submission
@@ -850,10 +811,11 @@
             event.preventDefault();
             handleFormSubmission();
         });
+    });
     </script>
-    <script>
+     <script>
         var dt = new Date().toLocaleTimeString();
-        document.getElementById('date-time').value = dt;
+        document.getElementById('date-time').value=dt;
     </script>
 </body>
 

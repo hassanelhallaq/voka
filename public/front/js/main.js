@@ -32,11 +32,11 @@ $(document).ready(function () {
           // جمع قيم العناصر ووضعها في الكائن JSON
           data.guest = $('#guest-input #client_id').val();
           data.package = $('#package-input #package_id').val();
-          data.table = $('#table-input #table_id').val();
+          data.table = $('.table-pick #table_id').val();
           data.packagePrice = $('.the-price').text();
 
           // طباعة الكائن JSON في وحدة التحكم
-          console.log(data);
+        //   console.log(data);
 
 
           var contentId = $(this).data('id');
@@ -50,7 +50,6 @@ $(document).ready(function () {
     $('.table-list').removeClass('casher-box');
     
     $('.new-menu-li').on('click', function(){
-        console.log('clickeeeeeeed');
         $('#mainPage').removeClass('col-md-8').addClass('col-md-11');
         $('.cash').hide();
     });
@@ -62,75 +61,73 @@ $(document).ready(function () {
 
     
     
-// كود صفحة الحجوزات
-var currentDate = new Date();
-var daysOfWeek = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
-
-// عرض تاريخ الأسبوع الحالي
-function displayCurrentWeek() {
-  $('.days').each(function(i) {
-    var currentDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + i);
-    var options = { weekday: 'long', month: 'long', day: 'numeric' };
-    var formattedDate = currentDay.toLocaleDateString('ar-EG', options);
-
-    $(this).text(formattedDate);
-  });
-}
-
-// زر الأسبوع السابق
-$('.prev-btn').on('click', function() {
-  currentDate.setDate(currentDate.getDate() - 7);
-  displayCurrentWeek();
-});
-
-// زر الأسبوع التالى
-$('.next-btn').on('click', function() {
-  currentDate.setDate(currentDate.getDate() + 7);
-  displayCurrentWeek();
-});
-
-// عرض الأسبوع الحالي عند تحميل الصفحة
-displayCurrentWeek();
-
-// كود وضع وازالة كلاس الاكتف على يوم الاسبوع ونقل التاريخ الى محتوى التاريخ  فى اعلى الصفحة
-$('.days').on('click', function(){
-  $('.days').removeClass
-  $(this).addClass('active-day');
-  console.log($(this).text());
-  $('.the-day').text($(this).text());
-});
-
-
-var currentDate = new Date();
-var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-var formattedDate = currentDate.toLocaleDateString('ar-EG', options);
-
-$('.reservations-container .the-day').text(formattedDate);
-console.log(formattedDate);
-
-// كود عند الضغط على الحجز داخل الجدول
-$('.statue').on('click', function(){
-  $('.statue').css('opacity', '0.5');
-  $(this).css('opacity', '1');
-   var dataTable = $(this).data('table');
-   var dataname = $(this).data('name');
-   var dataguests = $(this).data('guests');
-   var dataphone = $(this).data('phone');
-   var datapackage = $(this).data('package');
-   var datastute = $(this).data('stute');
-   var datapoints = $(this).data('guests');
-$('.reservations-table-nmber').text(dataTable);
-$('.guest-name').text(dataname);
-$('.guest-number').text(dataguests);
-$('.reservations-phone').text(dataphone);
-$('.reservations-package').text(datapackage);
-$('.reservations-statue').text(datastute);
-$('.reservations-points').text(datapoints);
+    // كود صفحة الحجوزات
+    var currentDate = new Date();
+    var daysOfWeek = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+    
+    // عرض تاريخ الأسبوع الحالي
+    function displayCurrentWeek() {
+      $('.days').each(function(i) {
+        var currentDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + i);
+        var options = { weekday: 'long', month: 'long', day: 'numeric' };
+        var formattedDate = currentDay.toLocaleDateString('ar-EG', options);
+    
+        $(this).text(formattedDate);
+      });
+    }
+    
+    // زر الأسبوع السابق
+    $('.prev-btn').on('click', function() {
+      currentDate.setDate(currentDate.getDate() - 7);
+      displayCurrentWeek();
+    });
+    
+    // زر الأسبوع التالى
+    $('.next-btn').on('click', function() {
+      currentDate.setDate(currentDate.getDate() + 7);
+      displayCurrentWeek();
+    });
+    
+    // عرض الأسبوع الحالي عند تحميل الصفحة
+    displayCurrentWeek();
+    
+    // كود وضع وازالة كلاس الاكتف على يوم الاسبوع ونقل التاريخ الى محتوى التاريخ  فى اعلى الصفحة
+    $('.days').on('click', function(){
+      $('.days').removeClass
+      $(this).addClass('active-day');
+      $('.the-day').text($(this).text());
+    });
 
 
-});
-
-// نهاية صفحة الحجوزات
+    var currentDate = new Date();
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var formattedDate = currentDate.toLocaleDateString('ar-EG', options);
+    
+    $('.reservations-container .the-day').text(formattedDate);
+    
+    // كود عند الضغط على الحجز داخل الجدول
+    $('.statue').on('click', function(){
+      $('.statue').css('opacity', '0.5');
+      $(this).css('opacity', '1');
+       var dataTable = $(this).data('table');
+       var dataname = $(this).data('name');
+       var dataguests = $(this).data('guests');
+       var dataphone = $(this).data('phone');
+       var datapackage = $(this).data('package');
+       var datastute = $(this).data('stute');
+       var datapoints = $(this).data('guests');
+    $('.reservations-table-nmber').text(dataTable);
+    $('.guest-name').text(dataname);
+    $('.guest-number').text(dataguests);
+    $('.reservations-phone').text(dataphone);
+    $('.reservations-package').text(datapackage);
+    $('.reservations-statue').text(datastute);
+    $('.reservations-points').text(datapoints);
+    
+    
+    });
+    
+    // نهاية صفحة الحجوزات
 
   $('.search .search-btn').on('click', function(e) {
     e.preventDefault();
@@ -247,7 +244,6 @@ $(".halls-tab .tab-pane").first().addClass("active");
         var updatedTime = $(this).data('updatedtime');
         if (updatedTime !== undefined && inputVal > updatedTime) {
           $(this).attr('style', 'display: flex !important');
-          console.log($(this));
         } else {
           $(this).attr('style', 'display: none !important');
         }
@@ -280,7 +276,6 @@ $(".halls-tab .tab-pane").first().addClass("active");
 
     $('.cat-tap').on('click', function() {
       var dataClass = $(this).data('class');
-      console.log('hhhhhhhhhhhhhhh');
 
        // إضافة كلاس 'active' للعنصر الحالي وإزالته من باقي العناصر
        $('.cat-tap').removeClass('active-card');
@@ -479,6 +474,30 @@ mins.on('click', function() {
     var formattedDate = month + " - " + year + " " + day;
     
     $('.reserv-date').text(formattedDate).attr('data-v', 1);
+    
+
+
+$('.reserv-date').on('click', function(){
+    var curDateText = $('.reserv-date').text(); // الحصول على نص التاريخ من الكلاس reserv-date
+
+    // تحويل نص التاريخ إلى كائن تاريخ
+    var curDateObj = new Date(Date.parse(curDateText));
+
+    // الحصول على تاريخ اليوم (التاريخ الحالي)
+    var currentDate = new Date();
+
+    // مقارنة التاريخين
+    if (curDateObj < currentDate) {
+        console.log("تاريخ الحجز الذي قمت باختياره قد انتهى");
+        // هنا يمكنك وضع الرسالة التي ترغب في عرضها للمستخدم
+        // مثلاً: alert("تاريخ الحجز الذي قمت باختياره قد انتهى");
+    } else {
+        console.log("تاريخ الحجز صالح");
+        // هنا يمكنك وضع أي إجراء إضافي ترغب فيه في حالة أن التاريخ صالح
+    }
+});
+
+
 
 
 
@@ -685,27 +704,27 @@ mins.on('click', function() {
 
 
        //  getting table id
-       $('.new-reservation-tables .card').on('click', function(){
-        $('.new-reservation-tables .card').removeClass('active-card');
-        $(this).addClass('active-card');
-        var cardTitle = $(this).find('.card-title').text();
-        $('.table-name').text(cardTitle)
+    //   $('.new-reservation-tables .card').on('click', function(){
+    //       console.log('table name');
+    //     $('.new-reservation-tables .card').removeClass('active-card');
+    //     $(this).addClass('active-card');
+    //     var cardTitle = $(this).find('.card-title').text();
+    //     $('.table-name').text(cardTitle)
 
-        var itemId = $(this).data('choosen');
-        $('.table-name').attr('data-choos', itemId);
-      });
+    //     var itemId = $(this).data('choosen');
+    //     $('.table-name').attr('data-choos', itemId);
+    //   });
 
     //  getting guest  id
-    $('.gust-cards .card').on('click', function(event) {
-      event.stopPropagation();
+    // $('.gust-cards .card').on('click', function(event) {
+    //   event.stopPropagation();
 
-      var personeName = $(this).find('.card-title');
-      $('.guest-name').text(personeName.text());
-      console.log($(this));
+    //   var personeName = $(this).find('.card-title');
+    //   $('.guest-name').text(personeName.text());
 
-      var itemId = $(this).data('choosen');
-      $('.guest-name').attr('data-choos', itemId);
-    });
+    //   var itemId = $(this).data('choosen');
+    //   $('.guest-name').attr('data-choos', itemId);
+    // });
 
     var newReservationData = {
       packageId: $('.package-name').data('data-choos'),
@@ -770,11 +789,11 @@ mins.on('click', function() {
 
 
 
-  $('.voka-slider').slick({
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 3
-    });
+//   $('.voka-slider').slick({
+//       infinite: true,
+//       slidesToShow: 3,
+//       slidesToScroll: 3
+//     });
 
 
 

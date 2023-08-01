@@ -23,7 +23,7 @@
                         <div class="row">
                             @foreach ($item->tables as $table)
                                 <div class="col-md-3 card-col  d-flex justify-content-center align-items-center ">
-                                    <div class="change-content event-test card catch-id  bg-success active-card" id="table-input"
+                                    <div class="change-content table-pick card catch-id  bg-success active-card"
                                         data-id="#allguests" data-choosen="{{ $table->id }}">
                                         <input hidden id="table_id" value="{{ $table->id }}">
                                         <div class="card-header primary-bg-color">
