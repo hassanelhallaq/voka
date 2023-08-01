@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('client_id')->on('clients')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('package_id');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
-            $table->date('date');
+            $table->dateTime('date');
             $table->string('time');
             $table->string('note')->nullable();
             $table->string('status');
