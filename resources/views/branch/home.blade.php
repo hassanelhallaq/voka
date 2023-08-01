@@ -117,24 +117,16 @@
                                         </div>
                                     </div>
                                     @php
-                                        if ($table->reservation) {
-                                            $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
-                                                ->where('table_id', $table->id)
-                                                ->where('is_done', 0)
-                                                ->with('products')
-                                                ->first();
-                                        } else {
-                                            $orders = null;
-                                        }
-                                        if ($orders) {
-                                            $totalOrderPrices = $orders->map(function ($order) {
-                                                return $order->products->sum(function ($product) {
-                                                    return $product->price * $product->quantity;
-                                                });
+                                        $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
+                                            ->where('table_id', $table->id)
+                                            ->where('is_done', 0)
+                                            ->with('products')
+                                            ->first();
+                                        $totalOrderPrices = $orders->map(function ($order) {
+                                            return $order->products->sum(function ($product) {
+                                                return $product->price * $product->quantity;
                                             });
-                                        } else {
-                                            $totalOrderPrices = 0;
-                                        }
+                                        });
                                     @endphp
                                     <div class="card-footer">
                                         <p class="hall-name"> الرصيد :
@@ -142,7 +134,7 @@
                                         <span class="sta">
                                             @if ($table->reservation)
                                                 الرصيد المتبقى :
-                                                {{ $table->reservation->package->price - $totalOrderPrices ?? 0 }}
+                                                {{ $table->reservation->package->price - $totalOrderPrices }}
                                             @else
                                                 لا يوجد رصيد
                                             @endif
@@ -201,8 +193,7 @@
                                                             <div class="me-2 ms-auto">
                                                                 <div class="fw-bold"> حاصل الجمع</div>
                                                             </div>
-                                                            <span>{{ $table->reservation->package->price ?? 0 }}
-                                                                ريال</span>
+                                                            <span>{{ $table->reservation->package->price }} ريال</span>
                                                         </div>
 
                                                         <div
@@ -217,7 +208,7 @@
                                                             <div class="me-2 ms-auto">
                                                                 <div class="fw-bold"> الإجمالى</div>
                                                             </div>
-                                                            <span>{{ $table->reservation->package->price ?? 0 * 0.15 }}
+                                                            <span>{{ $table->reservation->package->price * 0.15 }}
                                                                 ريال</span>
                                                         </div>
                                                         <div class="payment-method">
@@ -446,7 +437,7 @@
                                                         <div class="fw-bold"> حاصل الجمع</div>
                                                     </div>
                                                     <span class="sub-total-number">
-                                                        {{ $table->reservation->package->price ?? 0 }} </span>
+                                                        {{ $table->reservation->package->price }} </span>
                                                     <span> ريال</span>
                                                 </div>
 
@@ -463,7 +454,7 @@
                                                         <div class="fw-bold"> الإجمالى</div>
                                                     </div>
                                                     <span
-                                                        class="table-total">{{ $table->reservation->package->price ?? 0 * 0.15 }}
+                                                        class="table-total">{{ $table->reservation->package->price * 0.15 }}
                                                     </span>
                                                     <span> ريال</span>
                                                 </div>
@@ -524,10 +515,13 @@
                                                 </div>
                                             </li>
                                         </ol>
+
+
+
                                     </div>
                                 @endif
+
                             </div>
-                        </div>
                     @endforeach
                 @endforeach
             </div>
