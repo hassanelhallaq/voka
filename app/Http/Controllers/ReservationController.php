@@ -38,14 +38,18 @@ class ReservationController extends Controller
             if ($request->payment == 'المحفظة' && $wallet->credit > $package->price) {
                 return response()->json(['icon' => 'error', 'title' => 'رصيد محفظتك لا يكفي'], 400);
             }
+            $formattedTimeFrom = Carbon::createFromFormat('g:i A', $request->time);
+            $combinedDateTimeString = $formattedDate . ' ' . $formattedTimeFrom;
+            $dateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $combinedDateTimeString);
+
             $reservation = new Reservation();
             $reservation->package_id = $request->package_id;
             $reservation->price = $package->price;
             $reservation->minutes = $package->time;
             $reservation->table_id = $request->table_id;
             $reservation->client_id = $request->client_id;
-            $reservation->date = $formattedDate;
             $reservation->time = $request->time;
+            $reservation->date = $dateTime;
             $formattedTime = Carbon::createFromFormat('g:i A', $request->time)->addMinutes($package->time)->format('H:i');
             $reservation->time_end = $formattedTime;
             $reservation->note = $request->note;
