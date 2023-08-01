@@ -668,22 +668,22 @@
                                                 <div class="payment-method w-100">
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="cash">
                                                                 <i class="fa-solid fa-sack-dollar"></i>
                                                             </div>
                                                             <p class="text-center">كاش</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="credit-card">
                                                                 <i class="fa-solid fa-credit-card"></i>
                                                             </div>
                                                             <p class="text-center">بطاقة ائتمان</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="wallet">
                                                                 <i class="fa-solid fa-wallet"></i>
                                                             </div>
                                                             <p class="text-center">المحفظة</p>
@@ -737,12 +737,16 @@
         </div>
     </section>
     <!-- js files  -->
+    <script src="{{ asset('front/js/jquery.js') }}"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('front/js/date.js') }}"></script>
+    <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
+    <script src="{{ asset('front/js/main.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
@@ -794,6 +798,31 @@
             var itemId = $(this).data('choosen');
             $('.guest-name').attr('data-choos', itemId);
         });
+        let selectedOption = null;
+
+        // Get references to the payment option elements
+        const cashElement = document.getElementById("cash");
+        const creditCardElement = document.getElementById("credit-card");
+        const walletElement = document.getElementById("wallet");
+
+        // Add event listeners to each element
+        cashElement.addEventListener("click", function() {
+            handlePaymentOption("كاش");
+        });
+
+        creditCardElement.addEventListener("click", function() {
+            handlePaymentOption("بطاقة ائتمان");
+        });
+
+        walletElement.addEventListener("click", function() {
+            handlePaymentOption("المحفظة");
+        });
+
+        // Function to handle the selected payment option
+        function handlePaymentOption(option) {
+            selectedOption = option;
+
+        }
 
         // Function to handle form submission
         function storeReaervation() {
@@ -803,7 +832,6 @@
             var date = $('.reserv-date').text();
             var time = $('.reserv-time').text();
             var status = $('.nav-statues').text();
-
             let formData = new FormData();
             formData.append('client_id', guestId);
             formData.append('package_id', packageId);
@@ -811,9 +839,10 @@
             formData.append('date', date);
             formData.append('time', time);
             formData.append('status', status);
+            formData.append('payment', selectedOption);
 
             // Call the 'store' function to handle the form data submission
-            store('/branch/reservations', formData);
+            storeRoute('/branch/reservations', formData);
         }
 
         // Add event listener to form submission
