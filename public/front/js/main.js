@@ -1,5 +1,14 @@
 
 $(document).ready(function () {
+    
+        //   function pack(id) {
+
+        //     $.get('/branch/branch/halls/ajax', {
+        //         id: id,
+        //     }).done(function(data) {
+        //         $('#all-tables').html(data); // Show the new content
+        //     });
+        // }
         
       $('.event-test').on('click', function(){
          var contentId = $(this).data('id');

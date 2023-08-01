@@ -747,7 +747,11 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
     <script>
-    $(document).ready(function () {
+    
+      
+   
+
+     
         function pack(id) {
 
             $.get('/branch/branch/halls/ajax', {
@@ -756,7 +760,37 @@
                 $('#all-tables').html(data); // Show the new content
             });
         }
-
+        
+         // استهداف العنصر .table-pick وتعيين الحدث النقر عليه
+        document.querySelectorAll('.table-pick').forEach(function(element) {
+            element.addEventListener('click', function() {
+                // إزالة الفئة active-card من جميع عناصر .card داخل .new-reservation-tables
+                var cardElements = document.querySelectorAll('.new-reservation-tables .card');
+                cardElements.forEach(function(card) {
+                    card.classList.remove('active-card');
+                });
+                
+                // إضافة الفئة active-card إلى العنصر الذي تم النقر عليه
+                this.classList.add('active-card');
+                
+                // الحصول على نص عنوان البطاقة
+                var cardTitle = this.querySelector('.card-title').textContent;
+                
+                // تحديث نص العنصر .table-name بالعنوان الجديد
+                var tableNames = document.querySelectorAll('.table-name');
+                tableNames.forEach(function(tableName) {
+                    tableName.textContent = cardTitle;
+                });
+                
+                // الحصول على القيمة المخزنة في الخاصية data-choosen وتعيينها في الخاصية data-choos للعنصر .table-name
+                var itemId = this.getAttribute('data-choosen');
+                tableNames.forEach(function(tableName) {
+                    tableName.setAttribute('data-choos', itemId);
+                });
+            });
+        });
+        
+        
         function clients() {
             var phone = $("#search").val();
 
@@ -774,15 +808,15 @@
             store('/branch/clients', formData)
             this.clients()
         }
-        $('.table-pick').on('click', function() {
-            $('.new-reservation-tables .card').removeClass('active-card');
-            $(this).addClass('active-card');
-            var cardTitle = $(this).find('.card-title').text();
-            $('.table-name').text(cardTitle);
+        // $('.table-pick').on('click', function() {
+        //     $('.new-reservation-tables .card').removeClass('active-card');
+        //     $(this).addClass('active-card');
+        //     var cardTitle = $(this).find('.card-title').text();
+        //     $('.table-name').text(cardTitle);
 
-            var itemId = $(this).data('choosen');
-            $('.table-name').attr('data-choos', itemId);
-        });
+        //     var itemId = $(this).data('choosen');
+        //     $('.table-name').attr('data-choos', itemId);
+        // });
 
         // Function for guest click event
         $('.gust-cards .card').on('click', function(event) {
@@ -822,7 +856,7 @@
             event.preventDefault();
             handleFormSubmission();
         });
-    });
+
     </script>
     <script>
         var dt = new Date().toLocaleTimeString();
