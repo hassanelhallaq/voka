@@ -55,7 +55,7 @@ class ReservationController extends Controller
             $reservation->end = $combinedDateTimeStringEnd;
             $reservation->time_end = $formattedTime;
             $reservation->note = $request->note;
-            $reservation->status = $request->status;
+            $reservation->status = 'مؤكد';
             $reservation->payment_type = $request->payment;
             $isSaved = $reservation->save();
             $table = Table::find($request->table_id);
