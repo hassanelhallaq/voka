@@ -1,6 +1,6 @@
 <div id="mainPage">
     <div class="col-md-12">
-             <div class="seacr-bar mb-5">
+        <div class="seacr-bar mb-5">
             <form class="d-flex search  justify-content-between" role="search">
                 <p>اكتب رقم الطاولة</p>
                 <input class="search-input form-control" type="search" aria-label="Search" placeholder="12">
@@ -44,7 +44,7 @@
                                 $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                 $reservationDateTime = $table->reservation->date . ' ' . $formattedTime . ':00';
                             }
-
+                            
                         @endphp
                         <div class="col-md-3 card-col  d-flex justify-content-center align-items-center"
                             data-tableNumber="{{ $item->name }}"
@@ -96,9 +96,11 @@
                                     </div>
 
                                     <div class="body-package d-flex justify-content-between">
-                                        <p class="hall-name"> {{ $table->reservation->package->name ?? 'لا يوجد باقة ' }}
+                                        <p class="hall-name">
+                                            {{ $table->reservation->package->name ?? 'لا يوجد باقة ' }}
                                         </p>
-                                        <span class="sta"> {{ $table->reservation->package->name ?? 0 }} اشخاص</span>
+                                        <span class="sta"> {{ $table->reservation->package->name ?? 0 }}
+                                            اشخاص</span>
                                     </div>
                                     <div class="body-time d-flex justify-content-between">
                                         <p class="hall-name">{{ $table->reservation->date ?? 'لا يوجد تاريخ ' }}</p>
@@ -115,12 +117,33 @@
                                             <span class="glider"></span>
                                         </div>
                                     </div>
+                                    @php
+                                        if ($table->reservation) {
+                                            $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
+                                                ->where('table_id', $table->id)
+                                                ->where('is_done', 0)
+                                                ->with('products')
+                                                ->first();
+                                        } else {
+                                            $orders = null;
+                                        }
+                                        if ($orders) {
+                                            $totalOrderPrices = $orders->map(function ($order) {
+                                                return $order->products->sum(function ($product) {
+                                                    return $product->price * $product->quantity;
+                                                });
+                                            });
+                                        } else {
+                                            $totalOrderPrices = 0;
+                                        }
+                                    @endphp
                                     <div class="card-footer">
                                         <p class="hall-name"> الرصيد :
                                             {{ $table->reservation->package->price ?? ' لا يوجد رصيد' }}</p>
                                         <span class="sta">
                                             @if ($table->reservation)
-                                                الرصيد المتبقى : 300
+                                                الرصيد المتبقى :
+                                                {{ $table->reservation->package->price - $totalOrderPrices ?? 0 }}
                                             @else
                                                 لا يوجد رصيد
                                             @endif
@@ -150,14 +173,7 @@
                                         <div class="tab-content">
                                             <div id="the-menu" class="c-tab-pane active">
                                                 <ol class="list-group list-group-numbered reversed">
-                                                    @php
-                                                        $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
-                                                            ->where('table_id', $table->id)
-                                                            ->where('is_done', 0)
-                                                            ->with('products')
-                                                            ->first();
 
-                                                    @endphp
 
                                                     @foreach ($orders->products as $product)
                                                         <li
@@ -186,7 +202,8 @@
                                                             <div class="me-2 ms-auto">
                                                                 <div class="fw-bold"> حاصل الجمع</div>
                                                             </div>
-                                                            <span>{{ $table->reservation->package->price }} ريال</span>
+                                                            <span>{{ $table->reservation->package->price ?? 0 }}
+                                                                ريال</span>
                                                         </div>
 
                                                         <div
@@ -201,7 +218,7 @@
                                                             <div class="me-2 ms-auto">
                                                                 <div class="fw-bold"> الإجمالى</div>
                                                             </div>
-                                                            <span>{{ $table->reservation->package->price * 0.15 }}
+                                                            <span>{{ $table->reservation->package->price ?? 0 * 0.15 }}
                                                                 ريال</span>
                                                         </div>
                                                         <div class="payment-method">
@@ -234,7 +251,8 @@
                                                                     data-bs-target="#exampleModal6">
                                                                     ادفع الآن</div>
                                                                 <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModal6" tabindex="-1"
+                                                                <div class="modal fade" id="exampleModal6"
+                                                                    tabindex="-1"
                                                                     aria-labelledby="exampleModalLabel6"
                                                                     aria-hidden="true">
                                                                     <div class="modal-dialog">
@@ -243,7 +261,8 @@
                                                                                 <h5 class="modal-title"
                                                                                     id="exampleModalLabel">
                                                                                     تأكيد الدفع</h5>
-                                                                                <button type="button" class="btn-close"
+                                                                                <button type="button"
+                                                                                    class="btn-close"
                                                                                     data-bs-dismiss="modal"
                                                                                     aria-label="Close"></button>
                                                                             </div>
@@ -257,7 +276,8 @@
                                                                                     class="btn btn-primary">تأكيد</button>
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
-                                                                                    data-bs-dismiss="modal">لا </button>
+                                                                                    data-bs-dismiss="modal">لا
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -325,14 +345,16 @@
                                                                         <div
                                                                             class="d-flex h-100 justify-content-around align-items-center">
                                                                             <div class="gusts">
-                                                                                <span class="table-gusts px-2"> 4</span>
+                                                                                <span class="table-gusts px-2">
+                                                                                    4</span>
                                                                                 <span> <i
                                                                                         class="fa-solid fa-users"></i></span>
                                                                             </div>
                                                                             <div class="table-res">
                                                                                 طاولة 1
                                                                             </div>
-                                                                            <span class="badge bg-secondary">مؤكد</span>
+                                                                            <span
+                                                                                class="badge bg-secondary">مؤكد</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-3">
@@ -425,12 +447,13 @@
                                         </ol>
                                         <ol class="list-group reversed  mt-5">
                                             <li class="list-group-item no-number  ">
-                                                <div class="sub-total d-flex justify-content-between align-items-start">
+                                                <div
+                                                    class="sub-total d-flex justify-content-between align-items-start">
                                                     <div class="me-2 ms-auto">
                                                         <div class="fw-bold"> حاصل الجمع</div>
                                                     </div>
                                                     <span class="sub-total-number">
-                                                        {{ $table->reservation->package->price }} </span>
+                                                        {{ $table->reservation->package->price ?? 0 }} </span>
                                                     <span> ريال</span>
                                                 </div>
 
@@ -447,7 +470,7 @@
                                                         <div class="fw-bold"> الإجمالى</div>
                                                     </div>
                                                     <span
-                                                        class="table-total">{{ $table->reservation->package->price * 0.15 }}
+                                                        class="table-total">{{ $table->reservation->package->price ?? 0 * 0.15 }}
                                                     </span>
                                                     <span> ريال</span>
                                                 </div>
@@ -476,8 +499,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="payment-btn my-3 text-center">
-                                                        <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal">
+                                                        <div class="btn btn-primary btn-lg w-100"
+                                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                             ادفع الآن</div>
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -485,7 +508,8 @@
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                        <h5 class="modal-title"
+                                                                            id="exampleModalLabel">
                                                                             تأكيد الدفع</h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
@@ -498,7 +522,8 @@
                                                                     <div class="modal-footer">
                                                                         <button type="button"
                                                                             class="btn btn-primary">تأكيد</button>
-                                                                        <button type="button" class="btn btn-secondary"
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">لا </button>
                                                                     </div>
                                                                 </div>
@@ -508,18 +533,14 @@
                                                 </div>
                                             </li>
                                         </ol>
-
-
-
                                     </div>
                                 @endif
-
                             </div>
+                        </div>
                     @endforeach
                 @endforeach
             </div>
         </div>
-    </div>
     </div>
 </div>
 <script src="{{ asset('front/js/jquery.js') }}"></script>
