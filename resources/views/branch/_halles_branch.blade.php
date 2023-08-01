@@ -16,7 +16,7 @@
 <div class="card-body ">
     <div class="tab-content text-center">
         @foreach ($halles as $key => $item)
-            <div class="tab-pane {{ $key === 0 ? ' active show' : '' }}" id="hall{{ $item->id }}"  >
+            <div class="tab-pane {{ $key === 0 ? ' active show' : '' }}" id="hall{{ $item->id }}">
                 <div class="row new-reservation-tables">
                     <h2 class="text-center text-light">{{ $item->name }}</h2>
                     <div class="col-12">
@@ -25,7 +25,7 @@
                                 <div class="col-md-3 card-col  d-flex justify-content-center align-items-center ">
                                     <div class="change-content table-pick card catch-id  bg-success active-card"
                                         data-id="#allguests" data-choosen="{{ $table->id }}">
-                                        <input hidden id="table_id" value="{{ $table->id }}">
+                                        <input hidden value="{{ $table->id }}">
                                         <div class="card-header primary-bg-color">
                                             <div class="top d-flex justify-content-between ">
                                                 <h5 class="card-title"> طاولة رقم
