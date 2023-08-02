@@ -14,10 +14,12 @@ class MenuController extends Controller
     {
         $branch = Branch::find($branch_id);
         $table = Table::find($id);
-        $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
-        if (!$reservation) {
-            return view('errors.400');
-        }
+        // $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
+        // if (!$reservation) {
+        //     return view('errors.400');
+        // }
+        $reservation = Reservation::where([['table_id', $id]])->first();
+
         $categories = ProductCategory::where('category_status', 1)
             ->with([
                 'branch' => function ($query) use ($branch_id) {
