@@ -45,7 +45,7 @@
                                 $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                 $reservationDateTime = $table->reservation->date . ' ' . $formattedTime . ':00';
                             }
-
+                            
                         @endphp
                         <div class="col-md-3 card-col  d-flex justify-content-center align-items-center"
                             data-tableNumber="{{ $item->name }}"
@@ -123,14 +123,13 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        } else {
-                                            $orders = null;
-                                        }
-                                        if ($orders) {
-                                            $totalOrderPrices = $orders->map(function ($order) {
-                                                return $order->products->sum(function ($product) {
-                                                    return $product->price * $product->quantity;
-                                                });
+                                        
+                                            // Wrap the related products in a collection (even if there's only one result)
+                                            $productsCollection = collect($orders->products);
+                                        
+                                            // Calculate total order prices using the map function on the products collection
+                                            $totalOrderPrices = $productsCollection->map(function ($product) {
+                                                return $product->price * $product->quantity;
                                             });
                                         } else {
                                             $totalOrderPrices = 0;
@@ -142,7 +141,7 @@
                                         <span class="sta">
                                             @if ($table->reservation)
                                                 الرصيد المتبقى :
-                                                {{ $table->reservation->package->price - $totalOrderPrices ?? 0 }}
+                                                {{ $table->reservation->package->price ?? (0 - $totalOrderPrices ?? 0) }}
                                             @else
                                                 لا يوجد رصيد
                                             @endif
