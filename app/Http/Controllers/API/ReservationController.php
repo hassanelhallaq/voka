@@ -13,13 +13,13 @@ class ReservationController extends Controller
     {
 
         // Define the time slots in 24-hour format
-        $timeSlots = ["06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00", "03:00"];
+        $timeSlots = ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "00:00"];
 
         // Fetch all tables with their reservations
-           $currentDate = Carbon::now()->toDateString();
+        $currentDate = Carbon::now()->toDateString();
 
         // Fetch all tables with their reservations for today
-         $tables = Table::with(['reservations' => function ($query) use ($currentDate) {
+        $tables = Table::with(['reservations' => function ($query) use ($currentDate) {
             // Filter reservations for today
             $query->whereDate('date', $currentDate);
         }])->get();
@@ -40,8 +40,7 @@ class ReservationController extends Controller
                 // Check if the table is booked for the current time slot
                 foreach ($table->reservations as $reservation) {
                     $reservationStart = date('H:i', strtotime($reservation->date));
-                      $reservationEnd = date('H:i', strtotime($reservation->end));
-
+                    $reservationEnd = date('H:i', strtotime($reservation->end));
                     if ($reservationStart <= $slot && $reservationEnd > $slot) {
                         $isAvailable = false;
                         break;
