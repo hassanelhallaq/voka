@@ -97,5 +97,11 @@ Route::prefix('menu/{table_id}/{branch_id}')->group(function () {
 Route::get('/error', function () {
     abort(500);
 });
+Route::get('clear_cache', function () {
 
+    \Artisan::call('storage:link');
+    // \Artisan::call('composer require spatie/laravel-medialibrary');
+
+    dd("Cache is cleared");
+});
 require __DIR__ . '/auth.php';
