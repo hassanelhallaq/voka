@@ -18,7 +18,7 @@ class MenuController extends Controller
         // if (!$reservation) {
         //     return view('errors.400');
         // }
-        $reservation = Reservation::where([['table_id', $id], ['id', 25]])->first();
+        $reservation = Reservation::where([['id', 25]])->first();
 
         $categories = ProductCategory::where('category_status', 1)
             ->with([
