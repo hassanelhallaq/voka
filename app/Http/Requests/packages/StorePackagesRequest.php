@@ -51,6 +51,7 @@ class StorePackagesRequest extends FormRequest
             'price' => 'required|integer',
             'discount' => 'required|integer',
             'time' => 'required',
+            'count_of_visitors' => 'required',
             'branch_id' => 'required|exists:branches,id',
             'table_id.*' => 'required|exists:tables,id',
         ];
@@ -68,11 +69,12 @@ class StorePackagesRequest extends FormRequest
                 'boolean' => 'The :attribute field must be either true or false.',
                 'date' => 'The :attribute is not a valid date.',
                 'exists' => 'The selected :attribute is invalid.',
-
+                'count_of_visitors' => 'The :attribute field is required.',
             ];
         } elseif (app()->getLocale() == "ar") {
             return [
                 'required' => 'حقل :attribute مطلوب.',
+                'count_of_visitors.required' => 'حقل :عدد الزوار مطلوب.',
                 'string' => 'حقل :attribute يجب أن يكون نصًا.',
                 'integer' => 'حقل :attribute يجب أن يكون رقمًا صحيحًا.',
                 'date_format' => 'حقل :attribute يجب أن يكون بتنسيق :format.',

@@ -92,6 +92,21 @@
                                          </p>
                                      @endif
                                  </div>
+
+                                 <div class="form-group col-md-6">
+                                     <label class="col-lg-4 col-form-label " for="validationCustom01">
+                                         {{ __('count_of_visitors') }}
+                                         <span class="text-danger">*</span>
+                                     </label>
+                                     <input type="number" class="form-control mb-3" id="count_of_visitors"
+                                         value="{{ $package->count_of_visitors }}" name="discount" required>
+
+                                     @if ($errors->has('count_of_visitors'))
+                                         <p style="color: red">{{ $errors->first('count_of_visitors') }}
+                                         </p>
+                                     @endif
+
+                                 </div>
                              </div>
                              <div class="row">
 

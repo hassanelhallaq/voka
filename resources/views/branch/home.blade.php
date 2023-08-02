@@ -43,9 +43,9 @@
                         @php
                             if ($table->reservation) {
                                 $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
-                                $reservationDateTime = $table->reservation->date . ' ' . $formattedTime . ':00';
+                                $reservationDateTime = $table->reservation->date;
                             }
-                            
+
                         @endphp
                         <div class="col-md-3 card-col  d-flex justify-content-center align-items-center"
                             data-tableNumber="{{ $item->name }}"
@@ -71,7 +71,7 @@
                                         <!-- Add the countdown timer element where you want to display the remaining time -->
                                         <!-- Assuming $formattedTime contains the time in "H:i" format -->
                                         <div class="countdown-timer"
-                                            data-start="{{ $table->reservation ? $table->reservation->date . ' ' . $formattedTime : '' }}"
+                                            data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
                                             data-package-time="{{ $table->reservation->package->time ?? 0 }}">
                                             <!-- Add a span to display the countdown timer -->
                                             @if ($table->reservation)
@@ -99,13 +99,20 @@
                                     <div class="body-package d-flex justify-content-between">
                                         <p class="hall-name"> {{ $table->reservation->package->name ?? 'لا يوجد باقة ' }}
                                         </p>
-                                        <span class="sta"> {{ $table->reservation->package->name ?? 0 }} اشخاص</span>
+                                        <span class="sta"> {{ $table->reservation->package->count_of_visitors ?? 0 }}
+                                            اشخاص</span>
                                     </div>
                                     <div class="body-time d-flex justify-content-between">
-                                        <p class="hall-name">{{ $table->reservation->date ?? 'لا يوجد تاريخ ' }}</p>
+                                        <p class="hall-name">
+                                            @if (isset($table->reservation->date))
+                                                {{ \Illuminate\Support\Carbon::parse($table->reservation->date)->format('Y-m-d') }}
+                                            @else
+                                                لا يوجد تاريخ
+                                            @endif
+                                        </p>
                                         <span class="sta">{{ $table->reservation->time ?? 'لا يوجد وقت ' }} </span>
                                     </div>
-                                    <div class="body-activation d-flex justify-content-between">
+                                    {{-- <div class="body-activation d-flex justify-content-between">
                                         <p class="hall-name">التفعيل</p>
                                         <div class="table-activation">
                                             <input type="radio" id="radio-1" name="tabs" checked="">
@@ -115,7 +122,7 @@
 
                                             <span class="glider"></span>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     @php
                                         if ($table->reservation) {
                                             $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
@@ -123,10 +130,10 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             $productsCollection = collect($orders->products);
-                                        
+
                                             // Calculate total order prices using the map function on the products collection
                                             $totalOrderPrices = $productsCollection->map(function ($product) {
                                                 return $product->price * $product->quantity;

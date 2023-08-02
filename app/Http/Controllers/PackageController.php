@@ -29,6 +29,7 @@ class PackageController extends Controller
     {
         $package =   new Package();
         $package->name = $request->name;
+        $package->count_of_visitors = $request->count_of_visitors;
         $package->name_en = $request->name_en;
         $package->price = $request->price;
         $package->discount = $request->discount;
@@ -77,6 +78,7 @@ class PackageController extends Controller
 
         // Update the package details
         $package->name = $request->name;
+        $package->count_of_visitors = $request->count_of_visitors;
         $package->name_en = $request->name_en;
         $package->price = $request->price;
         $package->discount = $request->discount;

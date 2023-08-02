@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,8 +62,8 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::resource('reservations', ReservationController::class);
         Route::resource('categories', ClientCategoryController::class);
         Route::get('/branch-account', [BranchAccountController::class, 'index'])->name('branch-account.index');
-
-
+        Route::resource('shifts', ShiftController::class);
+        Route::put('/branch-account/{id}', [BranchAccountController::class, 'update'])->name('branch-account.update');
         Route::get('/order-product', [OrderController::class, 'index'])->name('order-product');
         Route::put('/tables/{id}', [TableController::class, 'update'])->name('tables.update');
         Route::delete('/tables/{id}', [TableController::class, 'destroy'])->name('tables.destroy');
@@ -87,6 +88,11 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
 
     Route::get('/path/to/branch.reservSide', [App\Http\Controllers\PosController::class, 'sideReser'])->name('sideReser.ajax');
 });
+Route::prefix('menu/{table_id}/{branch_id}')->group(function () {
+    Route::get('/home', [App\Http\Controllers\MenuController::class, 'index'])->name('menu.home');
+    Route::get('/cart', [App\Http\Controllers\MenuController::class, 'cart'])->name('menu.cart');
+});
+
 
 Route::get('/error', function () {
     abort(500);

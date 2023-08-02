@@ -15,4 +15,9 @@ class BranchAccount extends  Authenticatable
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function shifts()
+    {
+        return $this->belongsToMany(Shift::class, ShiftBranch::class)->withTimestamps();
+    }
 }

@@ -33,8 +33,10 @@ class StoreBranchAccounRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|string',
             'phone' => 'required|string|unique:branch_accounts,phone',
             'password' => 'required|string',
+            'shift_id' => 'required|exists:shifts,id', // Make sure the shift_id exists in the 'shifts' table
         ];
     }
 
@@ -49,6 +51,7 @@ class StoreBranchAccounRequest extends FormRequest
                 'phone.unique' => 'Please Enter unique phone ',
                 'manger.required' => 'Please Enter manger name ',
                 'password.required' => 'Please Enter password ',
+                'shift_id.required' => 'Please Enter shift  ',
 
             ];
         } elseif (app()->getLocale() == "ar") {
@@ -59,6 +62,7 @@ class StoreBranchAccounRequest extends FormRequest
                 'phone.required' => 'الرجاء ادخال رقم الهاتف',
                 'manger.required' => 'الرجاء ادخال اسم المدير',
                 'password.required' => 'الرجاء ادخال كملة مرور  ',
+                'shift_id.required' => 'بالرجاء اختيار فتره عمل ',
 
             ];
         }

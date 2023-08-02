@@ -141,6 +141,17 @@
             data-kt-menu="true" data-kt-menu-expand="false">
             <!--begin:Menu item-->
             <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                <a href="{{ route('shifts.index') }}">
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
+                        <span class="menu-title">{{ __('shifts') }}</span>
+                    </span></a>
+            </div>
+        </div>
+        <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
+            data-kt-menu="true" data-kt-menu-expand="false">
+            <!--begin:Menu item-->
+            <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                 <a href="{{ route('branch-account.index') }}">
                     <span class="menu-link">
                         <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>

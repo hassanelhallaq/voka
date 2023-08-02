@@ -7,9 +7,11 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\BranchAccount;
 use App\Models\Lounge;
 use App\Models\Package;
 use App\Models\ProductCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +44,19 @@ class UserAuthController extends Controller
             'phone' => $request->get('phone'),
             'password' => $request->get('password'),
         ];
+        $user = BranchAccount::where('phone', $request->get('phone'))->first();
+        $shifts = $user->shifts;
+
+        $now = Carbon::now();
+        foreach ($shifts as $shift) {
+            $startTime = Carbon::createFromFormat('H:i:s', $shift->start_time);
+            $endTime = Carbon::createFromFormat('H:i:s', $shift->end_time);
+
+            if ($shift->day === $now->format('l') && $now->between($startTime->startOfDay(), $endTime->endOfDay())) {
+            } else {
+                return response()->json(['icon' => 'error', 'title' => 'Login Faild'], 400);
+            }
+        }
         if (!$validator->fails()) {
             if (Auth::guard('branch')->attempt($credentials)) {
                 return response()->json(['icon' => 'success', 'title' => 'Login Successfully'], 200);

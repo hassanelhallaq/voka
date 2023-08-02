@@ -25,8 +25,8 @@
 
                      <tr>
 
-
-                         <th>{{ __('Email') }}</th>
+                         <th>{{ __('name') }}</th>
+                         <th>{{ __('phone') }}</th>
                          <th>{{ __('Role') }}</th>
 
                          <th>{{ __('Settings') }}</th>
@@ -40,28 +40,117 @@
                              <td>
                                  {{ $user->getRoleNames() }}
                              </td>
-
-                             {{-- <td>
-                                 @if ($admin->status == 'active')
-                                     {{ __('Active') }}
-                                 @elseif ($admin->status == 'deactive')
-                                     {{ __('Deactive') }}
-                                 @endif
-                             </td> --}}
                              <td>
                                  <div class="btn-group">
-                                     {{-- @can('edit-admin') --}}
-                                     {{-- <a href="" class="btn btn-primary mr-2" title="Edit Informations"> <i
-                                            class="fas fa-edit"></i> </a> --}}
-                                     {{-- @endcan --}}
-                                     <a href="#" onclick="performDestroy({{ $user->id }}, this)"
+
+                                     <a data-bs-toggle="modal" data-bs-target="#editAccountModal_{{ $user->id }}"
                                          class="btn btn-danger mr-2">
+                                         <i class="fas fa-edit"></i>
+                                     </a>
+                                     <a href="#" onclick="performDestroy({{ $user->id }}, this)"
+                                         class="btn btn-info mr-2">
                                          <i class="fas fa-trash"></i>
                                      </a>
 
                                  </div>
                              </td>
                          </tr>
+                         <div class="modal fade" id="editAccountModal_{{ $user->id }}" tabindex="-1"
+                             aria-hidden="true">
+                             <div class="modal-dialog modal-dialog-centered mw-750px">
+                                 <div class="modal-content">
+                                     <div class="modal-header">
+                                         <h5 class="modal-title" id="exampleModalLabel">Edit Account</h5>
+                                         <!-- Add a close button if needed -->
+                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                             aria-label="Close"></button>
+                                     </div>
+                                     <!--begin::Modal body-->
+                                     <div class="modal-body scroll-y mx-lg-5 my-7">
+                                         <!--begin::Form-->
+                                         <form id="kt_modal_edit_role_form" class="form"
+                                             action="{{ route('branch-account.update', ['id' => $user->id]) }}"
+                                             method="POST">
+                                             @csrf
+                                             @method('PUT')
+                                             <div class="row">
+                                                 <div class="form-group col-md-12">
+                                                     <label>{{ __('Shift') }}:</label>
+                                                     <select class="form-select form-select-solid"
+                                                         data-control="select2" multiple name="shift_id[]"
+                                                         id="shift_id">
+                                                         <option value="">Select Shift</option>
+                                                         @foreach ($shifts as $shift)
+                                                             <option value="{{ $shift->id }}"
+                                                                 @if (in_array($shift->id, $user->shifts->pluck('id')->toArray())) selected @endif>
+                                                                 {{ $shift->day }} - {{ $shift->start_time }} to
+                                                                 {{ $shift->end_time }}
+                                                             </option>
+                                                         @endforeach
+                                                     </select>
+                                                 </div>
+                                             </div>
+                                             <!--begin::Scroll-->
+                                             <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                                                 <div class="row">
+                                                     <div class="form-group col-md-12">
+                                                         <label>{{ __('Roles') }}:</label>
+                                                         <select class="form-control form-control-solid" name="role_id"
+                                                             id="role_id">
+                                                             @foreach ($roles as $role)
+                                                                 <option value="{{ $role->id }}"
+                                                                     @if ($user->role_id === $role->id) selected @endif>
+                                                                     {{ $role->name }}
+                                                                 </option>
+                                                             @endforeach
+                                                         </select>
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="form-group mb-6">
+                                                         <label>{{ __('Name') }}</label>
+                                                         <div class="input-group mb-3">
+                                                             <input type="text" class="form-control " name="name"
+                                                                 required id="name" value="{{ $user->name }}">
+                                                         </div>
+                                                         @error('name')
+                                                             <p style="color: red">{{ $message }}</p>
+                                                         @enderror
+                                                     </div>
+                                                     <div class="form-group mb-6">
+                                                         <label>{{ __('Phone') }}</label>
+                                                         <div class="input-group mb-3">
+                                                             <input type="text" class="form-control " name="phone"
+                                                                 required id="phone" value="{{ $user->phone }}">
+                                                         </div>
+                                                         @error('phone')
+                                                             <p style="color: red">{{ $message }}</p>
+                                                         @enderror
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!--end::Scroll-->
+                                             <!--begin::Actions-->
+                                             <div class="text-center pt-15">
+                                                 <button type="reset" class="btn btn-light me-3"
+                                                     data-bs-dismiss="modal" data-kt-roles-modal-action="cancel">
+                                                     {{ __('Discard') }}
+                                                 </button>
+                                                 <button type="submit" class="btn btn-primary"
+                                                     data-kt-roles-modal-action="submit">
+                                                     {{ __('Update') }}
+                                                 </button>
+                                             </div>
+                                             <!--end::Actions-->
+                                         </form>
+                                         <!--end::Form-->
+                                     </div>
+                                     <!--end::Modal body-->
+                                 </div>
+                                 <!--end::Modal content-->
+                             </div>
+                             <!--end::Modal dialog-->
+                         </div>
                      @endforeach
                  </tbody>
              </table>
@@ -84,6 +173,20 @@
                      <form id="kt_modal_add_role_form" class="form"
                          action="{{ route('branch-account.store', ['id' => $id]) }}" method="POST">
                          @csrf
+                         <div class="row">
+                             <div class="form-group col-md-12">
+                                 <label>{{ __('Shift') }}:</label>
+                                 <select class="form-select" data-control="select2" multiple name="shift_id[]"
+                                     id="shift_id">
+                                     <option value="">Select Shift</option>
+                                     @foreach ($shifts as $shift)
+                                         <option value="{{ $shift->id }}">{{ $shift->day }} -
+                                             {{ $shift->start_time }}
+                                             to {{ $shift->end_time }}</option>
+                                     @endforeach
+                                 </select>
+                             </div>
+                         </div>
                          <!--begin::Scroll-->
                          <div class="d-flex flex-column scroll-y me-n7 pe-7">
                              <div class="row">
@@ -99,11 +202,24 @@
                              </div>
                              <div class="row">
                                  <div class="form-group mb-6">
+                                     <label>{{ __('name') }}</label>
+
+                                     <div class="input-group mb-3">
+                                         <input type="text" class="form-control meal_price" name="name"
+                                             required id='name' value="{{ old('name') }}">
+                                     </div>
+                                     @if ($errors->has('name'))
+                                         <p style="color: red">
+                                             {{ $errors->first('name') }}
+                                         </p>
+                                     @endif
+                                 </div>
+                                 <div class="form-group mb-6">
                                      <label>{{ __('phone') }}</label>
 
                                      <div class="input-group mb-3">
-                                         <input type="text" class="form-control meal_price" name="phone" required
-                                             id='phone' value="{{ old('phone') }}">
+                                         <input type="text" class="form-control meal_price" name="phone"
+                                             required id='phone' value="{{ old('phone') }}">
                                      </div>
                                      @if ($errors->has('phone'))
                                          <p style="color: red">
@@ -114,8 +230,8 @@
                                  <div class="form-group mb-6">
                                      <label>{{ __('password') }}</label>
                                      <div class="input-group mb-3">
-                                         <input type="password" class="form-control meal_price" name="password" required
-                                             id='password' value="{{ old('password') }}">
+                                         <input type="password" class="form-control meal_price" name="password"
+                                             required id='password' value="{{ old('password') }}">
                                      </div>
                                      @if ($errors->has('password'))
                                          <p style="color: red">
