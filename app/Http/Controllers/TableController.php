@@ -20,7 +20,7 @@ class TableController extends Controller
         $table->status = 'available';
         $isSaved = $table->save();
         $qrImage = 'images' . $id . $table->id . '.svg';
-        $url =  'https://vkoa.net/' . $table->id . '/' . $lounge->branch_id . '/home';
+        $url =  'https://vkoa.net/menu/' . $table->id . '/' . $lounge->branch_id . '/home';
         QrCode::format('svg');
         QrCode::generate($url, $qrImage);
         $table->qr = $qrImage;
