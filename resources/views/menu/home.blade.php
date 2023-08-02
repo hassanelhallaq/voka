@@ -66,7 +66,7 @@
                             <div class="col-lg-4 col-6 {{ $item->category_id }}">
                                 <div class="product">
                                     <a class="product-thumb" href="menu-item.html">
-                                        <img src="{{ $item->getFirstMediaUrl('product', 'thumb') }}" alt="menu item" />
+                                        <img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt="menu item" />
                                     </a>
                                     <div class="product-body">
                                         <div class="product-desc">
