@@ -58,7 +58,7 @@ export default {
     async fetchData() {
         try {
         const branchId = authenticatedUserId;
-        const response = await axios.get("https://vkoa.net/api/time-slots", {
+        const response = await axios.get("https://vkoa.net/time-slots", {
                     params: {
                         branch_id: branchId,
                     },
