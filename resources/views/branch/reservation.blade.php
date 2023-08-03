@@ -308,20 +308,20 @@
                             </div>
                         </div>
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
- 
+
                             <!--<div id="app"></div>-->
-                          //  @include('branch._halles_branch')
- 
-                         //   <div id="app"></div>
+                          {{-- //  @include('branch._halles_branch') --}}
+
+                         {{-- //   <div id="app"></div> --}}
                             <div id="app">
                                 <slot></slot>
                             </div>
- 
-  
- 
+
+
+
                             <script src="{{ asset('js/app.js') }}"></script>
 
- 
+
                         </div>
                         <div class="reservation-tabs" id="allguests">
                             <div class="container">
