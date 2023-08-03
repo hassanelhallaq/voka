@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/time-slots', [ReservationController::class, 'index'])->name('time-slots');
+Route::get('/time-slots', [ReservationController::class, 'index'])->name('time-slots')->middleware('auth:branch');
