@@ -308,20 +308,8 @@
                             </div>
                         </div>
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
-
                             <!--<div id="app"></div>-->
-                          {{-- //  @include('branch._halles_branch') --}}
-
-                         {{-- //   <div id="app"></div> --}}
-                            <div id="app">
-                                <slot></slot>
-                            </div>
-
-
-
-                            <script src="{{ asset('js/app.js') }}"></script>
-
-
+                            @include('branch._halles_branch')
                         </div>
                         <div class="reservation-tabs" id="allguests">
                             <div class="container">
@@ -761,9 +749,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
-    <script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>
-    <script src="{{ asset('front/js/app.324c30d7.js') }}"></script>
+   
     <script>
+    
+      
+   
+
+     
         function pack(id) {
 
             $.get('/branch/branch/halls/ajax', {
@@ -772,8 +764,8 @@
                 $('#all-tables').html(data); // Show the new content
             });
         }
-
-        // استهداف العنصر .table-pick وتعيين الحدث النقر عليه
+        
+         // استهداف العنصر .table-pick وتعيين الحدث النقر عليه
         document.querySelectorAll('.table-pick').forEach(function(element) {
             element.addEventListener('click', function() {
                 // إزالة الفئة active-card من جميع عناصر .card داخل .new-reservation-tables
@@ -781,19 +773,19 @@
                 cardElements.forEach(function(card) {
                     card.classList.remove('active-card');
                 });
-
+                
                 // إضافة الفئة active-card إلى العنصر الذي تم النقر عليه
                 this.classList.add('active-card');
-
+                
                 // الحصول على نص عنوان البطاقة
                 var cardTitle = this.querySelector('.card-title').textContent;
-
+                
                 // تحديث نص العنصر .table-name بالعنوان الجديد
                 var tableNames = document.querySelectorAll('.table-name');
                 tableNames.forEach(function(tableName) {
                     tableName.textContent = cardTitle;
                 });
-
+                
                 // الحصول على القيمة المخزنة في الخاصية data-choosen وتعيينها في الخاصية data-choos للعنصر .table-name
                 var itemId = this.getAttribute('data-choosen');
                 tableNames.forEach(function(tableName) {
@@ -801,8 +793,8 @@
                 });
             });
         });
-
-
+        
+        
         function clients() {
             var phone = $("#search").val();
 
@@ -868,6 +860,7 @@
             event.preventDefault();
             handleFormSubmission();
         });
+
     </script>
     <script>
         var dt = new Date().toLocaleTimeString();
