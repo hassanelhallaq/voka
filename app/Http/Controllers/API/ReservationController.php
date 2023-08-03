@@ -7,6 +7,7 @@ use App\Models\Lounge;
 use Illuminate\Http\Request;
 use App\Models\Table;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -20,7 +21,7 @@ class ReservationController extends Controller
         $currentDate = Carbon::now()->toDateString();
 
         // Fetch all tables with their reservations for today
-        $lounges = Lounge::where('branch_id', $request->branch_id)->with(['tables' => function ($q) use ($currentDate) {
+        $lounges = Lounge::where('branch_id', Auth::user()->id)->with(['tables' => function ($q) use ($currentDate) {
             $q->with(['reservations' => function ($query) use ($currentDate) {
                 $query->whereDate('date', $currentDate);
             }]);
