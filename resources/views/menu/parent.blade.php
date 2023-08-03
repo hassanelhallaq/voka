@@ -90,7 +90,7 @@
                     <ul class="header-controls-inner">
                         <a href="{{ route('menu.cart', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}">
                             <li class="cart-dropdown-wrapper cart-trigger">
-                                <span class="cart-item-count">4</span>
+                                <span class="cart-item-count" id="cart-item-count">0</span>
                                 <i class="flaticon-shopping-bag"></i>
                             </li>
                         </a>
@@ -158,6 +158,8 @@
 
     <!-- Slices Scripts -->
     <script src="{{ asset('menu/assets/js/main.js') }}"></script>
+
+
 </body>
 
 </html>

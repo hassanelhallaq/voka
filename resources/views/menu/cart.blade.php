@@ -41,11 +41,11 @@
                                 </tr>
                                 <tr>
                                     <th>رصيد الباقة</th>
-                                    <td>100$</td>
+                                    <td>{{ $reservation->package->price }}</td>
                                 </tr>
                                 <tr>
                                     <th>السعر المتبقي</th>
-                                    <td><b id="remaining-balance">100$</b></td>
+                                    <td><b id="remaining-balance">0</b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -153,15 +153,15 @@
                 // Get the total price of the products in the cart
                 const totalPrice = calculateTotalPrice();
 
-                // Get the balance from the package (You can set this value dynamically based on the user's package)
-                const packageBalance = 100;
+                // Get the balance from the package
+                const packageBalance = {{ $reservation->package->price }};
 
                 // Calculate the remaining balance
                 const remainingBalance = packageBalance - totalPrice;
 
                 // Update the cart summary elements with the calculated values
-                totalPriceElement.innerText = totalPrice + '$';
-                remainingBalanceElement.innerText = remainingBalance + '$';
+                totalPriceElement.innerText = totalPrice;
+                remainingBalanceElement.innerText = remainingBalance;
             }
 
             // Call the function to update the cart summary when the page loads
@@ -173,5 +173,21 @@
                     updateCartSummary();
                 }
             });
+        </script>
+
+
+        <script>
+            function getCartItemCount() {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                let totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+                return totalItems;
+            }
+
+            function updateCartItemCount() {
+                const cartItemCountElement = document.getElementById('cart-item-count');
+                const cartItemCount = getCartItemCount();
+                cartItemCountElement.innerText = cartItemCount;
+            }
+            document.addEventListener('DOMContentLoaded', updateCartItemCount);
         </script>
     @endsection

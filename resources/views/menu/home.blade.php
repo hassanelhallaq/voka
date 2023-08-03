@@ -65,7 +65,8 @@
                             <!-- Product Start -->
                             <div class="col-lg-4 col-6 {{ $item->category_id }}">
                                 <div class="product">
-                                    <a class="product-thumb" href="menu-item.html">
+                                    <a class="product-thumb"
+                                        href="{{ route('product.index', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]) }}">
                                         <img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt="menu item" />
                                     </a>
                                     <div class="product-body">
@@ -76,7 +77,7 @@
                                         </div>
                                         <div class="product-controls">
                                             <a href="#" class="اطلب-item btn-custom btn-sm shadow-none"
-                                                data-product='{"name": "{{ $product->name }}", "price": "{{ $product->price }}", "image": "{{ $item->getFirstMediaUrl('product', 'thumb') }}"}'>
+                                                data-product='{"name": "{{ $product->name }}", "price": "{{ $product->price }}", "image": "{{ $product->getFirstMediaUrl('product', 'thumb') }}"}'>
                                                 اطلب <i class="fas fa-shopping-cart"></i>
                                             </a>
                                         </div>
@@ -102,6 +103,18 @@
     @endsection
     @section('js')
         <script>
+            function getCartItemCount() {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                let totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+                return totalItems;
+            }
+
+            // Function to update the cart item count display
+            function updateCartItemCount() {
+                const cartItemCountElement = document.getElementById('cart-item-count');
+                const cartItemCount = getCartItemCount();
+                cartItemCountElement.innerText = cartItemCount;
+            }
             // Function to handle adding items to the cart
             function addToCart(item) {
                 // Get existing cart items from local storage
@@ -123,6 +136,8 @@
 
                 // Save the updated cart items back to local storage
                 localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                updateCartItemCount();
+
             }
 
             // Add event listener to the "اطلب-item" button
@@ -135,5 +150,7 @@
                     alert('Item added to cart!');
                 });
             });
+
+            document.addEventListener('DOMContentLoaded', updateCartItemCount);
         </script>
     @endsection
