@@ -20,9 +20,10 @@ class ReservationController extends Controller
         $currentDate = Carbon::now()->toDateString();
 
         // Fetch all tables with their reservations for today
-        $lounges = Lounge::with(['tables', 'reservations' => function ($query) use ($currentDate) {
-            // Filter reservations for today
-            $query->whereDate('date', $currentDate);
+        $lounges = Lounge::with(['tables' => function ($q) use ($currentDate) {
+            $q->with(['reservations' => function ($query) use ($currentDate) {
+                $query->whereDate('date', $currentDate);
+            }]);
         }])->get();
         // Prepare the result array
         $avaTables = [
