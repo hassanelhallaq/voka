@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         // Define the time slots in 24-hour format
@@ -20,7 +20,7 @@ class ReservationController extends Controller
         $currentDate = Carbon::now()->toDateString();
 
         // Fetch all tables with their reservations for today
-        $lounges = Lounge::with(['tables' => function ($q) use ($currentDate) {
+        $lounges = Lounge::where('branch_id', $request->branch_id)->with(['tables' => function ($q) use ($currentDate) {
             $q->with(['reservations' => function ($query) use ($currentDate) {
                 $query->whereDate('date', $currentDate);
             }]);
