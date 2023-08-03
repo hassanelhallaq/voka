@@ -89,7 +89,7 @@
                                          <span class="text-danger">*</span>
                                      </label>
                                      <input type="number" class="form-control mb-3" id="count_of_visitors"
-                                         value="{{ old('count_of_visitors') }}" name="discount" required>
+                                         value="{{ old('count_of_visitors') }}" name="count_of_visitors" required>
 
                                      @if ($errors->has('count_of_visitors'))
                                          <p style="color: red">{{ $errors->first('count_of_visitors') }}
