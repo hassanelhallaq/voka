@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchAccountController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CasherController;
 use App\Http\Controllers\ClientCategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CouponsController;
@@ -52,6 +53,9 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::resource('coupons', CouponsController::class);
         Route::get('ajax/product/branches', [App\Http\Controllers\ProductController::class, 'ajaxProductBranches'])->name('product.ajax');
         Route::resource('packages', PackageController::class);
+        Route::resource('cashers', CasherController::class);
+
+
         Route::get('ajax/table/branches', [App\Http\Controllers\TableController::class, 'ajaxTableBranches'])->name('table.ajax');
         Route::post('ajax/package/status', [App\Http\Controllers\PackageController::class, 'ajaxPackageStatus'])->name('package.status');
         Route::get('/product', [DashboardController::class, 'product'])->name('product');
