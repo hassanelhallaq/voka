@@ -56,9 +56,13 @@ export default {
       console.log(tableId);
     },
     async fetchData() {
-      try {
-        const response = await axios.get("https://vkoa.net/api/time-slots");
-        this.avaTables.hours = response.data.hours;
+        try {
+        const branchId = authenticatedUserId;
+        const response = await axios.get("https://vkoa.net/api/time-slots", {
+                    params: {
+                        branch_id: branchId,
+                    },
+        });        this.avaTables.hours = response.data.hours;
         this.avaTables.tables = response.data.tables;
         console.log("succes");
       } catch (error) {

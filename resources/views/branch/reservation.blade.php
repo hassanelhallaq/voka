@@ -749,13 +749,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
-   
-    <script>
-    
-      
-   
 
-     
+    <script>
         function pack(id) {
 
             $.get('/branch/branch/halls/ajax', {
@@ -764,8 +759,8 @@
                 $('#all-tables').html(data); // Show the new content
             });
         }
-        
-         // استهداف العنصر .table-pick وتعيين الحدث النقر عليه
+
+        // استهداف العنصر .table-pick وتعيين الحدث النقر عليه
         document.querySelectorAll('.table-pick').forEach(function(element) {
             element.addEventListener('click', function() {
                 // إزالة الفئة active-card من جميع عناصر .card داخل .new-reservation-tables
@@ -773,19 +768,19 @@
                 cardElements.forEach(function(card) {
                     card.classList.remove('active-card');
                 });
-                
+
                 // إضافة الفئة active-card إلى العنصر الذي تم النقر عليه
                 this.classList.add('active-card');
-                
+
                 // الحصول على نص عنوان البطاقة
                 var cardTitle = this.querySelector('.card-title').textContent;
-                
+
                 // تحديث نص العنصر .table-name بالعنوان الجديد
                 var tableNames = document.querySelectorAll('.table-name');
                 tableNames.forEach(function(tableName) {
                     tableName.textContent = cardTitle;
                 });
-                
+
                 // الحصول على القيمة المخزنة في الخاصية data-choosen وتعيينها في الخاصية data-choos للعنصر .table-name
                 var itemId = this.getAttribute('data-choosen');
                 tableNames.forEach(function(tableName) {
@@ -793,8 +788,8 @@
                 });
             });
         });
-        
-        
+
+
         function clients() {
             var phone = $("#search").val();
 
@@ -860,11 +855,14 @@
             event.preventDefault();
             handleFormSubmission();
         });
-
     </script>
     <script>
         var dt = new Date().toLocaleTimeString();
         document.getElementById('date-time').value = dt;
+    </script>
+    <script>
+        // Set the authenticated user's ID as a global variable accessible in JavaScript
+        var authenticatedUserId = {{ auth()->user()->id }};
     </script>
 </body>
 
