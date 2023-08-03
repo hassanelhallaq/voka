@@ -13,7 +13,7 @@ class ReservationController extends Controller
 {
     public function index(Request $request)
     {
-      
+
         // Define the time slots in 24-hour format
         $timeSlots = ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "00:00"];
 
@@ -21,7 +21,7 @@ class ReservationController extends Controller
         $currentDate = Carbon::now()->toDateString();
 
         // Fetch all tables with their reservations for today
-        $lounges = Lounge::where('branch_id', Auth::user()->id)->with(['tables' => function ($q) use ($currentDate) {
+        $lounges = Lounge::with(['tables' => function ($q) use ($currentDate) {
             $q->with(['reservations' => function ($query) use ($currentDate) {
                 $query->whereDate('date', $currentDate);
             }]);
