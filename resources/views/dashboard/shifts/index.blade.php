@@ -80,7 +80,7 @@
                                             <td>
                                                 <button onclick="performDestroy({{ $item->id }} , this)"
                                                     class="btn btn-icon btn-danger">
-                                                    <i class="flaticon2-delete"></i>
+                                                    <i class="fa fa-trash"></i></a>
                                                 </button>
                                             </td>
                                         </tr>
