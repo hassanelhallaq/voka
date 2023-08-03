@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lounge;
 use Illuminate\Http\Request;
 use App\Models\Table;
 use Carbon\Carbon;
@@ -19,7 +20,7 @@ class ReservationController extends Controller
         $currentDate = Carbon::now()->toDateString();
 
         // Fetch all tables with their reservations for today
-        $tables = Table::with(['reservations' => function ($query) use ($currentDate) {
+        $lounges = Lounge::with(['tables', 'reservations' => function ($query) use ($currentDate) {
             // Filter reservations for today
             $query->whereDate('date', $currentDate);
         }])->get();
@@ -30,31 +31,46 @@ class ReservationController extends Controller
         ];
 
         // Iterate through each table and build the availability array
-        foreach ($tables as $table) {
-            $availability = [];
+        foreach ($timeSlots as $slot) {
+            $avaTables['hours'][] = date('h:i A', strtotime($slot));
+        }
 
-            // Fill the availability array with true (1) for available slots and false (0) for booked slots
-            foreach ($timeSlots as $slot) {
-                $isAvailable = true;
+        // Loop through each lounge
+        foreach ($lounges as $lounge) {
+            $tablesData = [];
 
-                // Check if the table is booked for the current time slot
-                foreach ($table->reservations as $reservation) {
-                    $reservationStart = date('H:i', strtotime($reservation->date));
-                    $reservationEnd = date('H:i', strtotime($reservation->end));
-                    if ($reservationStart <= $slot && $reservationEnd > $slot) {
-                        $isAvailable = false;
-                        break;
+            // Loop through each table in the lounge
+            foreach ($lounge->tables as $table) {
+                $availability = [];
+
+                // Fill the availability array with true (1) for available slots and false (0) for booked slots
+                foreach ($timeSlots as $slot) {
+                    $isAvailable = true;
+
+                    // Check if the table is booked for the current time slot
+                    foreach ($table->reservations as $reservation) {
+                        $reservationStart = date('H:i', strtotime($reservation->date));
+                        $reservationEnd = date('H:i', strtotime($reservation->end));
+                        if ($reservationStart <= $slot && $reservationEnd > $slot) {
+                            $isAvailable = false;
+                            break;
+                        }
                     }
+                    $availability[] = $isAvailable;
                 }
 
-                $availability[] = $isAvailable ? 1 : 0;
+                // Add the table information to the tablesData array
+                $tablesData[] = [
+                    'id' => $table->id,
+                    'name' => $table->name,
+                    'availability' => $availability,
+                ];
             }
 
-            // Add the table information to the result array
-            $avaTables['tables'][] = [
-                'id' => $table->id,
-                'name' => $table->name,
-                'availability' => $availability,
+            // Add the lounge information with tablesData to the result array
+            $avaTables['salons'][] = [
+                'name' => $lounge->name,
+                'tables' => $tablesData,
             ];
         }
 
