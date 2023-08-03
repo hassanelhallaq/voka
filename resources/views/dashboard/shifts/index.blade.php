@@ -77,7 +77,12 @@
                                             <td>
                                                 {{ $item->end_time }}
                                             </td>
-
+                                            <td>
+                                                <button onclick="performDestroy({{ $item->id }} , this)"
+                                                    class="btn btn-icon btn-danger">
+                                                    <i class="flaticon2-delete"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -95,3 +100,13 @@
                 </div>
             </div>
         </x-default-layout>
+        <script src="{{ asset('crudjs/crud.js') }}"></script>
+        <script>
+            function performDestroy(id, reference) {
+
+                let url = '/admin/shifts/' + id;
+
+                confirmDestroy(url, reference);
+
+            }
+        </script>

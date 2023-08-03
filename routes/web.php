@@ -86,6 +86,10 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::post('/order-product/store', [App\Http\Controllers\OrderProductController::class, 'store'])->name('order-product.store');
     Route::get('/calender/ajax', [App\Http\Controllers\PosController::class, 'ajaxCalender'])->name('ajaxCalender');
 
+    Route::get('/cal', [App\Http\Controllers\PosController::class, 'cal'])->name('cal');
+    Route::get('/calendar', function () {
+        return view('branch.calender');
+    });
     Route::get('/path/to/branch.reservSide', [App\Http\Controllers\PosController::class, 'sideReser'])->name('sideReser.ajax');
 });
 Route::prefix('menu/{table_id}/{branch_id}')->group(function () {

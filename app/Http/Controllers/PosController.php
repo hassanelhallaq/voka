@@ -188,4 +188,27 @@ class PosController extends Controller
         }])->find($id);
         return  $render = view('branch.products_orders', compact('products', 'table'));
     }
+    public function cal()
+    {
+
+        $reservations = Reservation::all();
+
+        // Format the events data for the frontend calendar.
+        $events = [];
+        foreach ($reservations as $reservation) {
+            $events[] = [
+                'title' => 'table' . ' ' . $reservation->table->name, // You can customize the title as needed.
+                'start' => $reservation->date,
+                'end' => $reservation->end,
+                // Add any other event properties needed by the frontend calendar.
+            ];
+        }
+
+        // Return the events as JSON.
+        return response()->json($events);
+
+        // Pass the table availability data to the view
+        // return $tableAvailability;
+        return response()->view('branch.calender');
+    }
 }

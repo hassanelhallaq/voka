@@ -32,4 +32,11 @@ class ShiftController extends Controller
         // Redirect to a route or URL after storing the shift
         return redirect()->route('shifts.index')->with('success', 'Shift created successfully');
     }
+
+    public function destroy($id)
+    {
+        $record = Shift::find($id);
+        $record->forceDelete();
+        return response()->json(['icon' => 'success', 'title' => 'تم الحذف  بنجاح'], 200);
+    }
 }
