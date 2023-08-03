@@ -15,11 +15,11 @@ class MenuController extends Controller
     {
         $branch = Branch::find($branch_id);
         $table = Table::find($id);
-        $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
+        // $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
         // if (!$reservation) {
         //     return view('errors.400');
         // }
-        // $reservation = Reservation::where([['id', 25]])->first();
+        $reservation = Reservation::where([['id', 25]])->first();
 
         $categories = ProductCategory::where('category_status', 1)
             ->with([
@@ -45,11 +45,11 @@ class MenuController extends Controller
 
     public function cart($id, $branch_id)
     {
-        $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
+        // $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
         // if (!$reservation) {
         //     return view('errors.400');
         // }
-        // $reservation = Reservation::where([['id', 25]])->first();
+        $reservation = Reservation::where([['id', 25]])->first();
         $branch = Branch::find($branch_id);
         $table = Table::find($id);
         return view('menu.cart', compact(
@@ -61,11 +61,11 @@ class MenuController extends Controller
 
     public function product($id, $branch_id, $product_id)
     {
-        $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
+        // $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
         // if (!$reservation) {
         //     return view('errors.400');
         // }
-        // $reservation = Reservation::where([['id', 25]])->first();
+        $reservation = Reservation::where([['id', 25]])->first();
         $branch = Branch::find($branch_id);
         $table = Table::find($id);
         $product = Product::find($product_id);
