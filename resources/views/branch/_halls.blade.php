@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body ">
+            <div class="card-body new">
                 <div class="tab-content text-center">
                     @foreach ($halles as $e => $item)
                         <div class="tab-pane {{ $e === 0 ? ' active' : '' }}" id="hall{{ $item->id }}">

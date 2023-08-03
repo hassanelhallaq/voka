@@ -1143,3 +1143,12 @@ table .active-day {
       transform: scale(0.6);
     }
   }
+  .hall-branch {
+      display: none;
+  }
+  #app,  .table-calender,  #app .table {
+      height: 100vh !important;
+  }
+  .table-calender,  #app .table { 
+      display: block;
+  }

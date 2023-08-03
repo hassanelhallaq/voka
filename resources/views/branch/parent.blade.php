@@ -10,12 +10,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('fron/slick/slick.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('fron/slick/slick-theme.css') }}" />
-    <!--<link rel="stylesheet" href="{{ asset('front/css/chunk-vendors.71fc5a8a.css') }}">-->
-    <!--<link rel="stylesheet" href="{{ asset('front/css/app.905d402c.css') }}">-->
+    <link rel="stylesheet" href="{{ asset('front/css/chunk-vendors.71fc5a8a.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/app.905d402c.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
 
 
     <script src="{{ asset('front/js/jquery.js') }}"></script>
@@ -105,8 +105,8 @@
     <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
 
     <script src="{{ asset('front/js/main.js') }}"></script>
-    <!--<script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>-->
-    <!--<script src="{{ asset('front/js/app.324c30d7.js') }}"></script>-->
+    <script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>
+    <script src="{{ asset('front/js/app.324c30d7.js') }}"></script>
 </body>
 
 </html>

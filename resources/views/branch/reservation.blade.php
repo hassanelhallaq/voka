@@ -15,6 +15,8 @@
         integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap-clockpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/chunk-vendors.71fc5a8a.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/app.905d402c.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
         tbody td:hover,
@@ -306,8 +308,8 @@
                             </div>
                         </div>
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
-                            <div id="app"></div>
-                            <!--@include('branch._halles_branch')-->
+                            <!--<div id="app"></div>-->
+                            @include('branch._halles_branch')
                         </div>
                         <div class="reservation-tabs" id="allguests">
                             <div class="container">
@@ -747,6 +749,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
+        <script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>
+    <script src="{{ asset('front/js/app.324c30d7.js') }}"></script>
     <script>
     
       

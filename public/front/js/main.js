@@ -68,7 +68,12 @@ $(document).ready(function () {
         $('#mainPage').removeClass('col-md-11').addClass('col-md-8');
     });
 
-    
+    $('.reservations-wrap .status').on('click', function(){
+        var inval = this.find('input').val();
+        console.log('before');
+        $('.table-name').text('herr');
+        console.log('here');
+    });
     
     // كود صفحة الحجوزات
     var currentDate = new Date();
