@@ -310,13 +310,17 @@
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
  
                             <!--<div id="app"></div>-->
-                            @include('branch._halles_branch')
+                          //  @include('branch._halles_branch')
  
-                            <div id="app"></div>
+                         //   <div id="app"></div>
                             <div id="app">
                                 <slot></slot>
                             </div>
-                            <script src="{{ mix('js/app.js') }}"></script>
+ 
+  
+ 
+                            <script src="{{ asset('js/app.js') }}"></script>
+
  
                         </div>
                         <div class="reservation-tabs" id="allguests">
@@ -757,7 +761,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
-        <script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>
+    <script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>
     <script src="{{ asset('front/js/app.324c30d7.js') }}"></script>
     <script>
         function pack(id) {
