@@ -39,13 +39,15 @@ class PackageController extends Controller
         $dayOfWeeks = $request->input('day_of_week');
         $startTimes = $request->input('start_time');
         $endTimes = $request->input('end_time');
-        foreach ($dayOfWeeks as $key => $dayOfWeek) {
-            $schedule = new PackageSchedule();
-            $schedule->day_of_week = $dayOfWeek;
-            $schedule->start_time = $startTimes[$key];
-            $schedule->end_time = $endTimes[$key];
-            $schedule->package_id = $package->id;
-            $schedule->save();
+        if ($dayOfWeeks) {
+            foreach ($dayOfWeeks as $key => $dayOfWeek) {
+                $schedule = new PackageSchedule();
+                $schedule->day_of_week = $dayOfWeek;
+                $schedule->start_time = $startTimes[$key];
+                $schedule->end_time = $endTimes[$key];
+                $schedule->package_id = $package->id;
+                $schedule->save();
+            }
         }
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
@@ -93,15 +95,16 @@ class PackageController extends Controller
         $dayOfWeeks = $request->input('day_of_week');
         $startTimes = $request->input('start_time');
         $endTimes = $request->input('end_time');
-        foreach ($dayOfWeeks as $key => $dayOfWeek) {
-            $schedule = new PackageSchedule();
-            $schedule->day_of_week = $dayOfWeek;
-            $schedule->start_time = $startTimes[$key];
-            $schedule->end_time = $endTimes[$key];
-            $schedule->package_id = $package->id;
-            $schedule->save();
+        if ($dayOfWeeks) {
+            foreach ($dayOfWeeks as $key => $dayOfWeek) {
+                $schedule = new PackageSchedule();
+                $schedule->day_of_week = $dayOfWeek;
+                $schedule->start_time = $startTimes[$key];
+                $schedule->end_time = $endTimes[$key];
+                $schedule->package_id = $package->id;
+                $schedule->save();
+            }
         }
-
         if ($request->hasFile('avatar')) {
             $file = $request->avatar;
             $imageName = time() . '_' . $package->id . '.' . $file->getClientOriginalExtension();
