@@ -14,7 +14,6 @@ class ReservationController extends Controller
     public function index(Request $request)
     {
 
-        // Define the time slots in 24-hour format
         $timeSlots = ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "00:00"];
 
         // Fetch all tables with their reservations
@@ -26,16 +25,12 @@ class ReservationController extends Controller
                 $query->whereDate('date', $currentDate);
             }]);
         }])->get();
+
         // Prepare the result array
         $avaTables = [
-            'hours' => $timeSlots,
+            'hours' => $timeSlots, // Only the original time slots are included here
             'tables' => [],
         ];
-
-        // Iterate through each table and build the availability array
-        foreach ($timeSlots as $slot) {
-            $avaTables['hours'][] = date('h:i A', strtotime($slot));
-        }
 
         // Loop through each lounge
         foreach ($lounges as $lounge) {
@@ -75,6 +70,7 @@ class ReservationController extends Controller
                 'tables' => $tablesData,
             ];
         }
+
 
         // Convert the array to JSON
         return $avaTables;
