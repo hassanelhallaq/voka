@@ -58,11 +58,12 @@ export default {
     async fetchData() {
         try {
         const branchId = authenticatedUserId;
-        const response = await axios.get("https://vkoa.net/time-slots", {
+        const response = await axios.get("https://vkoa.net/api/time-slots", {
                     params: {
-                        branch_id: branchId,
+                        branch_id: ['user'],
                     },
-        });        this.avaTables.hours = response.data.hours;
+        });
+            this.avaTables.hours = response.data.hours;
         this.avaTables.tables = response.data.tables;
         console.log("succes");
       } catch (error) {
