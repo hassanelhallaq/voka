@@ -15,8 +15,6 @@
         integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap-clockpicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/chunk-vendors.71fc5a8a.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/app.905d402c.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
         tbody td:hover,
@@ -308,10 +306,7 @@
                             </div>
                         </div>
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
-                            <div id="app"></div>
                             @include('branch._halles_branch')
-                            {{-- <slot :user="{{ Auth::user()->id }}"></slot>
-                                <script src="{{ asset('js/app.js') }}"></script> --}}
                         </div>
                         <div class="reservation-tabs" id="allguests">
                             <div class="container">
@@ -751,13 +746,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
-
     <script>
         function pack(id) {
 
             $.get('/branch/branch/halls/ajax', {
                 id: id,
             }).done(function(data) {
+                // Clear previous content
+
                 $('#all-tables').html(data); // Show the new content
             });
         }
@@ -861,10 +857,6 @@
     <script>
         var dt = new Date().toLocaleTimeString();
         document.getElementById('date-time').value = dt;
-    </script>
-    <script>
-        // Set the authenticated user's ID as a global variable accessible in JavaScript
-        var authenticatedUserId = {{ auth()->user()->id }};
     </script>
 </body>
 
