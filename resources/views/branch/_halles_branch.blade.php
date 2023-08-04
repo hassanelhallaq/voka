@@ -1,27 +1,31 @@
 <!--<div class="card-header card-header-danger">-->
-    <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
 <!--    <div class="nav-tabs-navigation">-->
 <!--        <div class="nav-tabs-wrapper">-->
 <!--            <ul class="nav nav-tabs" data-tabs="tabs">-->
-<!--                @foreach ($halles as $key => $item)-->
+<!--                @foreach ($halles as $key => $item)
+-->
 <!--                    <li class="nav-item">-->
 <!--                        <a class="nav-link {{ $key === 0 ? ' active' : '' }}" href="#hall{{ $item->id }}"-->
 <!--                            data-toggle="tab">{{ $item->name }}</a>-->
 <!--                    </li>-->
-<!--                @endforeach-->
+<!--
+@endforeach-->
 <!--            </ul>-->
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
 <!--<div class="card-body hall-branch">-->
 <!--    <div class="tab-content text-center">-->
-<!--        @foreach ($halles as $key => $item)-->
+<!--        @foreach ($halles as $key => $item)
+-->
 <!--            <div class="tab-pane {{ $key === 0 ? ' active show' : '' }}" id="hall{{ $item->id }}">-->
 <!--                <div class="row new-reservation-tables">-->
 <!--                    <h2 class="text-center text-light">{{ $item->name }}</h2>-->
 <!--                    <div class="col-12">-->
 <!--                        <div class="row">-->
-<!--                            @foreach ($item->tables as $table)-->
+<!--                            @foreach ($item->tables as $table)
+-->
 <!--                                <div class="col-md-3 card-col table-pick  d-flex justify-content-center align-items-center ">-->
 <!--                                    <div class="change-content  card catch-id  bg-success active-card"-->
 <!--                                        data-id="#allguests" data-choosen="{{ $table->id }}">-->
@@ -31,13 +35,19 @@
 <!--                                                <h5 class="card-title"> طاولة رقم-->
 <!--                                                    {{ $table->name }}</h5>-->
 <!--                                                <span class="no-revers">-->
-<!--                                                    @if ($table->status == 'in_service')-->
+<!--                                                    @if ($table->status == 'in_service')
+-->
 <!--                                                        فى الخدمة-->
-<!--                                                    @elseif($table->status == 'available')-->
+<!--
+@elseif($table->status == 'available')
+-->
 <!--                                                        متاحة-->
-<!--                                                    @elseif ($table->status == 'reserved')-->
+<!--
+@elseif ($table->status == 'reserved')
+-->
 <!--                                                        محجوزة-->
-<!--                                                    @endif-->
+<!--
+@endif-->
 <!--                                                </span>-->
 <!--                                            </div>-->
 
@@ -46,13 +56,19 @@
 <!--                                            <div class="mid d-flex justify-content-between">-->
 <!--                                                <p class="hall-name">{{ $item->name }}</p>-->
 <!--                                                <span class="sta">-->
-<!--                                                    @if ($table->status == 'in_service')-->
+<!--                                                    @if ($table->status == 'in_service')
+-->
 <!--                                                        فى الخدمة-->
-<!--                                                    @elseif($table->status == 'available')-->
+<!--
+@elseif($table->status == 'available')
+-->
 <!--                                                        متاحة-->
-<!--                                                    @elseif ($table->status == 'reserved')-->
+<!--
+@elseif ($table->status == 'reserved')
+-->
 <!--                                                        محجوزة-->
-<!--                                                    @endif-->
+<!--
+@endif-->
 <!--                                                </span>-->
 <!--                                            </div>-->
 <!--                                            <div class="body-package d-flex justify-content-between">-->
@@ -70,14 +86,16 @@
 <!--                                        </div>-->
 <!--                                    </div>-->
 <!--                                </div>-->
-<!--                            @endforeach-->
+<!--
+@endforeach-->
 <!--                        </div>-->
 
 
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
-<!--        @endforeach-->
+<!--
+@endforeach-->
 <!--    </div>-->
 <!--</div>-->
 <div id="app"></div>
@@ -99,6 +117,8 @@
 </script>
 <script src="{{ asset('front/js/date.js') }}"></script>
 <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
-     <script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>
-    <script src="{{ asset('front/js/app.324c30d7.js') }}"></script>
+<script src="{{ asset('front/js/chunk-vendors.7f43082a.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
+<script defer="defer" src="{{ asset('front/js/app.74ddef6e.js') }}"></script>
+<link href="{{ asset('front/css/chunk-vendors.71fc5a8a.css') }}" rel="stylesheet" />
+<link href="{{ asset('front/css/app.288ff1bf.css') }}" rel="stylesheet" />

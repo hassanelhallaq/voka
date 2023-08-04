@@ -308,11 +308,10 @@
                             </div>
                         </div>
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
-                            <div id="app">
-                                {{-- @include('branch._halles_branch') --}}
-                                <slot :user="{{ Auth::user()->id }}"></slot>
-                                <script src="{{ asset('js/app.js') }}"></script>
-                            </div>
+                            <div id="app"></div>
+                            @include('branch._halles_branch')
+                            {{-- <slot :user="{{ Auth::user()->id }}"></slot>
+                                <script src="{{ asset('js/app.js') }}"></script> --}}
                         </div>
                         <div class="reservation-tabs" id="allguests">
                             <div class="container">
