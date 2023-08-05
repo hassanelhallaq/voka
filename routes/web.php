@@ -90,7 +90,7 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::post('/order-product/store', [App\Http\Controllers\OrderProductController::class, 'store'])->name('order-product.store');
     Route::get('/table/slots/ajax', [App\Http\Controllers\PosController::class, 'tableSlots'])->name('tableSlots');
 
-    Route::get('/cal', [App\Http\Controllers\PosController::class, 'cal'])->name('cal');
+    Route::get('/cal', [App\Http\Controllers\PosController::class, 'ajaxCalender'])->name('ajaxCalender');
     Route::get('/calendar', function () {
         return view('branch.reserv');
     })->name('calendar');

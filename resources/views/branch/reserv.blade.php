@@ -94,7 +94,7 @@
                    center: 'title',
                    right: 'month,agendaWeek,agendaDay',
                },
-               events: "{{ route('resver.ajax') }}",
+               events: "{{ route('ajaxCalender') }}",
                selectable: true,
                selectHelper: true,
                firstDay: 0,
