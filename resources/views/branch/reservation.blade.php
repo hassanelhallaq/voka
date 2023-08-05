@@ -656,7 +656,7 @@
             $.get('/branch/table/slots/ajax', {
                 // Add a comma after packageId to separate the parameters
                 table_id: id,
-                packageId : packageId,
+                packageId: packageId,
             }).done(function(data) {
                 // Clear previous content
 
@@ -746,9 +746,8 @@
             formData.append('client_id', guestId);
             formData.append('package_id', packageId);
             formData.append('table_id', tableId);
-            formData.append('date', date);
             formData.append('time', time);
-            formData.append('status', status);
+
 
             // Call the 'store' function to handle the form data submission
             store('/branch/reservations', formData);
