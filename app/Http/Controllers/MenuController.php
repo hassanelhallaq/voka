@@ -15,8 +15,7 @@ class MenuController extends Controller
     {
         $branch = Branch::find($branch_id);
         $table = Table::find($id);
-        $table->status = "in_service";
-        $table->update();
+
         // $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
         // if (!$reservation) {
         //     return view('errors.400');
@@ -24,6 +23,10 @@ class MenuController extends Controller
         $reservation = Reservation::where([['id', 25]])->first();
         $reservation->status = 'تم الحضور';
         $reservation->update();
+        if ($reservation->status == 'انتهى') {
+            $table->status = "in_service";
+            $table->update();
+        }
         $categories = ProductCategory::where('category_status', 1)
             ->with([
                 'branch' => function ($query) use ($branch_id) {
