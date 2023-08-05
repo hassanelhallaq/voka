@@ -55,8 +55,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item resver">
-                                    <a href="{{ route('calendar') }}"
-                                        class="nav-link d-flex flex-column justify-content-center align-items-center">
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                        onclick="resver()">
                                         <i class="fa-solid fa-utensils"></i>
                                         <span>الحجوزات</span>
                                     </a>
