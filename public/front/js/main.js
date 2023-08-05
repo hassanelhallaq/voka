@@ -4,7 +4,6 @@ $(document).ready(function () {
     
       //  getting package id
     $('.choos-btn').on('click', function(){
-        console.log('before');
       var parentElement = $(this).parent(); // الوصول إلى العنصر الأب لزر الإضافة
       var forDataV = parentElement.find('.card-title');
       var cardTitle = parentElement.find('.card-title').text();
@@ -13,9 +12,13 @@ $(document).ready(function () {
       $('.payment-price').text(packagePrice + ' ريال ');
         var itemId = $(this).closest('.card').data('choosen');
       $('.package-name').attr('data-choos', itemId);
-      console.log('after');
 
        });
+       $('.btn-clock').on('click', function(){
+           var theClock = $(this).text();
+           $('.reserv-time').text(theClock);
+       });
+       
 
         $('.reservations-wrap').on('click', function(){
             console.log('hjhjhjhj');
@@ -527,23 +530,23 @@ $('.reserv-date').on('click', function(){
 
 
     // // اضافة الوقت
-    var currentDate = new Date();
-    var hours = currentDate.getHours();
-    var minutes = currentDate.getMinutes();
+    // var currentDate = new Date();
+    // var hours = currentDate.getHours();
+    // var minutes = currentDate.getMinutes();
 
-    minutes = minutes < 10 ? '0' + minutes : minutes;
+    // minutes = minutes < 10 ? '0' + minutes : minutes;
 
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // يعيد 0 إلى 12
+    // var ampm = hours >= 12 ? 'PM' : 'AM';
+    // hours = hours % 12;
+    // hours = hours ? hours : 12; // يعيد 0 إلى 12
 
-    if(hours < 10){
-        hours = '0' + hours;
-    } else {
-        hours = hours;
-    }
-    var formattedTime = hours + ':' + minutes + ' ' + ampm;
-    $('.reserv-time').text(formattedTime).attr('data-v', 1);
+    // if(hours < 10){
+    //     hours = '0' + hours;
+    // } else {
+    //     hours = hours;
+    // }
+    // var formattedTime = hours + ':' + minutes + ' ' + ampm;
+    // $('.reserv-time').text(formattedTime).attr('data-v', 1);
 
 
 

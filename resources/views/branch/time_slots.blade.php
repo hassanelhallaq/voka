@@ -12,10 +12,10 @@
                     }
                 @endphp
                 @if ($slotClosed)
-                    <button class="btn btn-lg btn-danger btn-clock" disabled>{{ $slot['start'] }} -
+                    <button class="btn btn-lg btn-danger change-content btn-clock" data-id="#all-tables" disabled >{{ $slot['start'] }} -
                         {{ $slot['end'] }}</button>
                 @else
-                    <button class="btn btn-lg btn-success btn-clock">{{ $slot['start'] }} -
+                    <button class="btn btn-lg btn-success change-content btn-clock" data-id="#pay">{{ $slot['start'] }} -
                         {{ $slot['end'] }}</button>
                 @endif
             @endforeach
