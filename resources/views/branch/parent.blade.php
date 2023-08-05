@@ -55,19 +55,19 @@
                                     </a>
                                 </li>
                                 <li class="nav-item resver">
-                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
-                                        onclick="resver()">
+                                    <a href="{{ route('calendar') }}"
+                                        class="nav-link d-flex flex-column justify-content-center align-items-center">
                                         <i class="fa-solid fa-utensils"></i>
                                         <span>الحجوزات</span>
                                     </a>
                                 </li>
-                                <li class="nav-item package">
+                                {{-- <li class="nav-item package">
                                     <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                         onclick="packages()">
                                         <i class="fa-solid fa-box-open"></i>
                                         <span>الباقات</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a class="nav-link d-flex flex-column justify-content-center align-items-center"
                                         href="waitingList.html">
@@ -87,14 +87,14 @@
                     </div>
                 </div>
                 @yield('contentFront')
-                
-                 @include('branch._casher')
+
+                @include('branch._casher')
                 @include('branch.reservSide')
 
             </div>
         </div>
     </section>
-
+    @yield('js')
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

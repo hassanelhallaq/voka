@@ -92,8 +92,8 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
 
     Route::get('/cal', [App\Http\Controllers\PosController::class, 'cal'])->name('cal');
     Route::get('/calendar', function () {
-        return view('branch.calender');
-    });
+        return view('branch.reserv');
+    })->name('calendar');
     Route::get('/path/to/branch.reservSide', [App\Http\Controllers\PosController::class, 'sideReser'])->name('sideReser.ajax');
 });
 Route::prefix('menu/{table_id}/{branch_id}')->group(function () {
