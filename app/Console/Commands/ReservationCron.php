@@ -39,16 +39,11 @@ class ReservationCron extends Command
         // Update the status of the expired reservations
         foreach ($expiredReservations as $reservation) {
             $package = Package::find($reservation->package_id);
-            $packageTimeInMinutes = $package->time; // Assuming the 'time' in the package is stored in minutes
-            $formattedTime = Carbon::createFromFormat('g:i A', $reservation->time)->format('H:i');
-            // Create a formatted datetime string for the reservation
             $reservationDateTime = $reservation->date;
-            // Calculate the new end time by adding the package time to the reservation time
             $reservationEndTime = Carbon::createFromFormat('Y-m-d H:i:s', $reservationDateTime)
                 ->addMinutes($reservation->minutes);
-            log::info($currentDateTime . '_' . $reservationEndTime);
             // Check if the new end time has passed
-            if ($currentDateTime >= $reservationEndTime) {
+            if ($currentDateTime <= $reservationEndTime) {
                 log::info($currentDateTime . '_' . $reservationEndTime . 't');
                 // If the end time has passed, update the reservation status to 'انتهى' (or 'ended')
                 $reservation->status = 'انتهى';
