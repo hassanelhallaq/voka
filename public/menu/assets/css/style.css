@@ -1916,7 +1916,7 @@ table img{
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 .footer-middle a,
 .footer-middle i{
@@ -1997,7 +1997,7 @@ table img{
   color: #fff;
 }
 .footer-widget {
-  padding-bottom: 60px;
+  padding-bottom: 20px;
 }
 .footer-buttons a{
   display: inline-block;
@@ -4796,11 +4796,11 @@ body{
   .product-desc h4 a{
     font-size: 18px;
   }
-  .social-media{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  /*.social-media{*/
+  /*  flex-direction: column;*/
+  /*  justify-content: center;*/
+  /*  align-items: center;*/
+  /*}*/
   .social-media li{
     margin-bottom:10px !important;
   }
@@ -4884,7 +4884,7 @@ body{
     padding: 60px 0;
   }
   .ct-footer{
-    padding: 60px 0 0 0;
+    padding: 20px 0 0 0;
   }
 
   .section.section-padding{

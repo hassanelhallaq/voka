@@ -14,12 +14,25 @@
         href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
         integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap-clockpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
         tbody td:hover,
         .selected {
             color: #e5772a;
+        }
+        .halls-tab{
+            background-color: transparent;
+            box-shadow: none;
+        }
+        .btn-clock{
+            width: 120px;
+            padding: 8px;
+            background: #707070 !important;
+            color: #fff;
+            border: none;
+            margin-bottom:10px;
         }
     </style>
 </head>
@@ -93,22 +106,22 @@
 
                                 </a>
                             </li>
-                            <li class="nav-item py-3 show-content" data-id="#date-content" data-v="0">
-                                <a class="nav-link" href="#">
-                                    <div class="d-flex w-100">
-                                        <div class="icon text-right">
-                                            <i class="fa-solid fa-calendar-days"></i> التاريخ
-                                        </div>
-                                        <div class="guests reserv-date text-center">
+                            <!--<li class="nav-item py-3 show-content" data-id="#date-content" data-v="0">-->
+                            <!--    <a class="nav-link" href="#">-->
+                            <!--        <div class="d-flex w-100">-->
+                            <!--            <div class="icon text-right">-->
+                            <!--                <i class="fa-solid fa-calendar-days"></i> التاريخ-->
+                            <!--            </div>-->
+                            <!--            <div class="guests reserv-date text-center">-->
 
-                                        </div>
-                                        <div class="chevro text-left">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                    </div>
+                            <!--            </div>-->
+                            <!--            <div class="chevro text-left">-->
+                            <!--                <i class="fas fa-chevron-left"></i>-->
+                            <!--            </div>-->
+                            <!--        </div>-->
 
-                                </a>
-                            </li>
+                            <!--    </a>-->
+                            <!--</li>-->
                             <li class="nav-item py-3 show-content" data-id="#alltime" data-v="0">
                                 <a class="nav-link" href="#">
                                     <div class="d-flex w-100 align-items-center">
@@ -147,38 +160,39 @@
 
                       </a>
                     </li> -->
-                            <li class="nav-item py-3 show-content" data-id="#status" data-v="0">
-                                <a class="nav-link" href="#">
-                                    <div class="d-flex w-100 ">
-                                        <div class="icon text-right">
-                                            <i class="fa-solid fa-calendar-check"></i> الحالة
-                                        </div>
-                                        <div class="guests nav-statues text-center">
-                                            مؤكد
-                                        </div>
-                                        <div class="chevro text-left">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                    </div>
+                            <!--<li class="nav-item py-3 show-content" data-id="#status" data-v="0">-->
+                            <!--    <a class="nav-link" href="#">-->
+                            <!--        <div class="d-flex w-100 ">-->
+                            <!--            <div class="icon text-right">-->
+                            <!--                <i class="fa-solid fa-calendar-check"></i> الحالة-->
+                            <!--            </div>-->
+                            <!--            <div class="guests nav-statues text-center">-->
+                            <!--                مؤكد-->
+                            <!--            </div>-->
+                            <!--            <div class="chevro text-left">-->
+                            <!--                <i class="fas fa-chevron-left"></i>-->
+                            <!--            </div>-->
+                            <!--        </div>-->
 
-                                </a>
-                            </li>
+                            <!--    </a>-->
+                            <!--</li>-->
 
-                            <li class="nav-item py-3 show-content no-border" data-id="#notes" data-v="0">
-                                <a class="nav-link" href="#">
-                                    <div class="d-flex w-100">
-                                        <div class="icon text-right">
-                                            <i class="fa-solid fa-book-open-reader"></i> ملحوظة
-                                        </div>
-                                        <div class="guests text-center booking-note" data-v="0">
-                                            الملحوظات
-                                        </div>
-                                        <div class="chevro text-left">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+
+                            <!--<li class="nav-item py-3 show-content no-border" data-id="#notes" data-v="0">-->
+                            <!--    <a class="nav-link" href="#">-->
+                            <!--        <div class="d-flex w-100">-->
+                            <!--            <div class="icon text-right">-->
+                            <!--                <i class="fa-solid fa-book-open-reader"></i> ملحوظة-->
+                            <!--            </div>-->
+                            <!--            <div class="guests text-center booking-note" data-v="0">-->
+                            <!--                الملحوظات-->
+                            <!--            </div>-->
+                            <!--            <div class="chevro text-left">-->
+                            <!--                <i class="fas fa-chevron-left"></i>-->
+                            <!--            </div>-->
+                            <!--        </div>-->
+                            <!--    </a>-->
+                            <!--</li>-->
                             <li class="nav-item py-3 show-content no-border" data-id="#pay" data-v="0">
                                 <div class="btn to-pay btn-lg w-100">الدفع </div>
                             </li>
@@ -308,6 +322,7 @@
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
                             @include('branch._halles_branch')
                         </div>
+                  
                         <div class="reservation-tabs" id="allguests">
                             <div class="container">
                                 <div class="row">
@@ -392,251 +407,316 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ftco-section reservation-tabs" id="date-content">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6 text-center mb-5">
-                                        <h2 class="heading-section">Calendar #02</h2>
-                                    </div>
-                                    <div class="elegant-calencar d-md-flex mb-5">
-                                        <div class="wrap-header d-flex align-items-center">
-                                            <p id="reset">reset</p>
-                                            <div id="header" class="p-0">
-                                                <div
-                                                    class="pre-button d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-chevron-left"></i>
-                                                </div>
-                                                <div class="head-info">
-                                                    <div class="head-day"></div>
-                                                    <div class="head-month"></div>
-                                                </div>
-                                                <div
-                                                    class="next-button d-flex align-items-center justify-content-center">
-                                                    <i class="fa fa-chevron-right"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="calendar-wrap">
-                                            <table id="calendar">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sun</th>
-                                                        <th>Mon</th>
-                                                        <th>Tue</th>
-                                                        <th>Wed</th>
-                                                        <th>Thu</th>
-                                                        <th>Fri</th>
-                                                        <th>Sat</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td data-id="#alltime" class=""></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                        <!--<div class="ftco-section reservation-tabs" id="date-content">-->
+                        <!--    <div class="container">-->
+                        <!--        <div class="row justify-content-center">-->
+                        <!--            <div class="col-md-6 text-center mb-5">-->
+                        <!--                <h2 class="heading-section">Calendar #02</h2>-->
+                        <!--            </div>-->
+                        <!--            <div class="elegant-calencar d-md-flex mb-5">-->
+                        <!--                <div class="wrap-header d-flex align-items-center">-->
+                        <!--                    <p id="reset">reset</p>-->
+                        <!--                    <div id="header" class="p-0">-->
+                        <!--                        <div-->
+                        <!--                            class="pre-button d-flex align-items-center justify-content-center">-->
+                        <!--                            <i class="fa fa-chevron-left"></i>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="head-info">-->
+                        <!--                            <div class="head-day"></div>-->
+                        <!--                            <div class="head-month"></div>-->
+                        <!--                        </div>-->
+                        <!--                        <div-->
+                        <!--                            class="next-button d-flex align-items-center justify-content-center">-->
+                        <!--                            <i class="fa fa-chevron-right"></i>-->
+                        <!--                        </div>-->
+                        <!--                    </div>-->
+                        <!--                </div>-->
+                        <!--                <div class="calendar-wrap">-->
+                        <!--                    <table id="calendar">-->
+                        <!--                        <thead>-->
+                        <!--                            <tr>-->
+                        <!--                                <th>Sun</th>-->
+                        <!--                                <th>Mon</th>-->
+                        <!--                                <th>Tue</th>-->
+                        <!--                                <th>Wed</th>-->
+                        <!--                                <th>Thu</th>-->
+                        <!--                                <th>Fri</th>-->
+                        <!--                                <th>Sat</th>-->
+                        <!--                            </tr>-->
+                        <!--                        </thead>-->
+                        <!--                        <tbody>-->
+                        <!--                            <tr>-->
+                        <!--                                <td data-id="#alltime" class=""></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                            </tr>-->
+                        <!--                            <tr>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                            </tr>-->
+                        <!--                            <tr>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                            </tr>-->
+                        <!--                            <tr>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                            </tr>-->
+                        <!--                            <tr>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                            </tr>-->
+                        <!--                            <tr>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                                <td></td>-->
+                        <!--                            </tr>-->
+                        <!--                        </tbody>-->
+                        <!--                    </table>-->
+                        <!--                </div>-->
+                        <!--            </div>-->
+                        <!--        </div>-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-md-12">-->
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="change-content btn btn-primary" data-id="#allguests">السابق</div>
-                                    </div>
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
-                                        <button class="change-content btn btn-primary"
-                                            data-id="#alltime">التالى</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--            </div>-->
+                        <!--        </div>-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-md-2">-->
+                        <!--                <div class="change-content btn btn-primary" data-id="#allguests">السابق</div>-->
+                        <!--            </div>-->
+                        <!--            <div class="col-md-8"></div>-->
+                        <!--            <div class="col-md-2">-->
+                        <!--                <button class="change-content btn btn-primary"-->
+                        <!--                    data-id="#alltime">التالى</button>-->
+                        <!--            </div>-->
+                        <!--        </div>-->
+                        <!--    </div>-->
+                        <!--</div>-->
                         <div class="reservation-tabs alltime" id="alltime">
                             <!-- Input group, just add class 'clockpicker', and optional data-* -->
-                            <div class="row justify-content-center h-100">
-                                <div class="col-12 col-md-4"></div>
-                                <div class="col-12 col-md-4 text-center d-flex align-items-center">
+                            <!--<div class="row justify-content-center h-100">-->
+                            <!--    <div class="col-12 col-md-4"></div>-->
+                            <!--    <div class="col-12 col-md-4 text-center d-flex align-items-center">-->
                                     <!-- Input group, just add class 'clockpicker', and optional data-* -->
-                                    <div class="input-group clockpicker" data-placement="right" data-align="top"
-                                        data-autoclose="true">
-                                        <input id="date-time" type="text" class="form-control clock"
-                                            value="09:32">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-time"></span>
-                                        </span>
+                            <!--        <div class="input-group clockpicker" data-placement="right" data-align="top"-->
+                            <!--            data-autoclose="true">-->
+                            <!--            <input id="date-time" type="text" class="form-control clock"-->
+                            <!--                value="09:32">-->
+                            <!--            <span class="input-group-addon">-->
+                            <!--                <span class="glyphicon glyphicon-time"></span>-->
+                            <!--            </span>-->
+                            <!--        </div>-->
+                            <!--    </div>-->
+                            <!--    <div class="col-12 col-md-4"></div>-->
+
+
+                            <!--</div>-->
+                            <div class="container">
+                                <div class="row" style="margin-bottom:50px; margin-top:50px">
+                                <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock" disabled >2:30 PM</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4"></div>
-
-
+                                <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock" disabled >12:30 PM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock" >1:00 PM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock" disabled >10:45 AM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock" >4:05 AM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock" disabled>1:45 PM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock">3:45 AM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock" >4:05 AM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock">1:45 PM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock">3:45 AM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock"disabled >4:05 AM</button>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-2 col-md-4 col-6">
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-clock">1:45 PM</button>
+                                    </div>
+                                </div>
+                            
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
-                                    <div class="change-content btn btn-primary" data-id="#date-content">السابق</div>
+                                    <div class="change-content btn btn-primary" data-id="#allguests">السابق</div>
                                 </div>
                                 <div class="col-md-8"></div>
                                 <div class="col-md-2">
-                                    <button class="change-content btn btn-primary" data-id="#status">التالى</button>
+                                    <button class="change-content btn btn-primary" data-id="#pay">تقدم للدفع</button>
                                 </div>
                             </div>
+                            </div>
                         </div>
-                        <div class="reservation-tabs allstatus" id="status">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-2"></div>
-                                    <div class="col-8 d-flex justify-content-center">
-                                        <form class="text-center" action="">
-                                            <div class="row">
-                                                <input data-id="#notes" type="checkbox"
-                                                    class="btn-check change-content" id="confirmed" checked
-                                                    autocomplete="off">
-                                                <label class="btn btn-secondary" for="confirmed">مؤكد</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="finished" autocomplete="off">
-                                                <label class="btn btn-secondary" for="finished">منتهى</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="canceld" autocomplete="off">
-                                                <label class="btn btn-secondary" for="canceld">ملغى</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="not-confirm" autocomplete="off">
-                                                <label class="btn btn-secondary" for="not-confirm">لم يتم
-                                                    التأكيد</label>
-                                            </div>
-                                            <div class="row">
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="no-answer" autocomplete="off">
-                                                <label class="btn btn-secondary" for="no-answer">لم يتم
-                                                    الإجابة</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="late" autocomplete="off">
-                                                <label class="btn btn-secondary" for="late">متأخر</label>
-                                                <input data-id="#notes" type="radio"
-                                                    class="btn-check change-content" name="options-outlined"
-                                                    id="arrived" autocomplete="off">
-                                                <label class="btn btn-secondary" for="arrived">تم الوصول</label>
-                                            </div>
+                        <!--<div class="reservation-tabs allstatus" id="status">-->
+                        <!--    <div class="container">-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-2"></div>-->
+                        <!--            <div class="col-8 d-flex justify-content-center">-->
+                        <!--                <form class="text-center" action="">-->
+                        <!--                    <div class="row">-->
+                        <!--                        <input data-id="#notes" type="checkbox"-->
+                        <!--                            class="btn-check change-content" id="confirmed" checked-->
+                        <!--                            autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="confirmed">مؤكد</label>-->
+                        <!--                        <input data-id="#notes" type="radio"-->
+                        <!--                            class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="finished" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="finished">منتهى</label>-->
+                        <!--                        <input data-id="#notes" type="radio"-->
+                        <!--                            class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="canceld" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="canceld">ملغى</label>-->
+                        <!--                        <input data-id="#notes" type="radio"-->
+                        <!--                            class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="not-confirm" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="not-confirm">لم يتم-->
+                        <!--                            التأكيد</label>-->
+                        <!--                    </div>-->
+                        <!--                    <div class="row">-->
+                        <!--                        <input data-id="#notes" type="radio"-->
+                        <!--                            class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="no-answer" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="no-answer">لم يتم-->
+                        <!--                            الإجابة</label>-->
+                        <!--                        <input data-id="#notes" type="radio"-->
+                        <!--                            class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="late" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="late">متأخر</label>-->
+                        <!--                        <input data-id="#notes" type="radio"-->
+                        <!--                            class="btn-check change-content" name="options-outlined"-->
+                        <!--                            id="arrived" autocomplete="off">-->
+                        <!--                        <label class="btn btn-secondary" for="arrived">تم الوصول</label>-->
+                        <!--                    </div>-->
 
 
-                                        </form>
+                        <!--                </form>-->
 
-                                    </div>
-                                    <div class="col-2"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>
-                                    </div>
-                                    <div class="col-md-8"></div>
+                        <!--            </div>-->
+                        <!--            <div class="col-2"></div>-->
+                        <!--        </div>-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-md-2">-->
+                        <!--                <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>-->
+                        <!--            </div>-->
+                        <!--            <div class="col-md-8"></div>-->
                                     <!--<div class="col-md-2">-->
                                     <!--    <button class="change-content btn btn-primary"-->
                                     <!--        data-id="#notes">التالى</button>-->
                                     <!--</div>-->
-                                </div>
-                            </div>
+                        <!--        </div>-->
+                        <!--    </div>-->
 
-                        </div>
-                        <div class="reservation-tabs notes pt-5 mt-5" id="notes">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <form class="text-right" action="">
-                                            <div class="mb-3">
-                                                <p class="">الرجاء تدوين الملاحظة بالأسفل</p>
-                                            </div>
-                                            <div class="mb-3">
-                                                <textarea class="form-control note-input" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button type="submit" class="btn btn-primary  note-save mb-3">تسجيل
-                                                    الملحوظة</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <ol class="list-group note-lists list-group-numbered reversed">
-                                            <li
-                                                class="list-group-item note-list no-notes d-flex justify-content-between align-items-start">
-                                                <div class="me-2 ms-auto">
-                                                    <div class="fw-bold"> لا يوجد اى ملاحظات</div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2  text-right">
-                                        <div class="change-content btn btn-primary" data-id="#status">السابق</div>
-                                    </div>
-                                    <div class="col-md-7"></div>
-                                    <div class="col-md-3">
-                                        <div class="save-all btn btn-lg btn-primary" data-id="#pay">
-                                            تقدم للدفع
-                                        </div>
+                        <!--</div>-->
+                        <!--<div class="reservation-tabs notes pt-5 mt-5" id="notes">-->
+                        <!--    <div class="container">-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-12 col-md-6">-->
+                        <!--                <form class="text-right" action="">-->
+                        <!--                    <div class="mb-3">-->
+                        <!--                        <p class="">الرجاء تدوين الملاحظة بالأسفل</p>-->
+                        <!--                    </div>-->
+                        <!--                    <div class="mb-3">-->
+                        <!--                        <textarea class="form-control note-input" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+                        <!--                    </div>-->
+                        <!--                    <div class="col-auto">-->
+                        <!--                        <button type="submit" class="btn btn-primary  note-save mb-3">تسجيل-->
+                        <!--                            الملحوظة</button>-->
+                        <!--                    </div>-->
+                        <!--                </form>-->
+                        <!--            </div>-->
+                        <!--            <div class="col-12 col-md-6">-->
+                        <!--                <ol class="list-group note-lists list-group-numbered reversed">-->
+                        <!--                    <li-->
+                        <!--                        class="list-group-item note-list no-notes d-flex justify-content-between align-items-start">-->
+                        <!--                        <div class="me-2 ms-auto">-->
+                        <!--                            <div class="fw-bold"> لا يوجد اى ملاحظات</div>-->
+                        <!--                        </div>-->
+                        <!--                    </li>-->
+                        <!--                </ol>-->
+                        <!--            </div>-->
+                        <!--        </div>-->
+                        <!--        <div class="row">-->
+                        <!--            <div class="col-md-2  text-right">-->
+                        <!--                <div class="change-content btn btn-primary" data-id="#status">السابق</div>-->
+                        <!--            </div>-->
+                        <!--            <div class="col-md-7"></div>-->
+                        <!--            <div class="col-md-3">-->
+                        <!--                <div class="save-all btn btn-lg btn-primary" data-id="#pay">-->
+                        <!--                    تقدم للدفع-->
+                        <!--                </div>-->
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--            </div>-->
+                        <!--        </div>-->
+                        <!--    </div>-->
+                        <!--</div>-->
                         <div class="reservation-tabs notes pt-5 mt-5" id="pay">
                             <div class="container">
                                 <div class="row">
@@ -690,37 +770,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="payment-btn my-3 text-center">
-                                                        <div class="btn btn-primary btn-lg w-100"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                                            ادفع الآن</div>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModal1" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="exampleModalLabel">تأكيد الدفع
-                                                                        </h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p class="consfirm-text">هل تريد تأكيد الدفع
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-primary"
-                                                                            onclick="storeReaervation()">تأكيد</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">لا </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
+                                                        <button class="btn btn-primary" type="button"
+                                                            data-bs-toggle="modal" data-bs-target="#modalPay">
+                                                            ادفع الآن
+                                                            </button>
+                                                       
                                                     </div>
                                                 </div>
                                             </li>
@@ -736,6 +790,33 @@
             </div>
         </div>
     </section>
+     <!-- Modal -->
+    <div class="modal fade" id="modalPay" tabindex="-1"
+        aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"
+                        id="exampleModalLabel">تأكيد الدفع
+                    </h5>
+                    <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close" style="margin-left: 0;"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="consfirm-text" style="color: #fff; text-align: center;">هل تريد تأكيد الدفع  </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary"
+                        onclick="storeReaervation()" style="margin-left: 10px;">تأكيد</button>
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">لا </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- js files  -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
@@ -743,6 +824,7 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>

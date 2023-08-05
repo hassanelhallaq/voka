@@ -1,7 +1,7 @@
     @foreach ($clients as $client)
         <div class="col-12 col-md-4">
 
-            <div class="card catch-id mb-3 change-content btn" data-id="#date-content" id="guest-input" data-choosen="{{ $client->id }}">
+            <div class="card catch-id mb-3 change-content btn" data-id="#alltime" id="guest-input" data-choosen="{{ $client->id }}">
                 <div class="row g-0">
                     <div class="col-md-3">
                         <img src="{{ asset('front/images/avatar.png') }}" class="img-fluid rounded-start" alt="...">
