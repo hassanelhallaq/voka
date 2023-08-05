@@ -30,3 +30,4 @@
             للدفع</button>
     </div>
 </div>
+<script src="{{ asset('front/js/main.js') }}"></script>

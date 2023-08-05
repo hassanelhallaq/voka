@@ -186,7 +186,7 @@ class PosController extends Controller
             ->get();
         $clients = Client::paginate(10);
 
-        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        $halles = [];
         $reservations = [];
         $availableSlots = [];
         $unavailableSlots = [];
@@ -202,7 +202,7 @@ class PosController extends Controller
             ->where('id', $request->table_id)
             ->orderBy('date')
             ->get();
-        $package = Package::find(4);
+        $package = Package::find($request->packageId);
         $minutesPerPackage = $package->time;
         // Generate time slots based on the package minutes
         $startTime = Carbon::createFromTime(0, 0, 0);

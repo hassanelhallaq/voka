@@ -651,11 +651,12 @@
         }
 
         function table(id) {
-            var packageId = $('.package-name');
+            var packageId = $('.package-name').attr('data-choos');
 
             $.get('/branch/table/slots/ajax', {
                 // Add a comma after packageId to separate the parameters
                 table_id: id,
+                packageId : packageId,
             }).done(function(data) {
                 // Clear previous content
 
