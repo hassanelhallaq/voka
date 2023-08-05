@@ -22,7 +22,7 @@ class MenuController extends Controller
         //     return view('errors.400');
         // }
         $reservation = Reservation::where([['id', 25]])->first();
-        $reservation->status = "تم الحضور";
+        $reservation->status = 'تم الحضور';
         $reservation->update();
         $categories = ProductCategory::where('category_status', 1)
             ->with([
