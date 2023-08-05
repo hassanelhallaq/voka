@@ -25,9 +25,6 @@ class ReservationController extends Controller
             'payment' => 'required|string',
         ]);
         if (!$validator->fails()) {
-            $dateString = $request->date;
-            $date = Carbon::createFromFormat('j F - Y', $dateString);
-            $formattedDate = $date->format('Y-m-d');
             $package = Package::find($request->package_id);
             $wallet = Wallet::where('client_id', $request->client_id)->first();
             $price = $package->price * .15;
@@ -37,21 +34,31 @@ class ReservationController extends Controller
             if ($request->payment == 'المحفظة' && $wallet->credit > $price) {
                 return response()->json(['icon' => 'error', 'title' => 'رصيد محفظتك لا يكفي'], 400);
             }
-            $timeRange = $request->time;
+            $timeString = $request->time;
 
-            // Split the time range string into start and end time strings
-            list($startTimeString, $endTimeString) = explode(" - ", $timeRange);
+            // Split the string into start and end time parts
+            $timeParts = explode("-", $timeString);
 
-            // Convert start and end time strings to DateTime objects using Carbon
-            $startDateTime = Carbon::createFromFormat('g:i A', trim($startTimeString));
-            $endDateTime = Carbon::createFromFormat('g:i A', trim($endTimeString));
+            // Extract the start and end time strings and trim any leading or trailing whitespaces
+            $startTime = trim($timeParts[0]);
+            $endTime = trim($timeParts[1]);
 
-            // If you need to work with dates, you can set the date part as well
-            $startDate = Carbon::today(); // Assuming the current date, you can use any date here
-            $startDateTime->setDate($startDate->year, $startDate->month, $startDate->day);
+            // Get the current date
+            $currentDate = Carbon::today();
 
-            $endDate = $startDate->copy(); // Clone the start date to get the end date
-            $endDateTime->setDate($endDate->year, $endDate->month, $endDate->day);
+            // Convert the time strings to DateTime objects
+            $startDate = $currentDate->copy()->setTimeFromTimeString($startTime);
+            $endDate = $currentDate->copy()->setTimeFromTimeString($endTime);
+
+            // Format the date objects to display in the desired format
+            $formattedStartTime = $startDate->format('g:i A'); // Output: 4:16 PM
+            $formattedEndTime = $endDate->format('g:i A');     // Output: 5:17 PM
+
+            // Optionally, you can also get the full datetime in a specific format:
+            $formattedStartDatetime = $startDate->format('Y-m-d H:i:s'); // Output: e.g., 2023-08-05 16:16:00
+            $formattedEndDatetime = $endDate->format('Y-m-d H:i:s');  // Output: e.g., 2023-08-05 17:17:00
+
+            // Now you can use the formatted start and end time values as needed
 
             // Now you have start and end DateTime objects with date and time information
             $reservation = new Reservation();
@@ -60,10 +67,10 @@ class ReservationController extends Controller
             $reservation->minutes = $package->time;
             $reservation->table_id = $request->table_id;
             $reservation->client_id = $request->client_id;
-            $reservation->time =  $startDateTime;
-            $reservation->date = $startDateTime->format('Y-m-d H:i:s');
-            $reservation->end = $endDateTime->format('Y-m-d H:i:s');
-            $reservation->time_end = $endDateTime;
+            $reservation->time =  $formattedStartTime;
+            $reservation->date = $formattedStartDatetime;
+            $reservation->end = $formattedEndDatetime;
+            $reservation->time_end = $formattedEndTime;
             $reservation->note = $request->note;
             $reservation->status = 'مؤكد';
             $reservation->payment_type = $request->payment;

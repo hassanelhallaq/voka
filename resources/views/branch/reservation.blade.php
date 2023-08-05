@@ -562,22 +562,22 @@
                                                 <div class="payment-method w-100">
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="cash">
                                                                 <i class="fa-solid fa-sack-dollar"></i>
                                                             </div>
                                                             <p class="text-center">كاش</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="credit-card">
                                                                 <i class="fa-solid fa-credit-card"></i>
                                                             </div>
                                                             <p class="text-center">بطاقة ائتمان</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <div
-                                                                class="payment-icon d-flex justify-content-center align-items-center">
+                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
+                                                                id="wallet">
                                                                 <i class="fa-solid fa-wallet"></i>
                                                             </div>
                                                             <p class="text-center">المحفظة</p>
@@ -732,9 +732,36 @@
             var itemId = $(this).data('choosen');
             $('.guest-name').attr('data-choos', itemId);
         });
+        let selectedOption = null;
+
+        // Get references to the payment option elements
+        const cashElement = document.getElementById("cash");
+        const creditCardElement = document.getElementById("credit-card");
+        const walletElement = document.getElementById("wallet");
+
+        // Add event listeners to each element
+        cashElement.addEventListener("click", function() {
+            handlePaymentOption("كاش");
+        });
+
+        creditCardElement.addEventListener("click", function() {
+            handlePaymentOption("بطاقة ائتمان");
+        });
+
+        walletElement.addEventListener("click", function() {
+            handlePaymentOption("المحفظة");
+        });
+
+        // Function to handle the selected payment option
+        function handlePaymentOption(option) {
+            selectedOption = option;
+
+        }
 
         // Function to handle form submission
         function storeReaervation() {
+
+
             var packageId = $('.package-name').attr('data-choos');
             var tableId = $('.table-name').attr('data-choos');
             var guestId = $('.guest-name').attr('data-choos');
@@ -747,12 +774,12 @@
             formData.append('package_id', packageId);
             formData.append('table_id', tableId);
             formData.append('time', time);
-
+            formData.append('payment', selectedOption);
 
             // Call the 'store' function to handle the form data submission
-            store('/branch/reservations', formData);
-        }
+            storeRoute('/branch/reservations', formData);
 
+        }
         // Add event listener to form submission
         $('#reservation-form').on('submit', function(event) {
             event.preventDefault();

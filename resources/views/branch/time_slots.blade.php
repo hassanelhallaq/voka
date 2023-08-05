@@ -21,7 +21,7 @@
                         {{ $slot['end'] }}</button>
                 @endif
             @endforeach
-            
+
 
     </div>
 </div>

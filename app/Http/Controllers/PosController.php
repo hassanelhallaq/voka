@@ -34,11 +34,11 @@ class PosController extends Controller
     public function _hallesBranch(Request $request)
     {
         $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
-            $query->where('status', 'available')->whereHas('packages', function ($q) use ($request) {
+            $query->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
             });
         }])->whereHas('tables', function ($query) use ($request) {
-            $query->where('status', 'available')->with('packages')->whereHas('packages', function ($q) use ($request) {
+            $query->with('packages')->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
             });
         })->get();
@@ -196,12 +196,17 @@ class PosController extends Controller
     }
     public function tableSlots(Request $request)
     {
+        $now = Carbon::now();
 
-        $reservations = DB::table('reservations')
-            ->select('date', 'end')
-            ->where('id', $request->table_id)
+        // Query to get all reservations for today
+        $reservations = Reservation::where('table_id', $request->table_id)
+            ->where(function ($query) use ($now) {
+                $query->whereDate('date', $now->toDateString())
+                    ->whereTime('date', '>=', $now->toTimeString());
+            })
             ->orderBy('date')
             ->get();
+
         $package = Package::find($request->packageId);
         $minutesPerPackage = $package->time;
         // Generate time slots based on the package minutes
@@ -219,7 +224,6 @@ class PosController extends Controller
             ];
             $currentTime->addMinutes($minutesPerPackage);
         }
-
         // Calculate the available and unavailable time slots
         $availableSlots = [];
         $unavailableSlots = [];
@@ -235,7 +239,6 @@ class PosController extends Controller
                     'end' => $start->format('g:i A'),
                 ];
             }
-
             $unavailableSlots[] = [
                 'start' => $start->format('g:i A'),
                 'end' => $end->format('g:i A'),
@@ -243,7 +246,6 @@ class PosController extends Controller
 
             $prevEndTime = $end;
         }
-
         if ($prevEndTime->lt($endTime)) {
             $availableSlots[] = [
                 'start' => $prevEndTime->format('g:i A'),
