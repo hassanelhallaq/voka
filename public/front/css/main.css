@@ -1169,3 +1169,10 @@ table .active-day {
 #app .table td {
     width: 100px;
 }
+#alltime .row .btn-clock {
+	 width: 220px !important; 
+	margin-left: 20px !important;
+	background: #4caf50 !important;
+	color: #fff !important;
+	
+}
