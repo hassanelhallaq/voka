@@ -23,9 +23,9 @@
                         <div class="row">
                             @foreach ($item->tables as $table)
                                 <div class="col-md-3 card-col table-pick  d-flex justify-content-center align-items-center change-content"
-                                    data-id="#allguests">
+                                    data-id="#allguests" data-choosen="{{ $table->id }}">
                                     <div class="card catch-id  bg-success active-card"
-                                        onclick="table({{ $table->id }})" data-choosen="{{ $table->id }}">
+                                        onclick="table({{ $table->id }})" >
                                         <input hidden value="{{ $table->id }}">
                                         <div class="card-header primary-bg-color">
                                             <div class="top d-flex justify-content-between ">
