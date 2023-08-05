@@ -109,23 +109,18 @@ class PosController extends Controller
         $data = Reservation::get();
         $newData = [];
 
-            foreach ($data as $index => $item) {
-                $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
-                $reservationDateTime = $item->date . ' ' . $formattedTime . ':00';
-                $date =  $item->date . ' ' . $formattedTime;
-                $color = '#48cfcf';
-                $newData[$index]['id']        = $item->id;
-                $str = explode(' ', $item->package->name);
-                $client_name = $str[0];
-                $newData[$index]['title']     = "\n" . $item->package->name . "\n";
-                $newData[$index]['start']     = $reservationDateTime;
-                $newData[$index]['color']       = $color;
-            }
-            return response()->json([
-                view('branch.reserv')->with($newData)->render()
-            ]);
-          
-       
+        foreach ($data as $index => $item) {
+            $reservationDateTime = $item->date;
+            $color = '#48cfcf';
+            $newData[$index]['id']        = $item->id;
+            $str = explode(' ', $item->package->name);
+            $newData[$index]['title']     = "\n" . $item->package->name . "\n";
+            $newData[$index]['start']     = $reservationDateTime;
+            $newData[$index]['color']       = $color;
+        }
+        return response()->json([
+            view('branch.reserv')->with($newData)->render()
+        ]);
     }
     public function ajaxCalender(Request $request)
     {
@@ -133,13 +128,10 @@ class PosController extends Controller
             ->get();
         $newData = [];
         foreach ($data as $index => $item) {
-            $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
-            $reservationDateTime = $item->date . ' ' . $formattedTime . ':00';
-            $date =  $item->date . ' ' . $formattedTime;
+            $reservationDateTime = $item->date;
             $color = '#48cfcf';
             $newData[$index]['id']        = $item->id;
             $str = explode(' ', $item->package->name);
-            $client_name = $str[0];
             $newData[$index]['title']     = "\n" . $item->package->name . "\n";
             $newData[$index]['start']     = $reservationDateTime;
             $newData[$index]['color']       = $color;
