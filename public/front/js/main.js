@@ -1,5 +1,21 @@
 
 $(document).ready(function () {
+    
+    
+      //  getting package id
+    $('.choos-btn').on('click', function(){
+        console.log('before');
+      var parentElement = $(this).parent(); // الوصول إلى العنصر الأب لزر الإضافة
+      var forDataV = parentElement.find('.card-title');
+      var cardTitle = parentElement.find('.card-title').text();
+      var packagePrice = parentElement.find('#packageprice').val();
+      $('.package-name').html(cardTitle );
+      $('.payment-price').text(packagePrice + ' ريال ');
+        var itemId = $(this).closest('.card').data('choosen');
+      $('.package-name').attr('data-choos', itemId);
+      console.log('after');
+
+       });
 
         $('.reservations-wrap').on('click', function(){
             console.log('hjhjhjhj');
@@ -697,18 +713,7 @@ $('.reserv-date').on('click', function(){
       });
     });
 
-    //  getting package id
-    $('.choos-btn').on('click', function(){
-      var parentElement = $(this).parent(); // الوصول إلى العنصر الأب لزر الإضافة
-      var forDataV = parentElement.find('.card-title');
-      var cardTitle = parentElement.find('.card-title').text();
-      var packagePrice = parentElement.find('#packageprice').val();
-      $('.package-name').html(cardTitle );
-      $('.payment-price').text(packagePrice + ' ريال ');
-        var itemId = $(this).closest('.card').data('choosen');
-      $('.package-name').attr('data-choos', itemId);
-
-       });
+  
 
 
        //  getting table id
