@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('lounge_id');
             $table->foreign('lounge_id')->on('lounges')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('qr')->nullable();
-            $table->enum('status', ['available', 'in_service', 'reserved']);
+            $table->enum('status', ['available', 'in_service', 'reserved', 'late']);
             $table->timestamps();
         });
     }

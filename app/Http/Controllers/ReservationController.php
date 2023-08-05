@@ -75,9 +75,7 @@ class ReservationController extends Controller
             $reservation->status = 'مؤكد';
             $reservation->payment_type = $request->payment;
             $isSaved = $reservation->save();
-            $table = Table::find($request->table_id);
-            $table->status = 'in_service';
-            $table->save();
+
             $order = new Order();
             $order->table_id = $request->table_id;
             $order->package_id = $request->package_id;

@@ -45,7 +45,7 @@
                                 $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                 $reservationDateTime = $table->reservation->date;
                             }
-
+                            
                         @endphp
                         <div class="col-md-3 card-col  d-flex justify-content-center align-items-center"
                             data-tableNumber="{{ $item->name }}"
@@ -59,6 +59,8 @@
                             <div class="card @if ($table->status == 'in_service') bg-info
                                  @elseif($table->status == 'available')
                                 bg-success text-light
+                                @elseif($table->status == 'late')
+                                bg-secondary text-light
                                 @elseif ($table->status == 'reserved')
                                    bg-danger  text-light @endif
                                  text-dark"
@@ -130,10 +132,10 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-
+                                        
                                             // Wrap the related products in a collection (even if there's only one result)
                                             $productsCollection = collect($orders->products);
-
+                                        
                                             // Calculate total order prices using the map function on the products collection
                                             $totalOrderPrices = $productsCollection->map(function ($product) {
                                                 return $product->price * $product->quantity;
