@@ -58,6 +58,8 @@
                             <div class="card @if ($table->status == 'in_service') bg-info
                                  @elseif($table->status == 'available')
                                 bg-success text-light
+                                @elseif($table->status == 'late')
+                                bg-secondary text-light
                                 @elseif ($table->status == 'reserved')
                                    bg-danger  text-light @endif
                                  text-dark"
@@ -99,7 +101,8 @@
                                         <p class="hall-name">
                                             {{ $table->reservation->package->name ?? 'لا يوجد باقة ' }}
                                         </p>
-                                        <span class="sta"> {{ $table->reservation->package->name ?? 0 }}
+                                        <span class="sta">
+                                            {{ $table->reservation->package->count_of_visitors ?? 0 }}
                                             اشخاص</span>
                                     </div>
                                     <div class="body-time d-flex justify-content-between">
