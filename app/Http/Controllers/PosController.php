@@ -30,23 +30,7 @@ class PosController extends Controller
 
         return response()->view('branch.home', compact('halles'));
     }
-    public function reservation()
-    {
-        $dayOfWeek = Carbon::now()->format('l');
-        $time = Carbon::now()->format('H:i:s');
-        $packages = Package::where('branch_id', Auth::user()->branch_id)
 
-            // ->whereHas('schedules', function ($query) use ($dayOfWeek, $time) {
-            //     $query->where('day_of_week', strtolower($dayOfWeek)) // Convert to lowercase for case-insensitive comparison
-            //         ->where('start_time', '<=', $time)
-            //         ->where('end_time', '>=', $time);
-            // })
-            ->get();
-        $clients = Client::paginate(10);
-
-        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
-        return response()->view('branch.reservation', compact('halles', 'packages', 'clients'));
-    }
     public function _hallesBranch(Request $request)
     {
         $halles = Lounge::where('branch_id', Auth::user()->branch_id)->with(['tables' => function ($query) use ($request) {
@@ -188,27 +172,87 @@ class PosController extends Controller
         }])->find($id);
         return  $render = view('branch.products_orders', compact('products', 'table'));
     }
-    public function cal()
+    public function reservation()
+    {
+        $dayOfWeek = Carbon::now()->format('l');
+        $time = Carbon::now()->format('H:i:s');
+        $packages = Package::where('branch_id', Auth::user()->branch_id)
+
+            // ->whereHas('schedules', function ($query) use ($dayOfWeek, $time) {
+            //     $query->where('day_of_week', strtolower($dayOfWeek)) // Convert to lowercase for case-insensitive comparison
+            //         ->where('start_time', '<=', $time)
+            //         ->where('end_time', '>=', $time);
+            // })
+            ->get();
+        $clients = Client::paginate(10);
+
+        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        $reservations = [];
+        $availableSlots = [];
+        $unavailableSlots = [];
+        $timeSlots = [];
+        $minutesPerPackage = [];
+        return response()->view('branch.reservation', compact('halles', 'packages', 'clients', 'availableSlots', 'unavailableSlots', 'timeSlots'));
+    }
+    public function tableSlots(Request $request)
     {
 
-        $reservations = Reservation::all();
+        $reservations = DB::table('reservations')
+            ->select('date', 'end')
+            ->where('id', $request->table_id)
+            ->orderBy('date')
+            ->get();
+        $package = Package::find($request->packageId);
+        $minutesPerPackage = $package->time;
+        // Generate time slots based on the package minutes
+        $startTime = Carbon::createFromTime(0, 0, 0);
+        $endTime = Carbon::createFromTime(23, 59, 59);
+        $timeSlots = [];
 
-        // Format the events data for the frontend calendar.
-        $events = [];
+        $currentTime = clone $startTime;
+        while ($currentTime->lte($endTime)) {
+            $endTimeSlot = clone $currentTime;
+            $endTimeSlot->addMinutes($minutesPerPackage);
+            $timeSlots[] = [
+                'start' => $currentTime->format('g:i A'),
+                'end' => $endTimeSlot->format('g:i A'),
+            ];
+            $currentTime->addMinutes($minutesPerPackage);
+        }
+
+        // Calculate the available and unavailable time slots
+        $availableSlots = [];
+        $unavailableSlots = [];
+
+        $prevEndTime = $startTime;
         foreach ($reservations as $reservation) {
-            $events[] = [
-                'title' => 'table' . ' ' . $reservation->table->name, // You can customize the title as needed.
-                'start' => $reservation->date,
-                'end' => $reservation->end,
-                // Add any other event properties needed by the frontend calendar.
+            $start = Carbon::parse($reservation->start_datetime);
+            $end = Carbon::parse($reservation->end_datetime);
+
+            if ($prevEndTime->lt($start)) {
+                $availableSlots[] = [
+                    'start' => $prevEndTime->format('g:i A'),
+                    'end' => $start->format('g:i A'),
+                ];
+            }
+
+            $unavailableSlots[] = [
+                'start' => $start->format('g:i A'),
+                'end' => $end->format('g:i A'),
+            ];
+
+            $prevEndTime = $end;
+        }
+
+        if ($prevEndTime->lt($endTime)) {
+            $availableSlots[] = [
+                'start' => $prevEndTime->format('g:i A'),
+                'end' => $endTime->format('g:i A'),
             ];
         }
 
-        // Return the events as JSON.
-        return response()->json($events);
-
-        // Pass the table availability data to the view
-        // return $tableAvailability;
-        return response()->view('branch.calender');
+        // return view('reservations.show', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
+        return  $render = view('branch.time_slots', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
+        // return response()->view('branch.calender');
     }
 }

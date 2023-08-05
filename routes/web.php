@@ -88,7 +88,7 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/resver/ajax', [App\Http\Controllers\PosController::class, 'resver'])->name('resver.ajax');
     Route::get('/product-order/ajax/{id}', [App\Http\Controllers\PosController::class, 'productOrder'])->name('productOrder.ajax');
     Route::post('/order-product/store', [App\Http\Controllers\OrderProductController::class, 'store'])->name('order-product.store');
-    Route::get('/calender/ajax', [App\Http\Controllers\PosController::class, 'ajaxCalender'])->name('ajaxCalender');
+    Route::get('/table/slots/ajax', [App\Http\Controllers\PosController::class, 'tableSlots'])->name('tableSlots');
 
     Route::get('/cal', [App\Http\Controllers\PosController::class, 'cal'])->name('cal');
     Route::get('/calendar', function () {

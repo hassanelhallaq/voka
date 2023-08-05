@@ -14,7 +14,8 @@
         href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
         integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap-clockpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
@@ -22,17 +23,19 @@
         .selected {
             color: #e5772a;
         }
-        .halls-tab{
+
+        .halls-tab {
             background-color: transparent;
             box-shadow: none;
         }
-        .btn-clock{
+
+        .btn-clock {
             width: 120px;
             padding: 8px;
             background: #707070 !important;
             color: #fff;
             border: none;
-            margin-bottom:10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -322,7 +325,7 @@
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
                             @include('branch._halles_branch')
                         </div>
-                  
+
                         <div class="reservation-tabs" id="allguests">
                             <div class="container">
                                 <div class="row">
@@ -522,201 +525,21 @@
                         <!--    </div>-->
                         <!--</div>-->
                         <div class="reservation-tabs alltime" id="alltime">
-                            <!-- Input group, just add class 'clockpicker', and optional data-* -->
-                            <!--<div class="row justify-content-center h-100">-->
-                            <!--    <div class="col-12 col-md-4"></div>-->
-                            <!--    <div class="col-12 col-md-4 text-center d-flex align-items-center">-->
-                                    <!-- Input group, just add class 'clockpicker', and optional data-* -->
-                            <!--        <div class="input-group clockpicker" data-placement="right" data-align="top"-->
-                            <!--            data-autoclose="true">-->
-                            <!--            <input id="date-time" type="text" class="form-control clock"-->
-                            <!--                value="09:32">-->
-                            <!--            <span class="input-group-addon">-->
-                            <!--                <span class="glyphicon glyphicon-time"></span>-->
-                            <!--            </span>-->
-                            <!--        </div>-->
-                            <!--    </div>-->
-                            <!--    <div class="col-12 col-md-4"></div>-->
-
-
-                            <!--</div>-->
                             <div class="container">
-                                <div class="row" style="margin-bottom:50px; margin-top:50px">
-                                <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock" disabled >2:30 PM</button>
+                                @include('branch.time_slots')
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="change-content btn btn-primary" data-id="#allguests">السابق</div>
+                                    </div>
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <button class="change-content btn btn-primary" data-id="#pay">تقدم
+                                            للدفع</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock" disabled >12:30 PM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock" >1:00 PM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock" disabled >10:45 AM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock" >4:05 AM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock" disabled>1:45 PM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock">3:45 AM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock" >4:05 AM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock">1:45 PM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock">3:45 AM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock"disabled >4:05 AM</button>
-                                    </div>
-                                </div>
-                                 <div class="col-lg-2 col-md-4 col-6">
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-clock">1:45 PM</button>
-                                    </div>
-                                </div>
-                            
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="change-content btn btn-primary" data-id="#allguests">السابق</div>
-                                </div>
-                                <div class="col-md-8"></div>
-                                <div class="col-md-2">
-                                    <button class="change-content btn btn-primary" data-id="#pay">تقدم للدفع</button>
-                                </div>
-                            </div>
                             </div>
                         </div>
-                        <!--<div class="reservation-tabs allstatus" id="status">-->
-                        <!--    <div class="container">-->
-                        <!--        <div class="row">-->
-                        <!--            <div class="col-2"></div>-->
-                        <!--            <div class="col-8 d-flex justify-content-center">-->
-                        <!--                <form class="text-center" action="">-->
-                        <!--                    <div class="row">-->
-                        <!--                        <input data-id="#notes" type="checkbox"-->
-                        <!--                            class="btn-check change-content" id="confirmed" checked-->
-                        <!--                            autocomplete="off">-->
-                        <!--                        <label class="btn btn-secondary" for="confirmed">مؤكد</label>-->
-                        <!--                        <input data-id="#notes" type="radio"-->
-                        <!--                            class="btn-check change-content" name="options-outlined"-->
-                        <!--                            id="finished" autocomplete="off">-->
-                        <!--                        <label class="btn btn-secondary" for="finished">منتهى</label>-->
-                        <!--                        <input data-id="#notes" type="radio"-->
-                        <!--                            class="btn-check change-content" name="options-outlined"-->
-                        <!--                            id="canceld" autocomplete="off">-->
-                        <!--                        <label class="btn btn-secondary" for="canceld">ملغى</label>-->
-                        <!--                        <input data-id="#notes" type="radio"-->
-                        <!--                            class="btn-check change-content" name="options-outlined"-->
-                        <!--                            id="not-confirm" autocomplete="off">-->
-                        <!--                        <label class="btn btn-secondary" for="not-confirm">لم يتم-->
-                        <!--                            التأكيد</label>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="row">-->
-                        <!--                        <input data-id="#notes" type="radio"-->
-                        <!--                            class="btn-check change-content" name="options-outlined"-->
-                        <!--                            id="no-answer" autocomplete="off">-->
-                        <!--                        <label class="btn btn-secondary" for="no-answer">لم يتم-->
-                        <!--                            الإجابة</label>-->
-                        <!--                        <input data-id="#notes" type="radio"-->
-                        <!--                            class="btn-check change-content" name="options-outlined"-->
-                        <!--                            id="late" autocomplete="off">-->
-                        <!--                        <label class="btn btn-secondary" for="late">متأخر</label>-->
-                        <!--                        <input data-id="#notes" type="radio"-->
-                        <!--                            class="btn-check change-content" name="options-outlined"-->
-                        <!--                            id="arrived" autocomplete="off">-->
-                        <!--                        <label class="btn btn-secondary" for="arrived">تم الوصول</label>-->
-                        <!--                    </div>-->
 
-
-                        <!--                </form>-->
-
-                        <!--            </div>-->
-                        <!--            <div class="col-2"></div>-->
-                        <!--        </div>-->
-                        <!--        <div class="row">-->
-                        <!--            <div class="col-md-2">-->
-                        <!--                <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>-->
-                        <!--            </div>-->
-                        <!--            <div class="col-md-8"></div>-->
-                                    <!--<div class="col-md-2">-->
-                                    <!--    <button class="change-content btn btn-primary"-->
-                                    <!--        data-id="#notes">التالى</button>-->
-                                    <!--</div>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-
-                        <!--</div>-->
-                        <!--<div class="reservation-tabs notes pt-5 mt-5" id="notes">-->
-                        <!--    <div class="container">-->
-                        <!--        <div class="row">-->
-                        <!--            <div class="col-12 col-md-6">-->
-                        <!--                <form class="text-right" action="">-->
-                        <!--                    <div class="mb-3">-->
-                        <!--                        <p class="">الرجاء تدوين الملاحظة بالأسفل</p>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="mb-3">-->
-                        <!--                        <textarea class="form-control note-input" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="col-auto">-->
-                        <!--                        <button type="submit" class="btn btn-primary  note-save mb-3">تسجيل-->
-                        <!--                            الملحوظة</button>-->
-                        <!--                    </div>-->
-                        <!--                </form>-->
-                        <!--            </div>-->
-                        <!--            <div class="col-12 col-md-6">-->
-                        <!--                <ol class="list-group note-lists list-group-numbered reversed">-->
-                        <!--                    <li-->
-                        <!--                        class="list-group-item note-list no-notes d-flex justify-content-between align-items-start">-->
-                        <!--                        <div class="me-2 ms-auto">-->
-                        <!--                            <div class="fw-bold"> لا يوجد اى ملاحظات</div>-->
-                        <!--                        </div>-->
-                        <!--                    </li>-->
-                        <!--                </ol>-->
-                        <!--            </div>-->
-                        <!--        </div>-->
-                        <!--        <div class="row">-->
-                        <!--            <div class="col-md-2  text-right">-->
-                        <!--                <div class="change-content btn btn-primary" data-id="#status">السابق</div>-->
-                        <!--            </div>-->
-                        <!--            <div class="col-md-7"></div>-->
-                        <!--            <div class="col-md-3">-->
-                        <!--                <div class="save-all btn btn-lg btn-primary" data-id="#pay">-->
-                        <!--                    تقدم للدفع-->
-                        <!--                </div>-->
-
-                        <!--            </div>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
                         <div class="reservation-tabs notes pt-5 mt-5" id="pay">
                             <div class="container">
                                 <div class="row">
@@ -773,8 +596,8 @@
                                                         <button class="btn btn-primary" type="button"
                                                             data-bs-toggle="modal" data-bs-target="#modalPay">
                                                             ادفع الآن
-                                                            </button>
-                                                       
+                                                        </button>
+
                                                     </div>
                                                 </div>
                                             </li>
@@ -790,28 +613,23 @@
             </div>
         </div>
     </section>
-     <!-- Modal -->
-    <div class="modal fade" id="modalPay" tabindex="-1"
-        aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="modalPay" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"
-                        id="exampleModalLabel">تأكيد الدفع
+                    <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع
                     </h5>
-                    <button type="button" class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close" style="margin-left: 0;"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="margin-left: 0;"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="consfirm-text" style="color: #fff; text-align: center;">هل تريد تأكيد الدفع  </p>
+                    <p class="consfirm-text" style="color: #fff; text-align: center;">هل تريد تأكيد الدفع </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"
-                        onclick="storeReaervation()" style="margin-left: 10px;">تأكيد</button>
-                    <button type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal">لا </button>
+                    <button type="button" class="btn btn-primary" onclick="storeReaervation()"
+                        style="margin-left: 10px;">تأكيد</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
                 </div>
             </div>
         </div>
@@ -824,7 +642,9 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
@@ -835,11 +655,22 @@
                 id: id,
             }).done(function(data) {
                 // Clear previous content
-
                 $('#all-tables').html(data); // Show the new content
             });
         }
 
+        function table(id) {
+            var packageId = $('.package-name');
+
+            $.get('/branch/table/slots/ajax', {
+                packageId: packageId, // Add a comma after packageId to separate the parameters
+                table_id: id,
+            }).done(function(data) {
+                // Clear previous content
+
+                $('#alltime').html(data); // Show the new content
+            });
+        }
         // استهداف العنصر .table-pick وتعيين الحدث النقر عليه
         document.querySelectorAll('.table-pick').forEach(function(element) {
             element.addEventListener('click', function() {
@@ -863,6 +694,7 @@
 
                 // الحصول على القيمة المخزنة في الخاصية data-choosen وتعيينها في الخاصية data-choos للعنصر .table-name
                 var itemId = this.getAttribute('data-choosen');
+                debugger;
                 tableNames.forEach(function(tableName) {
                     tableName.setAttribute('data-choos', itemId);
                 });

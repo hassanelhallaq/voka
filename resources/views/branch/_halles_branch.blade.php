@@ -22,9 +22,10 @@
                     <div class="col-12">
                         <div class="row">
                             @foreach ($item->tables as $table)
-                                <div class="col-md-3 card-col table-pick  d-flex justify-content-center align-items-center change-content" data-id="#allguests">
+                                <div class="col-md-3 card-col table-pick  d-flex justify-content-center align-items-center change-content"
+                                    data-id="#allguests">
                                     <div class="card catch-id  bg-success active-card"
-                                         data-choosen="{{ $table->id }}">
+                                        onclick="table({{ $table->id }})" data-choosen="{{ $table->id }}">
                                         <input hidden value="{{ $table->id }}">
                                         <div class="card-header primary-bg-color">
                                             <div class="top d-flex justify-content-between ">
@@ -80,17 +81,16 @@
         @endforeach
     </div>
 </div>
-  <div class="row" style="justify-content: space-between;">
-                        <div class="col-md-2">
-                            <div class="change-content btn btn-primary" data-id="#all-packages">السابق</div>
-                        </div>
-                        <!--<div class="col-md-2">-->
-                        <!--        <div class="change-content btn btn-primary" data-id="#allguests">التالى</div>-->
-                        <!--</div> -->
-                     </div>
+<div class="row" style="justify-content: space-between;">
+    <div class="col-md-2">
+        <div class="change-content btn btn-primary" data-id="#all-packages">السابق</div>
+    </div>
+    <!--<div class="col-md-2">-->
+    <!--        <div class="change-content btn btn-primary" data-id="#allguests">التالى</div>-->
+    <!--</div> -->
+</div>
 <script src="{{ asset('front/js/main.js') }}"></script>
 <script>
-
     document.querySelectorAll('.table-pick').forEach(function(element) {
         element.addEventListener('click', function() {
             // إزالة الفئة active-card من جميع عناصر .card داخل .new-reservation-tables
@@ -113,6 +113,7 @@
 
             // الحصول على القيمة المخزنة في الخاصية data-choosen وتعيينها في الخاصية data-choos للعنصر .table-name
             var itemId = this.getAttribute('data-choosen');
+
             tableNames.forEach(function(tableName) {
                 tableName.setAttribute('data-choos', itemId);
             });
