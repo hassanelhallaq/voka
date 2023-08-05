@@ -108,7 +108,7 @@ class PosController extends Controller
 
         $data = Reservation::get();
         $newData = [];
-        if ($request->ajax()) {
+
             foreach ($data as $index => $item) {
                 $formattedTime = Carbon::createFromFormat('g:i A', $item->time)->format('H:i');
                 $reservationDateTime = $item->date . ' ' . $formattedTime . ':00';
@@ -124,8 +124,8 @@ class PosController extends Controller
             return response()->json([
                 view('branch.reserv')->with($newData)->render()
             ]);
-            return response()->json($newData);
-        }
+          
+       
     }
     public function ajaxCalender(Request $request)
     {
