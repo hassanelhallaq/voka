@@ -94,7 +94,7 @@
                    center: 'title',
                    right: 'month,agendaWeek,agendaDay',
                },
-               events: "{{ route('ajaxCalender') }}",
+               events: "{{ route('resver.ajax') }}",
                selectable: true,
                selectHelper: true,
                firstDay: 0,
@@ -103,7 +103,7 @@
                        id: event.id,
                    }).done(function(data) {
                        $('#reservSideContainer').html(data); // Show the new content
-                        $('#reservSideContainer #reservSideContainer').css("width","100%");
+                       $('#reservSideContainer #reservSideContainer').css("width", "100%");
                    });
                },
 
