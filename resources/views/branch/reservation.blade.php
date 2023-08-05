@@ -527,16 +527,7 @@
                         <div class="reservation-tabs alltime" id="alltime">
                             <div class="container">
                                 @include('branch.time_slots')
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="change-content btn btn-primary" data-id="#allguests">السابق</div>
-                                    </div>
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
-                                        <button class="change-content btn btn-primary" data-id="#pay">تقدم
-                                            للدفع</button>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
 
@@ -663,7 +654,7 @@
             var packageId = $('.package-name');
 
             $.get('/branch/table/slots/ajax', {
-                packageId: packageId, // Add a comma after packageId to separate the parameters
+                // Add a comma after packageId to separate the parameters
                 table_id: id,
             }).done(function(data) {
                 // Clear previous content

@@ -202,7 +202,7 @@ class PosController extends Controller
             ->where('id', $request->table_id)
             ->orderBy('date')
             ->get();
-        $package = Package::find($request->packageId);
+        $package = Package::find(4);
         $minutesPerPackage = $package->time;
         // Generate time slots based on the package minutes
         $startTime = Carbon::createFromTime(0, 0, 0);
@@ -226,8 +226,8 @@ class PosController extends Controller
 
         $prevEndTime = $startTime;
         foreach ($reservations as $reservation) {
-            $start = Carbon::parse($reservation->start_datetime);
-            $end = Carbon::parse($reservation->end_datetime);
+            $start = Carbon::parse($reservation->date);
+            $end = Carbon::parse($reservation->end);
 
             if ($prevEndTime->lt($start)) {
                 $availableSlots[] = [
