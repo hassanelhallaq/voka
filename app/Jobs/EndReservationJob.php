@@ -13,6 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class EndReservationJob implements ShouldQueue
 {
@@ -32,6 +33,7 @@ class EndReservationJob implements ShouldQueue
     public function handle()
     {
         $currentDateTime = Carbon::now();
+        log::info('jobs');
 
 
         $expiredReservations = Reservation::where(function ($query) use ($currentDateTime) {
