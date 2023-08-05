@@ -1176,3 +1176,6 @@ table .active-day {
 	color: #fff !important;
 	
 }
+.reservation .side-nav {
+	padding-top: 150px;
+}

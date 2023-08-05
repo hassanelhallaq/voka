@@ -1650,7 +1650,7 @@ table img{
 }
 
 .top-header{
-  background-color: #1D2228;
+  background-color: #000;
 }
 .top-header-inner{
   display: -webkit-box;
@@ -1695,8 +1695,10 @@ table img{
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding:10px;
+  padding:8px;
   background-color: #015DA8;
+  min-width: 100px;
+  justify-content: space-between;
 }
 .top-header .header-cta li a:hover{
   color: #fff;
@@ -4812,7 +4814,7 @@ body{
     background-color: rgba(255,255,255,.1);
   }
   .main-header.header-light .navbar > ul > .menu-item > a, .main-header.header-light .header-controls-inner li{
-    color: #141414;
+    color: #fff;
   }
   .tableDetails,.subheader h1{
     color:#0D0705;
