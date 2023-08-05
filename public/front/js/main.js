@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
     
-    
+    $('.to-pay').parent().hide();
       //  getting package id
     $('.choos-btn').on('click', function(){
       var parentElement = $(this).parent(); // الوصول إلى العنصر الأب لزر الإضافة
