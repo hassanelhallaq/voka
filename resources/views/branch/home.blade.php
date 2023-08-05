@@ -134,12 +134,16 @@
                                                 ->first();
                                         
                                             // Wrap the related products in a collection (even if there's only one result)
-                                            $productsCollection = collect($orders->products);
+                                            if ($orders->products->count() != 0) {
+                                                $productsCollection = collect($orders->products);
                                         
-                                            // Calculate total order prices using the map function on the products collection
-                                            $totalOrderPrices = $productsCollection->map(function ($product) {
-                                                return $product->price * $product->quantity;
-                                            });
+                                                // Calculate total order prices using the map function on the products collection
+                                                $totalOrderPrices = $productsCollection->map(function ($product) {
+                                                    return $product->price * $product->quantity;
+                                                });
+                                            } else {
+                                                $totalOrderPrices = 0;
+                                            }
                                         } else {
                                             $totalOrderPrices = 0;
                                         }
