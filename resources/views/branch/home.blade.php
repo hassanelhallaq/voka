@@ -45,7 +45,7 @@
                                 $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                 $reservationDateTime = $table->reservation->date;
                             }
-                            
+
                         @endphp
                         <div class="col-md-3 card-col  d-flex justify-content-center align-items-center"
                             data-tableNumber="{{ $item->name }}"
@@ -132,11 +132,11 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders && $orders->products->count() != 0) {
                                                 $productsCollection = collect($orders->products);
-                                        
+
                                                 // Calculate total order prices using the map function on the products collection
                                                 $totalOrderPrices = $productsCollection->map(function ($product) {
                                                     return $product->price * $product->quantity;
@@ -229,7 +229,11 @@
                                                             <div class="me-2 ms-auto">
                                                                 <div class="fw-bold"> الإجمالى</div>
                                                             </div>
-                                                            <span>{{ $table->reservation->package->price ?? 0 * 0.15 - $totalOrderPrices }}
+
+                                                            @php
+                                                                $total = $table->reservation->package->price ?? 0 * 0.15;
+                                                            @endphp
+                                                            <span>{{ $total - $totalOrderPrices }} سعر{{ $totalOrderPrices }}
                                                                 ريال</span>
                                                         </div>
                                                         <div class="payment-method">
