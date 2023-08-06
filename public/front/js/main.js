@@ -12,6 +12,9 @@ $(document).ready(function () {
       $('.payment-price').text(packagePrice + ' ريال ');
         var itemId = $(this).closest('.card').data('choosen');
       $('.package-name').attr('data-choos', itemId);
+      const result = packagePrice * 0.10;
+        const roundedResult = result.toFixed(2);
+        $('.pay-total').text(roundedResult + ' ريال ');
 
        });
        $('.btn-clock').on('click', function(){

@@ -550,14 +550,14 @@
                                                     <div class="me-2 ms-auto">
                                                         <div class="fw-bold"> ضريبة</div>
                                                     </div>
-                                                    <span>10%</span>
+                                                    <span class="tax">10%</span>
                                                 </div>
                                                 <div
                                                     class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
                                                     <div class="me-2 ms-auto">
                                                         <div class="fw-bold"> الإجمالى</div>
                                                     </div>
-                                                    <span>286 ريال</span>
+                                                    <span class="pay-total">286 ريال</span>
                                                 </div>
                                                 <div class="payment-method w-100">
                                                     <div class="row">
