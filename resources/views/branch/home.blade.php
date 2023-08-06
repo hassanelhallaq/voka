@@ -135,13 +135,15 @@
                                                 ->first();
 
                                             // Wrap the related products in a collection (even if there's only one result)
-                                            if ($orders && $orders->products->count() != 0) {
-                                                $productsCollection = collect($orders->products);
+                                            if ($orders != null && $orders->products->count() != 0) {
 
+                                         
                                                 // Calculate total order prices using the map function on the products collection
-                                                $totalOrderPrices = $productsCollection->map(function ($product) {
-                                                    return $product->price * $product->quantity;
+                                                $totalOrderPrices = $orders->products->sum(function ($product) {
+                                                 
+                                                    return $product->pivot->price * $product->pivot->quantity;
                                                 });
+                                                      
                                             } else {
                                                 $totalOrderPrices = 0;
                                             }
@@ -188,18 +190,18 @@
                                                 <ol class="list-group list-group-numbered reversed">
 
 
-                                                        @if ($orders != null && $orders->products->count() != 0)
-                                                            @foreach ($orders->products as $product)
-                                                                <li
-                                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                                    <div class="me-2 ms-auto">
-                                                                        <div class="fw-bold">{{ $product->name }}</div>
-                                                                    </div>
+                                                    @if ($orders != null && $orders->products->count() != 0)
+                                                        @foreach ($orders->products as $product)
+                                                            <li
+                                                                class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="me-2 ms-auto">
+                                                                    <div class="fw-bold">{{ $product->name }}</div>
+                                                                </div>
 
-                                                                    <span>{{ $product->pivot->price }} ريال</span>
-                                                                </li>
-                                                            @endforeach
-                                                        @endif
+                                                                <span>{{ $product->pivot->price }} ريال</span>
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
 
                                                     <li
                                                         class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
@@ -237,6 +239,7 @@
                                                             @php
                                                                 $total = $table->reservation->package->price ?? 0 * 0.15;
                                                             @endphp
+
                                                             <span>{{ $total - $totalOrderPrices }}
                                                                 سعر{{ $totalOrderPrices }}
                                                                 ريال</span>
