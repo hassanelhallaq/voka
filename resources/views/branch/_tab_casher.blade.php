@@ -44,7 +44,7 @@
                </li>
 
            </ol>
-           <ol class="list-group reversed  mt-5">
+           <ol class="list-group reversed none mt-5">
                <li class="list-group-item no-number  ">
                    <div class="sub-total d-flex justify-content-between align-items-start">
                        <div class="me-2 ms-auto">

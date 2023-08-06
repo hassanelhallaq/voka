@@ -1176,6 +1176,16 @@ table .active-day {
 	color: #fff !important;
 	
 }
-.reservation .side-nav {
-	padding-top: 150px;
+/*.reservation .side-nav {*/
+/*	padding-top: 150px;*/
+/*}*/
+/*.table-side-bar .reversed {*/
+/*    display: none !important;*/
+/*}*/
+/*.table-side-bar .list-group-numbered {*/
+/*    display: flex;*/
+/*}*/
+
+.none {
+    display: none !important;
 }
