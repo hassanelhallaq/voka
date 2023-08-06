@@ -543,7 +543,7 @@
                                                     <div class="me-2 ms-auto">
                                                         <div class="fw-bold"> حاصل الجمع</div>
                                                     </div>
-                                                    <span>260 ريال</span>
+                                                    <span class="payment-price">260 ريال</span>
                                                 </div>
                                                 <div
                                                     class="tax d-flex justify-content-between align-items-start mt-4 w-100">

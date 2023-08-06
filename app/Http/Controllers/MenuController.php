@@ -23,7 +23,7 @@ class MenuController extends Controller
         $reservation = Reservation::where([['id', 25]])->first();
         $reservation->status = 'تم الحضور';
         $reservation->update();
-        if ($reservation->status == 'انتهى') {
+        if ($reservation->status != 'انتهى') {
             $table->status = "in_service";
             $table->update();
         }
