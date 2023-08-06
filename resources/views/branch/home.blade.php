@@ -125,6 +125,7 @@
                                             <span class="glider"></span>
                                         </div>
                                     </div> --}}
+
                                     @php
                                         if ($table->reservation) {
                                             $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
@@ -145,6 +146,7 @@
                                                 $totalOrderPrices = 0;
                                             }
                                         } else {
+                                            $orders = null;
                                             $totalOrderPrices = 0;
                                         }
                                     @endphp
@@ -185,18 +187,20 @@
                                             <div id="the-menu" class="c-tab-pane active">
                                                 <ol class="list-group list-group-numbered reversed">
 
-                                                    @if ($orders && $orders->products->count() != 0)
-                                                        @foreach ($orders->products as $product)
-                                                            <li
-                                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                                <div class="me-2 ms-auto">
-                                                                    <div class="fw-bold">{{ $product->name }}</div>
-                                                                </div>
 
-                                                                <span>{{ $product->pivot->price }} ريال</span>
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
+                                                        @if ($orders != null && $orders->products->count() != 0)
+                                                            @foreach ($orders->products as $product)
+                                                                <li
+                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                    <div class="me-2 ms-auto">
+                                                                        <div class="fw-bold">{{ $product->name }}</div>
+                                                                    </div>
+
+                                                                    <span>{{ $product->pivot->price }} ريال</span>
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
+
                                                     <li
                                                         class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
                                                         <a onclick="product({{ $table->id }})" class="me-2">
@@ -233,7 +237,8 @@
                                                             @php
                                                                 $total = $table->reservation->package->price ?? 0 * 0.15;
                                                             @endphp
-                                                            <span>{{ $total - $totalOrderPrices }} سعر{{ $totalOrderPrices }}
+                                                            <span>{{ $total - $totalOrderPrices }}
+                                                                سعر{{ $totalOrderPrices }}
                                                                 ريال</span>
                                                         </div>
                                                         <div class="payment-method">

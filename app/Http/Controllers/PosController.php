@@ -159,7 +159,7 @@ class PosController extends Controller
             });
         })->get();
         $table = Table::with(['reservation' => function ($q) {
-            $q->where('status', 'مؤكد');
+            $q->where('status','!=', 'انتهى');
         }])->find($id);
         return  $render = view('branch.products_orders', compact('products', 'table'));
     }

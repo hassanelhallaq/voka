@@ -39,11 +39,10 @@ class ReservationCron extends Command
         // Update the status of the expired reservations
         foreach ($expiredReservations as $reservation) {
             $package = Package::find($reservation->package_id);
-            $reservationDateTime = $reservation->date;
-            $reservationEndTime = Carbon::createFromFormat('Y-m-d H:i:s', $reservationDateTime)
-                ->addMinutes($reservation->minutes);
+            $reservationEndTime = $reservation->end;
+                
             // Check if the new end time has passed
-            if ($currentDateTime <= $reservationEndTime) {
+            if ($currentDateTime >= $reservationEndTime) {
                 log::info($currentDateTime . '_' . $reservationEndTime . 't');
                 // If the end time has passed, update the reservation status to 'انتهى' (or 'ended')
                 $reservation->status = 'انتهى';
@@ -55,6 +54,7 @@ class ReservationCron extends Command
                 $order->is_done = 1;
                 $order->update();
             } else {
+                  log::info('تم الحضو');
                 if ($reservation->status != 'تم الحضور') {
                     $reservation->status = 'تأخير';
                     $reservation->update();
