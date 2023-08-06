@@ -5,7 +5,7 @@
         <!-- Subheader Start -->
         <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('assets/img/cover.jpg')">
             <div class="container">
-                <div>
+                <div class="header-details">
                     <h1 style="text-align: center;">فرع {{ $branch->name }}</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb"
