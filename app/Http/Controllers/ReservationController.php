@@ -80,6 +80,8 @@ class ReservationController extends Controller
             $order->table_id = $request->table_id;
             $order->package_id = $request->package_id;
             $order->client_id = $request->client_id;
+            $order->reservation_id = $reservation->id;
+
             $order->is_done = 0;
             $order->save();
             if ($request->payment == 'المحفظة' && $wallet->credit > $price) {

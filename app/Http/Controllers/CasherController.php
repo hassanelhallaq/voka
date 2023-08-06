@@ -22,8 +22,12 @@ class CasherController extends Controller
     }
     public function create()
     {
-        $reservation = Reservation::whereDate('date', Carbon::today())->sum('price');
-        return view('dashboard.casher.create', compact('reservation'));
+        $reservationPayment = Reservation::whereDate('date', Carbon::today());
+        $cash = $reservationPayment->where('payment_type', 'كاش')->sum('price');
+        $visa = $reservationPayment->where('payment_type', 'بطاقة ائتمان')->sum('price');
+        $online = $reservationPayment->where('payment_type', 'online')->sum('price');
+
+        return view('dashboard.casher.create', compact('visa', 'cash', 'online'));
     }
     public function store(Request $request)
     {
@@ -35,6 +39,10 @@ class CasherController extends Controller
             'remarks' => 'required',
             'expenses_sum' => 'required',
             'credit_trans' => 'required',
+            'online' => 'required',
+            'online_trans' => 'required',
+
+
         ]);
         if (!$validator->fails()) {
             $casher = new Casher();
@@ -45,6 +53,8 @@ class CasherController extends Controller
             $casher->remarks = $request->get('remarks');
             $casher->expenses_sum = $request->get('expenses_sum');
             $casher->credit_trans = $request->get('credit_trans');
+            $casher->online_trans = $request->get('online_trans');
+            $casher->online = $request->get('online');
             $isSaved = $casher->save();
 
             if ($isSaved) {
@@ -76,6 +86,8 @@ class CasherController extends Controller
             'remarks' => 'required',
             'expenses_sum' => 'required',
             'credit_trans' => 'required',
+            'online' => 'required',
+            'online_trans' => 'required',
         ]);
         if (!$validator->fails()) {
             $casher =   Casher::find($id);
@@ -86,6 +98,8 @@ class CasherController extends Controller
             $casher->remarks = $request->get('remarks');
             $casher->expenses_sum = $request->get('expenses_sum');
             $casher->credit_trans = $request->get('credit_trans');
+            $casher->online_trans = $request->get('online_trans');
+            $casher->online = $request->get('online');
             $isSaved = $casher->update();
 
             if ($isSaved) {

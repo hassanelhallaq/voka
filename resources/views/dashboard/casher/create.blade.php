@@ -40,10 +40,10 @@
                  </div>
                  <div class="row">
                      <div class="form-group col-md-6">
-                         <label>cash z:</label>
+                         <label>cash :</label>
 
-                         <input type="number" id="cash" value="{{ $reservation }}" onInput="expensesSum()"
-                             class="form-control form-control-solid invalid" placeholder="cash z" />
+                         <input type="number" id="cash" value="{{ $cash }}" onInput="expensesSum()"
+                             class="form-control form-control-solid invalid" placeholder="cash " />
 
                      </div>
                  </div>
@@ -76,31 +76,53 @@
 
                      <div class="form-group col-md-6">
 
-                         <label> credit z:</label>
+                         <label> credit :</label>
 
-                         <input type="number" id="credit" class="form-control form-control-solid"
-                             placeholder=" credit z" />
+                         <input type="number" id="credit" value="{{ $visa }}"
+                             class="form-control form-control-solid" placeholder=" credit " />
 
                      </div>
                      <div class="form-group col-md-6">
 
                          <label> credit trans:</label>
 
-                         <input type="number" onInput="creditTrans()" id="credit_trans"
-                             class="form-control form-control-solid" onInput="creditTrans()"
+                         <input type="number" onInput="vouchersIn()" id="credit_trans"
+                             class="form-control form-control-solid" onInput="vouchersIn()"
                              placeholder="credit trans" />
+
+                     </div>
+
+                 </div>
+                 <hr>
+                 <div class="row">
+
+                     <div class="form-group col-md-6">
+
+                         <label> Online:</label>
+
+                         <input type="number" id="online" value="{{ $online }}"
+                             class="form-control form-control-solid" placeholder=" online" />
 
                      </div>
                      <div class="form-group col-md-6">
 
-                         <label>remarks</label>
+                         <label> Online trans:</label>
 
-                         <textarea type="text" id="remarks" class="form-control form-control-solid" placeholder="remarks"></textarea>
+                         <input type="number" onInput="creditTrans()" id="online_trans"
+                             class="form-control form-control-solid" onInput="creditTrans()"
+                             placeholder="credit trans" />
 
                      </div>
-                 </div>
 
+                 </div>
                  <hr>
+                 <div class="form-group col-md-6">
+
+                     <label>remarks</label>
+
+                     <textarea type="text" id="remarks" class="form-control form-control-solid" placeholder="remarks"></textarea>
+
+                 </div>
                  <div class="card-footer">
 
                      <button type="button" onclick="performStore()" id="save"
@@ -175,30 +197,7 @@
 
              }
 
-             function vouchersIn() {
 
-                 var vouchers = parseFloat(document.getElementById("vouchers").value);
-                 var vouchers_trans_1 = parseFloat(document.getElementById("vouchers_trans_1").value);
-                 var vouchers_trans_2 = parseFloat(document.getElementById("vouchers_trans_2").value);
-
-
-                 var vouchers_trans_2Input = document.getElementById('vouchers_trans_2');
-                 var vouchers_trans_1Input = document.getElementById('vouchers_trans_1');
-
-                 if (vouchers_trans_1 + vouchers_trans_2 != vouchers) {
-                     vouchers_trans_2Input.style.backgroundColor = '#ff0000';
-                     vouchers_trans_1Input.style.backgroundColor = '#ff0000';
-
-                     return false;
-
-                 }
-                 if (vouchers_trans_1 + vouchers_trans_2 == vouchers) {
-                     vouchers_trans_2Input.style.backgroundColor = '#ffffff';
-                     vouchers_trans_1Input.style.backgroundColor = '#ffffff';
-                     return true;
-                 }
-
-             }
              var avatar1 = new KTImageInput('kt_image_1');
 
              function performStore() {
@@ -210,6 +209,8 @@
                  formData.append('credit_trans', document.getElementById('credit_trans').value);
                  formData.append('date', document.getElementById('date').value);
                  formData.append('remarks', document.getElementById('remarks').value);
+                 formData.append('online', document.getElementById('online').value);
+                 formData.append('online_trans', document.getElementById('online_trans').value);
                  storeRedirect('/admin/cashers', formData, '/admin/cashers')
 
 

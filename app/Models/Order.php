@@ -13,7 +13,10 @@ class Order extends Model
     {
         return $this->belongsTo(Package::class);
     }
-
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
     public function client()
     {
         return $this->belongsTo(Client::class);

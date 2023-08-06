@@ -54,6 +54,8 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::get('ajax/product/branches', [App\Http\Controllers\ProductController::class, 'ajaxProductBranches'])->name('product.ajax');
         Route::resource('packages', PackageController::class);
         Route::resource('cashers', CasherController::class);
+        Route::get('finish-orders', [App\Http\Controllers\OrderController::class, 'finishOrders'])->name('finish_orders');
+        Route::get('orders/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
 
 
         Route::get('ajax/table/branches', [App\Http\Controllers\TableController::class, 'ajaxTableBranches'])->name('table.ajax');
