@@ -91,6 +91,8 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/product-order/ajax/{id}', [App\Http\Controllers\PosController::class, 'productOrder'])->name('productOrder.ajax');
     Route::post('/order-product/store', [App\Http\Controllers\OrderProductController::class, 'store'])->name('order-product.store');
     Route::get('/table/slots/ajax', [App\Http\Controllers\PosController::class, 'tableSlots'])->name('tableSlots');
+    Route::get('/casher/create', [App\Http\Controllers\PosController::class, 'casher'])->name('casher.create');
+
 
     Route::get('/cal', [App\Http\Controllers\PosController::class, 'ajaxCalender'])->name('ajaxCalender');
     Route::get('/calendar', function () {

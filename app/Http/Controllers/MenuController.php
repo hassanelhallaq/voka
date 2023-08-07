@@ -6,11 +6,19 @@ use App\Models\Branch;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Reservation;
+use App\Models\Setting;
 use App\Models\Table;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $setting = Setting::find(1);
+        if ($setting->status == 'DEACTIVE') {
+            return view('errors.400');
+        }
+    }
     public function index($id, $branch_id)
     {
         $branch = Branch::find($branch_id);

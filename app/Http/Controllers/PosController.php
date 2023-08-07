@@ -159,7 +159,7 @@ class PosController extends Controller
             });
         })->get();
         $table = Table::with(['reservation' => function ($q) {
-            $q->where('status','!=', 'انتهى');
+            $q->where('status', '!=', 'انتهى');
         }])->find($id);
         return  $render = view('branch.products_orders', compact('products', 'table'));
     }
@@ -247,5 +247,18 @@ class PosController extends Controller
         // return view('reservations.show', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
         return  $render = view('branch.time_slots', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
         // return response()->view('branch.calender');
+    }
+
+    public function casher()
+    {
+        $reservationPayment = Reservation::whereDate('date', Carbon::today())->with('table')->whereHas('table', function ($q) {
+            $q->where('branch_id', Auth::user()->id);
+        });
+        $cash = $reservationPayment->where('payment_type', 'كاش')->sum('price');
+        $visa = $reservationPayment->where('payment_type', 'بطاقة ائتمان')->sum('price');
+        $online = $reservationPayment->where('payment_type', 'online')->sum('price');
+        $point = $reservationPayment->where('payment_type', 'المحفظة')->sum('price');
+
+        return view('branch.casher', compact('visa', 'cash', 'online'));
     }
 }
