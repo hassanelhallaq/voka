@@ -1189,3 +1189,18 @@ table .active-day {
 .none {
     display: none !important;
 }
+.form h1 {
+    font-size: 20px;
+}
+.form label {
+    margin-bottom: 16px;
+    color: var(--orange);
+}
+.form input, .form .form-control {
+    background-color: #333 !important;
+    color: var(--white);
+    font-family: "arial" !important;
+}
+.form .form-control {
+	background-image: none !important ;
+}

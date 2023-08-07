@@ -138,7 +138,7 @@ Version: 1.0.0
   transition: .3s;
 }
 .breadcrumb-item+.breadcrumb-item::before{
-    color:transparent;
+    display:none;
 }
 .ct-preloader.hidden{
   opacity: 0;
@@ -499,7 +499,15 @@ blockquote::before{
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
 }
-
+.product .product-thumb img{
+  border-radius: 10px 10px 0px 0px;
+  /*height:250px;*/
+}
+.headProduct{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
 blockquote p{
   margin-bottom: 0 !important;
   font-family: "Oswald", sans-serif;
@@ -4834,6 +4842,12 @@ body{
     text-align: right;
     margin:0;
   }
+  .subheader h1{
+      font-size:20px;
+  }
+  .tableDetails{
+      font-size:18px;
+  }
   .main-header.header-absolute{
     position: relative;
   }
@@ -5386,6 +5400,7 @@ body{
   }
   .product .product-thumb img{
     width: 200px;
+    height:150px;
   }
 
 }

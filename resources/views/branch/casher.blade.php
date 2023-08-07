@@ -1,37 +1,36 @@
 @extends('branch.parent')
 @section('contentFront')
-    <form class="form" method="post" id='create_form'>
+     <div class="col-md-11">
+        <form class="form pt-5" method="post" id='create_form'>
         @csrf
         <div class="card-body">
             <div class="row">
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-2">
 
                     <label><strong>Date</strong></label>
 
                     <input type="date" id="date" class="form-control form-control-solid" placeholder="date" />
 
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
+   
+                <div class="form-group col-md-2">
                     <label>اجمالي مبيعات الكاش المسجلة :</label>
 
                     <input type="number" id="cash" value="{{ $cash }}" readonly onInput="expensesSum()"
                         class="form-control form-control-solid invalid" />
 
                 </div>
-            </div>
-            <div class="row">
+        
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-2">
 
                     <label> ادخل قيمة الكاش داخل الصندوق:</label>
 
                     <input type="number" id="cash_found" onInput="expensesSum()" class="form-control form-control-solid" />
 
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-2">
 
                     <label> صافي الجرد:</label>
 
@@ -40,7 +39,7 @@
 
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-2">
 
                     <label> حالة الجرد:</label>
 
@@ -51,14 +50,9 @@
 
             </div>
 
-
-            <hr>
-            <span>
-                <h1>قسم جرد ماكينة الدفع</h1>
-            </span>
-            <div class="row">
-
-                <div class="form-group col-md-6">
+            <div class="row my-4">
+                <h1 class="mb-4">قسم جرد ماكينة الدفع</h1>
+                <div class="form-group col-md-3">
 
                     <label> اجمالي مبيعات ماكينة الدفع :</label>
 
@@ -66,7 +60,7 @@
                         class="form-control form-control-solid" />
 
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> ادخل قيمة اجمالي المدفوعات:</label>
 
@@ -74,7 +68,7 @@
                         onInput="vouchersIn()" />
 
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> صافي الجرد:</label>
 
@@ -83,8 +77,8 @@
 
                 </div>
 
-                <div class="form-group col-md-6">
-
+                <div class="form-group col-md-3">
+                    
                     <label> حالة الجرد:</label>
 
                     <input type="text" id="credit_status" onInput="vouchersIn()" readonly
@@ -92,13 +86,10 @@
 
                 </div>
             </div>
-            <hr>
-            <span>
-                <h1>قسم جرد الدفع الالكتروني</h1>
-            </span>
-            <div class="row">
-
-                <div class="form-group col-md-6">
+         
+            <div class="row my-4">
+                <h1 class="mb-4">قسم جرد الدفع الالكتروني</h1>
+                <div class="form-group col-md-3">
 
                     <label> اجمالي مبيعات ماكينة الدفع
                         :</label>
@@ -107,7 +98,7 @@
                         class="form-control form-control-solid" />
 
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> ادخل قيمة اجمالي المدفوعات:</label>
 
@@ -115,7 +106,7 @@
                         onInput="creditTrans()" />
 
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> صافي الجرد:</label>
 
@@ -124,7 +115,7 @@
 
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> حالة الجرد:</label>
 
@@ -133,14 +124,10 @@
 
                 </div>
             </div>
-            <hr>
-            <span>
-                <h1>استخدامات الرصيد والمحفظة
+            <div class="row my-4">
+           <h1 class="mb-4">استخدامات الرصيد والمحفظة
                 </h1>
-            </span>
-            <div class="row">
-
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> اجمالي الرصيد المسجل
                         :</label>
@@ -149,7 +136,7 @@
                         class="form-control form-control-solid" />
 
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> اجمالي الرصيد المستخدم:</label>
 
@@ -157,7 +144,7 @@
                         onInput="creditTrans()" />
 
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> صافي الجرد:</label>
 
@@ -166,7 +153,7 @@
 
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
 
                     <label> حالة الجرد:</label>
 
@@ -176,7 +163,11 @@
                 </div>
             </div>
             <hr>
-            <div class="form-group col-md-6">
+           
+
+        </div>
+        <div class="row align-items-end">
+             <div class="form-group col-md-9">
 
                 <label>ادخل مالحظة إدارية
                 </label>
@@ -184,18 +175,18 @@
                 <textarea type="text" id="remarks" class="form-control form-control-solid" placeholder="remarks"></textarea>
 
             </div>
-            <div class="card-footer">
+            <div class="col-md-3">
 
-                <button type="button" onclick="performStore()" id="save"
-                    class="btn btn-primary mr-2">{{ __('Submit') }}</button>
+                <button  type="button" onclick="performStore()" id="save"
+                    class="btn btn-primary mr-2 w-100">{{ __('Submit') }}</button>
 
 
 
             </div>
-
         </div>
 
     </form>
+    </div>
 @endsection
 
 @section('js')

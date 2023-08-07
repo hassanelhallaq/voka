@@ -14,10 +14,10 @@ class MenuController extends Controller
 {
     public function __construct()
     {
-        $setting = Setting::find(1);
-        if ($setting->status == 'DEACTIVE') {
-            return view('errors.400');
-        }
+        // $setting = Setting::find(1);
+        // if ($setting->status == 'DEACTIVE') {
+        //     return view('errors.400');
+        // }
     }
     public function index($id, $branch_id)
     {
@@ -29,12 +29,12 @@ class MenuController extends Controller
         //     return view('errors.400');
         // }
         $reservation = Reservation::where([['id', 25]])->first();
-        $reservation->status = 'تم الحضور';
-        $reservation->update();
-        if ($reservation->status != 'انتهى') {
-            $table->status = "in_service";
-            $table->update();
-        }
+        // $reservation->status = 'تم الحضور';
+        // $reservation->update();
+        // if ($reservation->status != 'انتهى') {
+        //     $table->status = "in_service";
+        //     $table->update();
+        // }
         $categories = ProductCategory::where('category_status', 1)
             ->with([
                 'branch' => function ($query) use ($branch_id) {

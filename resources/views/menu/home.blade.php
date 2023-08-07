@@ -71,14 +71,18 @@
                                     </a>
                                     <div class="product-body">
                                         <div class="product-desc">
-                                            <h4><a href="menu-item.html">{{ $product->name }}</a></h4>
+                                            <div class="headProduct">
+                                                <h4><a href="menu-item.html">{{ $product->name }}</a></h4>
+                                                <p class="product-price">{{ $product->price }}</p>
+                                            </div>
+                                            <span>اسم الفئة</span>
                                             <p>{{ $product->description }}</p>
-                                            <p class="product-price">{{ $product->price }}</p>
+                                           
                                         </div>
                                         <div class="product-controls">
                                             <a href="#" class="اطلب-item btn-custom btn-sm shadow-none"
                                                 data-product='{"name": "{{ $product->name }}", "price": "{{ $product->price }}", "image": "{{ $product->getFirstMediaUrl('product', 'thumb') }}"}'>
-                                                اطلب <i class="fas fa-shopping-cart"></i>
+                                                أضف للطلب <i class="fas fa-shopping-cart"></i>
                                             </a>
                                         </div>
                                     </div>
