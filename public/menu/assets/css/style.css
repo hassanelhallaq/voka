@@ -4813,6 +4813,12 @@ body{
   .breadcrumb{
     padding:0;
   }
+  .header-details{
+    background: #eee;
+    border-radius: 4px;
+    margin: 5px 0px;
+    padding: 5px;
+  }
   .product-desc p{
     display: none;
   }
