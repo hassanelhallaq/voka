@@ -82,6 +82,14 @@
                                         <span>القائمة</span>
                                     </a>
                                 </li>
+                                <li class="nav-item product">
+                                    <a href="{{ route('casher.create') }}"
+                                        class="nav-link d-flex flex-column justify-content-center align-items-center">
+                                        <i class="fa-solid fa-clipboard-list "></i>
+                                        <span>الجرد</span>
+                                    </a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
