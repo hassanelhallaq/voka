@@ -137,6 +137,9 @@ Version: 1.0.0
   -o-transition: .3s;
   transition: .3s;
 }
+.breadcrumb-item+.breadcrumb-item::before{
+    color:transparent;
+}
 .ct-preloader.hidden{
   opacity: 0;
   visibility: hidden;
@@ -1260,6 +1263,9 @@ table img{
   -webkit-transform: translateY(-4px);
       -ms-transform: translateY(-4px);
           transform: translateY(-4px);
+}
+.slick-initialized .slick-slide{
+    margin:0;
 }
 .mega-menu-promotion-text h4{
   margin-bottom: 5px;
@@ -4792,9 +4798,12 @@ body{
 }
 
 @media (max-width: 991px) {
-  .header-details{
-    display:flex;
-    align-items: center;
+  /*.header-details{*/
+  /*  display:flex;*/
+  /*  align-items: center;*/
+  /*}*/
+  .breadcrumb{
+    padding:0;
   }
   .product-desc p{
     display: none;
@@ -4822,6 +4831,8 @@ body{
   }
   .tableDetails,.subheader h1{
     color:#0D0705;
+    text-align: right;
+    margin:0;
   }
   .main-header.header-absolute{
     position: relative;
