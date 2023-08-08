@@ -52,8 +52,15 @@
 
                      <tr>
 
-                         <th>Date</th>
-                         <th>is Done</th>
+                         <th>الفرع</th>
+                         <th>التاريخ</th>
+                         <th>الشفت</th>
+                         <th>الكاش</th>
+                         <th>مكينة الدفع</th>
+                         <th>دفع الكتروني
+                         </th>
+                         <th>الرصيد</th>
+                         <th>الحالة</th>
 
                      </tr>
                  </thead>
@@ -61,29 +68,36 @@
                  <tbody>
                      @foreach ($cashers as $casher)
                          <tr>
-
+                             <td>
+                                 {{ $casher->branch->name }}
+                             </td>
                              <td>
                                  {{ $casher->date }}
                              </td>
 
-
-                             @if ($casher->is_done == 1)
-                                 <td style="background-color:#00FF00">
-                                     Done
-                                 </td>
-                             @else
-                                 <td style="background-color:#FF0000">
-                                     Not Done
-                                 </td>
-                             @endif
                              <td>
-                                 <a href="{{ route('casher.edit', [$casher->id]) }}" class="btn btn-icon btn-success">
+                                 {{ $casher->shift_type }}
+                             </td>
+                             <td>
+                                 {{ $casher->cash }}
+                             </td>
+                             <td>
+                                 {{ $casher->credit }}
+                             </td>
+                             <td>
+                                 {{ $casher->online }}
+                             </td>
+                             <td>
+                                 {{ $casher->point }}
+                             </td>
+                             <td>
+                                 {{-- <a href="{{ route('casher.edit', [$casher->id]) }}" class="btn btn-icon btn-success">
                                      <i class="flaticon-edit"></i>
                                  </a>
                                  <button onclick="performDestroy({{ $casher->id }} , this)"
                                      class="btn btn-icon btn-danger">
                                      <i class="flaticon2-delete"></i>
-                                 </button>
+                                 </button> --}}
                              </td>
                          </tr>
                      @endforeach

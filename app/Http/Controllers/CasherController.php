@@ -16,7 +16,7 @@ class CasherController extends Controller
     public function index(Request $request)
     {
         $date =  $request->date ?? Carbon::now()->format('Y-m');
-        $cashers =  Casher::with('employee')->orderBy('date', 'desc')->whereRaw("DATE_FORMAT(date, '%Y-%m') = ?", [$date])->paginate(50);
+        $cashers =  Casher::with('branch')->orderBy('date', 'desc')->whereRaw("DATE_FORMAT(date, '%Y-%m') = ?", [$date])->paginate(50);
 
         return view('dashboard.casher.index', compact('cashers'));
     }
@@ -41,8 +41,15 @@ class CasherController extends Controller
             'credit_trans' => 'required',
             'online' => 'required',
             'online_trans' => 'required',
-
-
+            'status_cash' => 'required',
+            'credit_sum' => 'required',
+            'credit_status' => 'required',
+            'online_sum' => 'required',
+            'point' => 'required',
+            'point_trans' => 'required',
+            'point_sum' => 'required',
+            'point_status' => 'required',
+            'shift_type' => 'required',
         ]);
         if (!$validator->fails()) {
             $casher = new Casher();
@@ -55,11 +62,19 @@ class CasherController extends Controller
             $casher->credit_trans = $request->get('credit_trans');
             $casher->online_trans = $request->get('online_trans');
             $casher->online = $request->get('online');
+            $casher->online_trans = $request->get('online_trans');
+            $casher->status_cash = $request->get('status_cash');
+            $casher->credit_sum = $request->get('credit_sum');
+            $casher->credit_status = $request->get('credit_status');
+            $casher->online_sum = $request->get('online_sum');
+            $casher->point = $request->get('point');
+            $casher->point_trans = $request->get('point_trans');
+            $casher->point_sum = $request->get('point_sum');
+            $casher->point_status = $request->get('point_status');
+            $casher->shift_type = $request->get('shift_type');
+            $casher->branch_id = Auth::user()->id;
             $isSaved = $casher->save();
-
             if ($isSaved) {
-
-                return ['redirect' => route('cashers.index')];
                 return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
             } else {
 
