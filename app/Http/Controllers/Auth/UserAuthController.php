@@ -53,9 +53,10 @@ class UserAuthController extends Controller
             $endTime = Carbon::createFromFormat('H:i:s', $shift->end_time);
 
             if ($shift->day === $now->format('l') && $now->between($startTime->startOfDay(), $endTime->endOfDay())) {
-            } else {
-                return response()->json(['icon' => 'error', 'title' => 'Login Faild'], 400);
-            }
+            } 
+            // else {
+            //     return response()->json(['icon' => 'error', 'title' => 'لقد انتهى معاد عملك'], 400);
+            // }
         }
         if (!$validator->fails()) {
             if (Auth::guard('branch')->attempt($credentials)) {
