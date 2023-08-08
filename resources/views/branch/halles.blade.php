@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
     <style>
         /*----------------------------------- new design --------------------------------------------*/
         .home-card {
@@ -233,8 +233,9 @@
                                             <div class="row">
                                                 @foreach ($item->tables as $table)
                                                     <div class="col-md-2">
-                                                        <div class="sofa sofa-serv not-selected" data-id="table{{ $table->id }}"
-                                                            data-stat="serv" data-h="hall2" data-pstat="serv">
+                                                        <div class="sofa sofa-serv not-selected"
+                                                            data-id="table{{ $table->id }}" data-stat="serv"
+                                                            data-h="hall2" data-pstat="serv">
                                                             <svg width="93" height="57" viewBox="0 0 93 57"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path class="fill" fill-rule="evenodd"
@@ -889,9 +890,9 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
         integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
     </script>
-    <script src="./js/date.js"></script>
-    <script src="./js/bootstrap-clockpicker.min.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="{{ asset('front/js/date.js') }}"></script>
+    <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
+    <script src="{{ asset('front/js/main.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.home-card .sofa').on('click', function() {
