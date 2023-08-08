@@ -99,7 +99,7 @@
                                  @endif
                              </td>
                              <td>
-                                 <a href="{{ route('casher.edit', [$casher->id]) }}" class="btn btn-icon btn-success">
+                                 <a href="{{ route('cashers.edit', [$casher->id]) }}" class="btn btn-icon btn-success">
                                      <i class="flaticon-edit"></i>
                                  </a>
                                  <button onclick="performDestroy({{ $casher->id }} , this)"
@@ -125,7 +125,7 @@
  <script>
      function performDestroy(id, reference) {
 
-         let url = '/dashboard/admin/casher/' + id;
+         let url = '/dashboard/admin/cashers/' + id;
 
          confirmDestroy(url, reference);
 
