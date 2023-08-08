@@ -72,6 +72,7 @@ class CasherController extends Controller
             $casher->point_sum = $request->get('point_sum');
             $casher->point_status = $request->get('point_status');
             $casher->shift_type = $request->get('shift_type');
+            $casher->online_status = $request->get('online_status');
             $casher->branch_id = Auth::user()->id;
             $casher->status = 'underreview';
             $isSaved = $casher->save();
@@ -136,6 +137,7 @@ class CasherController extends Controller
             $casher->point_status = $request->get('point_status');
             $casher->shift_type = $request->get('shift_type');
             $casher->status = $request->get('status');
+            $casher->online_status = $request->get('online_status');
             $isSaved = $casher->save();
             if ($isSaved) {
 

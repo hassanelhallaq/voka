@@ -41,7 +41,8 @@
                                  <div class="d-flex d-flex justify-content-around">
                                      <div class="checkbox-wrapper-33">
                                          <label class="checkbox">
-                                             <input type="checkbox" id="checkbox1" value="شفت صباحى"
+                                             <input type="checkbox" @if ($casher->shift_type == 'شفت صباحى') checked @endif
+                                                 id="checkbox1" value="شفت صباحى"
                                                  class="checkbox__trigger visuallyhidden">
                                              <span class="checkbox__symbol">
                                                  <svg xmlns="http://www.w3.org/2000/svg" version="1"
@@ -55,7 +56,8 @@
                                      </div>
                                      <div class="checkbox-wrapper-33">
                                          <label class="checkbox">
-                                             <input type="checkbox" id="checkbox2" value="شفت مسائي"
+                                             <input type="checkbox" @if ($casher->shift_type == 'شفت مسائي') checked @endif
+                                                 id="checkbox2" value="شفت مسائي"
                                                  class="checkbox__trigger visuallyhidden">
                                              <span class="checkbox__symbol">
                                                  <svg xmlns="http://www.w3.org/2000/svg" version="1"
@@ -69,7 +71,8 @@
                                      </div>
                                      <div class="checkbox-wrapper-33">
                                          <label class="checkbox">
-                                             <input type="checkbox" id="checkbox3" value="دوام كامل"
+                                             <input type="checkbox" @if ($casher->shift_type == 'دوام كامل') checked @endif
+                                                 id="checkbox3" value="دوام كامل"
                                                  class="checkbox__trigger visuallyhidden">
                                              <span class="checkbox__symbol">
                                                  <svg xmlns="http://www.w3.org/2000/svg" version="1"
