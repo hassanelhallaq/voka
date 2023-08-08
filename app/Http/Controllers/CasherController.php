@@ -16,7 +16,7 @@ class CasherController extends Controller
     public function index(Request $request)
     {
         $date =  $request->date ?? Carbon::now()->format('Y-m');
-        $cashers =  Casher::with('branch')->orderBy('date', 'desc')->whereRaw("DATE_FORMAT(date, '%Y-%m') = ?", [$date])->paginate(50);
+        $cashers =  Casher::with('branch')->orderBy('date', 'desc')->paginate(50);
 
         return view('dashboard.casher.index', compact('cashers'));
     }
