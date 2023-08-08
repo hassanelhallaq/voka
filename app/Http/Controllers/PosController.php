@@ -77,7 +77,11 @@ class PosController extends Controller
         $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
         return  $render = view('branch._halls', compact('halles'));
     }
-
+    public function hallsNew()
+    {
+        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        return  $render = view('branch.halls', compact('halles'));
+    }
     public function _client(Request $request)
     {
         $clients = Client::when($request->phone, function ($query) use ($request) {
