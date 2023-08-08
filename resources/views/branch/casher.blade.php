@@ -5,49 +5,90 @@
         @csrf
         <div class="card-body">
             <div class="row">
+                <div class="col-md-12 my-5">
+                    <div class="row">
+                        <div class="form-group  col-md-3">
+                            <label><strong>التاريخ</strong></label>
 
-                <div class="form-group col-md-2">
-
-                    <label><strong>Date</strong></label>
-
-                    <input type="date" id="date" class="form-control form-control-solid" placeholder="date" />
-
+                            <input type="date" id="date" class="form-control form-control-solid" placeholder="date" />
+                            
+                        </div>
+                        <div class="col-md-5 pt-5">
+                            <div class="d-flex d-flex justify-content-around">
+                                <div class="checkbox-wrapper-33">
+                              <label class="checkbox">
+                                <input type="checkbox" class="checkbox__trigger visuallyhidden">
+                                <span class="checkbox__symbol">
+                                  <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 28 28" height="28px" width="28px" class="icon-checkbox" aria-hidden="true">
+                                    <path d="M4 14l8 7L24 7"></path>
+                                  </svg>
+                                </span>
+                                <p class="checkbox__textwrapper">شفت صباحى</p>
+                              </label>
+                            </div>
+                            <div class="checkbox-wrapper-33">
+                              <label class="checkbox">
+                                <input type="checkbox" class="checkbox__trigger visuallyhidden">
+                                <span class="checkbox__symbol">
+                                  <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 28 28" height="28px" width="28px" class="icon-checkbox" aria-hidden="true">
+                                    <path d="M4 14l8 7L24 7"></path>
+                                  </svg>
+                                </span>
+                                <p class="checkbox__textwrapper">شفت مسائي</p>
+                              </label>
+                            </div>
+                            <div class="checkbox-wrapper-33">
+                              <label class="checkbox">
+                                <input type="checkbox" class="checkbox__trigger visuallyhidden">
+                                <span class="checkbox__symbol">
+                                  <svg xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 28 28" height="28px" width="28px" class="icon-checkbox" aria-hidden="true">
+                                    <path d="M4 14l8 7L24 7"></path>
+                                  </svg>
+                                </span>
+                                <p class="checkbox__textwrapper">دوام كامل </p>
+                              </label>
+                            </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="col-md-9"></div>
+                    </div>
                 </div>
-   
-                <div class="form-group col-md-2">
-                    <label>اجمالي مبيعات الكاش المسجلة :</label>
-
-                    <input type="number" id="cash" value="{{ $cash }}" readonly onInput="expensesSum()"
-                        class="form-control form-control-solid invalid" />
-
+                
+                <div class="row">
+                     <h1 class="mb-4">  قسم جرد الكاش </h1>
+                    <div class="form-group col-md-3">
+                        <label>اجمالي مبيعات الكاش المسجلة :</label>
+    
+                        <input type="number" id="cash" value="{{ $cash }}" readonly onInput="expensesSum()"
+                            class="form-control form-control-solid invalid" />
+    
+                    </div>
+                    <div class="form-group col-md-3">
+    
+                        <label> ادخل قيمة الكاش داخل الصندوق:</label>
+    
+                        <input type="number" id="cash_found" onInput="expensesSum()" class="form-control form-control-solid" />
+    
+                    </div>
+                    <div class="form-group col-md-3">
+    
+                        <label> صافي الجرد:</label>
+    
+                        <input type="number" id="expenses_sum" onInput="expensesSum()" readonly
+                            class="form-control form-control-solid" />
+    
+                    </div>
+                    <div class="form-group col-md-3">
+    
+                        <label> حالة الجرد:</label>
+    
+                        <input type="text" id="status_cash" onInput="expensesSum()"readonly
+                            class="form-control form-control-solid" />
+    
+                    </div>
                 </div>
-        
-
-                <div class="form-group col-md-2">
-
-                    <label> ادخل قيمة الكاش داخل الصندوق:</label>
-
-                    <input type="number" id="cash_found" onInput="expensesSum()" class="form-control form-control-solid" />
-
-                </div>
-                <div class="form-group col-md-2">
-
-                    <label> صافي الجرد:</label>
-
-                    <input type="number" id="expenses_sum" onInput="expensesSum()" readonly
-                        class="form-control form-control-solid" />
-
-                </div>
-
-                <div class="form-group col-md-2">
-
-                    <label> حالة الجرد:</label>
-
-                    <input type="text" id="status_cash" onInput="expensesSum()"readonly
-                        class="form-control form-control-solid" />
-
-                </div>
-
             </div>
 
             <div class="row my-4">
