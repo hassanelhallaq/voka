@@ -169,8 +169,8 @@
                          <label> اجمالي مبيعات ماكينة الدفع
                              :</label>
 
-                         <input type="number" id="online" value="{{ $casher->online }}"
-                             value="{{ $online }}" readonly class="form-control form-control-solid" />
+                         <input type="number" id="online" value="{{ $casher->online }}" readonly
+                             class="form-control form-control-solid" />
 
                      </div>
                      <div class="form-group col-md-3">
