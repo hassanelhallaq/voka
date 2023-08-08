@@ -73,6 +73,7 @@ class CasherController extends Controller
             $casher->point_status = $request->get('point_status');
             $casher->shift_type = $request->get('shift_type');
             $casher->branch_id = Auth::user()->id;
+            $casher->status = 'underreview';
             $isSaved = $casher->save();
             if ($isSaved) {
                 return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
@@ -103,9 +104,18 @@ class CasherController extends Controller
             'credit_trans' => 'required',
             'online' => 'required',
             'online_trans' => 'required',
+            'status_cash' => 'required',
+            'credit_sum' => 'required',
+            'credit_status' => 'required',
+            'online_sum' => 'required',
+            'point' => 'required',
+            'point_trans' => 'required',
+            'point_sum' => 'required',
+            'point_status' => 'required',
+            'shift_type' => 'required',
         ]);
         if (!$validator->fails()) {
-            $casher =   Casher::find($id);
+            $casher =  Casher::find($id);
             $casher->cash = $request->get('cash');
             $casher->cash_found = $request->get('cash_found');
             $casher->credit = $request->get('credit');
@@ -115,11 +125,20 @@ class CasherController extends Controller
             $casher->credit_trans = $request->get('credit_trans');
             $casher->online_trans = $request->get('online_trans');
             $casher->online = $request->get('online');
-            $isSaved = $casher->update();
-
+            $casher->online_trans = $request->get('online_trans');
+            $casher->status_cash = $request->get('status_cash');
+            $casher->credit_sum = $request->get('credit_sum');
+            $casher->credit_status = $request->get('credit_status');
+            $casher->online_sum = $request->get('online_sum');
+            $casher->point = $request->get('point');
+            $casher->point_trans = $request->get('point_trans');
+            $casher->point_sum = $request->get('point_sum');
+            $casher->point_status = $request->get('point_status');
+            $casher->shift_type = $request->get('shift_type');
+            $casher->status = $request->get('status');
+            $isSaved = $casher->save();
             if ($isSaved) {
-                // $role = Role::where('id', $request->role_id)->first();
-                // $casher->assignRole($role->id);
+
                 return ['redirect' => route('cashers.index')];
                 // return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
             } else {

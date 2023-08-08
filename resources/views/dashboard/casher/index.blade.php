@@ -61,6 +61,7 @@
                          </th>
                          <th>الرصيد</th>
                          <th>الحالة</th>
+                         <th>الاعدادات</th>
 
                      </tr>
                  </thead>
@@ -91,13 +92,20 @@
                                  {{ $casher->point }}
                              </td>
                              <td>
-                                 {{-- <a href="{{ route('casher.edit', [$casher->id]) }}" class="btn btn-icon btn-success">
+                                 @if ($casher->status == 'underreview')
+                                     قيد المراجعه
+                                 @else
+                                     تم المراجعة
+                                 @endif
+                             </td>
+                             <td>
+                                 <a href="{{ route('casher.edit', [$casher->id]) }}" class="btn btn-icon btn-success">
                                      <i class="flaticon-edit"></i>
                                  </a>
                                  <button onclick="performDestroy({{ $casher->id }} , this)"
                                      class="btn btn-icon btn-danger">
                                      <i class="flaticon2-delete"></i>
-                                 </button> --}}
+                                 </button>
                              </td>
                          </tr>
                      @endforeach
