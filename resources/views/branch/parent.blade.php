@@ -82,7 +82,7 @@
                                         <span>القائمة</span>
                                     </a>
                                 </li>
-                                <li class="nav-item product">
+                                <li class="nav-item  casher">
                                     <a onclick="casher()"
                                         class="nav-link d-flex flex-column justify-content-center align-items-center">
                                         <i class="fa-solid fa-clipboard-list "></i>
@@ -219,7 +219,7 @@
         $('.nav-item.active').removeClass('active');
 
         // Add active class to "الحجوزات" link
-        $('.resver').addClass('active');
+        $('.casher').addClass('active');
         $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/casher/create', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
