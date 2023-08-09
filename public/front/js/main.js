@@ -1,6 +1,54 @@
 
 $(document).ready(function () {
     
+        // فلتر الحالات للصفحة الرئيسية
+    // $('.s-filter').on('click', function() {
+    //     console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    //     var key = $(this).data('st');
+    //     if (key === 'all') {
+    //         $('.sofa').removeClass('not-selected');
+    //     } else {
+    //         $('.sofa').addClass('not-selected'); // إخفاء جميع العناصر
+    //         // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
+    //         $('.sofa[data-pstat="' + key + '"]').removeClass('not-selected');
+    //     }
+    // });
+
+
+
+    $('.home-card .sofa').on('click', function() {
+        console.log('hhhhh');
+        $('.home-card .sofa').removeClass('active-table');
+        $(this).addClass('active-table');
+
+        $('.table-side-bar').hide();
+        var newId = '#' + $(this).data('id');
+
+        if ($(this).data('stat') == 'available') {
+            $('#tab-place').show();
+            $(newId).hide();
+        } else {
+            $('#tab-place').hide();
+            $(newId).show();
+            $('.side-place').append($(newId));
+        }
+    });
+
+ 
+    // // فلتر الصالات للصفحة الرئيسية
+    // $('.h-filter').on('click', function() {
+    //     console.log('ckicked');
+    //     var key = $(this).data('salon');
+    //     // $('#salon5').addClass('active-salon');
+        
+    //     $('.home-card').attr('style', 'display: none !important').removeClass(
+    //         'active-salon'); // إخفاء جميع العناصر
+    //     // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
+    //     $(key).attr('style', 'display: flex !important').addClass('active-salon');
+
+    // });
+
+    
     $('.to-pay').parent().hide();
       //  getting package id
     $('.choos-btn').on('click', function(){
@@ -234,27 +282,27 @@ $(".halls-tab .tab-pane").first().addClass("active");
   });
 
   // فلتر الحالات للصفحة الرئيسية
-  $('.s-filter').on('click', function(){
-    var key = $(this).data('st');
-    if (key === 'all') {
-          $('.card-col').attr('style', 'display: flex !important'); // إظهار جميع العناصر
-        } else {
-          $('.card-col').attr('style', 'display: none !important');      // إخفاء جميع العناصر
-          // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
-          $('.card-col[data-pstat="' + key + '"]').attr('style', 'display: flex !important');
-        }
-  });
+//   $('.s-filter').on('click', function(){
+//     var key = $(this).data('st');
+//     if (key === 'all') {
+//           $('.card-col').attr('style', 'display: flex !important'); // إظهار جميع العناصر
+//         } else {
+//           $('.card-col').attr('style', 'display: none !important');      // إخفاء جميع العناصر
+//           // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
+//           $('.card-col[data-pstat="' + key + '"]').attr('style', 'display: flex !important');
+//         }
+//   });
   // فلتر الصالات للصفحة الرئيسية
-  $('.h-filter').on('click', function(){
-    var key = $(this).data('ha');
-        if (key === 'all') {
-          $('.card-col').attr('style', 'display: flex !important'); // إظهار جميع العناصر
-        } else {
-          $('.card-col').attr('style', 'display: none !important');      // إخفاء جميع العناصر
-          // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
-          $('.card-col[data-h="' + key + '"]').attr('style', 'display: flex !important');
-        }
-  });
+//   $('.h-filter').on('click', function(){
+//     var key = $(this).data('ha');
+//         if (key === 'all') {
+//           $('.card-col').attr('style', 'display: flex !important'); // إظهار جميع العناصر
+//         } else {
+//           $('.card-col').attr('style', 'display: none !important');      // إخفاء جميع العناصر
+//           // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
+//           $('.card-col[data-h="' + key + '"]').attr('style', 'display: flex !important');
+//         }
+//   });
   // فلتر للعداد التنازلى للطاولات
   setInterval(function() {
     $('.card-col').each(function() {

@@ -18,17 +18,43 @@ class PosController extends Controller
 {
     public function home()
     {
-        $halles = Lounge::with(['tables' => function ($q) {
-            $q->with(['reservation' => function ($q) {
-                $now = Carbon::now(); // Get the current date and time
-                $q->with(['package' => function ($q) use ($now) {
-                    $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
-                }])
-                    ->where('status', '!=', 'انتهى');
-            }]);
-        }])->where('branch_id', Auth::user()->branch_id)->get();
+        // $halles = Lounge::with(['tables' => function ($q) {
+        //     $q->with(['reservation' => function ($q) {
+        //         $now = Carbon::now(); // Get the current date and time
+        //         $q->with(['package' => function ($q) use ($now) {
+        //             $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
+        //         }])
+        //             ->where('status', '!=', 'انتهى');
+        //     }]);
+        // }])->where('branch_id', Auth::user()->branch_id)->get();
+        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        $loungesSortOne = Lounge::where('sort', 1)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
 
-        return response()->view('branch.home', compact('halles'));
+        $loungesSortow = Lounge::where('sort', 2)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $halfCount = ceil($loungesSortow->tables->count() / 2);
+        $firstHalfTwo = $loungesSortow->tables->slice(0, $halfCount);
+        $secondHalfTwo = $loungesSortow->tables->slice($halfCount);
+        $loungesSorThree = Lounge::where('sort', 4)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+
+        $loungesSortowSilver = Lounge::where('sort', 3)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $halfCountSilver = ceil($loungesSortowSilver->tables->count() / 2);
+        $firstHalfSilverTwo = $loungesSortowSilver->tables->slice(0, $halfCountSilver);
+        $secondHalfSilverTwo = $loungesSortowSilver->tables->slice($halfCountSilver);
+
+        return response()->view('branch.home', compact('halles', 'loungesSortOne', 'loungesSorThree', 'loungesSortow', 'loungesSortowSilver', 'firstHalfTwo', 'secondHalfTwo', 'secondHalfSilverTwo', 'firstHalfSilverTwo'));
+
+        // return response()->view('branch.home', compact('halles'));
     }
 
     public function _hallesBranch(Request $request)
@@ -46,16 +72,52 @@ class PosController extends Controller
     }
     public function _home()
     {
-        $halles = Lounge::with(['tables' => function ($q) {
-            $q->with(['reservation' => function ($q) {
-                $now = Carbon::now(); // Get the current date and time
-                $q->with(['package' => function ($q) use ($now) {
-                    $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
-                }])
-                    ->where('status', '!=', 'انتهى');
-            }]);
-        }])->where('branch_id', Auth::user()->branch_id)->get();
-        return view('branch._home', compact('halles'))->render();
+        // $halles = Lounge::with(['tables' => function ($q) {
+        //     $q->with(['reservation' => function ($q) {
+        //         $now = Carbon::now(); // Get the current date and time
+        //         $q->with(['package' => function ($q) use ($now) {
+        //             $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
+        //         }])
+        //             ->where('status', '!=', 'انتهى');
+        //     }]);
+        // }])->where('branch_id', Auth::user()->branch_id)->get();
+        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        $loungesSortOne = Lounge::where('sort', 1)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $loungesSortow = Lounge::where('sort', 2)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $halfCount = ceil($loungesSortow->tables->count() / 2);
+        $firstHalfTwo = $loungesSortow->tables->slice(0, $halfCount);
+        $secondHalfTwo = $loungesSortow->tables->slice($halfCount);
+        $loungesSorThree = Lounge::where('sort', 4)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+
+        $loungesSortowSilver = Lounge::where('sort', 3)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $halfCountSilver = ceil($loungesSortowSilver->tables->count() / 2);
+        $firstHalfSilverTwo = $loungesSortowSilver->tables->slice(0, $halfCountSilver);
+        $secondHalfSilverTwo = $loungesSortowSilver->tables->slice($halfCountSilver);
+
+        return view('branch._home', compact(
+            'halles',
+            'loungesSortOne',
+            'loungesSorThree',
+            'loungesSortow',
+            'loungesSortowSilver',
+            'firstHalfTwo',
+            'secondHalfTwo',
+            'secondHalfSilverTwo',
+            'firstHalfSilverTwo'
+        ))->render();
+        // return view('branch._home', compact('halles'))->render();
     }
 
     public function products()
@@ -80,7 +142,30 @@ class PosController extends Controller
     public function hallsNew()
     {
         $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
-        return  $render = view('branch.halles', compact('halles'));
+        $loungesSortOne = Lounge::where('sort', 1)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $loungesSortow = Lounge::where('sort', 2)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $halfCount = ceil($loungesSortow->tables->count() / 2);
+        $firstHalfTwo = $loungesSortow->tables->slice(0, $halfCount);
+        $secondHalfTwo = $loungesSortow->tables->slice($halfCount);
+        $loungesSorThree = Lounge::where('sort', 4)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+
+        $loungesSortowSilver = Lounge::where('sort', 3)->with('tables')
+            ->where('branch_id', Auth::user()->id)
+            ->first();
+
+        $halfCountSilver = ceil($loungesSortowSilver->tables->count() / 2);
+        $firstHalfSilverTwo = $loungesSortowSilver->tables->slice(0, $halfCountSilver);
+        $secondHalfSilverTwo = $loungesSortowSilver->tables->slice($halfCountSilver);
+        return  $render = view('branch.halles', compact('halles', 'loungesSortOne', 'loungesSorThree', 'loungesSortow', 'loungesSortowSilver', 'firstHalfTwo', 'secondHalfTwo', 'secondHalfSilverTwo', 'firstHalfSilverTwo'));
     }
     public function _client(Request $request)
     {
