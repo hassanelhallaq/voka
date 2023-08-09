@@ -348,6 +348,6 @@ class PosController extends Controller
         $online = $reservationPayment->where('payment_type', 'online')->sum('price');
         $point = $reservationPayment->where('payment_type', 'المحفظة')->sum('price');
 
-        return view('branch.casher', compact('visa', 'cash', 'online'));
+        return view('branch.casher', compact('visa', 'cash', 'online'))->render();
     }
 }

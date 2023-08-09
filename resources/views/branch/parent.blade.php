@@ -83,7 +83,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item product">
-                                    <a href="{{ route('casher.create') }}"
+                                    <a onclick="casher()"
                                         class="nav-link d-flex flex-column justify-content-center align-items-center">
                                         <i class="fa-solid fa-clipboard-list "></i>
                                         <span>الجرد</span>
@@ -211,6 +211,21 @@
         }).done(function() {
             $('#casher-section').hide(); // Hide the casher section
             $('#reservSideContainer').show();
+            // $('#reserv-main-section').show(); // Show the reserv main section
+        });
+    }
+
+    function casher() {
+        $('.nav-item.active').removeClass('active');
+
+        // Add active class to "الحجوزات" link
+        $('.resver').addClass('active');
+        $('#mainPage').empty(); // Clear the previous page content
+        $.get('/branch/casher/create', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').hide(); // Hide the casher section
+            $('#reservSideContainer').hide();
             // $('#reserv-main-section').show(); // Show the reserv main section
         });
     }
