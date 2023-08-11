@@ -23,10 +23,10 @@ class OrderController extends Controller
     }
     public function editReservation($id)
     {
-        $reservations = Reservation::where([['status', 'حجز'], ['payment_type', 'online']])->find($id);
-        $packages = Package::where('branch_id', $reservations->package->branch_id)->get();
+        $reservation = Reservation::where([['status', 'حجز'], ['payment_type', 'online']])->find($id);
+        $packages = Package::where('branch_id', $reservation->package->branch_id)->get();
 
-        return view('dashboard.order.edit', compact('reservations', 'packages'));
+        return view('dashboard.order.edit', compact('reservation', 'packages'));
     }
     public function tableAvailable(Request $request)
     {
