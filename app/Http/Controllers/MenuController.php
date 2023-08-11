@@ -26,7 +26,7 @@ class MenuController extends Controller
 
         $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
         if (!$reservation) {
-            return view('errors.400');
+            return view('errors.404');
         }
         // $reservation = Reservation::where([['id', 25]])->first();
         $reservation->status = 'تم الحضور';
