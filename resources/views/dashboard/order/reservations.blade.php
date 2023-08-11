@@ -64,10 +64,10 @@
                                                         {{ $item->package->price }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->reservation->date }}
+                                                        {{ $item->date }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->reservation->end }}
+                                                        {{ $item->end }}
                                                     </td>
                                                     <td>
 
