@@ -21,6 +21,11 @@ class OrderController extends Controller
         $reservations = Reservation::where([['status', 'حجز'], ['payment_type', 'online']])->paginate(40);
         return view('dashboard.order.reservations', compact('reservations'));
     }
+    public function reservationsRefund()
+    {
+        $reservations = Reservation::where('price_back', '!=', 0)->paginate(40);
+        return view('dashboard.order.reservations', compact('reservations'));
+    }
     public function editReservation($id)
     {
         $reservation = Reservation::where([['status', 'حجز'], ['payment_type', 'online']])->find($id);

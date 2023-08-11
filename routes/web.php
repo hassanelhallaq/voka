@@ -64,6 +64,8 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::get('backReservation/{id}', [App\Http\Controllers\OrderController::class, 'backReservation'])->name('backReservation');
         Route::resource('departments', DepartmentsController::class);
         Route::post('wallet-blance/{id}', [App\Http\Controllers\ClientController::class, 'walletBlance'])->name('wallet.blance');
+        Route::get('reservations/refund', [App\Http\Controllers\OrderController::class, 'reservationsRefund'])->name('reservations.refund');
+
 
         Route::get('ajax/table/branches', [App\Http\Controllers\TableController::class, 'ajaxTableBranches'])->name('table.ajax');
         Route::post('ajax/package/status', [App\Http\Controllers\PackageController::class, 'ajaxPackageStatus'])->name('package.status');
