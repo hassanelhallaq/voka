@@ -4793,6 +4793,7 @@ body{
 
 }
 
+
 @media (max-width: 991px) {
     .subheader h1{
     font-size: 20px;
@@ -4803,9 +4804,12 @@ body{
     .ct-menu-categories{
     padding:0px;
     }
+    .tableDetails{
+     margin-bottom:0px;   
+    }
     .header-details{
     padding: 5px;
-    border: 2px solid #015da8;
+    border: 2px solid #000;
     box-shadow: 3px 4px 5px #015da838;
     margin: 10px 0px;
     border-radius: 4px;

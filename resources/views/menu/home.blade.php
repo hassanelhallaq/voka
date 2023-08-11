@@ -6,7 +6,7 @@
         <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('assets/img/cover.jpg')">
             <div class="container">
                 <div class="header-details">
-                    <h1 style="text-align: center;">فرع {{ $branch->name }}</h1>
+                    <!--<h1 style="text-align: center;">فرع {{ $branch->name }}</h1>-->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb"
                             style="background-color: transparent; justify-content: space-between; align-items: end;">
