@@ -153,10 +153,8 @@
                     addToCart(product);
                     // alert('Item added to cart!');
                     Swal.fire(
-                      title: 'Do you want to save the changes?',
-                      showDenyButton: true,
-                      showCancelButton: true,
-                      confirmButtonText: 'Save'
+                      'تم إضافة المنتج إلى السلة!',
+                      'حسناَ'
                     )
                 });
             });
