@@ -75,9 +75,9 @@
                                          for="validationCustom01">{{ __('tables') }}
                                          <span class="text-danger">*</span>
                                      </label>
-                                     <select class="form-select" multiple data-control="select2" id="table_id" required
+                                     <select class="form-select" data-control="select2" id="table_id" required
                                          name="table_id">
-                                         <option value="{{ $reservation->table_id }}" selected disabled="true">
+                                         <option value="{{ $reservation->table_id }}" selected>
                                              {{ $reservation->table->name }}
                                          </option>
                                      </select>
