@@ -84,14 +84,14 @@
                                                             class="btn btn-sm fw-bold btn-primary"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#kt_modal_create_app"><i
-                                                                class="fa fa-time"></i></a></a>
+                                                                class="fa fa-plus"></i></a></a>
                                                         <a class="btn btn-icon btn-sm btn-success"
                                                             href="{{ route('orders.show', [$item->id]) }}">
                                                             <i class="fa fa-eye"></i></a>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="time_{{ $item->id }}" tabindex="-1"
-                                                    aria-hidden="true">
+                                                <div class="modal fade" id="time_{{ $item->reservation->id }}"
+                                                    tabindex="-1" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered mw-750px">
                                                         <div class="modal-content">
                                                             <div class="modal-body scroll-y mx-lg-5 my-7">
@@ -108,7 +108,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control meal_price"
                                                                                         name="time" required
-                                                                                        id='time_{{ $item->id }}'
+                                                                                        id='time_{{ $item->reservation->id }}'
                                                                                         value="{{ old('time') }}">
                                                                                 </div>
                                                                                 @if ($errors->has('time'))
@@ -165,6 +165,9 @@
                 <!--end::Footer-->
             </div>
         </x-default-layout>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="{{ asset('crudjs/crud.js') }}"></script>
         <script>
             function performUpdate(id) {
                 let formData = new FormData();
