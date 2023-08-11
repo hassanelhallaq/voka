@@ -78,10 +78,71 @@
                                                     <td>
                                                         {{ $item->reservation->end }}
                                                     </td>
-                                                    <td> <a class="btn btn-icon btn-sm btn-success"
+                                                    <td>
+                                                        <a data-bs-toggle="modal"
+                                                            data-bs-target="#time_{{ $item->id }}"
+                                                            class="btn btn-sm fw-bold btn-primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#kt_modal_create_app"><i
+                                                                class="fa fa-time"></i></a></a>
+                                                        <a class="btn btn-icon btn-sm btn-success"
                                                             href="{{ route('orders.show', [$item->id]) }}">
-                                                            <i class="fa fa-eye"></i></a></td>
+                                                            <i class="fa fa-eye"></i></a>
+                                                    </td>
                                                 </tr>
+                                                <div class="modal fade" id="time_{{ $item->id }}" tabindex="-1"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered mw-750px">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body scroll-y mx-lg-5 my-7">
+                                                                <!--begin::Form-->
+                                                                <form id="kt_modal_add_role_form" class="form">
+                                                                    @csrf
+                                                                    <!--begin::Scroll-->
+                                                                    <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                                                                        <div class="row">
+                                                                            <div class="form-group mb-6">
+                                                                                <label>{{ __('time') }}</label>
+
+                                                                                <div class="input-group mb-3">
+                                                                                    <input type="text"
+                                                                                        class="form-control meal_price"
+                                                                                        name="time" required
+                                                                                        id='time_{{ $item->id }}'
+                                                                                        value="{{ old('time') }}">
+                                                                                </div>
+                                                                                @if ($errors->has('time'))
+                                                                                    <p style="color: red">
+                                                                                        {{ $errors->first('time') }}
+                                                                                    </p>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end::Scroll-->
+                                                                    <!--begin::Actions-->
+                                                                    <div class="text-center pt-15">
+                                                                        <button type="reset"
+                                                                            class="btn btn-light me-3"
+                                                                            data-bs-dismiss="modal"
+                                                                            data-kt-roles-modal-action="cancel">
+                                                                            {{ __('Discard') }}</button>
+                                                                        <button
+                                                                            onclick="performUpdate({{ $item->reservation->id }})"
+                                                                            type="button" class="btn btn-primary">
+                                                                            {{ __('Submit') }}
+                                                                        </button>
+                                                                    </div>
+                                                                    <!--end::Actions-->
+                                                                </form>
+                                                                <!--end::Form-->
+                                                            </div>
+                                                            <!--end::Modal body-->
+                                                        </div>
+                                                        <!--end::Modal content-->
+                                                    </div>
+                                                    <!--end::Modal dialog-->
+                                                </div>
                                             @endforeach
                                         </tbody>
                                         <span class="span">
@@ -104,3 +165,11 @@
                 <!--end::Footer-->
             </div>
         </x-default-layout>
+        <script>
+            function performUpdate(id) {
+                let formData = new FormData();
+                formData.append("_method", "PUT")
+                formData.append('time', document.getElementById('time_' + id).value);
+                storeReload('/admin/update-reservation-time/' + id, formData)
+            }
+        </script>

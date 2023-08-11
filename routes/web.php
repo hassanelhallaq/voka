@@ -76,6 +76,7 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::get('/order-product', [OrderController::class, 'index'])->name('order-product');
         Route::put('/tables/{id}', [TableController::class, 'update'])->name('tables.update');
         Route::delete('/tables/{id}', [TableController::class, 'destroy'])->name('tables.destroy');
+        Route::put('/update-reservation-time/{id}', [ReservationController::class, 'time'])->name('reservation.time');
     }
 );
 

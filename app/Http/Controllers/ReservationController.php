@@ -103,4 +103,13 @@ class ReservationController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
     }
+
+    public function time(Request $request, $id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->minutes = $request->time;
+        $reservation->end = $reservation->end->addMinute($request->time);
+        $isSaved = $reservation->update();
+        return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
+    }
 }
