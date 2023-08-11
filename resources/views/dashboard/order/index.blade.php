@@ -90,8 +90,8 @@
                                                             <i class="fa fa-eye"></i></a>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="time_{{ $item->reservation->id }}"
-                                                    tabindex="-1" aria-hidden="true">
+                                                <div class="modal fade" id="time_{{ $item->id }}" tabindex="-1"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered mw-750px">
                                                         <div class="modal-content">
                                                             <div class="modal-body scroll-y mx-lg-5 my-7">
