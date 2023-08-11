@@ -24,8 +24,10 @@ class MenuController extends Controller
         $branch = Branch::find($branch_id);
         $table = Table::find($id);
 
-        $reservation = Reservation::where([['table_id', $id], ['status', 'مؤكد']])->first();
-        if (!$reservation && $reservation->status == 'انتهى') {
+        $reservation = Reservation::where([['table_id', $id], ['status', '!=', 'انتهى']])->first();
+        // $reservationIn = Reservation::where([['table_id', $id], ['status', '!=', 'انتهى']])->first();
+
+        if (!$reservation) {
             return view('errors.404');
         }
         // $reservation = Reservation::where([['id', 25]])->first();
