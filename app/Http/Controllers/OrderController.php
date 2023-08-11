@@ -15,7 +15,7 @@ class OrderController extends Controller
     }
     public function reservations()
     {
-        $reservations = Reservation::where([['status', 'حجز'], ['payment_type', 'online']])->get();
+        $reservations = Reservation::where([['status', 'حجز'], ['payment_type', 'online']])->paginate(40);
         return view('dashboard.order.reservations', compact('reservations'));
     }
 
