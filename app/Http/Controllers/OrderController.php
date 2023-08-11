@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $order =  Order::with(['products', 'package', 'client'])->where('is_done', 0)->paginate(40);
+        $order =  Order::with(['products', 'package', 'client', 'reservation'])->where('is_done', 0)->paginate(40);
         return view('dashboard.order.index', compact('order'));
     }
 

@@ -68,7 +68,7 @@
                                                         {{ $item->reservation->date }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->package->end }}
+                                                        {{ $item->reservation->end }}
                                                     </td>
                                                     @php
                                                         $totalSum = $item->products->sum(function ($product) {
