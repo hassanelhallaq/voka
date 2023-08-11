@@ -61,8 +61,7 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::get('reservations-now/edit/{id}', [App\Http\Controllers\OrderController::class, 'editReservation'])->name('reservations.now.edit');
         Route::get('available-available/ajax', [App\Http\Controllers\OrderController::class, 'tableAvailable'])->name('table.available');
         Route::put('reservations-now/update/{id}', [App\Http\Controllers\OrderController::class, 'updateReservation'])->name('reservation.now.update');
-
-
+        Route::get('backReservation/{id}', [App\Http\Controllers\OrderController::class, 'backReservation'])->name('backReservation');
         Route::resource('departments', DepartmentsController::class);
         Route::post('wallet-blance/{id}', [App\Http\Controllers\ClientController::class, 'walletBlance'])->name('wallet.blance');
 

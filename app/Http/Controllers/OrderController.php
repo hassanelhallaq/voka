@@ -44,7 +44,16 @@ class OrderController extends Controller
         $reservation->table_id = $request->table_id;
         $reservation->minutes = $request->minutes;
         $reservation->update();
-        return redirect()->route('reservations.all')->with('success', 'Shift created successfully');
+        return redirect()->route('reservations.all')->with('success', 'Reservation created successfully');
+    }
+    public function backReservation(Request $request, $id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->price = 0;
+        $reservation->status = 'انتهى';
+        $reservation->back_price = $reservation->price;
+        $reservation->update();
+        return redirect()->route('reservations.all')->with('success', 'Reservation created successfully');
     }
     public function tableAvailable(Request $request)
     {

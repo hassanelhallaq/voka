@@ -73,7 +73,9 @@
                                                         <a class="btn btn-icon btn-sm btn-success"
                                                             href="{{ route('reservations.now.edit', [$item->id]) }}">
                                                             <i class="fa fa-eye"></i></a>
-
+                                                        <a class="btn btn-icon btn-sm btn-success"
+                                                            href="{{ route('backReservation', [$item->id]) }}">
+                                                            <i class="fa fa-undo" aria-hidden="true"></i>
                                                     </td>
                                                 </tr>
                                             @endforeach
