@@ -4904,7 +4904,8 @@ body{
     max-width: 100%;
   }
   .section {
-    padding: 60px 0;
+    /*padding: 60px 0;*/
+    padding:0px;
   }
   .ct-footer{
     padding: 20px 0 0 0;
@@ -5404,4 +5405,10 @@ body{
 }
 #tab-palance{
     text-align:right;
+    margin-bottom:20px;
+}
+.headProduct{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
