@@ -23,7 +23,7 @@ class OrderController extends Controller
     }
     public function reservationsRefund()
     {
-        $reservations = Reservation::where('price_back', '!=', 0)->paginate(40);
+        $reservations = Reservation::where('back_price', '!=', 0)->paginate(40);
         return view('dashboard.order.reservations', compact('reservations'));
     }
     public function editReservation($id)
