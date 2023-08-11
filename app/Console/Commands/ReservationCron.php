@@ -34,13 +34,13 @@ class ReservationCron extends Command
         $currentDateTime = Carbon::now();
 
 
-        $expiredReservations = Reservation::where('status', '!=', 'انتهى')->get();
+        $expiredReservations = Reservation::where([['status', '!=', 'انتهى'], ['status', '!=', 'حجز']])->get();
         //  log::info($expiredReservations);
         // Update the status of the expired reservations
         foreach ($expiredReservations as $reservation) {
             $package = Package::find($reservation->package_id);
             $reservationEndTime = $reservation->end;
-                
+
             // Check if the new end time has passed
             if ($currentDateTime >= $reservationEndTime) {
                 log::info($currentDateTime . '_' . $reservationEndTime . 't');
@@ -54,7 +54,7 @@ class ReservationCron extends Command
                 $order->is_done = 1;
                 $order->update();
             } else {
-                  log::info('تم الحضو');
+                log::info('تم الحضو');
                 if ($reservation->status != 'تم الحضور') {
                     $reservation->status = 'تأخير';
                     $reservation->update();
