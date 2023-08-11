@@ -18,26 +18,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row pb-4">
-                        <div class="col-4">
-                            <div class="upcoming d-flex flex-column text-center ">
-                                <span class="number">3</span>
-                                <span class="key">حجوزات</span>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="upcoming d-flex flex-column text-center ">
-                                <span class="number">15</span>
-                                <span class="key">زيارة</span>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="upcoming d-flex flex-column text-center ">
-                                <span class="number">عمليات دفع</span>
-                                <span class="key">1,300 $</span>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="row pb-4">-->
+                    <!--    <div class="col-4">-->
+                    <!--        <div class="upcoming d-flex flex-column text-center ">-->
+                    <!--            <span class="number">3</span>-->
+                    <!--            <span class="key">حجوزات</span>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--    <div class="col-4">-->
+                    <!--        <div class="upcoming d-flex flex-column text-center ">-->
+                    <!--            <span class="number">15</span>-->
+                    <!--            <span class="key">زيارة</span>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--    <div class="col-4">-->
+                    <!--        <div class="upcoming d-flex flex-column text-center ">-->
+                    <!--            <span class="number">عمليات دفع</span>-->
+                    <!--            <span class="key">1,300 $</span>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

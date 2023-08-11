@@ -59,7 +59,7 @@
                                 </div>
                                 <a href="#" class="اطلب-item btn-custom btn-sm shadow-none"
                                     data-product='{"name": "{{ $product->name }}", "price": "{{ $product->price }}", "image": "{{ $product->getFirstMediaUrl('product', 'thumb') }}"}'>
-                                    اطلب <i class="fas fa-shopping-cart"></i>
+                                    أضف إلى الطلب <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </form>
 

@@ -151,7 +151,13 @@
                     event.preventDefault();
                     const product = JSON.parse(this.getAttribute('data-product'));
                     addToCart(product);
-                    alert('Item added to cart!');
+                    // alert('Item added to cart!');
+                    Swal.fire(
+                      title: 'Do you want to save the changes?',
+                      showDenyButton: true,
+                      showCancelButton: true,
+                      confirmButtonText: 'Save'
+                    )
                 });
             });
 
