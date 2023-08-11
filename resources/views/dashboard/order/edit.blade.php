@@ -7,7 +7,7 @@
                  </div>
                  <div class="card-body">
                      <div class="form-validation">
-                         <form method="post" action="{{ route('packages.update', [$package->id]) }}"
+                         <form method="post" action=""
                              class="needs-validation" enctype="multipart/form-data">
                              @method('PUT')
                              @csrf
