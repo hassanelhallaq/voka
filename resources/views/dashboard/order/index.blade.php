@@ -37,6 +37,9 @@
                                                 <th>{{ __('package time') }}</th>
                                                 <th>{{ __('package price') }}</th>
                                                 <th>{{ __('Total orders') }}</th>
+                                                <th>{{ __('reservation start') }}</th>
+                                                <th>{{ __('reservation end') }}</th>
+
                                             </tr>
                                         </thead>
                                         <tbody class="fw-semibold text-gray-600">
@@ -60,6 +63,12 @@
                                                     </td>
                                                     <td>
                                                         {{ $item->package->price }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->reservation->date }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->package->end }}
                                                     </td>
                                                     @php
                                                         $totalSum = $item->products->sum(function ($product) {
