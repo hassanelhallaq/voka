@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\LoungeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderProductController;
@@ -57,6 +58,8 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::get('finish-orders', [App\Http\Controllers\OrderController::class, 'finishOrders'])->name('finish_orders');
         Route::get('orders/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
 
+        Route::resource('departments', DepartmentsController::class);
+        Route::post('wallet-blance/{id}', [App\Http\Controllers\ClientController::class, 'walletBlance'])->name('wallet.blance');
 
         Route::get('ajax/table/branches', [App\Http\Controllers\TableController::class, 'ajaxTableBranches'])->name('table.ajax');
         Route::post('ajax/package/status', [App\Http\Controllers\PackageController::class, 'ajaxPackageStatus'])->name('package.status');

@@ -43,6 +43,8 @@ class ProductController extends Controller
         $product->description = $request->desc_arabic;
         $product->description_english = $request->desc_english;
         $product->price = $request->price;
+        $product->department_id = $request->department_id;
+
         $isSave = $product->save();
         $product->branches()->attach($request->branch_id);
 
@@ -86,6 +88,7 @@ class ProductController extends Controller
         $product->description = $request->desc_arabic;
         $product->description_english = $request->desc_english;
         $product->price = $request->price;
+        $product->department_id = $request->department_id;
         $isSave = $product->save();
         if ($request->hasFile('avatar')) {
             ModelsMedia::where('model_id', $id)->where('model_type', 'App\Models\Product')->delete();

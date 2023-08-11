@@ -40,7 +40,7 @@ class StoreProductRequest extends FormRequest
             'price' => 'required',
             'calories' => 'required',
             'quantity_stock' => 'required',
-
+            'department_id' => 'required',
         ];
     }
 

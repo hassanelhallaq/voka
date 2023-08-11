@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\ClientCategory;
+use App\Models\Wallet;
+use App\Models\WalletAction;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -23,6 +25,28 @@ class ClientController extends Controller
         $client->phone = $request->phone;
         $client->client_category_id = $request->client_category_id;
         $isSaved = $client->save();
+        return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
+    }
+    public function walletBlance(Request $request, $id)
+    {
+
+        $wallet =   Wallet::where('client_id', $id)->first();
+        if (!$wallet) {
+            $wallet = new Wallet();
+        }
+        $wallet->credit = $request->blance;
+        $wallet->client_id = $id;
+        $isSaved = $wallet->save();
+        $walletAction = new WalletAction();
+        $walletAction->action_tite = $request->blance . 'لقد تم اضافة الى رصيد نقاطك مبلغ';
+        $walletAction->amount = $request->blance;
+        $walletAction->balance_before = $wallet->credit + $request->blance;
+        $walletAction->status = 'Success';
+        $walletAction->wallet_id  = $wallet->id;
+        $walletAction->action_type   = 'App\Models\Client';
+        $walletAction->action_id    = $id;
+        $walletAction->type   = 'Deposit';
+        $walletAction->save();
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
     public function update(Request $request, $id)

@@ -28,9 +28,9 @@
                                             <div class="d-flex flex-column">
                                                 <!--begin::Name-->
                                                 <div class="d-flex align-items-center mb-2">
-                                                    <a href="#"
+                                                    <a href="{{ route('clients.show', [$item->id]) }}"
                                                         class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $item->name }}</a>
-                                                    <a href="#">
+                                                    <a href="{{ route('clients.show', [$item->id]) }}">
                                                         <i class="ki-duotone ki-verify fs-1 text-primary">
                                                             <span class="path1"></span>
                                                             <span class="path2"></span>
@@ -121,12 +121,12 @@
                                                             </i>
                                                             <div class="fs-2 fw-bold" data-kt-countup="true"
                                                                 data-kt-countup-value={{ $item->packages_sum_price }}
-                                                                data-kt-countup-prefix="$">0
+                                                                data-kt-countup-prefix="ريال">0
                                                             </div>
                                                         </div>
                                                         <!--end::Number-->
                                                         <!--begin::Label-->
-                                                        <div class="fw-semibold fs-6 text-gray-400">Earnings</div>
+                                                        <div class="fw-semibold fs-6 text-gray-400">مبلغ الصرف</div>
                                                         <!--end::Label-->
                                                     </div>
                                                     <!--end::Stat-->
@@ -146,7 +146,7 @@
                                                         </div>
                                                         <!--end::Number-->
                                                         <!--begin::Label-->
-                                                        <div class="fw-semibold fs-6 text-gray-400">packages</div>
+                                                        <div class="fw-semibold fs-6 text-gray-400">الباقات</div>
                                                         <!--end::Label-->
                                                     </div>
                                                     <!--end::Stat-->
@@ -165,7 +165,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="fw-semibold fs-6 text-gray-400">Orders Count</div>
+                                                        <div class="fw-semibold fs-6 text-gray-400">عدد الطلبات</div>
                                                     </div>
                                                     <!--end::Stat-->
                                                     <div
@@ -182,7 +182,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="fw-semibold fs-6 text-gray-400">Visits Count</div>
+                                                        <div class="fw-semibold fs-6 text-gray-400">عدد الزيارات</div>
                                                     </div>
                                                     <div
                                                         class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
@@ -198,7 +198,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="fw-semibold fs-6 text-gray-400">wallet points</div>
+                                                        <div class="fw-semibold fs-6 text-gray-400">رصيد المحفظة</div>
                                                     </div>
 
                                                     <div
@@ -210,11 +210,16 @@
                                                                 <span class="path2"></span>
                                                             </i>
                                                             <div class="fs-2 fw-bold">
-                                                                {{ $item->reservation->created_at ?? '' }}
+                                                                @if ($item->reservation && $item->reservation->created_at)
+                                                                    <p>{{ $item->reservation->created_at->format('Y/m/d') }}
+                                                                    </p>
+                                                                @else
+                                                                    <p>0</p>
+                                                                @endif
                                                             </div>
                                                         </div>
 
-                                                        <div class="fw-semibold fs-6 text-gray-400">reservation date
+                                                        <div class="fw-semibold fs-6 text-gray-400">اخر حجز
                                                         </div>
                                                     </div>
                                                     <div
@@ -230,8 +235,27 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="fw-semibold fs-6 text-gray-400">last package
+                                                        <div class="fw-semibold fs-6 text-gray-400">اخر باقة
                                                         </div>
+                                                    </div>
+                                                    <div
+                                                        class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                        <!--begin::Number-->
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="ki-duotone ki-arrow-up fs-3 text-success me-2">
+                                                                <span class="path1"></span>
+                                                                <span class="path2"></span>
+                                                            </i>
+                                                            <div class="fs-2 fw-bold" data-kt-countup="true"
+                                                                data-kt-countup-value={{ $item->payment_type }}
+                                                                data-kt-countup-prefix="ريال">
+                                                                {{ $item->payment_type }}
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Number-->
+                                                        <!--begin::Label-->
+                                                        <div class="fw-semibold fs-6 text-gray-400">وسيلة الدفع</div>
+                                                        <!--end::Label-->
                                                     </div>
                                                     <div
                                                         class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
@@ -246,7 +270,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="fw-semibold fs-6 text-gray-400">avarage time
+                                                        <div class="fw-semibold fs-6 text-gray-400">معدل الحضور
                                                         </div>
                                                     </div>
                                                 </div>

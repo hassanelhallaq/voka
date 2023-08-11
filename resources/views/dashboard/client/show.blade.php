@@ -70,12 +70,62 @@
                    </div>
                    <!--end::Navbar-->
                    <!--begin::details View-->
+                   <a data-bs-toggle="modal" data-bs-target="#blance" class="btn btn-sm fw-bold btn-primary"
+                       data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">{{ __('Add Blance') }}</a>
+
+                   <div class="modal fade" id="blance" tabindex="-1" aria-hidden="true">
+                       <div class="modal-dialog modal-dialog-centered mw-750px">
+                           <div class="modal-content">
+                               <div class="modal-body scroll-y mx-lg-5 my-7">
+                                   <!--begin::Form-->
+                                   <form id="kt_modal_add_role_form" class="form">
+                                       @csrf
+                                       <!--begin::Scroll-->
+                                       <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                                           <div class="row">
+                                               <div class="form-group mb-6">
+                                                   <label>{{ __('blance') }}</label>
+
+                                                   <div class="input-group mb-3">
+                                                       <input type="number" class="form-control meal_price"
+                                                           name="blance" required id='blanceAmount'>
+                                                   </div>
+                                                   @if ($errors->has('blance'))
+                                                       <p style="color: red">
+                                                           {{ $errors->first('blance') }}
+                                                       </p>
+                                                   @endif
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <!--end::Scroll-->
+                                       <!--begin::Actions-->
+                                       <div class="text-center pt-15">
+                                           <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal"
+                                               data-kt-roles-modal-action="cancel">
+                                               {{ __('Discard') }}</button>
+                                           <button onclick="performStore({{ $client->id }})" type="button"
+                                               class="btn btn-primary">
+                                               {{ __('Submit') }}
+                                           </button>
+                                       </div>
+                                       <!--end::Actions-->
+                                   </form>
+                                   <!--end::Form-->
+                               </div>
+                               <!--end::Modal body-->
+                           </div>
+                           <!--end::Modal content-->
+                       </div>
+                       <!--end::Modal dialog-->
+                   </div>
                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+
                        <!--begin::Card header-->
                        <div class="card-header cursor-pointer">
                            <!--begin::Card title-->
                            <div class="card-title m-0">
-                               <h3 class="fw-bold m-0">Profile Details</h3>
+                               <h3 class="fw-bold m-0">تفاصيل المحفظة</h3>
                            </div>
                            <!--end::Card title-->
                            <!--begin::Action-->
@@ -88,39 +138,83 @@
                            <!--begin::Row-->
                            <div class="row mb-7">
                                <!--begin::Label-->
-                               <label class="col-lg-4 fw-semibold text-muted">Full Name</label>
+                               <label class="col-lg-4 fw-semibold text-muted">رصيد المحفظة</label>
                                <!--end::Label-->
                                <!--begin::Col-->
                                <div class="col-lg-8">
-                                   <span class="fw-bold fs-6 text-gray-800">{{ $client->name }}</span>
-                               </div>
-                               <!--end::Col-->
-                           </div>
-                           <!--end::Row-->
-                           <!--begin::Input group-->
-
-                           <!--end::Input group-->
-                           <!--begin::Input group-->
-                           <div class="row mb-7">
-                               <!--begin::Label-->
-                               <label class="col-lg-4 fw-semibold text-muted">Contact Phone
-                                   <span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
-                                       <i class="ki-duotone ki-information fs-7">
-                                           <span class="path1"></span>
-                                           <span class="path2"></span>
-                                           <span class="path3"></span>
-                                       </i>
-                                   </span></label>
-                               <!--end::Label-->
-                               <!--begin::Col-->
-                               <div class="col-lg-8 d-flex align-items-center">
-                                   <span class="fw-bold fs-6 text-gray-800 me-2">{{ $client->phone }}</span>
-                                   <span class="badge badge-success">Verified</span>
+                                   <span class="fw-bold fs-6 text-gray-800">{{ $client->wallet->credit ?? 0 }}</span>
                                </div>
                                <!--end::Col-->
                            </div>
 
-                           <!--end::Notice-->
+                       </div>
+                       <h3 class="card-title align-items-start flex-column">
+                           <span class="card-label fw-bold text-dark">حركات المحفظة</span>
+
+                       </h3>
+                       <div class="col-xl-8">
+                           <!--begin::Table Widget 5-->
+                           <div class="card card-flush h-xl-100">
+                               <!--begin::Card header-->
+                               <div class="card-header pt-7">
+                                   <!--begin::Title-->
+
+                                   <!--end::Title-->
+                                   <!--begin::Actions-->
+                                   <div class="card-toolbar">
+
+                                   </div>
+                                   <!--end::Card header-->
+                                   <!--begin::Card body-->
+                                   <div class="card-body">
+                                       <!--begin::Table-->
+                                       <table class="table">
+                                           <!--begin::Table head-->
+                                           <thead>
+                                               <!--begin::Table row-->
+                                               <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                                   <th class="min-w-150px">العنوان</th>
+                                                   <th class="text-end pe-3 min-w-100px">القيمة</th>
+                                                   <th class="text-end pe-3 min-w-150px">الرصيد السابق</th>
+                                                   <th class="text-end pe-3 min-w-100px">النوع</th>
+                                               </tr>
+                                               <!--end::Table row-->
+                                           </thead>
+                                           <!--end::Table head-->
+                                           <!--begin::Table body-->
+                                           <tbody class="fw-bold text-gray-600">
+                                               @if ($client->wallet && $client->wallet->wallet_action->count() != 0)
+                                                   @foreach ($client->wallet->wallet_action as $items)
+                                                       <tr>
+                                                           <td>
+                                                               <a href=" "
+                                                                   class="text-dark text-hover-primary">{{ $items->action_tite }}</a>
+                                                           </td>
+                                                           <!--end::Item-->
+                                                           <!--begin::Product ID-->
+                                                           <td class="text-end">{{ $items->amount }}</td>
+                                                           <!--end::Product ID-->
+                                                           <!--begin::Date added-->
+                                                           <td class="text-end">{{ $items->balance_before }}</td>
+                                                           <!--end::Date added-->
+                                                           <!--begin::Price-->
+
+                                                           <td class="text-end">
+                                                               {{ $items->type }}
+                                                           </td>
+                                                       </tr>
+                                                   @endforeach
+                                               @endif
+                                           </tbody>
+                                           <!--end::Table body-->
+                                       </table>
+                                       <!--end::Table-->
+                                   </div>
+                                   <!--end::Card body-->
+                               </div>
+                               <!--end::Table Widget 5-->
+                           </div>
+                           <!--end::Col-->
                        </div>
                        <!--end::Card body-->
                    </div>
@@ -249,3 +343,13 @@
                    <!--end::Content container-->
                </div>
        </x-default-layout>
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+       <script src="{{ asset('crudjs/crud.js') }}"></script>
+       <script>
+           function performStore(id) {
+               let formData = new FormData();
+               formData.append('blance', document.getElementById('blanceAmount').value);
+               storeReload('/admin/wallet-blance/' + id, formData)
+           }
+       </script>
