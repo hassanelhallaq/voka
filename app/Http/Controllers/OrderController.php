@@ -13,6 +13,11 @@ class OrderController extends Controller
         $order =  Order::with(['products', 'package', 'client', 'reservation'])->where('is_done', 0)->paginate(40);
         return view('dashboard.order.index', compact('order'));
     }
+    public function reservations()
+    {
+        $reservations = Reservation::where([['status', 'حجز'], ['payment_type', 'online']])->get();
+        return view('dashboard.order.reservations', compact('reservations'));
+    }
 
     public function finishOrders()
     {
