@@ -77,7 +77,7 @@
                                      </label>
                                      <select class="form-select" multiple data-control="select2" id="table_id" required
                                          name="table_id">
-                                         <option value="{{ $reservation->table_id }}" disabled="true">
+                                         <option value="{{ $reservation->table_id }}" selected disabled="true">
                                              {{ $reservation->table->name }}
                                          </option>
                                      </select>
