@@ -7,8 +7,7 @@
                  </div>
                  <div class="card-body">
                      <div class="form-validation">
-                         <form method="post" action=""
-                             class="needs-validation" enctype="multipart/form-data">
+                         <form method="post" action="" class="needs-validation" enctype="multipart/form-data">
                              @method('PUT')
                              @csrf
                              <div class="row">
@@ -18,8 +17,9 @@
                                          <span class="text-danger">*</span>
                                      </label>
 
-                                     <input type="date" value="{{ $reservation->date }}" class="form-control mb-3"
-                                         id="date" name="date" placeholder="{{ __('Date') }}" required>
+                                     <input type="datetime-local" value="{{ $reservation->date }}"
+                                         class="form-control mb-3" id="date" name="date"
+                                         placeholder="{{ __('Date') }}" required>
 
                                      @if ($errors->has('date'))
                                          <p style="color: red">{{ $errors->first('date') }}

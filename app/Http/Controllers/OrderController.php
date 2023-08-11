@@ -34,7 +34,7 @@ class OrderController extends Controller
         $date = $request->date;
         $tables = PackageTables::where('package_id', $packageID)->get();
         $tables = Table::whereIn('id', $tables->pluck('id'))->whereDoesntHave('reservations', function ($query) use ($date) {
-            $query->where('reservation_date', $date);
+            $query->where('date', $date);
         })->get();
         return response()->json($tables);
     }
