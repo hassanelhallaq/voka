@@ -47,14 +47,14 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <span class="top-title">حجز جديد</span>
+                    <span class="top-title"> تسجيل حجز جديد  </span>
                 </div>
-                <div class="col-4 text-left px-5">
-                    <a href="{{ route('branch.home') }}" class="close-icon">
-                        الإغلاق والذهاب الى الرئيسية
-                        <i class="fa-solid fa-xmark"></i>
-                    </a>
-                </div>
+                <!--<div class="col-4 text-left px-5">-->
+                <!--    <a href="{{ route('branch.home') }}" class="close-icon">-->
+                <!--        الإغلاق والذهاب الى الرئيسية-->
+                <!--        <i class="fa-solid fa-xmark"></i>-->
+                <!--    </a>-->
+                <!--</div>-->
             </div>
         </div>
         <div class="reservation">
@@ -109,6 +109,7 @@
 
                                 </a>
                             </li>
+                           
                             <!--<li class="nav-item py-3 show-content" data-id="#date-content" data-v="0">-->
                             <!--    <a class="nav-link" href="#">-->
                             <!--        <div class="d-flex w-100">-->
@@ -141,148 +142,22 @@
 
                                 </a>
                             </li>
-                            <!-- <li class="nav-item py-3 show-content">
-                      <a class="nav-link" href="#">
-                        <div class="d-flex w-100 ">
-                          <div class="icon text-right">
-                            <i class="fa-solid fa-timeline"></i> التوقيت
-                          </div>
-                          <div class="guests  text-center">
-                            <span class="hour">1</span>
-                            ساعة
-                            <span class="minuts">30</span>
-                            دقيقة
-                          </div>
-                          <div class="chevro text-left">
-                            <div class="btn-group icon-btn-group" role="group" aria-label="Basic example">
-                              <button type="button" class="btn btn-dark text-light ml-2 hour-mins rounded"><i class="fa-solid fa-minus"></i></button>
-                              <button type="button" class="btn btn-dark text-light hour-push rounded"><i class="fa-solid fa-plus"></i></button>
-                            </div>
-                          </div>
-                        </div>
-
-                      </a>
-                    </li> -->
-                            <!--<li class="nav-item py-3 show-content" data-id="#status" data-v="0">-->
-                            <!--    <a class="nav-link" href="#">-->
-                            <!--        <div class="d-flex w-100 ">-->
-                            <!--            <div class="icon text-right">-->
-                            <!--                <i class="fa-solid fa-calendar-check"></i> الحالة-->
-                            <!--            </div>-->
-                            <!--            <div class="guests nav-statues text-center">-->
-                            <!--                مؤكد-->
-                            <!--            </div>-->
-                            <!--            <div class="chevro text-left">-->
-                            <!--                <i class="fas fa-chevron-left"></i>-->
-                            <!--            </div>-->
-                            <!--        </div>-->
-
-                            <!--    </a>-->
-                            <!--</li>-->
-
-
-                            <!--<li class="nav-item py-3 show-content no-border" data-id="#notes" data-v="0">-->
-                            <!--    <a class="nav-link" href="#">-->
-                            <!--        <div class="d-flex w-100">-->
-                            <!--            <div class="icon text-right">-->
-                            <!--                <i class="fa-solid fa-book-open-reader"></i> ملحوظة-->
-                            <!--            </div>-->
-                            <!--            <div class="guests text-center booking-note" data-v="0">-->
-                            <!--                الملحوظات-->
-                            <!--            </div>-->
-                            <!--            <div class="chevro text-left">-->
-                            <!--                <i class="fas fa-chevron-left"></i>-->
-                            <!--            </div>-->
-                            <!--        </div>-->
-                            <!--    </a>-->
-                            <!--</li>-->
+                             <li class="mt-5">
+                                <div class="btn-group flex-column w-100" role="group" aria-label="Basic example">
+                                    <a href="{{ route('branch.home') }}" type="button" class="s-filter btn btn-lg btn-primary" > الغاء الحجز </a>
+                                    <a href="{{ route('branch.home') }}" type="button" class="s-filter btn btn-lg btn-primary my-3" > عرض الصالة </a>
+                                    <a href="{{ route('branch.home') }}" type="button" class="s-filter btn btn-lg btn-primary" > اقفال الشاشة </a>
+                                </div>
+                            </li>
                             <li class="nav-item py-3 show-content no-border" data-id="#pay" data-v="0">
                                 <div class="btn to-pay btn-lg w-100">الدفع </div>
                             </li>
-                            <!--<li class="nav-item py-3">-->
-                            <!--    <ol class="list-group reversed paing-wrp">-->
-                            <!--        <li class="list-group-item no-number  ">-->
-                            <!--            <div class="sub-total d-flex justify-content-between align-items-start w-100">-->
-                            <!--                <div class="me-2 ms-auto">-->
-                            <!--                    <div class="fw-bold"> حاصل الجمع</div>-->
-                            <!--                </div>-->
-                            <!--                <span>260 ريال</span>-->
-                            <!--            </div>-->
-                            <!--            <div class="tax d-flex justify-content-between align-items-start mt-4 w-100">-->
-                            <!--                <div class="me-2 ms-auto">-->
-                            <!--                    <div class="fw-bold"> ضريبة</div>-->
-                            <!--                </div>-->
-                            <!--                <span>10%</span>-->
-                            <!--            </div>-->
-                            <!--            <div class="tax d-flex justify-content-between align-items-start mt-4 total w-100">-->
-                            <!--                <div class="me-2 ms-auto">-->
-                            <!--                    <div class="fw-bold"> الإجمالى</div>-->
-                            <!--                </div>-->
-                            <!--                <span>286 ريال</span>-->
-                            <!--            </div>-->
-                            <!--            <div class="payment-method w-100">-->
-                            <!--                <div class="row">-->
-                            <!--                    <div class="col-4">-->
-                            <!--                        <div-->
-                            <!--                            class="payment-icon d-flex justify-content-center align-items-center">-->
-                            <!--                            <i class="fa-solid fa-sack-dollar"></i>-->
-                            <!--                        </div>-->
-                            <!--                        <p class="text-center">كاش</p>-->
-                            <!--                    </div>-->
-                            <!--                    <div class="col-4">-->
-                            <!--                        <div-->
-                            <!--                            class="payment-icon d-flex justify-content-center align-items-center">-->
-                            <!--                            <i class="fa-solid fa-credit-card"></i>-->
-                            <!--                        </div>-->
-                            <!--                        <p class="text-center">بطاقة ائتمان</p>-->
-                            <!--                    </div>-->
-                            <!--                    <div class="col-4">-->
-                            <!--                        <div-->
-                            <!--                            class="payment-icon d-flex justify-content-center align-items-center">-->
-                            <!--                            <i class="fa-solid fa-wallet"></i>-->
-                            <!--                        </div>-->
-                            <!--                        <p class="text-center">المحفظة</p>-->
-                            <!--                    </div>-->
-                            <!--                </div>-->
-                            <!--                <div class="payment-btn my-3 text-center">-->
-                            <!--                    <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"-->
-                            <!--                        data-bs-target="#exampleModal1">ادفع الآن</div>-->
-                            <!-- Modal -->
-                            <!--                    <div class="modal fade" id="exampleModal1" tabindex="-1"-->
-                            <!--                        aria-labelledby="exampleModalLabel1" aria-hidden="true">-->
-                            <!--                        <div class="modal-dialog">-->
-                            <!--                            <div class="modal-content">-->
-                            <!--                                <div class="modal-header">-->
-                            <!--                                    <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع-->
-                            <!--                                    </h5>-->
-                            <!--                                    <button type="button" class="btn-close"-->
-                            <!--                                        data-bs-dismiss="modal" aria-label="Close"></button>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="modal-body">-->
-                            <!--                                    <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="modal-footer">-->
-                            <!--                                    <button type="button"-->
-                            <!--                                        class="btn btn-primary">تأكيد</button>-->
-                            <!--                                    <button type="button" class="btn btn-secondary"-->
-                            <!--                                        data-bs-dismiss="modal">لا </button>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-                            <!--                        </div>-->
-                            <!--                    </div>-->
-
-                            <!--                </div>-->
-                            <!--            </div>-->
-                            <!--        </li>-->
-                            <!--    </ol>-->
-                            <!--</li>-->
-                            <!-- إضافة المزيد من العناصر هنا -->
                         </ul>
                     </div>
                     <div class="col-md-9">
-                        <div class="reservation-tabs  py-5" id="all-packages">
-                            <div class="container  py-5">
-                                <div class="row py-5">
+                        <div class="reservation-tabs" id="all-packages">
+                            <div class="container ">
+                                <div class="row">
                                     <!--<div class="col-md-2"></div>-->
                                     @foreach ($packages as $package)
                                         <div class="col-md-4">
@@ -305,41 +180,33 @@
                                                     </label>
 
                                                 </div>
-                                                <div
-                                                    class="card-footer btn-dark text-light text-body-secondary package-price">
-                                                    الباقة الأولى
-                                                </div>
                                             </div>
                                         </div>
                                     @endforeach
-                                    <!--<div class="col-md-2"></div>-->
                                 </div>
-                                <!--<div class="row">-->
-                                <!--    <div class="col-md-10"></div>-->
-                                <!--    <div class="col-md-2">-->
-                                <!--        <div class="change-content btn btn-primary" data-id="#all-tables">التالى</div>-->
-                                <!--    </div>-->
-                                <!--</div>-->
                             </div>
                         </div>
                         <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
                             @include('branch._halles_branch')
                         </div>
-
                         <div class="reservation-tabs" id="allguests">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="seacr-bar mb-5">
-                                            <form class="d-flex search w-100 " role="search">
-                                                <input class="form-control" oninput="clients()" id="search"
-                                                    type="search" aria-label="Search">
-                                                <button class="btn search-btn"><i
-                                                        class="fa-solid fa-magnifying-glass"></i></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="container pt-3">
+                                <!--<div class="row">-->
+                                <!--    <div class="col-10">-->
+                                        
+                                        <!--<div class="seacr-bar mb-5">-->
+                                        <!--    <form class="d-flex search w-100 " role="search">-->
+                                        <!--        <input class="form-control" oninput="clients()" id="search"-->
+                                        <!--            type="search" aria-label="Search">-->
+                                        <!--        <button class="btn search-btn"><i-->
+                                        <!--                class="fa-solid fa-magnifying-glass"></i></button>-->
+                                        <!--    </form>-->
+                                        <!--</div>-->
+                                <!--    </div>-->
+                                <!--    <div class="col-md-2">-->
+                                <!--        <div class="top-prev change-content btn btn-primary" data-id="#all-tables">السابق</div>-->
+                                <!--    </div>-->
+                                <!--</div>-->
                                 <div class="row">
                                     <div class="col-1">
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -389,141 +256,31 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <h3>
                                             أضف ضيف جديد</h3>
 
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-2">
+                                        <div class="top-prev change-content btn btn-primary" data-id="#all-tables">السابق</div>
                                     </div>
                                 </div>
                                 <div class="row gust-cards" id="clients">
                                     @include('branch._clients')
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="change-content btn btn-primary" data-id="#all-tables">السابق</div>
-                                    </div>
-                                    <div class="col-md-8"></div>
+                                <!--<div class="row">-->
+                                <!--    <div class="col-md-2">-->
+                                <!--        <div class="change-content btn btn-primary" data-id="#all-tables">السابق</div>-->
+                                <!--    </div>-->
+                                <!--    <div class="col-md-8"></div>-->
                                     <!--<div class="col-md-2">-->
                                     <!--    <button class="change-content btn btn-primary"-->
                                     <!--        data-id="#date-content">التالى</button>-->
                                     <!--</div>-->
-                                </div>
+                                <!--</div>-->
                             </div>
                         </div>
-                        <!--<div class="ftco-section reservation-tabs" id="date-content">-->
-                        <!--    <div class="container">-->
-                        <!--        <div class="row justify-content-center">-->
-                        <!--            <div class="col-md-6 text-center mb-5">-->
-                        <!--                <h2 class="heading-section">Calendar #02</h2>-->
-                        <!--            </div>-->
-                        <!--            <div class="elegant-calencar d-md-flex mb-5">-->
-                        <!--                <div class="wrap-header d-flex align-items-center">-->
-                        <!--                    <p id="reset">reset</p>-->
-                        <!--                    <div id="header" class="p-0">-->
-                        <!--                        <div-->
-                        <!--                            class="pre-button d-flex align-items-center justify-content-center">-->
-                        <!--                            <i class="fa fa-chevron-left"></i>-->
-                        <!--                        </div>-->
-                        <!--                        <div class="head-info">-->
-                        <!--                            <div class="head-day"></div>-->
-                        <!--                            <div class="head-month"></div>-->
-                        <!--                        </div>-->
-                        <!--                        <div-->
-                        <!--                            class="next-button d-flex align-items-center justify-content-center">-->
-                        <!--                            <i class="fa fa-chevron-right"></i>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-                        <!--                </div>-->
-                        <!--                <div class="calendar-wrap">-->
-                        <!--                    <table id="calendar">-->
-                        <!--                        <thead>-->
-                        <!--                            <tr>-->
-                        <!--                                <th>Sun</th>-->
-                        <!--                                <th>Mon</th>-->
-                        <!--                                <th>Tue</th>-->
-                        <!--                                <th>Wed</th>-->
-                        <!--                                <th>Thu</th>-->
-                        <!--                                <th>Fri</th>-->
-                        <!--                                <th>Sat</th>-->
-                        <!--                            </tr>-->
-                        <!--                        </thead>-->
-                        <!--                        <tbody>-->
-                        <!--                            <tr>-->
-                        <!--                                <td data-id="#alltime" class=""></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                            </tr>-->
-                        <!--                            <tr>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                            </tr>-->
-                        <!--                            <tr>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                            </tr>-->
-                        <!--                            <tr>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                            </tr>-->
-                        <!--                            <tr>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                            </tr>-->
-                        <!--                            <tr>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                                <td></td>-->
-                        <!--                            </tr>-->
-                        <!--                        </tbody>-->
-                        <!--                    </table>-->
-                        <!--                </div>-->
-                        <!--            </div>-->
-                        <!--        </div>-->
-                        <!--        <div class="row">-->
-                        <!--            <div class="col-md-12">-->
-
-                        <!--            </div>-->
-                        <!--        </div>-->
-                        <!--        <div class="row">-->
-                        <!--            <div class="col-md-2">-->
-                        <!--                <div class="change-content btn btn-primary" data-id="#allguests">السابق</div>-->
-                        <!--            </div>-->
-                        <!--            <div class="col-md-8"></div>-->
-                        <!--            <div class="col-md-2">-->
-                        <!--                <button class="change-content btn btn-primary"-->
-                        <!--                    data-id="#alltime">التالى</button>-->
-                        <!--            </div>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
                         <div class="reservation-tabs alltime" id="alltime">
                             <div class="container">
                                 @include('branch.time_slots')
@@ -533,6 +290,12 @@
 
                         <div class="reservation-tabs notes pt-5 mt-5" id="pay">
                             <div class="container">
+                                <div class="row">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-2">
+                                         <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-3"></div>
                                     <div class="col-md-6">
@@ -559,6 +322,22 @@
                                                     </div>
                                                     <span class="pay-total">286 ريال</span>
                                                 </div>
+                                                 <div
+                                                    class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
+
+                                                    <div class="discount-inputs input-group">
+                                                        <label  class="col-sm-2 col-form-label"> %</label>
+                                                      <input class="discount-input form-control" lang="en" type="number" placeholder="قيمة الخصم" aria-label="default input example">
+                                                      <button class="btn btn-primary" type="button">تطبيق</button>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
+                                                    <div class="me-2 ms-auto">
+                                                        <div class="fw-bold"> الأجمالى بعد الخصم</div>
+                                                    </div>
+                                                    <span class="pay-total-discount">286 ريال</span>
+                                                </div>
                                                 <div class="payment-method w-100">
                                                     <div class="row">
                                                         <div class="col-4">
@@ -584,10 +363,30 @@
                                                         </div>
                                                     </div>
                                                     <div class="payment-btn my-3 text-center">
-                                                        <button class="btn btn-primary" type="button"
-                                                            data-bs-toggle="modal" data-bs-target="#modalPay">
-                                                            ادفع الآن
-                                                        </button>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <button class="btn btn-primary w-100" type="button"
+                                                                    data-bs-toggle="modal" data-bs-target="#modalPay">
+                                                                     تسجيل الطلب
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="btn btn-primary w-100" type="button" disabled>
+                                                                     تفعيل الحجز
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="btn btn-primary w-100" type="button"
+                                                                    data-bs-toggle="modal" data-bs-target="#bill" disabled>
+                                                                      طباعة الفاتورة
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="btn btn-primary w-100" type="button" disabled>
+                                                                     تغيير الصالة 
+                                                                </button>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                 </div>

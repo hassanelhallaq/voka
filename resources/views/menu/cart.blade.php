@@ -3,7 +3,7 @@
         <div class="subheader dark-overlay dark-overlay-2" style="background-image: url('assets/img/cover.jpg')">
             <div class="container">
                 <div>
-                    <h1 style="text-align: center;">Cart</h1>
+                    <h1 style="text-align: center;">السلة</h1>
                 </div>
             </div>
         </div>
@@ -20,8 +20,7 @@
                             <th class="remove-item"></th>
                             <th>المنتج</th>
                             <th>السعر</th>
-                            <th>الكمية</th>
-                            <th>المجموع</th>
+                           
                         </tr>
                     </thead>
                     <tbody id="cart-body">
@@ -64,6 +63,15 @@
                             aria-controls="tab-product-reviews" aria-selected="false">دفع إلكتروني</a>
                     </li>
                 </ul>
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="tab-palance" role="tabpanel" aria-labelledby="tab-palance-tab">
+                      <p>يمكنك التمتع برصيد الباقة وطلب مختلف الأصناف من خلال زر إنشاء طلب</p>
+                      <button class=" btn-custom btn-sm shadow-non">إنشاء طلب</button>
+                  </div>
+                <div class="tab-pane" id="tab-e-pay" role="tabpanel" aria-labelledby="tab-e-pay-tab">
+                    
+                </div>
+                </div>
                 <!-- end pay -->
 
             </div>
@@ -99,10 +107,7 @@
                     </div>
                 </td>
                 <td data-title="السعر"> <strong>${item.price}$</strong> </td>
-                <td class="quantity" data-title="الكمية">
-                    <input type="number" class="qty form-control" value="${item.quantity}" min="1">
-                </td>
-                <td data-title="المجموع"> <strong>${(item.price * item.quantity).toFixed(2)}$</strong> </td>
+               
             `;
                     cartBody.appendChild(cartItemRow);
                 });

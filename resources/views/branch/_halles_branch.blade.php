@@ -9,6 +9,9 @@
                             data-toggle="tab">{{ $item->name }}</a>
                     </li>
                 @endforeach
+                <li class="top-prev">
+                    <div class="change-content btn btn-primary" data-id="#all-packages">السابق</div>
+                </li>
             </ul>
         </div>
     </div>
@@ -81,14 +84,7 @@
         @endforeach
     </div>
 </div>
-<div class="row" style="justify-content: space-between;">
-    <div class="col-md-2">
-        <div class="change-content btn btn-primary" data-id="#all-packages">السابق</div>
-    </div>
-    <!--<div class="col-md-2">-->
-    <!--        <div class="change-content btn btn-primary" data-id="#allguests">التالى</div>-->
-    <!--</div> -->
-</div>
+
 <script src="{{ asset('front/js/main.js') }}"></script>
 <script>
     document.querySelectorAll('.table-pick').forEach(function(element) {

@@ -1327,3 +1327,140 @@ table .active-day {
     transform: scale(20);
   }
 }
+/*------------------------------------------------------------------------------ 10 - 8 -------------------------------------------------------------*/
+/*----------------------- top action section -------------------------------*/
+.top-actions .card {
+  text-align: right !important;
+}
+.top-actions .card .card-body {
+  padding-right: 10px !important;
+}
+.top-actions .card .top-icon {
+  font-size: 30px;
+  text-align: center;
+  padding-top: 10px;
+}
+.top-actions .card .card-text {
+  color: #fff;
+}
+.top-actions .dropdown-toggle {
+  padding: 0;
+  color: var(--white);
+  font-size: 15px;
+}
+.top-actions .dropdown-menu {
+  text-align: right;
+  background-color: var(--accentDark);
+  color: var(--white);
+}
+/* inner notification */
+.top-text-block {
+  display: block;
+  padding: 15px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: var(--white);
+  white-space: inherit !important;
+  border-bottom: 1px solid #5d5d5d;
+  position: relative;
+}
+.top-text-block:hover:before {
+  content: '';
+  width: 4px;
+  background: #f05a1a;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+}
+.top-text-block.unread {
+  background: #ffc;
+}
+.top-text-light {
+  font-size: 14px;
+  margin-top: 8px;
+  color: var(--orange);
+}
+/* end of inner notification */
+.languages .dropdown-toggle {
+  font-size: 18px;
+}
+.lock {
+  font-size: 35px;
+  cursor: pointer;
+  text-align: center;
+}
+.top-actions .new-reserv-btn {
+    border: 1px dashed var(--white);
+}
+.top-actions .new-reserv-btn i {
+	font-size: 20px !important;
+	margin-left: 15px;
+}
+/*----------------------- end of top action section -------------------------------*/
+/*----------------------- end of top action section -------------------------------*/
+/* ------------- new design for the tables -----------------*/
+.sofa {
+  cursor: pointer;
+}
+.sofa .modal-header .btn-close {
+  margin: 0 !important;
+}
+.sofa .table-vvip h2 {
+  transform: rotate(270deg);
+  font-size: 25px;
+}
+.sofa .table-vip h4 {
+  font-size: 16px;
+}
+/*-------------- Dine Set tables ----------------------*/
+.sofa .table-dine {
+  position: relative;
+}
+.sofa .table-dine h4 {
+	z-index: 3;
+	font-size: 14px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.sofa .table-dine svg {
+  transform: scale(1.8);
+}
+.sofa-serv .table-dine h4 {
+  color: var(--accentDark);
+}
+/*-------------- end of Dine Set Tables ---------------*/
+/*----------------- table modal -------------------------*/
+.sofa .modal-header .btn-close {
+	margin: 0 !important;
+	background-color: aliceblue;
+}
+.table-modal .list-group {
+  padding: 0 !important;
+}
+.table-modal .left {
+  text-align: right;
+  flex: 1;
+}
+.table-modal .right {
+  text-align: left;
+  flex: 1;
+}
+/*----------------- end of table modal -------------------------*/
+/* ------------- end of new design for the tables -----------------*/
+/*--------------------- new css for the reversation page ---------------------------*/
+.top-prev {
+    margin-right: auto;
+}
+.discount-inputs {
+    gap: 6px;
+}
+.discount-inputs .form-select {
+    color: var(--accentDark);
+}
+.discount-inputs .discount-input {
+    font-family: 'arial';
+}

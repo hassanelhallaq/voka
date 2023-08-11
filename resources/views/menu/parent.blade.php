@@ -63,27 +63,23 @@
 
         <div class="top-header">
             <div class="container">
-                <div class="top-header-inner">
-                    <ul class="top-header-nav header-cta">
-                        
-                        <li> 
-                       
-                        <a href="#">
-                         <i class="fa-solid fa-bell"></i>
-                        استدعي الويتر
-                        </a>
-                         </li>
-                    </ul>
-                     <div class="container">
+            <div class="top-header-inner">
+            <div class="container">
             <nav class="navbar">
+                <ul class="top-header-nav header-cta">
+                    <li> 
+                    <a href="#">
+                     <i class="fa-solid fa-bell"></i>
+                    استدعي الويتر
+                    </a>
+                     </li>
+                </ul>
                 <!-- Logo -->
                 <a class="navbar-brand"
                     href="{{ route('menu.home', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}"> <img
-                        src="https://via.placeholder.com/135x73" alt="logo">
+                        src="{{ asset('menu/assets/img/VOKALOGOBLACK_page-0001 (1).jpg') }}" alt="logo">
                 </a>
                 <!-- Menu -->
-
-
                 <div class="header-controls">
                     <ul class="navbar-nav">
                         <li class="menu-item menu-item-has-children">
@@ -103,7 +99,6 @@
                         </li>
                     </ul>
                 </div>
-
             </nav>
         </div>
                 </div>
@@ -119,7 +114,7 @@
         <div class="container">
             <div class="footer-top">
                 <div class="footer-logo">
-                    <img src="https://via.placeholder.com/135x73" alt="logo">
+                    <img src="{{ asset('menu/assets/img/VOKALOGOBLACK_page-0001 (1).jpg') }}" alt="logo">
                 </div>
             </div>
         </div>
@@ -164,7 +159,8 @@
     <script src="{{ asset('menu/assets/js/plugins/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('menu/assets/js/plugins/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('menu/assets/js/plugins/slick.min.js') }}"></script>
-
+    <!--sweet alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Slices Scripts -->
     <script src="{{ asset('menu/assets/js/main.js') }}"></script>
 

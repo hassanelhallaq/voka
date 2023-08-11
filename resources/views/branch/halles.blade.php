@@ -200,17 +200,107 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="seacr-bar mb-5">
-                            <form class="d-flex search  justify-content-between" role="search">
-                                <p>اكتب رقم الطاولة</p>
-                                <input class="search-input form-control" type="search" aria-label="Search"
-                                    placeholder="12">
-                                <button class="btn search-btn">
-                                    بحث
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </form>
+                          <!-- logout and notification part  -->
+                          <div class="row top-actions">
+                            <div class="col-md-3">
+                                <div class="notifications-wrap">
+                                    <div class="logout mb-5">
+                                        <div class="card mb-3">
+                                            <div class="row g-0">
+                                              <div class="col-md-2">
+                                                <i class="top-icon fa-solid fa-user-tie"></i>
+                                              </div>
+                                              <div class="col-md-10 pr-2">
+                                                <div class="card-body  p-0">
+                                                  <h5 class="card-title">محمد أحمد</h5>
+                                                  <a href="#" class="card-text">تسجيل خروج</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="notifications mb-5">
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                          <div class="col-md-2">
+                                            <i class="top-icon fa-solid fa-bell"></i>
+                                          </div>
+                                          <div class="col-md-10 pr-2">
+                                            <div class="card-body  p-0">
+                                              <h5 class="card-title"> استدعاء ويتر</h5>
+                                              <div class="dropdown">
+                                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  عرض الأستدعاء 
+                                                </button>
+                                                <ul class="dropdown-menu w-100 text-right">
+                                                  <li>
+                                                    <a href="#" class="top-text-block">
+                                                        <div class="top-text-heading">
+                                                            <span class="noti-text">استدعاء طاولة: </span>
+                                                            <span class="table-number">VVIP2</span>
+                                                        </div>
+                                                        <div class="top-text-light">
+                                                            منذ <span class="noti-time"> 30 ثانية</span>
+                                                        </div>
+                                                    </a> 
+                                                  </li>
+                                                  <li>
+                                                    <a href="#" class="top-text-block">
+                                                        <div class="top-text-heading">
+                                                            <span class="noti-text">استدعاء طاولة: </span>
+                                                            <span class="table-number">VVIP2</span>
+                                                        </div>
+                                                        <div class="top-text-light">
+                                                            منذ <span class="noti-time"> 30 ثانية</span>
+                                                        </div>
+                                                    </a> 
+                                                  </li>
+                                                  <li>
+                                                    <a href="#" class="top-text-block">
+                                                        <div class="top-text-heading">
+                                                            <span class="noti-text">استدعاء طاولة: </span>
+                                                            <span class="table-number">VVIP2</span>
+                                                        </div>
+                                                        <div class="top-text-light">
+                                                            منذ <span class="noti-time"> 30 ثانية</span>
+                                                        </div>
+                                                    </a> 
+                                                  </li>
+                                                  <li class="text-center">
+                                                    <a href="#" class="btn btn-link text-center mt-3" >كل الأستدعاءات</a>
+                                                  </li>
+                                                </ul>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-1">
+                                <div class="languages">
+                                      <div class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                          English
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                          <li><a class="dropdown-item" href="#">عربى</a></li>
+                                        </ul>
+                                      </div>
+                              
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="lock">
+                                    <i class="fa-solid fa-unlock-keyhole"></i>
+                                </div>
+                            </div>
                         </div>
+                          <!-- end of logout and notification part  -->
                         <div class="container">
                             <div class="filter-btns d-flex mb-2">
                                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -3621,7 +3711,6 @@
         <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
             integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
         </script>
-        <script src="{{ asset('front/js/date.js') }}"></script>
         <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
 
         <script src="{{ asset('front/js/main.js') }}"></script>
