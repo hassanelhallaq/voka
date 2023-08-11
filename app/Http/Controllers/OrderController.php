@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\PackageTables;
 use App\Models\Reservation;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -26,7 +28,16 @@ class OrderController extends Controller
 
         return view('dashboard.order.edit', compact('reservations', 'packages'));
     }
-
+    public function tableAvailable(Request $request)
+    {
+        $packageID = $request->id;
+        $date = $request->date;
+        $tables = PackageTables::where('package_id', $packageID)->get();
+        $tables = Table::whereIn('id', $tables->pluck('id'))->whereDoesntHave('reservations', function ($query) use ($date) {
+            $query->where('reservation_date', $date);
+        })->get();
+        return response()->json($tables);
+    }
     public function finishOrders()
     {
         $order =  Order::with(['products', 'package', 'client', 'reservation'])->where('is_done', 1)->paginate(40);

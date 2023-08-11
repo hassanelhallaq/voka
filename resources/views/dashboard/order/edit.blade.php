@@ -146,9 +146,10 @@
          $(document).ready(function() {
              $.ajax({
                  type: 'get',
-                 url: "{{ route('table.ajax') }}",
+                 url: "{{ route('table.available') }}",
                  data: {
-                     'id': id
+                     'id': id,
+                     'date': document.getElementById('date').value
                  },
                  success: function(data) {
 
