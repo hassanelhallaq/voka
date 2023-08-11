@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\product\StoreProductRequest;
 use App\Models\Branch;
+use App\Models\Department;
 use App\Models\ProductCategory;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class ProductController extends Controller
     public function create()
     {
         $branches =  Branch::all();
-        return view('dashboard.product.create', compact('branches'));
+        $departments =  Department::all();
+        return view('dashboard.product.create', compact('branches', 'departments'));
     }
 
     public function store(StoreProductRequest $request)
@@ -74,8 +76,9 @@ class ProductController extends Controller
     {
         $product =  Product::find($id);
         $branches =  Branch::all();
+        $departments =  Department::all();
 
-        return view('dashboard.product.edit', compact('product', 'branches'));
+        return view('dashboard.product.edit', compact('product', 'branches', 'departments'));
     }
 
     public function update(StoreProductRequest $request, $id)

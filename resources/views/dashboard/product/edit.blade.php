@@ -155,6 +155,27 @@
                                                 @endif
                                             </div>
                                         </div>
+
+                                        <div class="form-group col-md-3">
+
+                                            <label>{{ __('departments') }}:</label>
+
+                                            <select class="form-select" multiple data-control="select2"
+                                                name="department_id" id="department_id">
+
+                                                @foreach ($departments as $department)
+                                                    @if (app()->getLocale() == 'ar')
+                                                        <option value="{{ $department->id }}">{{ $department->name }}
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $department->id }}">{{ $department->name }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+
+                                            </select>
+
+                                        </div>
                                         <div class="form-group col-md-3">
                                             <label>{{ __('Branch') }}:</label>
                                             <select class="form-select" multiple data-control="select2"
