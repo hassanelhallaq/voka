@@ -76,7 +76,7 @@
                                             @endforeach
                                         </tbody>
                                         <span class="span">
-                                            {!! $order->links() !!}
+                                            {!! $reservations->links() !!}
                                         </span>
                                     </table>
                                     <!--end::Table-->
