@@ -58,6 +58,7 @@ Route::prefix('admin')->middleware('auth')->group(
         Route::get('finish-orders', [App\Http\Controllers\OrderController::class, 'finishOrders'])->name('finish_orders');
         Route::get('orders/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
         Route::get('reservations/all', [App\Http\Controllers\OrderController::class, 'reservations'])->name('reservations.all');
+        Route::get('reservations-now/edit/{id}', [App\Http\Controllers\OrderController::class, 'reservations'])->name('reservations.now.edit');
 
         Route::resource('departments', DepartmentsController::class);
         Route::post('wallet-blance/{id}', [App\Http\Controllers\ClientController::class, 'walletBlance'])->name('wallet.blance');
