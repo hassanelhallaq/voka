@@ -7,7 +7,8 @@
                  </div>
                  <div class="card-body">
                      <div class="form-validation">
-                         <form method="post" action="" class="needs-validation" enctype="multipart/form-data">
+                         <form method="post" action="{{ route('reservation.now.update', [$reservation->id]) }}"
+                             class="needs-validation" enctype="multipart/form-data">
                              @method('PUT')
                              @csrf
                              <div class="row">
@@ -50,7 +51,7 @@
                                          <span class="text-danger">*</span>
                                      </label>
                                      <select class="default-select wide form-control mb-3" onchange="table(this.value)""
-                                         name="branch_id" id="branch_id" required>
+                                         name="package_id" id="package_id" required>
                                          <option value="0"> .... </option>
                                          @foreach ($packages as $package)
                                              <option @if ($reservation->package_id == $package->id) selected @endif
@@ -75,7 +76,7 @@
                                          <span class="text-danger">*</span>
                                      </label>
                                      <select class="form-select" multiple data-control="select2" id="table_id" required
-                                         name="table_id[]">
+                                         name="table_id">
                                          <option value="{{ $reservation->table_id }}" disabled="true">
                                              {{ $reservation->table->name }}
                                          </option>
@@ -90,14 +91,14 @@
 
                                  <div class="form-group col-md-6">
                                      <label class="col-lg-4 col-form-label " for="validationCustom01">
-                                         {{ __('time') }}
+                                         {{ __('minutes') }}
                                          <span class="text-danger">*</span>
                                      </label>
-                                     <input type="number" class="form-control mb-3" id="time"
-                                         value="{{ $reservation->time }}" name="time" required>
+                                     <input type="number" class="form-control mb-3" id="minutes"
+                                         value="{{ $reservation->minutes }}" name="minutes" required>
 
-                                     @if ($errors->has('time'))
-                                         <p style="color: red">{{ $errors->first('time') }}
+                                     @if ($errors->has('minutes'))
+                                         <p style="color: red">{{ $errors->first('minutes') }}
                                          </p>
                                      @endif
 

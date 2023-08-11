@@ -28,6 +28,24 @@ class OrderController extends Controller
 
         return view('dashboard.order.edit', compact('reservation', 'packages'));
     }
+    public function updateReservation(Request $request, $id)
+    {
+        $request->validate([
+            'date' => 'required',
+            'price' => 'required',
+            'package_id' => 'required',
+            'table_id' => 'required',
+            'minutes' => 'required',
+        ]);
+        $reservation = Reservation::find($id);
+        $reservation->date = $request->date;
+        $reservation->price = $request->price;
+        $reservation->package_id = $request->package_id;
+        $reservation->table_id = $request->table_id;
+        $reservation->minutes = $request->minutes;
+        $reservation->update();
+        return redirect()->route('reservations.all')->with('success', 'Shift created successfully');
+    }
     public function tableAvailable(Request $request)
     {
         $packageID = $request->id;
