@@ -64,18 +64,20 @@
                                                     <td>
                                                         {{ $item->package->price }}
                                                     </td>
+
+                                                    @php
+                                                        $totalSum = $item->products->sum(function ($product) {
+                                                            return $product->pivot->price * $product->pivot->quantity;
+                                                        });
+                                                    @endphp
+
+                                                    <td> {{ $totalSum }}</td>
                                                     <td>
                                                         {{ $item->reservation->date }}
                                                     </td>
                                                     <td>
                                                         {{ $item->reservation->end }}
                                                     </td>
-                                                    @php
-                                                        $totalSum = $item->products->sum(function ($product) {
-                                                            return $product->pivot->price * $product->pivot->quantity;
-                                                        });
-                                                    @endphp
-                                                    <td> {{ $totalSum }}</td>
                                                     <td> <a class="btn btn-icon btn-sm btn-success"
                                                             href="{{ route('orders.show', [$item->id]) }}">
                                                             <i class="fa fa-eye"></i></a></td>
