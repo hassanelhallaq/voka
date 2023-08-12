@@ -18,11 +18,11 @@
              <div class="card">
                  <div class="card-body">
                      <div class="form-validation">
-                         <form class="needs-validation" action="{{ route('branch.update', [ $branch->id]) }}"
+                         <form class="needs-validation" action="{{ route('branch.update', [$branch->id]) }}"
                              method="post" novalidate>
 
                              @csrf
-                             {{-- <div class="row">
+                             <div class="row">
 
                                  <div class="form-group col-md-12">
 
@@ -38,7 +38,7 @@
 
                                  </div>
 
-                             </div> --}}
+                             </div>
                              <br>
                              <div class="row">
 
