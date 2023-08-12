@@ -34,7 +34,7 @@ class RoleController extends Controller
         $page_description = '';
         $roles = Role::withCount('users')->paginate(100);
         $permissionGroups = PermissionGroup::with('permissions')->whereHas('permissions', function ($q) {
-            $q->where('guard_name', 'web');
+            $q->where('guard_name', 'admin');
         })->get();
         $permissionGroupsBranch = PermissionGroup::with('permissions')->whereHas('permissions', function ($q) {
             $q->where('guard_name', 'branch');
