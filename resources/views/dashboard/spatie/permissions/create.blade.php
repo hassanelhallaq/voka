@@ -102,7 +102,7 @@
 
          };
 
-         store('/dashboard/admin/permissions', data);
+         store('/admin/permissions', data);
 
      }
  </script>
