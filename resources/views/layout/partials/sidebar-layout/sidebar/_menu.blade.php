@@ -31,6 +31,17 @@
                 </div>
                 <!--end:Menu content-->
             </div>
+            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
+                data-kt-menu="true" data-kt-menu-expand="false">
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="{{ route('branch.index') }}">
+                        <span class="menu-link">
+                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
+                            <span class="menu-title">{{ __('Branch') }}</span>
+                        </span></a>
+                </div>
+            </div>
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <span class="menu-link">
@@ -40,46 +51,32 @@
                 </span>
                 <!--end:Menu link-->
                 <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('products.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">{{ __('Products') }}</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('branch.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">{{ __('Branch') }}</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
 
-                    <!--end:Menu item-->
-                </div>
-                <!--end:Menu sub-->
-            </div>
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('address-book', 'fs-2') !!}</span>
-                    <span class="menu-title">setting</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
+
                 <div class="menu-sub menu-sub-accordion">
                     <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('shifts.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{ __('shifts') }}</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('branch-account.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{ __('Employee') }}</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
                     <div class="menu-item">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('settings.index') }}">
@@ -90,8 +87,6 @@
                         </a>
                         <!--end:Menu link-->
                     </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('show_translate') }}">
@@ -116,50 +111,42 @@
                 </div>
                 <!--end:Menu sub-->
             </div>
-            <!--end:Menu item-->
-            <!--begin:Menu item-->
-            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
-                data-kt-menu="true" data-kt-menu-expand="false">
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="{{ route('coupons.index') }}">
-                        <span class="menu-link">
-                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-                            <span class="menu-title">{{ __('coupons') }}</span>
-                        </span></a>
-                </div>
-            </div>
-
-            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
-                data-kt-menu="true" data-kt-menu-expand="false">
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="{{ route('packages.index') }}">
-                        <span class="menu-link">
-                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <!--begin:Menu link-->
+                <span class="menu-link">
+                    <span class="menu-icon">{!! getIcon('address-book', 'fs-2') !!}</span>
+                    <span class="menu-title"> الحجوزات والطاولات</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-accordion">
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('packages.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
                             <span class="menu-title">{{ __('packages') }}</span>
-                        </span></a>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+
+                    <!--end:Menu item-->
                 </div>
+                <!--end:Menu sub-->
             </div>
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                 data-kt-menu="true" data-kt-menu-expand="false">
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="{{ route('categories.index') }}">
+                    <a href="{{ route('products.index') }}">
                         <span class="menu-link">
                             <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-                            <span class="menu-title">{{ __('client Category') }}</span>
-                        </span></a>
-                </div>
-            </div>
-            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
-                data-kt-menu="true" data-kt-menu-expand="false">
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="{{ route('clients.index') }}">
-                        <span class="menu-link">
-                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-                            <span class="menu-title">{{ __('clients') }}</span>
+                            <span class="menu-title">{{ __('products') }}</span>
                         </span></a>
                 </div>
             </div>
@@ -174,6 +161,71 @@
                         </span></a>
                 </div>
             </div>
+            <!--end:Menu item-->
+            <!--begin:Menu item-->
+            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
+                data-kt-menu="true" data-kt-menu-expand="false">
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="{{ route('coupons.index') }}">
+                        <span class="menu-link">
+                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
+                            <span class="menu-title">{{ __('coupons') }}</span>
+                        </span></a>
+                </div>
+            </div>
+
+            {{-- <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
+                data-kt-menu="true" data-kt-menu-expand="false">
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <a href="{{ route('packages.index') }}">
+                        <span class="menu-link">
+                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
+                            <span class="menu-title">{{ __('packages') }}</span>
+                        </span></a>
+                </div>
+            </div> --}}
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <!--begin:Menu link-->
+                <span class="menu-link">
+                    <span class="menu-icon">{!! getIcon('address-book', 'fs-2') !!}</span>
+                    <span class="menu-title"> العملاء (CRM)</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-accordion">
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('clients.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{ __('clients') }}</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('categories.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{ __('client Category') }}</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+
+                    <!--end:Menu item-->
+                </div>
+                <!--end:Menu sub-->
+            </div>
+
+
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                 data-kt-menu="true" data-kt-menu-expand="false">
                 <!--begin:Menu item-->
@@ -223,27 +275,43 @@
                 </div>
                 <!--end:Menu sub-->
             </div>
-            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
-                data-kt-menu="true" data-kt-menu-expand="false">
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="{{ route('shifts.index') }}">
-                        <span class="menu-link">
-                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-                            <span class="menu-title">{{ __('shifts') }}</span>
-                        </span></a>
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <!--begin:Menu link-->
+                <span class="menu-link">
+                    <span class="menu-icon">{!! getIcon('address-book', 'fs-2') !!}</span>
+                    <span class="menu-title">{{ __('reservations') }}</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                <div class="menu-sub menu-sub-accordion">
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('reservations.all') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{ __('reservations online') }}</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('reservations.refund') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{ __('reservations refunded') }}</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+
+                    <!--end:Menu item-->
                 </div>
-            </div>
-            <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
-                data-kt-menu="true" data-kt-menu-expand="false">
-                <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                    <a href="{{ route('branch-account.index') }}">
-                        <span class="menu-link">
-                            <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
-                            <span class="menu-title">{{ __('Employee') }}</span>
-                        </span></a>
-                </div>
+                <!--end:Menu sub-->
             </div>
             <!--end:Menu item-->
         </div>
