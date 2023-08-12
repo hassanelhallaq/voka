@@ -92,18 +92,18 @@
                                                             <div
                                                                 class="card-item body-time d-flex justify-content-between align-items-center">
                                                                 @php
-                                                                    if ($table->reservation) {
-                                                                        $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
-                                                                        $reservationDateTime = $table->reservation->date;
+                                                                    if ($tables->reservation) {
+                                                                        $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $tables->reservation->time)->format('H:i');
+                                                                        $reservationDateTime = $tables->reservation->date;
                                                                     }
                                                                     
                                                                 @endphp
                                                                 <p class="hall-name"> الوقت المنقضى</p>
                                                                 <div class="countdown-timer"
-                                                                    data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
-                                                                    data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                                    data-start="{{ $tables->reservation ? $tables->reservation->date : '' }}"
+                                                                    data-package-time="{{ $tables->reservation->package->time ?? 0 }}">
                                                                     <!-- Add a span to display the countdown timer -->
-                                                                    @if ($table->reservation)
+                                                                    @if ($tables->reservation)
                                                                         <span
                                                                             class="countdown-timer-text">00:00:00</span>
                                                                     @else
@@ -167,9 +167,9 @@
                                                     </div>
                                                     <!-- عناصر التاب -->
                                                     @php
-                                                        if ($table->reservation) {
-                                                            $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
-                                                                ->where('table_id', $table->id)
+                                                        if ($tables->reservation) {
+                                                            $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
+                                                                ->where('table_id', $tables->id)
                                                                 ->where('is_done', 0)
                                                                 ->with('products')
                                                                 ->first();
@@ -208,7 +208,7 @@
 
                                                                 <li
                                                                     class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                                    <a onclick="product({{ $table->id }})"
+                                                                    <a onclick="product({{ $tables->id }})"
                                                                         class="me-2">
                                                                         <div class="fw-bold">اضف عنصر جديد</div>
                                                                     </a>
@@ -223,7 +223,7 @@
                                                                         <div class="me-2 ms-auto">
                                                                             <div class="fw-bold"> حاصل الجمع</div>
                                                                         </div>
-                                                                        <span>{{ $table->reservation->package->price ?? 0 }}
+                                                                        <span>{{ $tables->reservation->package->price ?? 0 }}
                                                                             ريال</span>
                                                                     </div>
 
@@ -241,7 +241,7 @@
                                                                         </div>
 
                                                                         @php
-                                                                            $total = $table->reservation->package->price ?? 0 * 0.15;
+                                                                            $total = $tables->reservation->package->price ?? 0 * 0.15;
                                                                         @endphp
 
                                                                         <span>{{ $total - $totalOrderPrices }}
@@ -322,7 +322,7 @@
 
                                                         </div>
                                                         <div id="orders" class="c-tab-pane ">
-                                                            @foreach ($table->reservations as $reservation)
+                                                            @foreach ($tables->reservations as $reservation)
                                                                 <ol
                                                                     class="list-group list-group-numbered reversed bill-info">
                                                                     <li
