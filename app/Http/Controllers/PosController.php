@@ -136,7 +136,9 @@ class PosController extends Controller
 
     public function halls()
     {
-        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
+        $halles = Lounge::with(['tables', 'reservation' => function ($q) {
+            $q->where('status', 'انتهى');
+        }])->where('branch_id', Auth::user()->branch_id)->get();
         return  $render = view('branch._halls', compact('halles'));
     }
     public function hallsNew()
