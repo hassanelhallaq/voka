@@ -35,6 +35,7 @@ class BranchAccountController extends Controller
         $branch->branch_id = $id;
         $isSaved = $branch->save();
         $shiftId = $request->input('shift_id');
+        $branch->assignRole($role);
         $branch->shifts()->attach($shiftId);
         $role = Role::find($request->role_id);
         $branch->assignRole($role);

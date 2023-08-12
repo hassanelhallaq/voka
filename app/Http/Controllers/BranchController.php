@@ -35,8 +35,6 @@ class BranchController extends Controller
         $branch->phone = $request->get('phone');
         $branch->manger = $request->get('manger');
         $isSaved = $branch->save();
-        $role = Role::where('id', $request->role_id)->first();
-        $branch->assignRole($role);
         if ($isSaved) {
 
             toastr()->success('Branch store successfully.');
@@ -58,9 +56,6 @@ class BranchController extends Controller
         $branch->phone = $request->get('phone');
         $branch->manger = $request->get('manger');
         $isSaved = $branch->save();
-        $branch->removeRole($branch->roles);
-        $role = Role::find($request->get('role_id'));
-        $branch->assignRole($role);
         if ($isSaved) {
 
             toastr()->success('Branch update successfully.');
