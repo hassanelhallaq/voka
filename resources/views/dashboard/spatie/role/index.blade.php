@@ -194,13 +194,13 @@
                                                                 </td>
                                                                 <td>
                                                                     <!--begin::Checkbox-->
-                                                                    <label
+                                                                    {{-- <label
                                                                         class="form-check form-check-custom form-check-solid me-9">
                                                                         <input class="form-check-input" type="checkbox"
                                                                             value="" id="kt_roles_select_all" />
                                                                         <span class="form-check-label"
                                                                             for="kt_roles_select_all">Select all</span>
-                                                                    </label>
+                                                                    </label> --}}
                                                                     <!--end::Checkbox-->
                                                                 </td>
                                                             </tr>
@@ -340,14 +340,14 @@
                                                                 </td>
                                                                 <td>
                                                                     <!--begin::Checkbox-->
-                                                                    <label
+                                                                    {{-- <label
                                                                         class="form-check form-check-custom form-check-solid me-9">
                                                                         <input class="form-check-input"
                                                                             type="checkbox" value=""
                                                                             id="kt_roles_select_all" />
                                                                         <span class="form-check-label"
                                                                             for="kt_roles_select_all">Select all</span>
-                                                                    </label>
+                                                                    </label> --}}
                                                                     <!--end::Checkbox-->
                                                                 </td>
                                                             </tr>
