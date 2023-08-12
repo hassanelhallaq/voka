@@ -124,6 +124,11 @@
             <div class="container">
                 <div class="row" style="justify-content: center; align-items: center;">
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 footer-widget">
+                        <a href="#" style="text-align:center">
+                        <p>
+                            تحقق من رصيدك
+                        </p>
+                        </a>
                         <h5 class="widget-title">ابقى على تواصل معنا</h5>
                         <ul class="social-media">
                             <li> <a href="#" class="facebook"> <i class="fab fa-facebook-f"></i> </a> </li>

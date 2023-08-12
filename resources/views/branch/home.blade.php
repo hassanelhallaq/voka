@@ -2875,48 +2875,48 @@
 </script>
 <script>
     // Function to update the countdown timer display
-    function updateCountdown() {
-        // Get all the countdown-timer elements
-        const countdownTimers = document.querySelectorAll('.countdown-timer');
+    // function updateCountdown() {
+    //     // Get all the countdown-timer elements
+    //     const countdownTimers = document.querySelectorAll('.countdown-timer');
 
-        countdownTimers.forEach(countdownTimer => {
-            const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
+    //     countdownTimers.forEach(countdownTimer => {
+    //         const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
 
-            // Get the data-start and data-package-time values from the data attributes
-            const startTimeString = countdownTimer.getAttribute('data-start');
-            const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
+    //         // Get the data-start and data-package-time values from the data attributes
+    //         const startTimeString = countdownTimer.getAttribute('data-start');
+    //         const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
 
-            // Convert the startTimeString to a Date object
-            const startTime = new Date(startTimeString);
+    //         // Convert the startTimeString to a Date object
+    //         const startTime = new Date(startTimeString);
 
-            // Calculate the target end time by adding the packageTime in minutes to the start time
-            const endTime = new Date(startTime.getTime() + packageTime * 60000);
+    //         // Calculate the target end time by adding the packageTime in minutes to the start time
+    //         const endTime = new Date(startTime.getTime() + packageTime * 60000);
 
-            const currentTime = new Date().getTime();
-            const timeRemaining = endTime - currentTime;
+    //         const currentTime = new Date().getTime();
+    //         const timeRemaining = endTime - currentTime;
 
-            if (timeRemaining <= 0) {
-                // Timer has ended
-                countdownTimerText.textContent = 'انتهى';
-            } else {
-                // Calculate hours, minutes, and seconds
-                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    //         if (timeRemaining <= 0) {
+    //             // Timer has ended
+    //             countdownTimerText.textContent = 'انتهى';
+    //         } else {
+    //             // Calculate hours, minutes, and seconds
+    //             const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    //             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-                // Format the time and update the countdown display
-                const formattedTime =
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                countdownTimerText.textContent = formattedTime;
-            }
-        });
-    }
+    //             // Format the time and update the countdown display
+    //             const formattedTime =
+    //                 `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    //             countdownTimerText.textContent = formattedTime;
+    //         }
+    //     });
+    // }
 
-    // Update the countdown every second
-    setInterval(updateCountdown, 1000);
+    // // Update the countdown every second
+    // setInterval(updateCountdown, 1000);
 
-    // Initialize the countdown on page load
-    updateCountdown();
+    // // Initialize the countdown on page load
+    // updateCountdown();
 </script>
 <script>
     // $(document).ready(function() {

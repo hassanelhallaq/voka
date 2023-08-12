@@ -4174,7 +4174,7 @@ td.quantity{
 }
 .ct-menu-category-item{
   display: inline-block;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
 }
 .ct-menu-category-item h6{
@@ -5411,14 +5411,14 @@ body{
   }
   .product .product-thumb img{
     width: 200px;
-    height: 200px;
+    /*height: 200px;*/
   }
 
 }
 .breadcrumb-item+.breadcrumb-item::before{
     display:none;
 }
-#tab-palance{
+#tab-palance,#tab-e-pay{
     text-align:right;
     margin-bottom:20px;
 }

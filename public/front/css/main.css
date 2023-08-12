@@ -1490,3 +1490,101 @@ table .active-day {
 .items-group:nth-last-of-type(1) {
     border: none;
 }
+/*------------------------------- new salon page css ------------------------------------*/
+.home-salon {
+  display: flex;
+}
+.card-item {
+  border-bottom: 1px solid #333;
+}
+.have-bg {
+	background-color: var(--accentDark);
+	padding-top: 12px;
+	border-radius: 8px;
+}
+.table-side-bar .nav-tabs {
+	border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  background-color: var(--accentDark);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 8px;
+}
+.list-group-numbered > .list-group-item::before {
+	content: counters(section, ".") ". ";
+	counter-increment: section;
+  display: none;
+}
+.table-side-bar a {
+	color: #b3b3b3;
+	text-decoration: none;
+}
+.table-side-bar .nav-tabs > li.active > a, 
+.table-side-bar .nav-tabs > li.active > a:focus, 
+.table-side-bar .nav-tabs > li.active > a:hover {
+	color: var(--white);
+	cursor: default;
+	background-color: var(--accentDark);
+	border: 1px solid var(--accentDark);
+	border-bottom-color: transparent;
+}
+.table-side-bar .nav > li > a:focus, .nav > li > a:hover {
+	text-decoration: none;
+	background-color: var(--accentDark);
+}
+.table-side-bar .tab-content {
+	padding: 8px 16px 0 16px;
+	font-size: 14px;
+}
+.rev-item {
+  border-bottom: 1px solid #3d3c3c;
+  padding-bottom: 12px;
+}
+.first-tabb {
+    padding: 0 20px;
+}
+.rev-time {
+	background-color: #111;
+	padding: 4px;
+	font-size: 10px;
+	width: 36px;
+	border-radius: 4px;
+}
+.rev-info {
+  flex: 1;
+  padding-right: 6px;
+}
+.rev-info h4{
+  font-size: 14px;
+  margin-top: 0;
+}
+.rev-info p{
+  font-size: 10px;
+  margin-bottom: 0;
+}
+.rev-statu p {
+  margin: 0;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  padding: 4px;
+}
+.rev-statu span {
+  font-size: 10px;
+}
+.rev-statu .s-time {
+  font-size: 16px;
+}
+.tablebrowse .casher-box {
+    display: block;
+    padding-right: 0;
+}
+.hidden-tab {
+    display: none;
+}
+.table-side-bar .active-tab {
+    display: block;
+}
+
+/*------------------------------- end new salon page css ------------------------------------*/

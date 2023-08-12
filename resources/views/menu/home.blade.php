@@ -1,4 +1,9 @@
     @extends('menu.parent')
+    <style>
+        .menu-category-thumb{
+            margin:0 -30px !important;
+        }
+    </style>
     @section('content')
         <!-- Header End -->
 
@@ -11,7 +16,10 @@
                         <ol class="breadcrumb"
                             style="background-color: transparent; justify-content: space-between; align-items: end;">
                             <div class="breadcrumb-item">
-                                <h4 class="tableDetails">رصيد الطاولة: <span>{{ $reservation->package->price }}</span></h4>
+                                <h4 class="tableDetails">رصيد الطاولة: <span>
+                                    {{ $reservation->package->price }}
+                                    ريال
+                                    </span></h4>
                             </div>
                             <div class="breadcrumb-item">
                                 <h4 class="tableDetails">رقم الطاولة: <span>{{ $table->name }}</span></h4>
@@ -53,6 +61,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- Menu Categories End -->
 
         <!-- Menu Wrapper Start -->
@@ -161,5 +170,5 @@
 
             document.addEventListener('DOMContentLoaded', updateCartItemCount);
         </script>
-       
+      
     @endsection

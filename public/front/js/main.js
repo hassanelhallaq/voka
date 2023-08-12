@@ -19,7 +19,32 @@ $(document).ready(function () {
     //         $('.side-place').append($(newId));
     //     }
     // });
+    
+     $('.table-btn-action').on('click', function(){
 
+        $('.table-side-bar').hide();
+        var newId = $(this).data('id');
+    
+        if($(this).data('stat') == 'available') {
+          $('#tab-place').show();
+          $(newId).hide();
+        } else {
+          $('#tab-place').hide();
+          $('#tab-place').removeClass('show');
+          $(newId).show();
+          $('.side-place').append($(newId)).addClass('have-bg');
+        }
+      });
+
+ 
+     $('.nav-btns .btn').on('click', function(){
+        var tabpanid = $(this).data('tab');
+        $('.table-bar-info').addClass('hidden-tab').removeClass('active-tab')
+        $('.' + tabpanid).addClass('active-tab').removeClass('hidden-tab');
+        console.log($(tabpanid));
+    });
+    
+    
     
     $('.to-pay').parent().hide();
       //  getting package id
@@ -451,18 +476,8 @@ mins.on('click', function() {
       }, 400, "linear");
     });
 
-    // اضافة التاريخ
-    // var currentDate = new Date();
-    // var monthNames = [
-    //   "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
-    //   "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-    // ];
-    // var monthIndex = currentDate.getMonth();
-    // var month = monthNames[monthIndex];
-    // var day = currentDate.getDate();
-    // var year = currentDate.getFullYear();
-    // var formattedDate = day + ' ' +  month + ', ' + year;
-    // $('.reserv-date').text(formattedDate).attr('data-v', 1);
+     
+    
     var currentDate = new Date();
     var monthNames = [
       "January", "February", "March", "April", "May", "June",
@@ -499,41 +514,6 @@ $('.reserv-date').on('click', function(){
 });
 
 
-
-
-
-    // // اضافة الوقت
-    // var currentDate = new Date();
-    // var hours = currentDate.getHours();
-    // var minutes = currentDate.getMinutes();
-
-    // minutes = minutes < 10 ? '0' + minutes : minutes;
-
-    // var ampm = hours >= 12 ? 'PM' : 'AM';
-    // hours = hours % 12;
-    // hours = hours ? hours : 12; // يعيد 0 إلى 12
-
-    // if(hours < 10){
-    //     hours = '0' + hours;
-    // } else {
-    //     hours = hours;
-    // }
-    // var formattedTime = hours + ':' + minutes + ' ' + ampm;
-    // $('.reserv-time').text(formattedTime).attr('data-v', 1);
-
-
-
-
-    // كود اخفاء واظهار محتوى التبويبات فى صفحة حجز جديد
-
-
-//  $('.show-content').on('click', function(){
-//         $('.show-content').removeClass('active-list');
-//         $(this).addClass('active-list');
-//         $('.reservation-tabs').hide();
-//         var contentId = $(this).data('id');
-//         $(contentId).show();
-//     });
 
         $('.clock').on("blur", function(){
             var tlheClock = $(this).val();

@@ -117,26 +117,26 @@
                                                         <div class="table-btn my-3 text-center">
                                                             <div class="row">
                                                                 <div class="col-md-6 mb-2">
-                                                                    <button class="btn btn-primary w-100"
-                                                                        type="button">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableorders">
                                                                         الطلبات
                                                                     </button>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <button class="btn btn-primary w-100"
-                                                                        type="button">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableinfo">
                                                                         استعراض
                                                                     </button>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <button class="btn btn-primary w-100" type="button"
-                                                                        disabled>
+                                                                    <button class="table-btn-action btn btn-primary w-100" type="button"
+                                                                     data-id="#tableactive"   disabled>
                                                                         تفعيل الحجز
                                                                     </button>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <button class="btn btn-primary w-100"
-                                                                        type="button">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
                                                                         انهاء الحجز
                                                                     </button>
                                                                 </div>
@@ -146,6 +146,103 @@
                                                     </div>
 
                                                 </div>
+                                                 <div class="table-side-bar" id="tableinfo">
+                                                    <div class="tablebrowse" >
+                                          <div class="tab-nav-wraper">
+                                                <div class="nav-btns d-flex justify-content-around align-items-center">
+                                                    <div class="btn btn-dark" data-tab="rev">الحجوزات</div>
+                                                    <div class="btn btn-dark" data-tab="waitings">الأنتظار</div>
+                                                </div>
+                                              <form action="">
+                                                <input class="form-control bg-dark text-light text-center"  type="text" placeholder="ابحث عن ضيف" aria-label="default input example">
+                                              </form>
+                                          </div>
+                                              <!-- عناصر التاب -->
+                                            <div class="side-tab-content">
+                                              <div id="rev" class="table-bar-info reversation-side-bar rev active-tab">
+                                                <div class="first-tabb d-flex justify-content-between align-items-start">
+                                                  <p>حجوزات الطاولة</p>
+                                                  <span> 3 <i class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                </div>
+                                                <ol class="list-group list-group-numbered reversed bill-info">
+                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="rev-item d-flex w-100  align-items-start">
+                                                      <div class="rev-time text-center">
+                                                        <span>6:00</span> <br >
+                                                        <span>PM</span>
+                                                      </div>
+                                                      <div class="rev-info">
+                                                        <h4>محمد عبدالعزيز</h4>
+                                                        <p>012586439</p>
+                                                        <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                      </div>
+                                                      <div class="rev-statu text-center">
+                                                        <p>VVIP-1</p>
+                                                        <span>فى الخدمة</span>
+                                                      </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="rev-item d-flex w-100  align-items-start">
+                                                      <div class="rev-time text-center">
+                                                        <span>6:00</span> <br >
+                                                        <span>PM</span>
+                                                      </div>
+                                                      <div class="rev-info">
+                                                        <a href="" class="btn btn-primary">احجز الآن</a>
+                                                      </div>
+                                                      <div class="rev-statu text-center">
+                                                        <p>VVIP-1</p>
+                                                        <span> شاغرة</span>
+                                                      </div>
+                                                    </div>
+                                                  </li>
+                                                 
+                                                </ol>
+                                              </div>
+                                              <div id="waithings" class="table-bar-info waitings-side-bar waitings hidden-tab">
+                                                <ol class="list-group list-group-numbered reversed bill-info">
+                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="rev-item d-flex w-100  align-items-start">
+                                                      <div class="rev-time text-center">
+                                                        <span>1</span>
+                                                      </div>
+                                                      <div class="rev-info">
+                                                        <h4>محمد عبدالعزيز</h4>
+                                                        <p>012586439</p>
+                                                        <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                      </div>
+                                                      <div class="rev-statu text-center">
+                                                        <a href="" class="btn btn-primary">تفعيل</a> <br />
+                                                        <span class="s-time"> 1:20:00</span>
+                                                      </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="rev-item d-flex w-100  align-items-start">
+                                                      <div class="rev-time text-center">
+                                                        <span>2</span>
+                                                      </div>
+                                                      <div class="rev-info">
+                                                        <h4>محمد عبدالعزيز</h4>
+                                                        <p>012586439</p>
+                                                        <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                      </div>
+                                                      <div class="rev-statu text-center">
+                                                        <a href="" class="btn btn-primary">تفعيل</a> <br />
+                                                        <span class="s-time"> 1:20:00</span>
+                                                      </div>
+                                                    </div>
+                                                  </li>
+                                                 
+                                                </ol>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        
+                                                 </div>
+                                                 
+                                                 
                                                 <div class="table-side-bar" id="table{{ $item->id }}">
                                                     <h2 class="text-center mb-4"> {{ $tables->name }} </h2>
                                                     <div class="tab-nav-wraper">
@@ -165,7 +262,7 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <!-- عناصر التاب -->
+                                                     عناصر التاب 
                                                     @php
                                                         if ($tables->reservation) {
                                                             $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
@@ -279,7 +376,7 @@
                                                                                 data-bs-toggle="modal"
                                                                                 data-bs-target="#exampleModal6">
                                                                                 ادفع الآن</div>
-                                                                            <!-- Modal -->
+                                                                             Modal 
                                                                             <div class="modal fade" id="exampleModal6"
                                                                                 tabindex="-1"
                                                                                 aria-labelledby="exampleModalLabel6"
@@ -489,46 +586,46 @@
 <script src="{{ asset('front/js/main.js') }}"></script>
 <script>
     // Function to update the countdown timer display
-    function updateCountdown() {
-        // Get all the countdown-timer elements
-        const countdownTimers = document.querySelectorAll('.countdown-timer');
+    // function updateCountdown() {
+    //     // Get all the countdown-timer elements
+    //     const countdownTimers = document.querySelectorAll('.countdown-timer');
 
-        countdownTimers.forEach(countdownTimer => {
-            const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
+    //     countdownTimers.forEach(countdownTimer => {
+    //         const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
 
-            // Get the data-start and data-package-time values from the data attributes
-            const startTimeString = countdownTimer.getAttribute('data-start');
-            const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
+    //         // Get the data-start and data-package-time values from the data attributes
+    //         const startTimeString = countdownTimer.getAttribute('data-start');
+    //         const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
 
-            // Convert the startTimeString to a Date object
-            const startTime = new Date(startTimeString);
+    //         // Convert the startTimeString to a Date object
+    //         const startTime = new Date(startTimeString);
 
-            // Calculate the target end time by adding the packageTime in minutes to the start time
-            const endTime = new Date(startTime.getTime() + packageTime * 60000);
+    //         // Calculate the target end time by adding the packageTime in minutes to the start time
+    //         const endTime = new Date(startTime.getTime() + packageTime * 60000);
 
-            const currentTime = new Date().getTime();
-            const timeRemaining = endTime - currentTime;
+    //         const currentTime = new Date().getTime();
+    //         const timeRemaining = endTime - currentTime;
 
-            if (timeRemaining <= 0) {
-                // Timer has ended
-                countdownTimerText.textContent = 'انتهى';
-            } else {
-                // Calculate hours, minutes, and seconds
-                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    //         if (timeRemaining <= 0) {
+    //             // Timer has ended
+    //             countdownTimerText.textContent = 'انتهى';
+    //         } else {
+    //             // Calculate hours, minutes, and seconds
+    //             const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    //             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-                // Format the time and update the countdown display
-                const formattedTime =
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                countdownTimerText.textContent = formattedTime;
-            }
-        });
-    }
+    //             // Format the time and update the countdown display
+    //             const formattedTime =
+    //                 `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    //             countdownTimerText.textContent = formattedTime;
+    //         }
+    //     });
+    // }
 
-    // Update the countdown every second
-    setInterval(updateCountdown, 1000);
+    // // Update the countdown every second
+    // setInterval(updateCountdown, 1000);
 
-    // Initialize the countdown on page load
-    updateCountdown();
+    // // Initialize the countdown on page load
+    // updateCountdown();
 </script>
