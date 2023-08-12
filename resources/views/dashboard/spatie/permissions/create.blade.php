@@ -1,118 +1,108 @@
  <x-default-layout>
 
-<div class="card card-custom">
+     <div class="card card-custom">
 
 
 
-    <div class="card-header">
+         <div class="card-header">
 
-        <h3 class="card-title">
+             <h3 class="card-title">
 
-           انشاء أذن
+                 انشاء أذن
 
-        </h3>
+             </h3>
 
-        <div class="card-toolbar">
+             <div class="card-toolbar">
 
-            <div class="example-tools justify-content-center">
+                 <div class="example-tools justify-content-center">
 
-                <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+                     <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
 
-                <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+                     <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
 
-            </div>
+                 </div>
 
-        </div>
+             </div>
 
-    </div>
+         </div>
 
-    <form class="form"  method="post" id="create_form">
+         <form class="form" method="post" id="create_form">
 
-        @csrf
+             @csrf
 
-        <div class="card-body">
+             <div class="card-body">
 
-           <div class="row">
+                 <div class="row">
 
-            <div class="form-group col-md-6">
+                     <div class="form-group col-md-6">
 
-                <label>المستخدمون:</label>
+                         <label>المستخدمون:</label>
 
-               <select class="form-control form-control-solid" name="guard_name" id="guard_name">
-                        <option value="admin">المشرف</option>
-                        <option value="company">الشركة</option>
-                        <option value="companySon">أبناء الشركات</option>
-                        <option value="delivery">مكاتب الدليفري</option>
-                    </select>
+                         <select class="form-control form-control-solid" name="guard_name" id="guard_name">
+                             <option value="web">المشرف</option>
+                             <option value="branch">الفروع</option>
+                         </select>
 
-                </div>
+                     </div>
 
-            <div class="form-group col-md-6">
+                     <div class="form-group col-md-6">
 
-                <label>الأذن:</label>
+                         <label>الأذن:</label>
 
-                <input type="text" name="name" id="name" class="form-control form-control-solid"
-                placeholder="ادخل الأذن"/>
+                         <input type="text" name="name" id="name" class="form-control form-control-solid"
+                             placeholder="ادخل الأذن" />
 
-            </div>
+                     </div>
 
-        </div>
+                 </div>
+
+             </div>
+
+             <div class="card-footer">
+
+                 <button type="button" onclick="performStore()" class="btn btn-success mr-2">حفظ</button>
+                 <a href="{{ route('permissions.index') }}"><button type="button"
+                         class="btn btn-primary mr-2">الغاء</button></a>
+
+
+             </div>
 
      </div>
 
-      <div class="card-footer">
+     </form>
 
-         <button type="button" onclick="performStore()" class="btn btn-success mr-2">حفظ</button>
-         <a href="{{route('permissions.index')}}"><button type="button" class="btn btn-primary mr-2">الغاء</button></a>
+ </x-default-layout>
 
+ <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 
-     </div>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-  </div>
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-</form>
-
-</x-default-layout>
-
-<script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<script src="{{asset('crudjs/crud.js')}}"></script>
+ <script src="{{ asset('crudjs/crud.js') }}"></script>
 
 
 
-<script>
+ <script>
+     //Initialize Select2 Elements
 
-        //Initialize Select2 Elements
+     $('.guards').select2({
 
-    $('.guards').select2({
+         theme: 'bootstrap4'
 
-        theme: 'bootstrap4'
+     })
 
-    })
+     function performStore() {
 
-        function performStore(){
+         let data = {
 
-            let data = {
+             name: document.getElementById('name').value,
 
-            name: document.getElementById('name').value,
+             guard_name: document.getElementById('guard_name').value
 
-            guard_name: document.getElementById('guard_name').value
+         };
 
-            };
+         store('/dashboard/admin/permissions', data);
 
-             store('/dashboard/admin/permissions',data);
-
-        }
-
-
-
-
-
-</script>
-
-
-
+     }
+ </script>

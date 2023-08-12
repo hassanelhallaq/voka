@@ -14,8 +14,8 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::with('orders', 'wallet', 'reservation', 'packages')->withCount('packages', 'orders')->withSum('packages', 'price')->paginate(50);
-        $clientCategory = ClientCategory::all();
-        return view('dashboard.client.index', compact('clients', 'clientCategory'));
+        // $clientCategory = ClientCategory::all();
+        return view('dashboard.client.index', compact('clients'));
     }
 
     public function store(Request $request)
@@ -23,7 +23,7 @@ class ClientController extends Controller
         $client = new Client();
         $client->name = $request->name;
         $client->phone = $request->phone;
-        $client->client_category_id = $request->client_category_id;
+        $client->client_category_id = 1;
         $isSaved = $client->save();
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }

@@ -17,7 +17,10 @@ class Client extends Model
     {
         return $this->hasOne(Wallet::class);
     }
-
+    public function category()
+    {
+        return $this->hasOne(ClientCategory::class);
+    }
     public function packages()
     {
         return $this->belongsToMany(Package::class, Order::class);

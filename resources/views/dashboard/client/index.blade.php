@@ -29,7 +29,8 @@
                                                 <!--begin::Name-->
                                                 <div class="d-flex align-items-center mb-2">
                                                     <a href="{{ route('clients.show', [$item->id]) }}"
-                                                        class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $item->name }}</a>
+                                                        class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $item->name }}
+                                                        {{ ($item->category->name ?? '') }}</a>
                                                     <a href="{{ route('clients.show', [$item->id]) }}">
                                                         <i class="ki-duotone ki-verify fs-1 text-primary">
                                                             <span class="path1"></span>
@@ -376,7 +377,7 @@
                     <span class="span">
                         {!! $clients->links() !!}
                     </span>
-                    <div class="modal fade" id="clients" tabindex="-1" aria-hidden="true">
+                    {{-- <div class="modal fade" id="clients" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered mw-750px">
                             <div class="modal-content">
                                 <div class="modal-body scroll-y mx-lg-5 my-7">
@@ -456,7 +457,7 @@
                             <!--end::Modal content-->
                         </div>
                         <!--end::Modal dialog-->
-                    </div>
+                    </div> --}}
                     <!--end::Navbar-->
                     <!--begin::Row-->
 
