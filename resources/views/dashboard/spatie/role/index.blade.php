@@ -355,14 +355,14 @@
                                                             <input class="form-control form-control-solid" hidden
                                                                 value="branch" placeholder="Enter a role name"
                                                                 name="guard_name" />
-                                                            @foreach ($permissionGroups as $permissionGroup)
+                                                            @foreach ($permissionGroupsBranch as $permissionGroup)
                                                                 <tr>
 
                                                                     <td class="text-gray-800">
                                                                         {{ $permissionGroup->name }}
                                                                     </td>
                                                                     <!--end::Label-->
-                                                                    @foreach ($permissionGroupsBranch->permissions as $permission)
+                                                                    @foreach ($permissionGroup->permissions as $permission)
                                                                         <td>
                                                                             <div class="d-flex">
                                                                                 <!--begin::Checkbox-->
