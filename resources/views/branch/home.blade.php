@@ -115,7 +115,7 @@
             }
         </style>
     <div class="col-md-8" id="mainPage">
-       
+
         <div class="container-fluid">
             <!--<div class="filter-btns d-flex mb-2">-->
             <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
@@ -134,7 +134,7 @@
             <!--        <button type="button" class="s-filter btn btn-dark" data-st="serv"> فى-->
             <!--            الخدمة</button>-->
             <!--    </div>-->
-                
+
             <!--</div>-->
             <!-- salone table  -->
 
@@ -162,9 +162,9 @@
                                 <i class="fa-solid fa-arrow-rotate-right"></i>
                                 تحديث الصفحة
                                 </button>
-                            
+
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -570,6 +570,7 @@
                                                     </div>
                                                 </div>
                                             @else
+                                            @can('add_reservation')
                                                 <div class="table-side-bar" id="table{{ $table->id }}"
                                                     data-id="table{{ $table->id }}">
                                                     <ol class="table-list list-group list-group-numbered reversed">
@@ -585,6 +586,7 @@
                                                     </ol>
 
                                                 </div>
+                                                @endcan
                                             @endif
                                         </div>
                                     </div>
@@ -992,6 +994,7 @@
                                                     </div>
                                                 </div>
                                             @else
+                                            @can('add_reservation')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
                                                     <ol class="table-list list-group list-group-numbered reversed">
                                                         <li
@@ -1006,6 +1009,7 @@
                                                     </ol>
 
                                                 </div>
+                                                @endcan
                                             @endif
                                         </div>
                                     </div>
@@ -1506,6 +1510,7 @@
                                                     </div>
                                                 </div>
                                             @else
+                                            @can('add_reservation')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
                                                     <ol class="table-list list-group list-group-numbered reversed">
                                                         <li
@@ -1520,6 +1525,7 @@
                                                     </ol>
 
                                                 </div>
+                                                @endcan
                                             @endif
                                         </div>
                                     </div>
@@ -1935,6 +1941,7 @@
                                                     </div>
                                                 </div>
                                             @else
+                                            @can('add_reservation')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
                                                     <ol class="table-list list-group list-group-numbered reversed">
                                                         <li
@@ -1949,6 +1956,7 @@
                                                     </ol>
 
                                                 </div>
+                                                @endcan
                                             @endif
                                         </div>
                                     </div>
@@ -2357,6 +2365,7 @@
                                                     </div>
                                                 </div>
                                             @else
+                                            @can('add_reservation')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
                                                     <ol class="table-list list-group list-group-numbered reversed">
                                                         <li
@@ -2371,6 +2380,7 @@
                                                     </ol>
 
                                                 </div>
+                                                @endcan
                                             @endif
                                         </div>
                                     </div>
@@ -2415,10 +2425,10 @@
                                                             sofa-available
                                                              @elseif ($table->status == 'reserved')
                                                               sofa-reserved @endif"
-                                data-id="table{{ $table->id }}" data-stat="serv" 
-                                data-bs-toggle="modal" 
+                                data-id="table{{ $table->id }}" data-stat="serv"
+                                data-bs-toggle="modal"
                                 data-bs-target="#modal{{ $table->id }}"
-                                data-h="hall{{ $loungesSortOne->id }}" 
+                                data-h="hall{{ $loungesSortOne->id }}"
                                 @if ($table->status == 'in_service') data-pstat="serv"
                                                             @elseif($table->status == 'available')
                                                              data-pstat ="available"
@@ -2498,7 +2508,7 @@
                                           </div>
                                         </div>
                                       </div>
-                                    
+
                                 </div>
 
                                 @if ($table->status == 'in_service')
@@ -2520,7 +2530,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                         عناصر التاب 
+                                         عناصر التاب
                                         <div class="tab-content">
                                             <div id="the-menu" class="c-tab-pane active">
                                                 <ol class="list-group list-group-numbered reversed">
@@ -2622,7 +2632,7 @@
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#exampleModal6">
                                                                     ادفع الآن</div>
-                                                                 Modal 
+                                                                 Modal
                                                                 <div class="modal fade" id="exampleModal6"
                                                                     tabindex="-1" aria-labelledby="exampleModalLabel6"
                                                                     aria-hidden="true">
@@ -2827,6 +2837,7 @@
                                         </div>
                                     </div>
                                 @else
+                                @can('add_reservation')
                                     <div class="table-side-bar" id="table{{ $table->id }}">
                                         <ol class="table-list list-group list-group-numbered reversed">
                                             <li
@@ -2841,6 +2852,7 @@
                                         </ol>
 
                                     </div>
+                                    @endcan
                                 @endif
 
                             </div>
@@ -2850,9 +2862,9 @@
 
                     </div>
                 </div>
-                
+
             </div>
-        
+
         </div>
     </div>
 @endsection
