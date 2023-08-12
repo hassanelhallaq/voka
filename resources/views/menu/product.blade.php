@@ -38,7 +38,7 @@
 
                             <!-- Price -->
                             <div class="price-wrapper">
-                                <p class="product-price">{{ $product->price }}</p>
+                                <p class="product-price">{{ $product->price }} ريال</p>
                             </div>
                             <!-- /Price -->
 
@@ -150,7 +150,11 @@
                     const quantity = parseInt(quantityInput.value, 10);
 
                     addToCart(product, quantity);
-                    alert('Item added to cart!');
+                    // alert('Item added to cart!');
+                     Swal.fire(
+                      'تم إضافة المنتج إلى السلة!',
+                      'حسناَ'
+                    )
                 });
             });
 

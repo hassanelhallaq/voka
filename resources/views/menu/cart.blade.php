@@ -66,10 +66,11 @@
                 <div class="tab-content" id="pills-tabContent">
                   <div class="tab-pane fade show active" id="tab-palance" role="tabpanel" aria-labelledby="tab-palance-tab">
                       <p>يمكنك التمتع برصيد الباقة وطلب مختلف الأصناف من خلال زر إنشاء طلب</p>
-                      <button class=" btn-custom btn-sm shadow-non">إنشاء طلب</button>
+                      <button class=" btn-custom btn-sm shadow-non" style="width:100%">إنشاء طلب</button>
                   </div>
                 <div class="tab-pane" id="tab-e-pay" role="tabpanel" aria-labelledby="tab-e-pay-tab">
-                    
+                      <p>يمكنك التمتع برصيد الباقة وطلب مختلف الأصناف من خلال زر إنشاء طلب</p>
+                      <button class=" btn-custom btn-sm shadow-non" style="width:100%">إنشاء طلب</button>
                 </div>
                 </div>
                 <!-- end pay -->

@@ -24,9 +24,9 @@
             </div>
         </div>
         <!-- Subheader End -->
-
+        
         <!-- Menu Categories Start -->
-        <div class="ct-menu-categories menu-filter">
+        <div class="ct-menu-categories menu-filter" style="margin-top:10px">
             <div class="container">
                 <div class="menu-category-slider">
                     <a href="#" data-filter="*" class="ct-menu-category-item active">
@@ -39,7 +39,7 @@
                         </div>
                     </a>
                     @foreach ($categories as $item)
-                        <a href="#" data-filter=".{{ $item->category_id }}" class="ct-menu-category-item">
+                        <a href="#" data-filter=".{{ $item->category_id }}" class="ct-menu-category-item itemNotActive">
                             <div class="menu-category-thumb">
                                 <img src="{{ $item->getFirstMediaUrl('category_image', 'thumb') }}" alt="category">
                             </div>
@@ -73,7 +73,7 @@
                                         <div class="product-desc">
                                             <div class="headProduct">
                                                 <h4><a href="menu-item.html">{{ $product->name }}</a></h4>
-                                                <p class="product-price">{{ $product->price }}</p>
+                                                <p class="product-price">{{ $product->price }} ريال</p>
                                             </div>
                                             <span>اسم الفئة</span>
                                             <p>{{ $product->description }}</p>
@@ -161,4 +161,5 @@
 
             document.addEventListener('DOMContentLoaded', updateCartItemCount);
         </script>
+       
     @endsection

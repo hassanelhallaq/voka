@@ -624,9 +624,9 @@ body {
 	cursor: pointer;
 	transition: all 0.3s ease-in-out;
 }
-.new-reservation-tables .active-card, .new-reservation-tables .card:hover {
-  background-color: var(--orange) !important;
-}
+/*.new-reservation-tables .active-card, .new-reservation-tables .card:hover {*/
+/*  background-color: var(--orange) !important;*/
+/*}*/
 .reservation-tabs footer{
   margin-top:100px;
   color: #555;
@@ -1328,7 +1328,21 @@ table .active-day {
   }
 }
 /*------------------------------------------------------------------------------ 10 - 8 -------------------------------------------------------------*/
+.nav-tabs {
+	border-color: #2d2d2d;
+}
+.tab-content {
+	padding: 0;
+	font-size: 14px;
+}
+.reservation-tabs div.card {
+	 margin-top: 0 !important; 
+}
 /*----------------------- top action section -------------------------------*/
+.top-actions {
+    border-bottom: 1px solid #2d2d2d;
+    margin-bottom: 30px;
+}
 .top-actions .card {
   text-align: right !important;
 }
@@ -1463,4 +1477,16 @@ table .active-day {
 }
 .discount-inputs .discount-input {
     font-family: 'arial';
+}
+/*------------------------------- new salon page css ------------------------------------*/
+.home-salon {
+  display: flex;
+}
+.items-group {
+    border-bottom: 1px solid #373737;
+      padding-bottom: 4px;
+      padding-top: 4px;
+}
+.items-group:nth-last-of-type(1) {
+    border: none;
 }
