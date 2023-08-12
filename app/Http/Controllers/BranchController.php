@@ -48,7 +48,7 @@ class BranchController extends Controller
     {
         $roles = Role::where('guard_name', 'branch')->paginate(10);
         $branch =   Branch::find($id);
-        return view('dashboard.branch.edit', compact('branch'));
+        return view('dashboard.branch.edit', compact('branch', 'roles'));
     }
     public function update(StoreBranchRequest $request, $id)
     {
