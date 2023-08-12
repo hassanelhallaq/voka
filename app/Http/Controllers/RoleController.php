@@ -34,10 +34,10 @@ class RoleController extends Controller
         $page_description = '';
         $roles = Role::withCount('users')->paginate(100);
         $permissionGroups = PermissionGroup::with('permissions')->whereHas('permissions', function ($q) {
-            $q->where('guard_name ', 'web');
+            $q->where('guard_name', 'web');
         })->get();
         $permissionGroupsBranch = PermissionGroup::with('permissions')->whereHas('permissions', function ($q) {
-            $q->where('guard_name ', 'branch');
+            $q->where('guard_name', 'branch');
         })->get();
         return response()->view('dashboard.spatie.role.index', compact(
             'roles',
