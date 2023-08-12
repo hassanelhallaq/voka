@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Branch\StoreBranchRequest;
+use App\Http\Requests\Branch\updateBranchRequest;
 use App\Models\Branch;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class BranchController extends Controller
         $branch =   Branch::find($id);
         return view('dashboard.branch.edit', compact('branch', 'roles'));
     }
-    public function update(StoreBranchRequest $request, $id)
+    public function update(updateBranchRequest  $request, $id)
     {
         $branch =   Branch::find($id);
         $branch->name = $request->get('name');
