@@ -41,9 +41,6 @@ class PermissionController extends Controller
         $permissions = Permission::paginate(100);
 
         return view('dashboard.spatie.permissions.index', compact('permissions', 'page_title', 'page_description'));
-
-        
-
     }
 
 
@@ -65,7 +62,6 @@ class PermissionController extends Controller
         //
 
         return response()->view('dashboard.spatie.permissions.create');
-
     }
 
 
@@ -94,7 +90,7 @@ class PermissionController extends Controller
 
             'name' => 'required|string|max:100',
 
-            'guard_name' => 'required|string|in:admin',
+            'guard_name' => 'required|string',
 
         ]);
 
@@ -111,13 +107,10 @@ class PermissionController extends Controller
             $isSaved = $permission->save();
 
             return response()->json(['icon' => 'success', 'title' => 'Permission created successfully'], $isSaved ? 201 : 400);
-
         } else {
 
-            return response()->json(['icon' => 'error', 'title'=> $validator->getMessageBag()->first()], 400);
-
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
-
     }
 
 
@@ -165,7 +158,6 @@ class PermissionController extends Controller
         $permission = Permission::findById($id);
 
         return response()->view('dashboard.spatie.permissions.edit', compact('permission'));
-
     }
 
 
@@ -211,13 +203,10 @@ class PermissionController extends Controller
             $isSaved = $permission->save();
 
             return response()->json(['icon' => 'success', 'title' => 'Permission updated successfully'], $isSaved ? 200 : 400);
-
         } else {
 
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
-
         }
-
     }
 
 
@@ -243,8 +232,5 @@ class PermissionController extends Controller
         $isDeleted = Permission::destroy($id);
 
         return response()->json(['icon' => 'success', 'title' => 'permission deleted successfully'], $isDeleted ? 200 : 400);
-
     }
-
 }
-
