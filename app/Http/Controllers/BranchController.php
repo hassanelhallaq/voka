@@ -22,9 +22,9 @@ class BranchController extends Controller
     }
     public function create()
     {
-        $roles = Role::where('guard_name', 'branch')->paginate(10);
+        // $roles = Role::where('guard_name', 'branch')->paginate(10);
 
-        return view('dashboard.branch.create', compact('roles'));
+        return view('dashboard.branch.create');
     }
 
     public function store(StoreBranchRequest $request)
@@ -47,9 +47,8 @@ class BranchController extends Controller
     }
     public function edit($id)
     {
-        $roles = Role::where('guard_name', 'branch')->paginate(10);
         $branch =   Branch::find($id);
-        return view('dashboard.branch.edit', compact('branch', 'roles'));
+        return view('dashboard.branch.edit', compact('branch'));
     }
     public function update(updateBranchRequest  $request, $id)
     {

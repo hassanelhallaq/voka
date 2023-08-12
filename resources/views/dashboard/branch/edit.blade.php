@@ -22,7 +22,7 @@
                              method="post" novalidate>
                             @method('put')
                              @csrf
-                             <div class="row">
+                             {{-- <div class="row">
 
                                  <div class="form-group col-md-12">
 
@@ -38,7 +38,7 @@
 
                                  </div>
 
-                             </div>
+                             </div> --}}
                              <br>
                              <div class="row">
 
