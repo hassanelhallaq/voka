@@ -238,7 +238,7 @@
                  <!--                         <li><a class="dropdown-item" href="#">عربى</a></li>-->
                  <!--                       </ul>-->
                  <!--                     </div>-->
-                              
+
                  <!--               </div>-->
                  <!--           </div>-->
                  <!--           <div class="col-md-1">-->
@@ -250,7 +250,7 @@
                 <div class="row">
                     <div class="col-md-1">
                         <div class="sidenav d-flex flex-column">
-                            
+
                             <div class="nav-body">
                                 <ul class="navbar-nav justify-content-center flex-grow-1">
                                     <li class="nav-item active">
@@ -303,7 +303,7 @@
                     </div>
                     <div class="col-md-8">
                           <!-- logout and notification part  -->
-                         
+
                           <!-- end of logout and notification part  -->
                         <div class="container">
                             <div class="filter-btns d-flex mb-2">
@@ -831,7 +831,8 @@
                                                                     </div>
                                                                 </div>
                                                             @else
-                                                                <div class="table-side-bar"
+                                                                @can('add_reservation')
+<div class="table-side-bar"
                                                                     id="table{{ $table->id }}" data-id="table{{ $table->id }}">
                                                                     <ol
                                                                         class="table-list list-group list-group-numbered reversed">
@@ -847,6 +848,7 @@
                                                                     </ol>
 
                                                                 </div>
+@endcan
                                                             @endif
                                                         </div>
                                                     </div>
@@ -1354,7 +1356,8 @@
                                                                     </div>
                                                                 </div>
                                                             @else
-                                                                <div class="table-side-bar"
+                                                                @can('add_reservation')
+<div class="table-side-bar"
                                                                     id="table{{ $table->id }}">
                                                                     <ol
                                                                         class="table-list list-group list-group-numbered reversed">
@@ -1369,7 +1372,8 @@
 
                                                                     </ol>
 
-                                                                </div>
+                                                                </div>                                                               </div>
+@endcan
                                                             @endif
                                                         </div>
                                                     </div>
@@ -2103,7 +2107,8 @@
                                                                     </div>
                                                                 </div>
                                                             @else
-                                                                <div class="table-side-bar"
+                                                                @can('add_reservation')
+<div class="table-side-bar"
                                                                     id="table{{ $table->id }}">
                                                                     <ol
                                                                         class="table-list list-group list-group-numbered reversed">
@@ -2118,7 +2123,8 @@
 
                                                                     </ol>
 
-                                                                </div>
+                                                                </div>                                                               </div>
+@endcan
                                                             @endif
                                                         </div>
                                                     </div>
@@ -2631,7 +2637,8 @@
                                                                     </div>
                                                                 </div>
                                                             @else
-                                                                <div class="table-side-bar"
+                                                                @can('add_reservation')
+<div class="table-side-bar"
                                                                     id="table{{ $table->id }}">
                                                                     <ol
                                                                         class="table-list list-group list-group-numbered reversed">
@@ -2646,7 +2653,8 @@
 
                                                                     </ol>
 
-                                                                </div>
+                                                                </div>                                                               </div>
+@endcan
                                                             @endif
                                                         </div>
                                                     </div>
@@ -3136,7 +3144,8 @@
                                                                     </div>
                                                                 </div>
                                                             @else
-                                                                <div class="table-side-bar"
+                                                                @can('add_reservation')
+<div class="table-side-bar"
                                                                     id="table{{ $table->id }}">
                                                                     <ol
                                                                         class="table-list list-group list-group-numbered reversed">
@@ -3151,7 +3160,8 @@
 
                                                                     </ol>
 
-                                                                </div>
+                                                                </div>                                                               </div>
+@endcan
                                                             @endif
                                                         </div>
                                                     </div>
@@ -3655,7 +3665,8 @@
                                                                     </div>
                                                                 </div>
                                                             @else
-                                                                <div class="table-side-bar"
+                                                                @can('add_reservation')
+<div class="table-side-bar"
                                                                     id="table{{ $table->id }}">
                                                                     <ol
                                                                         class="table-list list-group list-group-numbered reversed">
@@ -3670,7 +3681,8 @@
 
                                                                     </ol>
 
-                                                                </div>
+                                                                </div>                                                               </div>
+@endcan
                                                             @endif
 
                                             </div>
@@ -3722,7 +3734,7 @@
         <script src="{{ asset('front/js/app.324c30d7.js') }}"></script>
         <script>
             $(document).ready(function () {
-    
+
                 // فلتر الحالات للصفحة الرئيسية
             $('.s-filter').on('click', function() {
                 console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
