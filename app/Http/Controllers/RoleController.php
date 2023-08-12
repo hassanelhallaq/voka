@@ -102,6 +102,7 @@ class RoleController extends Controller
         // Create a new role
         $role = Role::create([
             'name' => $validatedData['role_name'],
+            'guard_name' => $request['guard_name'],
         ]);
         // Attach the selected permissions to the role
         if (isset($validatedData['permissions'])) {
