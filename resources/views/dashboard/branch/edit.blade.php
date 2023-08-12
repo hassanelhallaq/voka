@@ -20,7 +20,7 @@
                      <div class="form-validation">
                          <form class="needs-validation" action="{{ route('branch.update', [$branch->id]) }}"
                              method="post" novalidate>
-
+                            @method('put')
                              @csrf
                              <div class="row">
 
