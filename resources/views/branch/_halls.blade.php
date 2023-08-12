@@ -96,7 +96,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $tables->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $tables->reservation->date;
                                                                     }
-                                                                    
+
                                                                 @endphp
                                                                 <p class="hall-name"> الوقت المنقضى</p>
                                                                 <div class="countdown-timer"
@@ -173,7 +173,7 @@
                                                                 ->where('is_done', 0)
                                                                 ->with('products')
                                                                 ->first();
-                                                        
+
                                                             // Wrap the related products in a collection (even if there's only one result)
                                                             if ($orders != null && $orders->products->count() != 0) {
                                                                 // Calculate total order prices using the map function on the products collection
@@ -477,6 +477,16 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('front/js/jquery.js') }}"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+</script>
+<script src="{{ asset('front/js/date.js') }}"></script>
+<script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
+<script src="{{ asset('front/js/main.js') }}"></script>
 <script>
     // Function to update the countdown timer display
     function updateCountdown() {
