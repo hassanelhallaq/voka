@@ -255,6 +255,9 @@
                                                                         </div>
                                                                         <ol
                                                                             class="list-group list-group-numbered reversed bill-info">
+                                                                            <li class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                <a  herf="" class="btn btn-primary w-100 mb-3" >اضافة حجز </a>
+                                                                            </li>
                                                                             <li
                                                                                 class="list-group-item d-flex justify-content-between align-items-start">
                                                                                 <div
@@ -387,7 +390,7 @@
                                                                             الطلبات</div>
                                                                         <a onclick="product({{ $tables->id }})"
                                                                             class="btn btn-primary  mb-1"
-                                                                            data-tab="waitings"> طلب جديد</a>
+                                                                            > طلب جديد</a>
                                                                     </div>
                                                                     {{-- <form action="">
                                                                         <input
@@ -429,6 +432,7 @@
                                                                         class="table-bar-info waitings-side-bar waitings hidden-tab">
                                                                         <ol
                                                                             class="list-group list-group-numbered reversed bill-info">
+                                                                            
                                                                             <li
                                                                                 class="list-group-item d-flex justify-content-between align-items-start">
                                                                                 <div
