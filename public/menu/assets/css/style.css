@@ -4675,10 +4675,6 @@ td.quantity{
 .navbar-nav li a{
   color:#fff !important;
 }
-body{
-    font-family: 'Tajawal', sans-serif !important;
-    background:#000;
-}
 .top-header-nav li a .fa-phone{
   margin-left: .5rem!important;
 }
@@ -5426,4 +5422,11 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+body{
+    font-family: 'Tajawal', sans-serif !important;
+    background:#000;
+}
+h1, h2, h3, h4, h5, h6,table th{
+    font-family: 'Tajawal', sans-serif !important;
 }

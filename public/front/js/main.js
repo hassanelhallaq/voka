@@ -2,23 +2,10 @@
 $(document).ready(function () {
 
 
-    // $('.home-card .sofa').on('click', function() {
-    //     console.log('hhhhh');
-    //     $('.home-card .sofa').removeClass('active-table');
-    //     $(this).addClass('active-table');
-
-    //     $('.table-side-bar').hide();
-    //     var newId = '#' + $(this).data('id');
-
-    //     if ($(this).data('stat') == 'available') {
-    //         $('#tab-place').show();
-    //         $(newId).hide();
-    //     } else {
-    //         $('#tab-place').hide();
-    //         $(newId).show();
-    //         $('.side-place').append($(newId));
-    //     }
-    // });
+    $('.custome-close').on('click', function() {
+       $('.active-the-reversation .modal-backdrop').addClass('none');
+        
+    });
     
      $('.table-btn-action').on('click', function(){
 

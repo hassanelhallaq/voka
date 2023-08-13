@@ -1,3 +1,4 @@
+
 <div id="mainPage" class="menu-page">
     <div class="row">
     <div class="col-md-9">
@@ -197,7 +198,8 @@
     <!--                </div>-->
     </div>
                     </div>
-                </div>
+</div>
+
 </div>
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>

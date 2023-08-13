@@ -1,5 +1,7 @@
-<div id="mainPage">
-    <div class="col-md-12">
+<div class="row">
+    <div class="col-md-9">
+        <div id="mainPage">
+        <div class="col-md-12">
         <div class="reservation-tabs all-halls card card-nav-tabs card-plain ">
             <div class="card-header card-header-danger">
                 <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
@@ -25,7 +27,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         @foreach ($item->tables as $i => $tables)
-                                            <div class="col-md-4 card-col  d-flex justify-content-center align-items-center "
+                                            <div class="col-md-3 card-col  d-flex justify-content-center align-items-center "
                                                 data-tableNumber="1" data-start="45" data-updatedTime="45"
                                                 data-h="hall2" data-pstat="serv">
                                                 <div class="card @if ($tables->status == 'in_service') bg-info
@@ -128,11 +130,48 @@
                                                                         استعراض
                                                                     </button>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <button class="table-btn-action btn btn-primary w-100" type="button"
-                                                                     data-id="#tableactive"   disabled>
-                                                                        تفعيل الحجز
-                                                                    </button>
+                                                                <div class="col-md-6 active-the-reversation">
+                                                                    <!--<button class="table-btn-action btn btn-primary w-100" type="button"-->
+                                                                    <!-- data-id="#tableactive" ata-bs-target="#exampleModalToggle" data-bs-toggle="modal" >-->
+                                                                    <!--    تفعيل الحجز-->
+                                                                    <!--</button>-->
+                                                                    
+                                                                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                                                      <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                          <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5 text-light" id="exampleModalToggleLabel"> تفعيل الحجز</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                          </div>
+                                                                          <div class="modal-body text-light">
+                                                                           هل تود تفعيل الحجز
+                                                                          </div>
+                                                                          <div class="modal-footer">
+                                                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">تفعيل يدوى</button>
+                                                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"> QR </button>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                                                      <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                          <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5 text-light" id="exampleModalToggleLabel2">تفعيل الحجز</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                          </div>
+                                                                          <div class="modal-body text-light">
+                                                                            تم تفعيل الحجز بنجاح
+                                                                          </div>
+                                                                          <div class="modal-footer">
+                                                                            <button class="btn btn-primary custome-close" data-bs-dismiss="modal" aria-label="Close">اغلاق</button>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                    <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">تفعيل الحجز</a>
+                                                                    
+                                                                    
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <button class="table-btn-action btn btn-primary w-100"
@@ -148,97 +187,194 @@
                                                 </div>
                                                  <div class="table-side-bar" id="tableinfo">
                                                     <div class="tablebrowse" >
-                                          <div class="tab-nav-wraper">
-                                                <div class="nav-btns d-flex justify-content-around align-items-center">
-                                                    <div class="btn btn-dark" data-tab="rev">الحجوزات</div>
-                                                    <div class="btn btn-dark" data-tab="waitings">الأنتظار</div>
-                                                </div>
-                                              <form action="">
-                                                <input class="form-control bg-dark text-light text-center"  type="text" placeholder="ابحث عن ضيف" aria-label="default input example">
-                                              </form>
-                                          </div>
-                                              <!-- عناصر التاب -->
-                                            <div class="side-tab-content">
-                                              <div id="rev" class="table-bar-info reversation-side-bar rev active-tab">
-                                                <div class="first-tabb d-flex justify-content-between align-items-start">
-                                                  <p>حجوزات الطاولة</p>
-                                                  <span> 3 <i class="fa-solid fa-stopwatch-20 ml-1"></i></span>
-                                                </div>
-                                                <ol class="list-group list-group-numbered reversed bill-info">
-                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="rev-item d-flex w-100  align-items-start">
-                                                      <div class="rev-time text-center">
-                                                        <span>6:00</span> <br >
-                                                        <span>PM</span>
+                                                      <div class="tab-nav-wraper">
+                                                            <div class="nav-btns d-flex justify-content-around align-items-center">
+                                                                <div class="btn btn-dark" data-tab="rev">الحجوزات</div>
+                                                                <div class="btn btn-dark" data-tab="waitings">الأنتظار</div>
+                                                            </div>
+                                                          <form action="">
+                                                            <input class="form-control bg-dark text-light text-center"  type="text" placeholder="ابحث عن ضيف" aria-label="default input example">
+                                                          </form>
                                                       </div>
-                                                      <div class="rev-info">
-                                                        <h4>محمد عبدالعزيز</h4>
-                                                        <p>012586439</p>
-                                                        <p><span>4 اشخاص</span><span>/باقة vip</span></p>
-                                                      </div>
-                                                      <div class="rev-statu text-center">
-                                                        <p>VVIP-1</p>
-                                                        <span>فى الخدمة</span>
-                                                      </div>
+                                                          <!-- عناصر التاب -->
+                                                        <div class="side-tab-content">
+                                                          <div id="rev" class="table-bar-info reversation-side-bar rev active-tab">
+                                                            <div class="first-tabb d-flex justify-content-between align-items-start">
+                                                              <p>حجوزات الطاولة</p>
+                                                              <span> 3 <i class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                            </div>
+                                                            <ol class="list-group list-group-numbered reversed bill-info">
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>6:00</span> <br >
+                                                                    <span>PM</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <h4>محمد عبدالعزيز</h4>
+                                                                    <p>012586439</p>
+                                                                    <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <p>VVIP-1</p>
+                                                                    <span>فى الخدمة</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>6:00</span> <br >
+                                                                    <span>PM</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <a href="" class="btn btn-primary">احجز الآن</a>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <p>VVIP-1</p>
+                                                                    <span> شاغرة</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                             
+                                                            </ol>
+                                                          </div>
+                                                          <div id="waithings" class="table-bar-info waitings-side-bar waitings hidden-tab">
+                                                            <ol class="list-group list-group-numbered reversed bill-info">
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>1</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <h4>محمد عبدالعزيز</h4>
+                                                                    <p>012586439</p>
+                                                                    <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <a href="" class="btn btn-primary">تفعيل</a> <br />
+                                                                    <span class="s-time"> 1:20:00</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>2</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <h4>محمد عبدالعزيز</h4>
+                                                                    <p>012586439</p>
+                                                                    <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <a href="" class="btn btn-primary">تفعيل</a> <br />
+                                                                    <span class="s-time"> 1:20:00</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                             
+                                                            </ol>
+                                                          </div>
+                                                         
+                                                        </div>
                                                     </div>
-                                                  </li>
-                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="rev-item d-flex w-100  align-items-start">
-                                                      <div class="rev-time text-center">
-                                                        <span>6:00</span> <br >
-                                                        <span>PM</span>
+                                        
+                                                 </div>
+                                                  <div class="table-side-bar" id="tableorders">
+                                                    <div class="tablebrowse" >
+                                                      <div class="tab-nav-wraper">
+                                                            <div class="nav-btns d-flex justify-content-around align-items-center">
+                                                                <div class="btn btn-dark" data-tab="rev">الطلبات</div>
+                                                                <a  href="" class="btn btn-primary  mb-1" data-tab="waitings">  طلب جديد</a>
+                                                            </div>
+                                                          <form action="">
+                                                            <input class="form-control bg-dark text-light text-center"  type="text" placeholder="ابحث عن ضيف" aria-label="default input example">
+                                                          </form>
                                                       </div>
-                                                      <div class="rev-info">
-                                                        <a href="" class="btn btn-primary">احجز الآن</a>
-                                                      </div>
-                                                      <div class="rev-statu text-center">
-                                                        <p>VVIP-1</p>
-                                                        <span> شاغرة</span>
-                                                      </div>
+                                                          <!-- عناصر التاب -->
+                                                        <div class="side-tab-content">
+                                                          <div id="rev" class="table-bar-info reversation-side-bar rev active-tab">
+                                                            <div class="first-tabb d-flex justify-content-between align-items-start">
+                                                              <p>حجوزات الطاولة</p>
+                                                              <span> 3 <i class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                            </div>
+                                                            <ol class="list-group list-group-numbered reversed bill-info">
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>6:00</span> <br >
+                                                                    <span>PM</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <h4>محمد عبدالعزيز</h4>
+                                                                    <p>012586439</p>
+                                                                    <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <p>VVIP-1</p>
+                                                                    <span>فى الخدمة</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>6:00</span> <br >
+                                                                    <span>PM</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <a href="" class="btn btn-primary">احجز الآن</a>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <p>VVIP-1</p>
+                                                                    <span> شاغرة</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                             
+                                                            </ol>
+                                                          </div>
+                                                          <div id="waithings" class="table-bar-info waitings-side-bar waitings hidden-tab">
+                                                            <ol class="list-group list-group-numbered reversed bill-info">
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>1</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <h4>محمد عبدالعزيز</h4>
+                                                                    <p>012586439</p>
+                                                                    <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <a href="" class="btn btn-primary">تفعيل</a> <br />
+                                                                    <span class="s-time"> 1:20:00</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                              <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                                <div class="rev-item d-flex w-100  align-items-start">
+                                                                  <div class="rev-time text-center">
+                                                                    <span>2</span>
+                                                                  </div>
+                                                                  <div class="rev-info">
+                                                                    <h4>محمد عبدالعزيز</h4>
+                                                                    <p>012586439</p>
+                                                                    <p><span>4 اشخاص</span><span>/باقة vip</span></p>
+                                                                  </div>
+                                                                  <div class="rev-statu text-center">
+                                                                    <a href="" class="btn btn-primary">تفعيل</a> <br />
+                                                                    <span class="s-time"> 1:20:00</span>
+                                                                  </div>
+                                                                </div>
+                                                              </li>
+                                                             
+                                                            </ol>
+                                                          </div>
+                                                         
+                                                        </div>
                                                     </div>
-                                                  </li>
-                                                 
-                                                </ol>
-                                              </div>
-                                              <div id="waithings" class="table-bar-info waitings-side-bar waitings hidden-tab">
-                                                <ol class="list-group list-group-numbered reversed bill-info">
-                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="rev-item d-flex w-100  align-items-start">
-                                                      <div class="rev-time text-center">
-                                                        <span>1</span>
-                                                      </div>
-                                                      <div class="rev-info">
-                                                        <h4>محمد عبدالعزيز</h4>
-                                                        <p>012586439</p>
-                                                        <p><span>4 اشخاص</span><span>/باقة vip</span></p>
-                                                      </div>
-                                                      <div class="rev-statu text-center">
-                                                        <a href="" class="btn btn-primary">تفعيل</a> <br />
-                                                        <span class="s-time"> 1:20:00</span>
-                                                      </div>
-                                                    </div>
-                                                  </li>
-                                                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="rev-item d-flex w-100  align-items-start">
-                                                      <div class="rev-time text-center">
-                                                        <span>2</span>
-                                                      </div>
-                                                      <div class="rev-info">
-                                                        <h4>محمد عبدالعزيز</h4>
-                                                        <p>012586439</p>
-                                                        <p><span>4 اشخاص</span><span>/باقة vip</span></p>
-                                                      </div>
-                                                      <div class="rev-statu text-center">
-                                                        <a href="" class="btn btn-primary">تفعيل</a> <br />
-                                                        <span class="s-time"> 1:20:00</span>
-                                                      </div>
-                                                    </div>
-                                                  </li>
-                                                 
-                                                </ol>
-                                              </div>
-                                            </div>
-                                        </div>
                                         
                                                  </div>
                                                  
@@ -573,7 +709,106 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
+    <div class="col-md-3" id="casher-section">
+        <div class="side-place">
+            <div id="tab-place" class="c-tab-pane fade show active">
+                <ol class="table-list list-group list-group-numbered reversed">
+                    <li
+                        class="menu-info-list list-group-item d-flex  flex-column justify-content-center align-items-center text-center p-0">
+                        <a class="new-reserv-btn btn btn-link w-100" href="{{ route('branch.reservation') }}">
+                            <i class="fa-solid fa-plus"></i>
+                            <p>انشاء حجز جديد </p>
+                        </a>
+                    </li>
+
+                </ol>
+                <ol class="list-group reversed casher-box mt-5 none">
+                    <li class="list-group-item no-number  ">
+                         <div class="tax d-flex justify-content-between align-items-start my-4 total w-100">
+                                <div class="discount-inputs input-group">
+                                    <label  class="col-sm-2 col-form-label"> %</label>
+                                  <input class="discount-input form-control bg-dark text-light" lang="en" type="number" placeholder="قيمة الخصم" aria-label="default input example">
+                                  <button class="btn btn-dark menu-btn" type="button">تطبيق</button>
+                                </div>
+                            </div>
+                        <div class="sub-total d-flex justify-content-between align-items-start">
+                            <div class="me-2 ms-auto">
+                                <div class="fw-bold"> حاصل الجمع</div>
+                            </div>
+                            <span class="sub-total-number"> 260 </span>
+                            <span> ريال</span>
+                        </div>
+
+                        <div class="tax d-flex justify-content-between align-items-start mt-4">
+                            <div class="me-2 ms-auto">
+                                <div class="fw-bold"> ضريبة</div>
+                            </div>
+                            <span class="taxes">10%</span>
+                        </div>
+                        <div class="tax d-flex justify-content-between align-items-start mt-4 total">
+                            <div class="me-2 ms-auto">
+                                <div class="fw-bold"> الإجمالى</div>
+                            </div>
+                            <span class="table-total">286 </span>
+                            <span> ريال</span>
+                        </div>
+                        <div class="payment-method">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="payment-icon active d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-sack-dollar"></i>
+                                    </div>
+                                    <p class="text-center">كاش</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="payment-icon d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-credit-card"></i>
+                                    </div>
+                                    <p class="text-center">بطاقة ائتمان</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="payment-icon d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-wallet"></i>
+                                    </div>
+                                    <p class="text-center">المحفظة</p>
+                                </div>
+                            </div>
+                            <div class="payment-btn my-3 text-center">
+                                <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">ادفع الآن</div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="consfirm-text">هل تريد تأكيد الدفع</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">تأكيد</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">لا </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>

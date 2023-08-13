@@ -101,7 +101,7 @@
                 </td>
                 <td data-title="المنتج">
                     <div class="cart-product-wrapper">
-                        <img src="${item.image}" alt="${item.name}">
+                        <!-- <img src="${item.image}" alt="${item.name}">-->
                         <div class="cart-product-body">
                             <h6> <a href="#">${item.name}</a> </h6>
                         </div>

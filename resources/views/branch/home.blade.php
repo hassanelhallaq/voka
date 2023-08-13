@@ -114,7 +114,7 @@
                 fill: #3E3F41;
             }
         </style>
-    <div class="col-md-8" id="mainPage">
+    <div class="col-md-11" id="mainPage">
 
         <div class="container-fluid">
             <!--<div class="filter-btns d-flex mb-2">-->
@@ -167,7 +167,8 @@
 
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
                     <div class="other d-flex flex-column">
                         <div class="right">
                             <div class="row">
@@ -2862,6 +2863,7 @@
 
                     </div>
                 </div>
+                <div class="col-md-1"></div>
 
             </div>
 
