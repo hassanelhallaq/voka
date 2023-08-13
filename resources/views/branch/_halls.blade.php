@@ -359,7 +359,7 @@
                                                         @php
                                                             if ($tables->reservation) {
                                                                 $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
-                                                                    ->where('table_id', $table->id)
+                                                                    ->where('table_id', $tables->id)
                                                                     ->where('is_done', 0)
                                                                     ->with('products')
                                                                     ->first();
