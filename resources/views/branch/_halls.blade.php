@@ -385,27 +385,27 @@
                                                                         class="nav-btns d-flex justify-content-around align-items-center">
                                                                         <div class="btn btn-dark" data-tab="rev">
                                                                             الطلبات</div>
-                                                                        <a href=""
+                                                                        <a onclick="product({{ $tables->id }})"
                                                                             class="btn btn-primary  mb-1"
                                                                             data-tab="waitings"> طلب جديد</a>
                                                                     </div>
-                                                                    <form action="">
+                                                                    {{-- <form action="">
                                                                         <input
                                                                             class="form-control bg-dark text-light text-center"
                                                                             type="text" placeholder="ابحث عن ضيف"
                                                                             aria-label="default input example">
-                                                                    </form>
+                                                                    </form> --}}
                                                                 </div>
                                                                 <!-- عناصر التاب -->
                                                                 <div class="side-tab-content">
                                                                     <div id="rev"
                                                                         class="table-bar-info reversation-side-bar rev active-tab">
-                                                                        <div
+                                                                        {{-- <div
                                                                             class="first-tabb d-flex justify-content-between align-items-start">
                                                                             <p>حجوزات الطاولة</p>
                                                                             <span> 3 <i
                                                                                     class="fa-solid fa-stopwatch-20 ml-1"></i></span>
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <ol
                                                                             class="list-group list-group-numbered reversed bill-info">
                                                                             @if ($orders != null && $orders->products->count() != 0)
@@ -950,47 +950,65 @@
 <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
 <script>
-    // Function to update the countdown timer display
-    // function updateCountdown() {
-    //     // Get all the countdown-timer elements
-    //     const countdownTimers = document.querySelectorAll('.countdown-timer');
+    Function to update the countdown timer display
 
-    //     countdownTimers.forEach(countdownTimer => {
-    //         const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
+    function updateCountdown() {
+        // Get all the countdown-timer elements
+        const countdownTimers = document.querySelectorAll('.countdown-timer');
 
-    //         // Get the data-start and data-package-time values from the data attributes
-    //         const startTimeString = countdownTimer.getAttribute('data-start');
-    //         const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
+        countdownTimers.forEach(countdownTimer => {
+            const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
 
-    //         // Convert the startTimeString to a Date object
-    //         const startTime = new Date(startTimeString);
+            // Get the data-start and data-package-time values from the data attributes
+            const startTimeString = countdownTimer.getAttribute('data-start');
+            const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
 
-    //         // Calculate the target end time by adding the packageTime in minutes to the start time
-    //         const endTime = new Date(startTime.getTime() + packageTime * 60000);
+            // Convert the startTimeString to a Date object
+            const startTime = new Date(startTimeString);
 
-    //         const currentTime = new Date().getTime();
-    //         const timeRemaining = endTime - currentTime;
+            // Calculate the target end time by adding the packageTime in minutes to the start time
+            const endTime = new Date(startTime.getTime() + packageTime * 60000);
 
-    //         if (timeRemaining <= 0) {
-    //             // Timer has ended
-    //             countdownTimerText.textContent = 'انتهى';
-    //         } else {
-    //             // Calculate hours, minutes, and seconds
-    //             const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    //             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            const currentTime = new Date().getTime();
+            const timeRemaining = endTime - currentTime;
 
-    //             // Format the time and update the countdown display
-    //             const formattedTime =
-    //                 `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    //             countdownTimerText.textContent = formattedTime;
-    //         }
-    //     });
-    // }
+            if (timeRemaining <= 0) {
+                // Timer has ended
+                countdownTimerText.textContent = 'انتهى';
+            } else {
+                // Calculate hours, minutes, and seconds
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-    // // Update the countdown every second
-    // setInterval(updateCountdown, 1000);
+                // Format the time and update the countdown display
+                const formattedTime =
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                countdownTimerText.textContent = formattedTime;
+            }
+        });
+    }
 
-    // // Initialize the countdown on page load
-    // updateCountdown();
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+
+    // Initialize the countdown on page load
+    updateCountdown();
+</script>
+<script>
+    function product(id) {
+
+        // Add active class to "القائمة" link
+        $.get('product-order/ajax/' + id, {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+
+            $('#reserv-main-section').hide(); // Show the reserv main section
+
+        });
+
+
+    }
 </script>
