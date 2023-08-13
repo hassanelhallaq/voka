@@ -219,7 +219,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset('front/js/main.js') }}"></script>
+    <!--<script src="{{ asset('front/js/main.js') }}"></script>-->
 </body>
 
 </html>

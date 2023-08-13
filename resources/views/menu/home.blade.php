@@ -1,9 +1,4 @@
     @extends('menu.parent')
-    <style>
-        .menu-category-thumb{
-            margin:0 -30px !important;
-        }
-    </style>
     @section('content')
         <!-- Header End -->
 

@@ -397,6 +397,7 @@ mins.on('click', function() {
       $('.table-list').prepend(listItem); // إضافة العنصر إلى القائمة
       updateSubTotal();
       calculateTotal();
+      $('.casher-box').addClass('box-block');
     });
 
    
@@ -420,6 +421,9 @@ mins.on('click', function() {
       var taxPercentage = parseFloat($('.taxes').html()) / 100;
       var taxAmount = subTotal * taxPercentage;
       var total = subTotal + taxAmount;
+    //   var discountval = $('.discount-input').val();
+    //   var discountAmount = (discountval / 100) * total;
+    //   var afterdiscount = total - discountAmount;
 
       $('.table-total').text(total);
     }
@@ -429,6 +433,17 @@ mins.on('click', function() {
     $('.payment-icon').on('click', function(){
       $('.payment-icon').removeClass('active');
       $(this).addClass('active');
+    });
+    
+    $('.discount-inputs .menu-btn').on('click', function(){
+        
+          var total = $('.table-total').text();
+          var discountval = $('.discount-input').val();
+          var discountAmount = (discountval / 100) * total;
+          console.log(discountAmount);
+          var afterdiscount = total - discountAmount;
+          var roundedFinalAmount = Math.round(afterdiscount);
+          $('.table-total').text(roundedFinalAmount);
     });
 
     // صفحة الحجوزات

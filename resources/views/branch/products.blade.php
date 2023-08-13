@@ -1,13 +1,8 @@
-<div id="mainPage">
+<div id="mainPage" class="menu-page">
     <div class="row">
     <div class="col-md-9">
 
-        <div class="seacr-bar mb-5">
-            <form class="d-flex search " role="search">
-                <input class="form-control" type="search" aria-label="Search">
-                <button class="btn search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-        </div>
+       
         <div class="menu-category-wrap d-flex mb-4">
             <div class="voka-slider">
                 @foreach ($products as $key => $item)

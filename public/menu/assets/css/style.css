@@ -4174,7 +4174,7 @@ td.quantity{
 }
 .ct-menu-category-item{
   display: inline-block;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
 }
 .ct-menu-category-item h6{

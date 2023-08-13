@@ -13,6 +13,13 @@
                 </ol>
                 <ol class="list-group reversed casher-box mt-5 none">
                     <li class="list-group-item no-number  ">
+                         <div class="tax d-flex justify-content-between align-items-start my-4 total w-100">
+                                <div class="discount-inputs input-group">
+                                    <label  class="col-sm-2 col-form-label"> %</label>
+                                  <input class="discount-input form-control bg-dark text-light" lang="en" type="number" placeholder="قيمة الخصم" aria-label="default input example">
+                                  <button class="btn btn-dark menu-btn" type="button">تطبيق</button>
+                                </div>
+                            </div>
                         <div class="sub-total d-flex justify-content-between align-items-start">
                             <div class="me-2 ms-auto">
                                 <div class="fw-bold"> حاصل الجمع</div>

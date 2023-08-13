@@ -1586,5 +1586,8 @@ table .active-day {
 .table-side-bar .active-tab {
     display: block;
 }
+.box-block {
+    display: block !important;
+}
 
 /*------------------------------- end new salon page css ------------------------------------*/
