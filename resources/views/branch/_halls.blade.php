@@ -349,7 +349,16 @@
                                                                                     }
                                                                                 }
                                                                             @endphp
-                                                                            @foreach ($availableSlots as $slot)
+                                                                            @foreach ($timeSlots as $slot)
+                                                                                @php
+                                                                                    $slotClosed = false;
+                                                                                    foreach ($unavailableSlots as $unavailableSlot) {
+                                                                                        if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                                                                                            $slotClosed = true;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
                                                                                 <li
                                                                                     class="list-group-item d-flex justify-content-between align-items-start">
                                                                                     <div
@@ -360,6 +369,15 @@
                                                                                             <br>
                                                                                             <span>{{ $slot['end'] }}</span>
                                                                                         </div>
+                                                                                        @if ($slotClosed)
+                                                                                        @else
+                                                                                            <div
+                                                                                                class="rev-time text-center">
+                                                                                                <span>{{ $slot['start'] }}</span>
+                                                                                                <br>
+                                                                                                <span>{{ $slot['end'] }}</span>
+                                                                                            </div>
+                                                                                        @endif
                                                                                         <div class="rev-info">
                                                                                             <a href="{{ route('branch.reservation') }}"
                                                                                                 class="btn btn-primary">احجز
