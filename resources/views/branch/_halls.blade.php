@@ -298,52 +298,56 @@
                                                                                     })
                                                                                     ->orderBy('date')
                                                                                     ->get();
-                                                                                $package = App\Models\Package::find($tables->reservation->package->id);
-                                                                                $minutesPerPackage = $package->time;
-                                                                                // Generate time slots based on the package minutes
-                                                                                $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
-                                                                                $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
-                                                                                $timeSlots = [];
                                                                                 
-                                                                                $currentTime = clone $startTime;
-                                                                                while ($currentTime->lte($endTime)) {
-                                                                                    $endTimeSlot = clone $currentTime;
-                                                                                    $endTimeSlot->addMinutes($minutesPerPackage);
-                                                                                    $timeSlots[] = [
-                                                                                        'start' => $currentTime->format('g:i A'),
-                                                                                        'end' => $endTimeSlot->format('g:i A'),
-                                                                                    ];
-                                                                                    $currentTime->addMinutes($minutesPerPackage);
-                                                                                }
-                                                                                // Calculate the available and unavailable time slots
-                                                                                $availableSlots = [];
-                                                                                $unavailableSlots = [];
+                                                                                $packages = $tables->packages;
+                                                                                foreach ($packages as $key => $package) {
+                                                                                    # code...
                                                                                 
-                                                                                $prevEndTime = $startTime;
-                                                                                foreach ($reservations as $reservation) {
-                                                                                    $start = Carbon\Carbon::parse($reservation->date);
-                                                                                    $end = Carbon\Carbon::parse($reservation->end);
+                                                                                    $minutesPerPackage = $package->time;
+                                                                                    // Generate time slots based on the package minutes
+                                                                                    $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                    $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                    $timeSlots = [];
                                                                                 
-                                                                                    if ($prevEndTime->lt($start)) {
+                                                                                    $currentTime = clone $startTime;
+                                                                                    while ($currentTime->lte($endTime)) {
+                                                                                        $endTimeSlot = clone $currentTime;
+                                                                                        $endTimeSlot->addMinutes($minutesPerPackage);
+                                                                                        $timeSlots[] = [
+                                                                                            'start' => $currentTime->format('g:i A'),
+                                                                                            'end' => $endTimeSlot->format('g:i A'),
+                                                                                        ];
+                                                                                        $currentTime->addMinutes($minutesPerPackage);
+                                                                                    }
+                                                                                    // Calculate the available and unavailable time slots
+                                                                                    $availableSlots = [];
+                                                                                    $unavailableSlots = [];
+                                                                                
+                                                                                    $prevEndTime = $startTime;
+                                                                                    foreach ($reservations as $reservation) {
+                                                                                        $start = Carbon\Carbon::parse($reservation->date);
+                                                                                        $end = Carbon\Carbon::parse($reservation->end);
+                                                                                
+                                                                                        if ($prevEndTime->lt($start)) {
+                                                                                            $availableSlots[] = [
+                                                                                                'start' => $prevEndTime->format('g:i A'),
+                                                                                                'end' => $start->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+                                                                                        $unavailableSlots[] = [
+                                                                                            'start' => $start->format('g:i A'),
+                                                                                            'end' => $end->format('g:i A'),
+                                                                                        ];
+                                                                                
+                                                                                        $prevEndTime = $end;
+                                                                                    }
+                                                                                    if ($prevEndTime->lt($endTime)) {
                                                                                         $availableSlots[] = [
                                                                                             'start' => $prevEndTime->format('g:i A'),
-                                                                                            'end' => $start->format('g:i A'),
+                                                                                            'end' => $endTime->format('g:i A'),
                                                                                         ];
                                                                                     }
-                                                                                    $unavailableSlots[] = [
-                                                                                        'start' => $start->format('g:i A'),
-                                                                                        'end' => $end->format('g:i A'),
-                                                                                    ];
-                                                                                
-                                                                                    $prevEndTime = $end;
                                                                                 }
-                                                                                if ($prevEndTime->lt($endTime)) {
-                                                                                    $availableSlots[] = [
-                                                                                        'start' => $prevEndTime->format('g:i A'),
-                                                                                        'end' => $endTime->format('g:i A'),
-                                                                                    ];
-                                                                                }
-                                                                                
                                                                             @endphp
                                                                             @foreach ($availableSlots as $slot)
                                                                                 <li
