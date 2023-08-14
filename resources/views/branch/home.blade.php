@@ -2870,6 +2870,9 @@
         </div>
     </div>
 @endsection
+    <script src="{{ asset('front/js/jquery.js') }}"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
 <script>
     function product(id) {
 

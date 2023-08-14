@@ -215,15 +215,12 @@
         </div>
     </section>
     @yield('js')
-    <script src="{{ asset('front/js/jquery.js') }}"></script>
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+    <!--<script src="{{ asset('front/js/jquery.js') }}"></script>-->
+    <!--<script src="https://unpkg.com/@popperjs/core@2"></script>-->
+    <!--<script src="{{ asset('front/js/bootstrap.min.js') }}"></script>-->
 
     <!--<script src="{{ asset('front/js/main.js') }}"></script>-->
-</body>
-
-</html>
-<script>
+    <script>
     $(document).ready(function() {
         // Load 'branch.reservSide' view using jQuery's $.get() method
         $.get('/branch/path/to/branch.reservSide', function(data) {
@@ -335,3 +332,7 @@
         });
     }
 </script>
+</body>
+
+</html>
+

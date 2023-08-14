@@ -7,20 +7,27 @@ $(document).ready(function () {
         
     });
     
-     $('.table-btn-action').on('click', function(){
+    //  $('.table-btn-action').on('click', function(){
 
-        $('.table-side-bar').hide();
-        var newId = $(this).data('id');
+    //     $('.table-side-bar').hide();
+    //     var newId = $(this).data('id');
     
-        if($(this).data('stat') == 'available') {
-          $('#tab-place').show();
-          $(newId).hide();
-        } else {
-          $('#tab-place').hide();
-          $('#tab-place').removeClass('show');
-          $(newId).show();
+    //     if($(this).data('stat') == 'available') {
+    //       $('#tab-place').show();
+    //       $(newId).hide();
+    //     } else {
+    //       $('#tab-place').hide();
+    //       $('#tab-place').removeClass('show');
+    //       $(newId).show();
+    //       $('.side-place').append($(newId)).addClass('have-bg');
+    //     }
+    //   });
+    
+    
+      $('.table-btn-action').on('click', function(){
+         var newId = $(this).data('id');
+         $(newId).addClass('appended');
           $('.side-place').append($(newId)).addClass('have-bg');
-        }
       });
 
  

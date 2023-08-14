@@ -1589,5 +1589,15 @@ table .active-day {
 .box-block {
     display: block !important;
 }
-
+.food-items {
+    padding-right: 0 !important;
+    padding: 10px;
+}
+.food-items .list-group-item {
+    border-radius: 0;
+    border-bottom: 1px solid #555;
+}
+.appended {
+    display: block !important;
+}
 /*------------------------------- end new salon page css ------------------------------------*/

@@ -122,15 +122,15 @@
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
                                                                             <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableorders">
+                                                                                class="table-btn-orders btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders{{ $tables->id }}">
                                                                                 الطلبات
                                                                             </button>
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableinfo">
+                                                                                class="table-btn-info btn btn-primary w-100"
+                                                                                type="button" data-id="#tableinfo{{ $tables->id }}">
                                                                                 استعراض
                                                                             </button>
                                                                         </div>
@@ -139,86 +139,71 @@
                                                                             <!-- data-id="#tableactive" ata-bs-target="#exampleModalToggle" data-bs-toggle="modal" >-->
                                                                             <!--    تفعيل الحجز-->
                                                                             <!--</button>-->
-
-                                                                            <div class="modal fade"
-                                                                                id="exampleModalToggle"
-                                                                                aria-hidden="true"
-                                                                                aria-labelledby="exampleModalToggleLabel"
-                                                                                tabindex="-1">
-                                                                                <div
-                                                                                    class="modal-dialog modal-dialog-centered">
+                                                                                <!-- Button trigger modal -->
+                                                                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                                  تفعيل 
+                                                                                </button>
+                                                                                
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                  <div class="modal-dialog">
                                                                                     <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <h1 class="modal-title fs-5 text-light"
-                                                                                                id="exampleModalToggleLabel">
-                                                                                                تفعيل الحجز</h1>
-                                                                                            <button type="button"
-                                                                                                class="btn-close"
-                                                                                                data-bs-dismiss="modal"
-                                                                                                aria-label="Close"></button>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="modal-body text-light">
+                                                                                      <div class="modal-header">
+                                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">تفعيل الحجز</h1>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                      </div>
+                                                                                      <div class="modal-body">
+                                                                                        <div  class="modal-body text-light">
                                                                                             هل تود تفعيل الحجز
                                                                                         </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <button
-                                                                                                class="btn btn-primary"
-                                                                                                data-bs-target="#exampleModalToggle2"
-                                                                                                data-bs-toggle="modal">تفعيل
-                                                                                                يدوى</button>
-                                                                                            <button
-                                                                                                class="btn btn-primary"
-                                                                                                data-bs-target="#exampleModalToggle2"
-                                                                                                data-bs-toggle="modal">
-                                                                                                QR </button>
-                                                                                        </div>
+                                                                                      </div>
+                                                                                      <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                                                                                        <button type="button" class="btn btn-primary">تأكيد </button>
+                                                                                      </div>
                                                                                     </div>
+                                                                                  </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="modal fade"
-                                                                                id="exampleModalToggle2"
-                                                                                aria-hidden="true"
-                                                                                aria-labelledby="exampleModalToggleLabel2"
-                                                                                tabindex="-1">
-                                                                                <div
-                                                                                    class="modal-dialog modal-dialog-centered">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <h1 class="modal-title fs-5 text-light"
-                                                                                                id="exampleModalToggleLabel2">
-                                                                                                تفعيل الحجز</h1>
-                                                                                            <button type="button"
-                                                                                                class="btn-close"
-                                                                                                data-bs-dismiss="modal"
-                                                                                                aria-label="Close"></button>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="modal-body text-light">
-                                                                                            تم تفعيل الحجز بنجاح
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <button
-                                                                                                class="btn btn-primary custome-close"
-                                                                                                data-bs-dismiss="modal"
-                                                                                                aria-label="Close">اغلاق</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <a class="btn btn-primary"
-                                                                                data-bs-toggle="modal"
-                                                                                href="#exampleModalToggle"
-                                                                                role="button">تفعيل الحجز</a>
+
+                                                                            
+                                                                            <!--<a class="btn btn-primary"-->
+                                                                            <!--    data-bs-toggle="modal"-->
+                                                                            <!--    href="#exampleModalToggle1"-->
+                                                                            <!--    role="button">تفعيل الحجز</a>-->
 
 
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableend">
-                                                                                انهاء الحجز
-                                                                            </button>
+                                                                            <!--<button-->
+                                                                            <!--    class="table-btn-action btn btn-primary w-100"-->
+                                                                            <!--    type="button" data-id="#tableend">-->
+                                                                            <!--    انهاء الحجز-->
+                                                                            <!--</button>-->
+                                                                             <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                                  انهاء الحجز 
+                                                                                </button>
+                                                                                
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                  <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                      <div class="modal-header">
+                                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">انهاء الحجز</h1>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                      </div>
+                                                                                      <div class="modal-body">
+                                                                                        <div  class="modal-body text-light">
+                                                                                            هل تود انهاء الحجز
+                                                                                        </div>
+                                                                                      </div>
+                                                                                      <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                                                                                        <button type="button" class="btn btn-primary">انهاء </button>
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div>
+
                                                                         </div>
                                                                     </div>
 
@@ -226,7 +211,7 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="table-side-bar" id="tableinfo">
+                                                        <div class="table-side-bar side-bar-info" id="tableinfo{{ $tables->id }}">
                                                             <div class="tablebrowse">
                                                                 <div class="tab-nav-wraper">
                                                                     <div
@@ -381,12 +366,12 @@
                                                                 $totalOrderPrices = 0;
                                                             }
                                                         @endphp
-                                                        <div class="table-side-bar" id="tableorders">
+                                                        <div class="table-side-bar side-bar-orders" id="tableorders{{ $tables->id }}">
                                                             <div class="tablebrowse">
                                                                 <div class="tab-nav-wraper">
                                                                     <div
                                                                         class="nav-btns d-flex justify-content-around align-items-center">
-                                                                        <div class="btn btn-dark" data-tab="rev">
+                                                                        <div class="btn btn-dark" data-tab="newOrders">
                                                                             الطلبات</div>
                                                                         <a onclick="product({{ $tables->id }})"
                                                                             class="btn btn-primary  mb-1"
@@ -482,34 +467,103 @@
 
                                                                         </ol>
                                                                     </div>
+                                                                    <div id="newOrders"
+                                                                        class="table-bar-info newOrders-side-bar newOrders active-tab">
+                                                                       <div id="tab1" class="tab-pane fade show active">
+                                                                            <ol class="table-list list-group list-group-numbered reversed food-items pr-0"><li class="list-group-item drag d-flex justify-content-between align-items-start" draggable="true"><div class="me-2 ms-auto"><div class="fw-bold"><span class="title">أوريجينال تشيكن رانش</span><span class="count-wrap mr-2"><i class="fa-solid fa-x"></i><span class="count">3</span></span></div></div><span class="list-price">25 ريال</span><button class="order-remove btn btn-danger" type="button"><i class="fa-solid fa-trash-can"></i></button></li><li class="list-group-item drag d-flex justify-content-between align-items-start" draggable="true"><div class="me-2 ms-auto"><div class="fw-bold"><span class="title">أوريجينال تشيكن رانش</span><span class="count-wrap mr-2"><i class="fa-solid fa-x"></i><span class="count">3</span></span></div></div><span class="list-price">25 ريال</span><button class="order-remove btn btn-danger" type="button"><i class="fa-solid fa-trash-can"></i></button></li><li class="list-group-item drag d-flex justify-content-between align-items-start" draggable="true"><div class="me-2 ms-auto"><div class="fw-bold"><span class="title">أوريجينال تشيكن رانش</span><span class="count-wrap mr-2"><i class="fa-solid fa-x"></i><span class="count">3</span></span></div></div><span class="list-price">25 ريال</span><button class="order-remove btn btn-danger" type="button"><i class="fa-solid fa-trash-can"></i></button></li>
+                                                                                
+                                                
+                                                                              </ol>
+                                                                              <!--<ol class="list-group reversed  mt-5">-->
+                                                                              <!--  <li class="list-group-item no-number  ">-->
+                                                                              <!--      <div class="sub-total d-flex justify-content-between align-items-start">-->
+                                                                              <!--          <div class="discount-inputs input-group">-->
+                                                                              <!--              <label class="col-sm-2 col-form-label"> %</label>-->
+                                                                              <!--              <input class="discount-input form-control bg-dark text-light" lang="en"-->
+                                                                              <!--                  type="number" placeholder="قيمة الخصم" aria-label="default input example">-->
+                                                                              <!--              <button class="btn btn-dark menu-btn" type="button">تطبيق</button>-->
+                                                                              <!--          </div>-->
+                                                                              <!--      </div>-->
+                                                                              <!--      <div class="sub-total d-flex justify-content-between align-items-start mt-2">-->
+                                                                              <!--          <div class="me-2 ms-auto">-->
+                                                                              <!--              <div class="fw-bold"> حاصل الجمع</div>-->
+                                                                              <!--            </div>-->
+                                                                              <!--            <span class="sub-total-number">225</span>-->
+                                                                              <!--            <span> ريال</span>-->
+                                                                              <!--      </div>-->
+                                                
+                                                                              <!--      <div class="tax d-flex justify-content-between align-items-start mt-4">-->
+                                                                              <!--          <div class="me-2 ms-auto">-->
+                                                                              <!--              <div class="fw-bold"> ضريبة</div>-->
+                                                                              <!--            </div>-->
+                                                                              <!--            <span class="taxes">10%</span>-->
+                                                                              <!--      </div>-->
+                                                                              <!--      <div class="tax d-flex justify-content-between align-items-start mt-4 total">-->
+                                                                              <!--          <div class="me-2 ms-auto">-->
+                                                                              <!--              <div class="fw-bold"> الإجمالى</div>-->
+                                                                              <!--            </div>-->
+                                                                              <!--            <span class="table-total">247.5</span>-->
+                                                                              <!--            <span> ريال</span>-->
+                                                                              <!--      </div>-->
+                                                                              <!--      <div class="payment-method">-->
+                                                                              <!--          <div class="row">-->
+                                                                              <!--              <div class="col-4">-->
+                                                                              <!--                  <div class="payment-icon active d-flex justify-content-center align-items-center">-->
+                                                                              <!--                      <i class="fa-solid fa-sack-dollar"></i>-->
+                                                                              <!--                  </div>-->
+                                                                              <!--                  <p class="text-center">كاش</p>-->
+                                                                              <!--              </div>-->
+                                                                              <!--              <div class="col-4">-->
+                                                                              <!--                <div class="payment-icon d-flex justify-content-center align-items-center">-->
+                                                                              <!--                  <i class="fa-solid fa-credit-card"></i>-->
+                                                                              <!--                </div>-->
+                                                                              <!--                <p class="text-center">بطاقة  ائتمان</p>-->
+                                                                              <!--            </div>-->
+                                                                              <!--            <div class="col-4">-->
+                                                                              <!--              <div class="payment-icon d-flex justify-content-center align-items-center">-->
+                                                                              <!--                <i class="fa-solid fa-wallet"></i>-->
+                                                                              <!--              </div>-->
+                                                                              <!--              <p class="text-center">المحفظة</p>-->
+                                                                              <!--          </div>-->
+                                                                              <!--          </div>-->
+                                                                              <!--          <div class="payment-btn my-3 text-center">-->
+                                                                              <!--              <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ادفع الآن</div>-->
+                                                                                            <!-- Modal -->
+                                                                              <!--              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                                                                              <!--                <div class="modal-dialog">-->
+                                                                              <!--                  <div class="modal-content">-->
+                                                                              <!--                    <div class="modal-header">-->
+                                                                              <!--                      <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>-->
+                                                                              <!--                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                                                                              <!--                    </div>-->
+                                                                              <!--                    <div class="modal-body">-->
+                                                                              <!--                      <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
+                                                                              <!--                    </div>-->
+                                                                              <!--                    <div class="modal-footer">-->
+                                                                              <!--                      <button type="button" class="btn btn-primary">تأكيد</button>-->
+                                                                              <!--                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>-->
+                                                                              <!--                    </div>-->
+                                                                              <!--                  </div>-->
+                                                                              <!--                </div>-->
+                                                                              <!--              </div>-->
+                                                                              <!--          </div>-->
+                                                                              <!--      </div>-->
+                                                                              <!--    </li>-->
+                                                
+                                                
+                                                
+                                                                              <!--</ol>-->
+                                                
+                                                                        </div>
+                                                                    </div>
 
                                                                 </div>
                                                             </div>
 
                                                         </div>
 
-
-                                                        <div class="table-side-bar" id="table{{ $item->id }}">
-                                                            <h2 class="text-center mb-4"> {{ $tables->name }} </h2>
-                                                            <div class="tab-nav-wraper">
-                                                                <ul
-                                                                    class="nav c-nav-tabs d-flex justify-content-between home-tab">
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link " data-tab="reservations"
-                                                                            href="#"> الحجوزات</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" data-tab="orders"
-                                                                            href="#">
-                                                                            الطلبات</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link active" data-tab="the-menu"
-                                                                            href="#"> القائمة</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            عناصر التاب
+                                                            
+                                                       
                                                             @php
                                                                 if ($tables->reservation) {
                                                                     $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
@@ -532,305 +586,7 @@
                                                                     $totalOrderPrices = 0;
                                                                 }
                                                             @endphp
-                                                            <div class="tab-content">
-                                                                <div id="the-menu" class="c-tab-pane active">
-                                                                    <ol
-                                                                        class="list-group list-group-numbered reversed">
-                                                                        @if ($orders != null && $orders->products->count() != 0)
-                                                                            @foreach ($orders->products as $product)
-                                                                                <li
-                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                    <div class="me-2 ms-auto">
-                                                                                        <div class="fw-bold">
-                                                                                            {{ $product->name }}</div>
-                                                                                    </div>
-
-                                                                                    <span>{{ $product->pivot->price }}
-                                                                                        ريال</span>
-                                                                                </li>
-                                                                            @endforeach
-                                                                        @endif
-
-                                                                        <li
-                                                                            class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                                            <a onclick="product({{ $tables->id }})"
-                                                                                class="me-2">
-                                                                                <div class="fw-bold">اضف عنصر جديد
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-
-                                                                    </ol>
-
-                                                                    <ol class="list-group reversed none  mt-5">
-                                                                        <li class="list-group-item no-number  ">
-                                                                            <div
-                                                                                class="sub-total d-flex justify-content-between align-items-start">
-                                                                                <div class="me-2 ms-auto">
-                                                                                    <div class="fw-bold"> حاصل الجمع
-                                                                                    </div>
-                                                                                </div>
-                                                                                <span>{{ $tables->reservation->package->price ?? 0 }}
-                                                                                    ريال</span>
-                                                                            </div>
-
-                                                                            <div
-                                                                                class="tax d-flex justify-content-between align-items-start mt-4">
-                                                                                <div class="me-2 ms-auto">
-                                                                                    <div class="fw-bold"> ضريبة</div>
-                                                                                </div>
-                                                                                <span>15%</span>
-                                                                            </div>
-                                                                            <div
-                                                                                class="tax d-flex justify-content-between align-items-start mt-4 total">
-                                                                                <div class="me-2 ms-auto">
-                                                                                    <div class="fw-bold"> الإجمالى
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                @php
-                                                                                    $total = $tables->reservation->package->price ?? 0 * 0.15;
-                                                                                @endphp
-
-                                                                                <span>{{ $total - $totalOrderPrices }}
-
-                                                                                    ريال</span>
-                                                                            </div>
-                                                                            <div class="payment-method">
-                                                                                <div class="row">
-                                                                                    <div class="col-4">
-                                                                                        <div
-                                                                                            class="payment-icon d-flex justify-content-center align-items-center">
-                                                                                            <i
-                                                                                                class="fa-solid fa-sack-dollar"></i>
-                                                                                        </div>
-                                                                                        <p class="text-center">كاش</p>
-                                                                                    </div>
-                                                                                    <div class="col-4">
-                                                                                        <div
-                                                                                            class="payment-icon d-flex justify-content-center align-items-center">
-                                                                                            <i
-                                                                                                class="fa-solid fa-credit-card"></i>
-                                                                                        </div>
-                                                                                        <p class="text-center">بطاقة
-                                                                                            ائتمان</p>
-                                                                                    </div>
-                                                                                    <div class="col-4">
-                                                                                        <div
-                                                                                            class="payment-icon d-flex justify-content-center align-items-center">
-                                                                                            <i
-                                                                                                class="fa-solid fa-wallet"></i>
-                                                                                        </div>
-                                                                                        <p class="text-center">المحفظة
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    class="payment-btn my-3 text-center">
-                                                                                    <div class="btn btn-primary btn-lg w-100"
-                                                                                        data-bs-toggle="modal"
-                                                                                        data-bs-target="#exampleModal6">
-                                                                                        ادفع الآن</div>
-                                                                                    Modal
-                                                                                    <div class="modal fade"
-                                                                                        id="exampleModal6"
-                                                                                        tabindex="-1"
-                                                                                        aria-labelledby="exampleModalLabel6"
-                                                                                        aria-hidden="true">
-                                                                                        <div class="modal-dialog">
-                                                                                            <div class="modal-content">
-                                                                                                <div
-                                                                                                    class="modal-header">
-                                                                                                    <h5 class="modal-title"
-                                                                                                        id="exampleModalLabel">
-                                                                                                        تأكيد الدفع</h5>
-                                                                                                    <button
-                                                                                                        type="button"
-                                                                                                        class="btn-close"
-                                                                                                        data-bs-dismiss="modal"
-                                                                                                        aria-label="Close"></button>
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="modal-body">
-                                                                                                    <p
-                                                                                                        class="consfirm-text">
-                                                                                                        هل
-                                                                                                        تريد تأكيد
-                                                                                                        الدفع
-                                                                                                    </p>
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="modal-footer">
-                                                                                                    <button
-                                                                                                        type="button"
-                                                                                                        class="btn btn-primary">تأكيد</button>
-                                                                                                    <button
-                                                                                                        type="button"
-                                                                                                        class="btn btn-secondary"
-                                                                                                        data-bs-dismiss="modal">لا
-                                                                                                    </button>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-
-
-
-                                                                    </ol>
-
-                                                                </div>
-                                                                <div id="orders" class="c-tab-pane ">
-                                                                    @foreach ($tables->reservations as $reservation)
-                                                                        <ol
-                                                                            class="list-group list-group-numbered reversed bill-info">
-                                                                            <li
-                                                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                <div class="me-2 ms-auto">
-                                                                                    <div class="fw-bold"> طلب باسم
-                                                                                    </div>
-                                                                                </div>
-                                                                                <span>{{ $reservation->client->name }}</span>
-                                                                            </li>
-                                                                            <li
-                                                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                <div class="me-2 ms-auto">
-                                                                                    <div class="fw-bold">اسم الباقة
-                                                                                    </div>
-                                                                                </div>
-                                                                                <span>
-                                                                                    {{ $reservation->package->name }}</span>
-                                                                            </li>
-                                                                            <li
-                                                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                <div class="me-2 ms-auto">
-                                                                                    <div class="fw-bold"> الرصيد</div>
-                                                                                </div>
-                                                                                <span>{{ $reservation->package->price }}
-                                                                                </span>
-                                                                            </li>
-                                                                            <li
-                                                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                <div class="me-2 ms-auto">
-                                                                                    <div class="fw-bold"> الحالة</div>
-                                                                                </div>
-                                                                                <span class="badge bg-info">تم الدفع
-                                                                                </span>
-                                                                            </li>
-                                                                            <li
-                                                                                class="new-menu-li list-group-item d-flex justify-content-center align-items-start">
-                                                                                <div class="me-2">
-                                                                                    <div class="fw-bold"> طباعة الطلب
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ol>
-                                                                    @endforeach
-
-                                                                </div>
-                                                                <div id="reservations" class="c-tab-pane ">
-                                                                    <div class="hour-col">
-                                                                        <div class="body-hour-cel">
-                                                                            <div class="row gx-0 p-2 text-center">
-                                                                                <div class="col-md-2">
-                                                                                    <p class="hour mb-0">05:00 AM</p>
-                                                                                </div>
-                                                                                <div class="col-md-10">
-                                                                                    <div class="row gx-0">
-                                                                                        <div class="col-md-9">
-                                                                                            <div
-                                                                                                class="d-flex h-100 justify-content-around align-items-center">
-                                                                                                <div class="gusts">
-                                                                                                    <span
-                                                                                                        class="table-gusts px-2">
-                                                                                                        4</span>
-                                                                                                    <span> <i
-                                                                                                            class="fa-solid fa-users"></i></span>
-                                                                                                </div>
-                                                                                                <div class="table-res">
-                                                                                                    طاولة 1
-                                                                                                </div>
-                                                                                                <span
-                                                                                                    class="badge bg-secondary">مؤكد</span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <span>رصيد متبقى 600</span>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="body-hour-cel">
-                                                                            <div class="row gx-0 p-2 text-center">
-                                                                                <div class="col-md-2">
-                                                                                    05:15 AM
-                                                                                </div>
-                                                                                <div class="col-md-10">
-                                                                                    <div class="row gx-0">
-                                                                                        <div class="col-md-9">
-                                                                                            <div
-                                                                                                class="d-flex justify-content-center align-items-center">
-                                                                                                <span>لا يوجد حجز</span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <span>لا يوجد رصيد</span>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="body-hour-cel">
-                                                                            <div class="row gx-0 p-2 text-center">
-                                                                                <div class="col-md-2">
-                                                                                    05:30 AM
-                                                                                </div>
-                                                                                <div class="col-md-10">
-                                                                                    <div class="row gx-0">
-                                                                                        <div class="col-md-9">
-                                                                                            <div
-                                                                                                class="d-flex justify-content-center align-items-center">
-                                                                                                <span>لا يوجد حجز</span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <span>لا يوجد رصيد</span>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="body-hour-cel">
-                                                                            <div class="row gx-0 p-2 text-center">
-                                                                                <div class="col-md-2">
-                                                                                    05:45 AM
-                                                                                </div>
-                                                                                <div class="col-md-10">
-                                                                                    <div class="row gx-0">
-                                                                                        <div class="col-md-9">
-                                                                                            <div
-                                                                                                class="d-flex justify-content-center align-items-center">
-                                                                                                <span>لا يوجد حجز</span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <span>لا يوجد رصيد</span>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <!--</div>-->
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -846,98 +602,98 @@
     </div>
     <div class="col-md-3" id="casher-section">
         <div class="side-place">
-            <div id="tab-place" class="c-tab-pane fade show active">
-                <ol class="table-list list-group list-group-numbered reversed">
-                    <li
-                        class="menu-info-list list-group-item d-flex  flex-column justify-content-center align-items-center text-center p-0">
-                        <a class="new-reserv-btn btn btn-link w-100" href="{{ route('branch.reservation') }}">
-                            <i class="fa-solid fa-plus"></i>
-                            <p>انشاء حجز جديد </p>
-                        </a>
-                    </li>
+            <!--<div id="tab-place" class="c-tab-pane fade show active">-->
+            <!--    <ol class="table-list list-group list-group-numbered reversed">-->
+            <!--        <li-->
+            <!--            class="menu-info-list list-group-item d-flex  flex-column justify-content-center align-items-center text-center p-0">-->
+            <!--            <a class="new-reserv-btn btn btn-link w-100" href="{{ route('branch.reservation') }}">-->
+            <!--                <i class="fa-solid fa-plus"></i>-->
+            <!--                <p>انشاء حجز جديد </p>-->
+            <!--            </a>-->
+            <!--        </li>-->
 
-                </ol>
-                <ol class="list-group reversed casher-box mt-5 none">
-                    <li class="list-group-item no-number  ">
-                        <div class="tax d-flex justify-content-between align-items-start my-4 total w-100">
-                            <div class="discount-inputs input-group">
-                                <label class="col-sm-2 col-form-label"> %</label>
-                                <input class="discount-input form-control bg-dark text-light" lang="en"
-                                    type="number" placeholder="قيمة الخصم" aria-label="default input example">
-                                <button class="btn btn-dark menu-btn" type="button">تطبيق</button>
-                            </div>
-                        </div>
-                        <div class="sub-total d-flex justify-content-between align-items-start">
-                            <div class="me-2 ms-auto">
-                                <div class="fw-bold"> حاصل الجمع</div>
-                            </div>
-                            <span class="sub-total-number"> 260 </span>
-                            <span> ريال</span>
-                        </div>
+            <!--    </ol>-->
+            <!--    <ol class="list-group reversed casher-box mt-5 none">-->
+            <!--        <li class="list-group-item no-number  ">-->
+            <!--            <div class="tax d-flex justify-content-between align-items-start my-4 total w-100">-->
+            <!--                <div class="discount-inputs input-group">-->
+            <!--                    <label class="col-sm-2 col-form-label"> %</label>-->
+            <!--                    <input class="discount-input form-control bg-dark text-light" lang="en"-->
+            <!--                        type="number" placeholder="قيمة الخصم" aria-label="default input example">-->
+            <!--                    <button class="btn btn-dark menu-btn" type="button">تطبيق</button>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <div class="sub-total d-flex justify-content-between align-items-start">-->
+            <!--                <div class="me-2 ms-auto">-->
+            <!--                    <div class="fw-bold"> حاصل الجمع</div>-->
+            <!--                </div>-->
+            <!--                <span class="sub-total-number"> 260 </span>-->
+            <!--                <span> ريال</span>-->
+            <!--            </div>-->
 
-                        <div class="tax d-flex justify-content-between align-items-start mt-4">
-                            <div class="me-2 ms-auto">
-                                <div class="fw-bold"> ضريبة</div>
-                            </div>
-                            <span class="taxes">10%</span>
-                        </div>
-                        <div class="tax d-flex justify-content-between align-items-start mt-4 total">
-                            <div class="me-2 ms-auto">
-                                <div class="fw-bold"> الإجمالى</div>
-                            </div>
-                            <span class="table-total">286 </span>
-                            <span> ريال</span>
-                        </div>
-                        <div class="payment-method">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="payment-icon active d-flex justify-content-center align-items-center">
-                                        <i class="fa-solid fa-sack-dollar"></i>
-                                    </div>
-                                    <p class="text-center">كاش</p>
-                                </div>
-                                <div class="col-4">
-                                    <div class="payment-icon d-flex justify-content-center align-items-center">
-                                        <i class="fa-solid fa-credit-card"></i>
-                                    </div>
-                                    <p class="text-center">بطاقة ائتمان</p>
-                                </div>
-                                <div class="col-4">
-                                    <div class="payment-icon d-flex justify-content-center align-items-center">
-                                        <i class="fa-solid fa-wallet"></i>
-                                    </div>
-                                    <p class="text-center">المحفظة</p>
-                                </div>
-                            </div>
-                            <div class="payment-btn my-3 text-center">
-                                <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">ادفع الآن</div>
+            <!--            <div class="tax d-flex justify-content-between align-items-start mt-4">-->
+            <!--                <div class="me-2 ms-auto">-->
+            <!--                    <div class="fw-bold"> ضريبة</div>-->
+            <!--                </div>-->
+            <!--                <span class="taxes">10%</span>-->
+            <!--            </div>-->
+            <!--            <div class="tax d-flex justify-content-between align-items-start mt-4 total">-->
+            <!--                <div class="me-2 ms-auto">-->
+            <!--                    <div class="fw-bold"> الإجمالى</div>-->
+            <!--                </div>-->
+            <!--                <span class="table-total">286 </span>-->
+            <!--                <span> ريال</span>-->
+            <!--            </div>-->
+            <!--            <div class="payment-method">-->
+            <!--                <div class="row">-->
+            <!--                    <div class="col-4">-->
+            <!--                        <div class="payment-icon active d-flex justify-content-center align-items-center">-->
+            <!--                            <i class="fa-solid fa-sack-dollar"></i>-->
+            <!--                        </div>-->
+            <!--                        <p class="text-center">كاش</p>-->
+            <!--                    </div>-->
+            <!--                    <div class="col-4">-->
+            <!--                        <div class="payment-icon d-flex justify-content-center align-items-center">-->
+            <!--                            <i class="fa-solid fa-credit-card"></i>-->
+            <!--                        </div>-->
+            <!--                        <p class="text-center">بطاقة ائتمان</p>-->
+            <!--                    </div>-->
+            <!--                    <div class="col-4">-->
+            <!--                        <div class="payment-icon d-flex justify-content-center align-items-center">-->
+            <!--                            <i class="fa-solid fa-wallet"></i>-->
+            <!--                        </div>-->
+            <!--                        <p class="text-center">المحفظة</p>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <div class="payment-btn my-3 text-center">-->
+            <!--                    <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"-->
+            <!--                        data-bs-target="#exampleModal">ادفع الآن</div>-->
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p class="consfirm-text">هل تريد تأكيد الدفع</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">تأكيد</button>
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">لا </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
-            </div>
+            <!--                    <div class="modal fade" id="exampleModal" tabindex="-1"-->
+            <!--                        aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+            <!--                        <div class="modal-dialog">-->
+            <!--                            <div class="modal-content">-->
+            <!--                                <div class="modal-header">-->
+            <!--                                    <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>-->
+            <!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+            <!--                                        aria-label="Close"></button>-->
+            <!--                                </div>-->
+            <!--                                <div class="modal-body">-->
+            <!--                                    <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
+            <!--                                </div>-->
+            <!--                                <div class="modal-footer">-->
+            <!--                                    <button type="button" class="btn btn-primary">تأكيد</button>-->
+            <!--                                    <button type="button" class="btn btn-secondary"-->
+            <!--                                        data-bs-dismiss="modal">لا </button>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </li>-->
+            <!--    </ol>-->
+            <!--</div>-->
         </div>
     </div>
 </div>
@@ -946,12 +702,12 @@
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
-    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
-</script>
-<script src="{{ asset('front/js/date.js') }}"></script>
-<script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
+<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+<!--<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"-->
+<!--    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">-->
+<!--</script>-->
+<!--<script src="{{ asset('front/js/date.js') }}"></script>-->
+<!--<script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>-->
 <script src="{{ asset('front/js/main.js') }}"></script>
 <script>
     Function to update the countdown timer display
@@ -1016,3 +772,107 @@
 
     }
 </script>
+<script>
+  $(document).ready(function () {
+//   $('.table-btn-action').on('click', function(){
+//     var newId = $(this).data('id');
+//     var $appendedContent = $('.side-place .appended');
+
+//     if ($appendedContent.length && !$appendedContent.is($(newId))) {
+//       $appendedContent.removeClass('appended');
+//       $appendedContent.remove();
+//     } else {
+//       $appendedContent.addClass('appended');
+//     }
+
+//     $(newId).toggleClass('appended');
+//     $('.side-place').addClass('have-bg').append($(newId));
+//   });
+  
+  
+    $('.table-btn-orders').on('click', function() {
+    var newId = $(this).data('id');
+    $('.side-place').empty();
+    $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
+    console.log('first');
+});
+
+$('.table-btn-info').on('click', function() {
+    var newId = $(this).data('id');
+    $('.side-place').empty();
+    $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
+    console.log('second');
+});
+
+});
+
+
+
+
+</script>
+<div class="modal fade"
+    id="exampleModalToggle1"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div
+        class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light"
+                    id="exampleModalToggleLabe2">
+                    تفعيل الحجز</h1>
+                <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div
+                class="modal-body text-light">
+                هل تود تفعيل الحجز
+            </div>
+            <div class="modal-footer">
+                <button
+                    class="btn btn-primary"
+                    data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal">تفعيل
+                    يدوى</button>
+                <button
+                    class="btn btn-primary"
+                    data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal">
+                    QR </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade"
+    id="exampleModalToggle2"
+    aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div
+        class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-light"
+                    id="exampleModalToggleLabel2">
+                    تفعيل الحجز</h1>
+                <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div
+                class="modal-body text-light">
+                تم تفعيل الحجز بنجاح
+            </div>
+            <div class="modal-footer">
+                <button
+                    class="btn btn-primary custome-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">اغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>
