@@ -182,28 +182,14 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-
-
-                                                                            <!--<a class="btn btn-primary"-->
-                                                                            <!--    data-bs-toggle="modal"-->
-                                                                            <!--    href="#exampleModalToggle1"-->
-                                                                            <!--    role="button">تفعيل الحجز</a>-->
-
-
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <!--<button-->
-                                                                            <!--    class="table-btn-action btn btn-primary w-100"-->
-                                                                            <!--    type="button" data-id="#tableend">-->
-                                                                            <!--    انهاء الحجز-->
-                                                                            <!--</button>-->
                                                                             <button type="button"
                                                                                 class="btn btn-primary w-100"
                                                                                 data-bs-toggle="modal"
                                                                                 data-bs-target="#exampleModal">
                                                                                 انهاء الحجز
                                                                             </button>
-
                                                                             <!-- Modal -->
                                                                             <div class="modal fade" id="exampleModal"
                                                                                 tabindex="-1"
@@ -302,25 +288,87 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </li>
-                                                                            <li
-                                                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                <div
-                                                                                    class="rev-item d-flex w-100  align-items-start">
-                                                                                    <div class="rev-time text-center">
-                                                                                        <span>6:00</span> <br>
-                                                                                        <span>PM</span>
+                                                                            @php
+                                                                                $now = Carbon\Carbon::now();
+                                                                                
+                                                                                // Query to get all reservations for today
+                                                                                $reservations = App\Models\Reservation::where('table_id', $tables->id)
+                                                                                    ->where(function ($query) use ($now) {
+                                                                                        $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                    })
+                                                                                    ->orderBy('date')
+                                                                                    ->get();
+                                                                                $package = App\Models\Package::find($tables->reservation->package->id);
+                                                                                $minutesPerPackage = $package->time;
+                                                                                // Generate time slots based on the package minutes
+                                                                                $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                $timeSlots = [];
+                                                                                
+                                                                                $currentTime = clone $startTime;
+                                                                                while ($currentTime->lte($endTime)) {
+                                                                                    $endTimeSlot = clone $currentTime;
+                                                                                    $endTimeSlot->addMinutes($minutesPerPackage);
+                                                                                    $timeSlots[] = [
+                                                                                        'start' => $currentTime->format('g:i A'),
+                                                                                        'end' => $endTimeSlot->format('g:i A'),
+                                                                                    ];
+                                                                                    $currentTime->addMinutes($minutesPerPackage);
+                                                                                }
+                                                                                // Calculate the available and unavailable time slots
+                                                                                $availableSlots = [];
+                                                                                $unavailableSlots = [];
+                                                                                
+                                                                                $prevEndTime = $startTime;
+                                                                                foreach ($reservations as $reservation) {
+                                                                                    $start = Carbon\Carbon::parse($reservation->date);
+                                                                                    $end = Carbon\Carbon::parse($reservation->end);
+                                                                                
+                                                                                    if ($prevEndTime->lt($start)) {
+                                                                                        $availableSlots[] = [
+                                                                                            'start' => $prevEndTime->format('g:i A'),
+                                                                                            'end' => $start->format('g:i A'),
+                                                                                        ];
+                                                                                    }
+                                                                                    $unavailableSlots[] = [
+                                                                                        'start' => $start->format('g:i A'),
+                                                                                        'end' => $end->format('g:i A'),
+                                                                                    ];
+                                                                                
+                                                                                    $prevEndTime = $end;
+                                                                                }
+                                                                                if ($prevEndTime->lt($endTime)) {
+                                                                                    $availableSlots[] = [
+                                                                                        'start' => $prevEndTime->format('g:i A'),
+                                                                                        'end' => $endTime->format('g:i A'),
+                                                                                    ];
+                                                                                }
+                                                                                
+                                                                            @endphp
+                                                                            @foreach ($availableSlots as $slot)
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100 align-items-start">
+                                                                                        <div
+                                                                                            class="rev-time text-center">
+                                                                                            <span>{{ $slot['start'] }}</span>
+                                                                                            <br>
+                                                                                            <span>{{ $slot['end'] }}</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <a href="{{ route('branch.reservation') }}"
+                                                                                                class="btn btn-primary">احجز
+                                                                                                الآن</a>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <p>VVIP-1</p>
+                                                                                            <span>شاغرة</span>
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <div class="rev-info">
-                                                                                        <a href=""
-                                                                                            class="btn btn-primary">احجز
-                                                                                            الآن</a>
-                                                                                    </div>
-                                                                                    <div class="rev-statu text-center">
-                                                                                        <p>VVIP-1</p>
-                                                                                        <span> شاغرة</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
+                                                                                </li>
+                                                                            @endforeach
 
                                                                         </ol>
                                                                     </div>
@@ -416,23 +464,11 @@
                                                                         <a onclick="product({{ $tables->id }})"
                                                                             class="btn btn-primary  mb-1"> طلب جديد</a>
                                                                     </div>
-                                                                    {{-- <form action="">
-                                                                        <input
-                                                                            class="form-control bg-dark text-light text-center"
-                                                                            type="text" placeholder="ابحث عن ضيف"
-                                                                            aria-label="default input example">
-                                                                    </form> --}}
                                                                 </div>
                                                                 <!-- عناصر التاب -->
                                                                 <div class="side-tab-content">
                                                                     <div id="rev"
                                                                         class="table-bar-info reversation-side-bar rev active-tab">
-                                                                        {{-- <div
-                                                                            class="first-tabb d-flex justify-content-between align-items-start">
-                                                                            <p>حجوزات الطاولة</p>
-                                                                            <span> 3 <i
-                                                                                    class="fa-solid fa-stopwatch-20 ml-1"></i></span>
-                                                                        </div> --}}
                                                                         <ol
                                                                             class="list-group list-group-numbered reversed bill-info">
                                                                             @if ($orders != null && $orders->products->count() != 0)
@@ -510,28 +546,6 @@
                                                                         class="table-bar-info newOrders-side-bar newOrders active-tab">
                                                                         <div id="tab1"
                                                                             class="tab-pane fade show active">
-                                                                            @php
-                                                                                if ($tables->reservation) {
-                                                                                    $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
-                                                                                        ->where('table_id', $tables->id)
-                                                                                        ->where('is_done', 0)
-                                                                                        ->with('products')
-                                                                                        ->first();
-                                                                                
-                                                                                    // Wrap the related products in a collection (even if there's only one result)
-                                                                                    if ($orders != null && $orders->products->count() != 0) {
-                                                                                        // Calculate total order prices using the map function on the products collection
-                                                                                        $totalOrderPrices = $orders->products->sum(function ($product) {
-                                                                                            return $product->pivot->price * $product->pivot->quantity;
-                                                                                        });
-                                                                                    } else {
-                                                                                        $totalOrderPrices = 0;
-                                                                                    }
-                                                                                } else {
-                                                                                    $orders = null;
-                                                                                    $totalOrderPrices = 0;
-                                                                                }
-                                                                            @endphp
                                                                             <ol
                                                                                 class="table-list list-group list-group-numbered reversed food-items pr-0">
                                                                                 @if ($orders != null && $orders->products->count() != 0)
@@ -557,86 +571,6 @@
                                                                                     @endforeach
                                                                                 @endif
                                                                             </ol>
-                                                                            <!--<ol class="list-group reversed  mt-5">-->
-                                                                            <!--  <li class="list-group-item no-number  ">-->
-                                                                            <!--      <div class="sub-total d-flex justify-content-between align-items-start">-->
-                                                                            <!--          <div class="discount-inputs input-group">-->
-                                                                            <!--              <label class="col-sm-2 col-form-label"> %</label>-->
-                                                                            <!--              <input class="discount-input form-control bg-dark text-light" lang="en"-->
-                                                                            <!--                  type="number" placeholder="قيمة الخصم" aria-label="default input example">-->
-                                                                            <!--              <button class="btn btn-dark menu-btn" type="button">تطبيق</button>-->
-                                                                            <!--          </div>-->
-                                                                            <!--      </div>-->
-                                                                            <!--      <div class="sub-total d-flex justify-content-between align-items-start mt-2">-->
-                                                                            <!--          <div class="me-2 ms-auto">-->
-                                                                            <!--              <div class="fw-bold"> حاصل الجمع</div>-->
-                                                                            <!--            </div>-->
-                                                                            <!--            <span class="sub-total-number">225</span>-->
-                                                                            <!--            <span> ريال</span>-->
-                                                                            <!--      </div>-->
-
-                                                                            <!--      <div class="tax d-flex justify-content-between align-items-start mt-4">-->
-                                                                            <!--          <div class="me-2 ms-auto">-->
-                                                                            <!--              <div class="fw-bold"> ضريبة</div>-->
-                                                                            <!--            </div>-->
-                                                                            <!--            <span class="taxes">10%</span>-->
-                                                                            <!--      </div>-->
-                                                                            <!--      <div class="tax d-flex justify-content-between align-items-start mt-4 total">-->
-                                                                            <!--          <div class="me-2 ms-auto">-->
-                                                                            <!--              <div class="fw-bold"> الإجمالى</div>-->
-                                                                            <!--            </div>-->
-                                                                            <!--            <span class="table-total">247.5</span>-->
-                                                                            <!--            <span> ريال</span>-->
-                                                                            <!--      </div>-->
-                                                                            <!--      <div class="payment-method">-->
-                                                                            <!--          <div class="row">-->
-                                                                            <!--              <div class="col-4">-->
-                                                                            <!--                  <div class="payment-icon active d-flex justify-content-center align-items-center">-->
-                                                                            <!--                      <i class="fa-solid fa-sack-dollar"></i>-->
-                                                                            <!--                  </div>-->
-                                                                            <!--                  <p class="text-center">كاش</p>-->
-                                                                            <!--              </div>-->
-                                                                            <!--              <div class="col-4">-->
-                                                                            <!--                <div class="payment-icon d-flex justify-content-center align-items-center">-->
-                                                                            <!--                  <i class="fa-solid fa-credit-card"></i>-->
-                                                                            <!--                </div>-->
-                                                                            <!--                <p class="text-center">بطاقة  ائتمان</p>-->
-                                                                            <!--            </div>-->
-                                                                            <!--            <div class="col-4">-->
-                                                                            <!--              <div class="payment-icon d-flex justify-content-center align-items-center">-->
-                                                                            <!--                <i class="fa-solid fa-wallet"></i>-->
-                                                                            <!--              </div>-->
-                                                                            <!--              <p class="text-center">المحفظة</p>-->
-                                                                            <!--          </div>-->
-                                                                            <!--          </div>-->
-                                                                            <!--          <div class="payment-btn my-3 text-center">-->
-                                                                            <!--              <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ادفع الآن</div>-->
-                                                                            <!-- Modal -->
-                                                                            <!--              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-                                                                            <!--                <div class="modal-dialog">-->
-                                                                            <!--                  <div class="modal-content">-->
-                                                                            <!--                    <div class="modal-header">-->
-                                                                            <!--                      <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>-->
-                                                                            <!--                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-                                                                            <!--                    </div>-->
-                                                                            <!--                    <div class="modal-body">-->
-                                                                            <!--                      <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
-                                                                            <!--                    </div>-->
-                                                                            <!--                    <div class="modal-footer">-->
-                                                                            <!--                      <button type="button" class="btn btn-primary">تأكيد</button>-->
-                                                                            <!--                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>-->
-                                                                            <!--                    </div>-->
-                                                                            <!--                  </div>-->
-                                                                            <!--                </div>-->
-                                                                            <!--              </div>-->
-                                                                            <!--          </div>-->
-                                                                            <!--      </div>-->
-                                                                            <!--    </li>-->
-
-
-
-                                                                            <!--</ol>-->
-
                                                                         </div>
                                                                     </div>
 
@@ -644,31 +578,6 @@
                                                             </div>
 
                                                         </div>
-
-
-
-                                                        @php
-                                                            if ($tables->reservation) {
-                                                                $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
-                                                                    ->where('table_id', $tables->id)
-                                                                    ->where('is_done', 0)
-                                                                    ->with('products')
-                                                                    ->first();
-                                                            
-                                                                // Wrap the related products in a collection (even if there's only one result)
-                                                                if ($orders != null && $orders->products->count() != 0) {
-                                                                    // Calculate total order prices using the map function on the products collection
-                                                                    $totalOrderPrices = $orders->products->sum(function ($product) {
-                                                                        return $product->pivot->price * $product->pivot->quantity;
-                                                                    });
-                                                                } else {
-                                                                    $totalOrderPrices = 0;
-                                                                }
-                                                            } else {
-                                                                $orders = null;
-                                                                $totalOrderPrices = 0;
-                                                            }
-                                                        @endphp
                                                         <!--</div>-->
                                                     </div>
                                                 @endforeach
@@ -685,98 +594,6 @@
     </div>
     <div class="col-md-3" id="casher-section">
         <div class="side-place">
-            <!--<div id="tab-place" class="c-tab-pane fade show active">-->
-            <!--    <ol class="table-list list-group list-group-numbered reversed">-->
-            <!--        <li-->
-            <!--            class="menu-info-list list-group-item d-flex  flex-column justify-content-center align-items-center text-center p-0">-->
-            <!--            <a class="new-reserv-btn btn btn-link w-100" href="{{ route('branch.reservation') }}">-->
-            <!--                <i class="fa-solid fa-plus"></i>-->
-            <!--                <p>انشاء حجز جديد </p>-->
-            <!--            </a>-->
-            <!--        </li>-->
-
-            <!--    </ol>-->
-            <!--    <ol class="list-group reversed casher-box mt-5 none">-->
-            <!--        <li class="list-group-item no-number  ">-->
-            <!--            <div class="tax d-flex justify-content-between align-items-start my-4 total w-100">-->
-            <!--                <div class="discount-inputs input-group">-->
-            <!--                    <label class="col-sm-2 col-form-label"> %</label>-->
-            <!--                    <input class="discount-input form-control bg-dark text-light" lang="en"-->
-            <!--                        type="number" placeholder="قيمة الخصم" aria-label="default input example">-->
-            <!--                    <button class="btn btn-dark menu-btn" type="button">تطبيق</button>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--            <div class="sub-total d-flex justify-content-between align-items-start">-->
-            <!--                <div class="me-2 ms-auto">-->
-            <!--                    <div class="fw-bold"> حاصل الجمع</div>-->
-            <!--                </div>-->
-            <!--                <span class="sub-total-number"> 260 </span>-->
-            <!--                <span> ريال</span>-->
-            <!--            </div>-->
-
-            <!--            <div class="tax d-flex justify-content-between align-items-start mt-4">-->
-            <!--                <div class="me-2 ms-auto">-->
-            <!--                    <div class="fw-bold"> ضريبة</div>-->
-            <!--                </div>-->
-            <!--                <span class="taxes">10%</span>-->
-            <!--            </div>-->
-            <!--            <div class="tax d-flex justify-content-between align-items-start mt-4 total">-->
-            <!--                <div class="me-2 ms-auto">-->
-            <!--                    <div class="fw-bold"> الإجمالى</div>-->
-            <!--                </div>-->
-            <!--                <span class="table-total">286 </span>-->
-            <!--                <span> ريال</span>-->
-            <!--            </div>-->
-            <!--            <div class="payment-method">-->
-            <!--                <div class="row">-->
-            <!--                    <div class="col-4">-->
-            <!--                        <div class="payment-icon active d-flex justify-content-center align-items-center">-->
-            <!--                            <i class="fa-solid fa-sack-dollar"></i>-->
-            <!--                        </div>-->
-            <!--                        <p class="text-center">كاش</p>-->
-            <!--                    </div>-->
-            <!--                    <div class="col-4">-->
-            <!--                        <div class="payment-icon d-flex justify-content-center align-items-center">-->
-            <!--                            <i class="fa-solid fa-credit-card"></i>-->
-            <!--                        </div>-->
-            <!--                        <p class="text-center">بطاقة ائتمان</p>-->
-            <!--                    </div>-->
-            <!--                    <div class="col-4">-->
-            <!--                        <div class="payment-icon d-flex justify-content-center align-items-center">-->
-            <!--                            <i class="fa-solid fa-wallet"></i>-->
-            <!--                        </div>-->
-            <!--                        <p class="text-center">المحفظة</p>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--                <div class="payment-btn my-3 text-center">-->
-            <!--                    <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"-->
-            <!--                        data-bs-target="#exampleModal">ادفع الآن</div>-->
-            <!-- Modal -->
-            <!--                    <div class="modal fade" id="exampleModal" tabindex="-1"-->
-            <!--                        aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-            <!--                        <div class="modal-dialog">-->
-            <!--                            <div class="modal-content">-->
-            <!--                                <div class="modal-header">-->
-            <!--                                    <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>-->
-            <!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-            <!--                                        aria-label="Close"></button>-->
-            <!--                                </div>-->
-            <!--                                <div class="modal-body">-->
-            <!--                                    <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
-            <!--                                </div>-->
-            <!--                                <div class="modal-footer">-->
-            <!--                                    <button type="button" class="btn btn-primary">تأكيد</button>-->
-            <!--                                    <button type="button" class="btn btn-secondary"-->
-            <!--                                        data-bs-dismiss="modal">لا </button>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </li>-->
-            <!--    </ol>-->
-            <!--</div>-->
         </div>
     </div>
 </div>
