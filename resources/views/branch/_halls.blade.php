@@ -267,30 +267,34 @@
                                                                                     class="btn btn-primary w-100 mb-3">اضافة
                                                                                     حجز </a>
                                                                             </li>
-                                                                            <li
-                                                                                class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                <div
-                                                                                    class="rev-item d-flex w-100  align-items-start">
-                                                                                    <div class="rev-time text-center">
-                                                                                        <span>6:00</span> <br>
-                                                                                        <span>PM</span>
+                                                                            @if ($tables->reservation)
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div
+                                                                                            class="rev-time text-center">
+                                                                                            <span>6:00</span> <br>
+                                                                                            <span>PM</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>{{ $tables->reservation->client->name }}
+                                                                                            </h4>
+                                                                                            <p>{{ $tables->reservation->client->phone }}
+                                                                                            </p>
+                                                                                            <p><span>{{ $tables->reservation->package->count_of_visitors }}
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    {{ $tables->reservation->package->name }}</span>
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <p>VVIP-1</p>
+                                                                                            <span>{{ $tables->status }}</span>
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <div class="rev-info">
-                                                                                        <h4>{{ $tables->reservation->client->name }}
-                                                                                        </h4>
-                                                                                        <p>{{ $tables->reservation->client->phone }}
-                                                                                        </p>
-                                                                                        <p><span>{{ $tables->reservation->package->count_of_visitors }}
-                                                                                                اشخاص</span><span>/باقة
-                                                                                                {{ $tables->reservation->package->name }}</span>
-                                                                                        </p>
-                                                                                    </div>
-                                                                                    <div class="rev-statu text-center">
-                                                                                        <p>VVIP-1</p>
-                                                                                        <span>{{ $tables->status }}</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
+                                                                                </li>
+                                                                            @endif
                                                                             @php
                                                                                 $now = Carbon\Carbon::now();
                                                                                 
