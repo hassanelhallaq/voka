@@ -123,14 +123,16 @@
                                                                         <div class="col-md-6 mb-2">
                                                                             <button
                                                                                 class="table-btn-orders btn btn-primary w-100"
-                                                                                type="button" data-id="#tableorders{{ $tables->id }}">
+                                                                                type="button"
+                                                                                data-id="#tableorders{{ $tables->id }}">
                                                                                 الطلبات
                                                                             </button>
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
                                                                                 class="table-btn-info btn btn-primary w-100"
-                                                                                type="button" data-id="#tableinfo{{ $tables->id }}">
+                                                                                type="button"
+                                                                                data-id="#tableinfo{{ $tables->id }}">
                                                                                 استعراض
                                                                             </button>
                                                                         </div>
@@ -139,33 +141,49 @@
                                                                             <!-- data-id="#tableactive" ata-bs-target="#exampleModalToggle" data-bs-toggle="modal" >-->
                                                                             <!--    تفعيل الحجز-->
                                                                             <!--</button>-->
-                                                                                <!-- Button trigger modal -->
-                                                                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                                  تفعيل 
-                                                                                </button>
-                                                                                
-                                                                                <!-- Modal -->
-                                                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                                  <div class="modal-dialog">
-                                                                                    <div class="modal-content">
-                                                                                      <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">تفعيل الحجز</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                      </div>
-                                                                                      <div class="modal-body">
-                                                                                        <div  class="modal-body text-light">
-                                                                                            هل تود تفعيل الحجز
-                                                                                        </div>
-                                                                                      </div>
-                                                                                      <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                                                                                        <button type="button" class="btn btn-primary">تأكيد </button>
-                                                                                      </div>
-                                                                                    </div>
-                                                                                  </div>
-                                                                                </div>
+                                                                            <!-- Button trigger modal -->
+                                                                            <button type="button"
+                                                                                class="btn btn-primary w-100"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#exampleModal">
+                                                                                تفعيل
+                                                                            </button>
 
-                                                                            
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade" id="exampleModal"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
                                                                             <!--<a class="btn btn-primary"-->
                                                                             <!--    data-bs-toggle="modal"-->
                                                                             <!--    href="#exampleModalToggle1"-->
@@ -179,30 +197,46 @@
                                                                             <!--    type="button" data-id="#tableend">-->
                                                                             <!--    انهاء الحجز-->
                                                                             <!--</button>-->
-                                                                             <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                                  انهاء الحجز 
-                                                                                </button>
-                                                                                
-                                                                                <!-- Modal -->
-                                                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                                  <div class="modal-dialog">
+                                                                            <button type="button"
+                                                                                class="btn btn-primary w-100"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#exampleModal">
+                                                                                انهاء الحجز
+                                                                            </button>
+
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade" id="exampleModal"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
                                                                                     <div class="modal-content">
-                                                                                      <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">انهاء الحجز</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                      </div>
-                                                                                      <div class="modal-body">
-                                                                                        <div  class="modal-body text-light">
-                                                                                            هل تود انهاء الحجز
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                انهاء الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
                                                                                         </div>
-                                                                                      </div>
-                                                                                      <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
-                                                                                        <button type="button" class="btn btn-primary">انهاء </button>
-                                                                                      </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود انهاء الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-primary">انهاء
+                                                                                            </button>
+                                                                                        </div>
                                                                                     </div>
-                                                                                  </div>
                                                                                 </div>
+                                                                            </div>
 
                                                                         </div>
                                                                     </div>
@@ -211,7 +245,8 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="table-side-bar side-bar-info" id="tableinfo{{ $tables->id }}">
+                                                        <div class="table-side-bar side-bar-info"
+                                                            id="tableinfo{{ $tables->id }}">
                                                             <div class="tablebrowse">
                                                                 <div class="tab-nav-wraper">
                                                                     <div
@@ -240,8 +275,11 @@
                                                                         </div>
                                                                         <ol
                                                                             class="list-group list-group-numbered reversed bill-info">
-                                                                            <li class="list-group-item d-flex justify-content-between align-items-start w-100">
-                                                                                <a  herf="" class="btn btn-primary w-100 mb-3" >اضافة حجز </a>
+                                                                            <li
+                                                                                class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                <a herf="{{ route('branch.reservation') }}"
+                                                                                    class="btn btn-primary w-100 mb-3">اضافة
+                                                                                    حجز </a>
                                                                             </li>
                                                                             <li
                                                                                 class="list-group-item d-flex justify-content-between align-items-start">
@@ -366,16 +404,17 @@
                                                                 $totalOrderPrices = 0;
                                                             }
                                                         @endphp
-                                                        <div class="table-side-bar side-bar-orders" id="tableorders{{ $tables->id }}">
+                                                        <div class="table-side-bar side-bar-orders"
+                                                            id="tableorders{{ $tables->id }}">
                                                             <div class="tablebrowse">
                                                                 <div class="tab-nav-wraper">
                                                                     <div
                                                                         class="nav-btns d-flex justify-content-around align-items-center">
-                                                                        <div class="btn btn-dark" data-tab="newOrders">
+                                                                        <div class="btn btn-dark"
+                                                                            data-tab="newOrders">
                                                                             الطلبات</div>
                                                                         <a onclick="product({{ $tables->id }})"
-                                                                            class="btn btn-primary  mb-1"
-                                                                            > طلب جديد</a>
+                                                                            class="btn btn-primary  mb-1"> طلب جديد</a>
                                                                     </div>
                                                                     {{-- <form action="">
                                                                         <input
@@ -417,7 +456,7 @@
                                                                         class="table-bar-info waitings-side-bar waitings hidden-tab">
                                                                         <ol
                                                                             class="list-group list-group-numbered reversed bill-info">
-                                                                            
+
                                                                             <li
                                                                                 class="list-group-item d-flex justify-content-between align-items-start">
                                                                                 <div
@@ -469,91 +508,135 @@
                                                                     </div>
                                                                     <div id="newOrders"
                                                                         class="table-bar-info newOrders-side-bar newOrders active-tab">
-                                                                       <div id="tab1" class="tab-pane fade show active">
-                                                                            <ol class="table-list list-group list-group-numbered reversed food-items pr-0"><li class="list-group-item drag d-flex justify-content-between align-items-start" draggable="true"><div class="me-2 ms-auto"><div class="fw-bold"><span class="title">أوريجينال تشيكن رانش</span><span class="count-wrap mr-2"><i class="fa-solid fa-x"></i><span class="count">3</span></span></div></div><span class="list-price">25 ريال</span><button class="order-remove btn btn-danger" type="button"><i class="fa-solid fa-trash-can"></i></button></li><li class="list-group-item drag d-flex justify-content-between align-items-start" draggable="true"><div class="me-2 ms-auto"><div class="fw-bold"><span class="title">أوريجينال تشيكن رانش</span><span class="count-wrap mr-2"><i class="fa-solid fa-x"></i><span class="count">3</span></span></div></div><span class="list-price">25 ريال</span><button class="order-remove btn btn-danger" type="button"><i class="fa-solid fa-trash-can"></i></button></li><li class="list-group-item drag d-flex justify-content-between align-items-start" draggable="true"><div class="me-2 ms-auto"><div class="fw-bold"><span class="title">أوريجينال تشيكن رانش</span><span class="count-wrap mr-2"><i class="fa-solid fa-x"></i><span class="count">3</span></span></div></div><span class="list-price">25 ريال</span><button class="order-remove btn btn-danger" type="button"><i class="fa-solid fa-trash-can"></i></button></li>
+                                                                        <div id="tab1"
+                                                                            class="tab-pane fade show active">
+                                                                            @php
+                                                                                if ($tables->reservation) {
+                                                                                    $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
+                                                                                        ->where('table_id', $tables->id)
+                                                                                        ->where('is_done', 0)
+                                                                                        ->with('products')
+                                                                                        ->first();
                                                                                 
-                                                
-                                                                              </ol>
-                                                                              <!--<ol class="list-group reversed  mt-5">-->
-                                                                              <!--  <li class="list-group-item no-number  ">-->
-                                                                              <!--      <div class="sub-total d-flex justify-content-between align-items-start">-->
-                                                                              <!--          <div class="discount-inputs input-group">-->
-                                                                              <!--              <label class="col-sm-2 col-form-label"> %</label>-->
-                                                                              <!--              <input class="discount-input form-control bg-dark text-light" lang="en"-->
-                                                                              <!--                  type="number" placeholder="قيمة الخصم" aria-label="default input example">-->
-                                                                              <!--              <button class="btn btn-dark menu-btn" type="button">تطبيق</button>-->
-                                                                              <!--          </div>-->
-                                                                              <!--      </div>-->
-                                                                              <!--      <div class="sub-total d-flex justify-content-between align-items-start mt-2">-->
-                                                                              <!--          <div class="me-2 ms-auto">-->
-                                                                              <!--              <div class="fw-bold"> حاصل الجمع</div>-->
-                                                                              <!--            </div>-->
-                                                                              <!--            <span class="sub-total-number">225</span>-->
-                                                                              <!--            <span> ريال</span>-->
-                                                                              <!--      </div>-->
-                                                
-                                                                              <!--      <div class="tax d-flex justify-content-between align-items-start mt-4">-->
-                                                                              <!--          <div class="me-2 ms-auto">-->
-                                                                              <!--              <div class="fw-bold"> ضريبة</div>-->
-                                                                              <!--            </div>-->
-                                                                              <!--            <span class="taxes">10%</span>-->
-                                                                              <!--      </div>-->
-                                                                              <!--      <div class="tax d-flex justify-content-between align-items-start mt-4 total">-->
-                                                                              <!--          <div class="me-2 ms-auto">-->
-                                                                              <!--              <div class="fw-bold"> الإجمالى</div>-->
-                                                                              <!--            </div>-->
-                                                                              <!--            <span class="table-total">247.5</span>-->
-                                                                              <!--            <span> ريال</span>-->
-                                                                              <!--      </div>-->
-                                                                              <!--      <div class="payment-method">-->
-                                                                              <!--          <div class="row">-->
-                                                                              <!--              <div class="col-4">-->
-                                                                              <!--                  <div class="payment-icon active d-flex justify-content-center align-items-center">-->
-                                                                              <!--                      <i class="fa-solid fa-sack-dollar"></i>-->
-                                                                              <!--                  </div>-->
-                                                                              <!--                  <p class="text-center">كاش</p>-->
-                                                                              <!--              </div>-->
-                                                                              <!--              <div class="col-4">-->
-                                                                              <!--                <div class="payment-icon d-flex justify-content-center align-items-center">-->
-                                                                              <!--                  <i class="fa-solid fa-credit-card"></i>-->
-                                                                              <!--                </div>-->
-                                                                              <!--                <p class="text-center">بطاقة  ائتمان</p>-->
-                                                                              <!--            </div>-->
-                                                                              <!--            <div class="col-4">-->
-                                                                              <!--              <div class="payment-icon d-flex justify-content-center align-items-center">-->
-                                                                              <!--                <i class="fa-solid fa-wallet"></i>-->
-                                                                              <!--              </div>-->
-                                                                              <!--              <p class="text-center">المحفظة</p>-->
-                                                                              <!--          </div>-->
-                                                                              <!--          </div>-->
-                                                                              <!--          <div class="payment-btn my-3 text-center">-->
-                                                                              <!--              <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ادفع الآن</div>-->
-                                                                                            <!-- Modal -->
-                                                                              <!--              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-                                                                              <!--                <div class="modal-dialog">-->
-                                                                              <!--                  <div class="modal-content">-->
-                                                                              <!--                    <div class="modal-header">-->
-                                                                              <!--                      <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>-->
-                                                                              <!--                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-                                                                              <!--                    </div>-->
-                                                                              <!--                    <div class="modal-body">-->
-                                                                              <!--                      <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
-                                                                              <!--                    </div>-->
-                                                                              <!--                    <div class="modal-footer">-->
-                                                                              <!--                      <button type="button" class="btn btn-primary">تأكيد</button>-->
-                                                                              <!--                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>-->
-                                                                              <!--                    </div>-->
-                                                                              <!--                  </div>-->
-                                                                              <!--                </div>-->
-                                                                              <!--              </div>-->
-                                                                              <!--          </div>-->
-                                                                              <!--      </div>-->
-                                                                              <!--    </li>-->
-                                                
-                                                
-                                                
-                                                                              <!--</ol>-->
-                                                
+                                                                                    // Wrap the related products in a collection (even if there's only one result)
+                                                                                    if ($orders != null && $orders->products->count() != 0) {
+                                                                                        // Calculate total order prices using the map function on the products collection
+                                                                                        $totalOrderPrices = $orders->products->sum(function ($product) {
+                                                                                            return $product->pivot->price * $product->pivot->quantity;
+                                                                                        });
+                                                                                    } else {
+                                                                                        $totalOrderPrices = 0;
+                                                                                    }
+                                                                                } else {
+                                                                                    $orders = null;
+                                                                                    $totalOrderPrices = 0;
+                                                                                }
+                                                                            @endphp
+                                                                            <ol
+                                                                                class="table-list list-group list-group-numbered reversed food-items pr-0">
+                                                                                @if ($orders != null && $orders->products->count() != 0)
+                                                                                    @foreach ($orders->products as $product)
+                                                                                        <li class="list-group-item drag d-flex justify-content-between align-items-start"
+                                                                                            draggable="true">
+                                                                                            <div class="me-2 ms-auto">
+                                                                                                <div class="fw-bold">
+                                                                                                    <span
+                                                                                                        class="title">
+                                                                                                        {{ $product->name }}</span><span
+                                                                                                        class="count-wrap mr-2"><i
+                                                                                                            class="fa-solid fa-x"></i><span
+                                                                                                            class="count">3</span></span>
+                                                                                                </div>
+                                                                                            </div><span
+                                                                                                class="list-price">{{ $product->pivot->price }}
+                                                                                                ريال</span><button
+                                                                                                class="order-remove btn btn-danger"
+                                                                                                type="button"><i
+                                                                                                    class="fa-solid fa-trash-can"></i></button>
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                @endif
+                                                                            </ol>
+                                                                            <!--<ol class="list-group reversed  mt-5">-->
+                                                                            <!--  <li class="list-group-item no-number  ">-->
+                                                                            <!--      <div class="sub-total d-flex justify-content-between align-items-start">-->
+                                                                            <!--          <div class="discount-inputs input-group">-->
+                                                                            <!--              <label class="col-sm-2 col-form-label"> %</label>-->
+                                                                            <!--              <input class="discount-input form-control bg-dark text-light" lang="en"-->
+                                                                            <!--                  type="number" placeholder="قيمة الخصم" aria-label="default input example">-->
+                                                                            <!--              <button class="btn btn-dark menu-btn" type="button">تطبيق</button>-->
+                                                                            <!--          </div>-->
+                                                                            <!--      </div>-->
+                                                                            <!--      <div class="sub-total d-flex justify-content-between align-items-start mt-2">-->
+                                                                            <!--          <div class="me-2 ms-auto">-->
+                                                                            <!--              <div class="fw-bold"> حاصل الجمع</div>-->
+                                                                            <!--            </div>-->
+                                                                            <!--            <span class="sub-total-number">225</span>-->
+                                                                            <!--            <span> ريال</span>-->
+                                                                            <!--      </div>-->
+
+                                                                            <!--      <div class="tax d-flex justify-content-between align-items-start mt-4">-->
+                                                                            <!--          <div class="me-2 ms-auto">-->
+                                                                            <!--              <div class="fw-bold"> ضريبة</div>-->
+                                                                            <!--            </div>-->
+                                                                            <!--            <span class="taxes">10%</span>-->
+                                                                            <!--      </div>-->
+                                                                            <!--      <div class="tax d-flex justify-content-between align-items-start mt-4 total">-->
+                                                                            <!--          <div class="me-2 ms-auto">-->
+                                                                            <!--              <div class="fw-bold"> الإجمالى</div>-->
+                                                                            <!--            </div>-->
+                                                                            <!--            <span class="table-total">247.5</span>-->
+                                                                            <!--            <span> ريال</span>-->
+                                                                            <!--      </div>-->
+                                                                            <!--      <div class="payment-method">-->
+                                                                            <!--          <div class="row">-->
+                                                                            <!--              <div class="col-4">-->
+                                                                            <!--                  <div class="payment-icon active d-flex justify-content-center align-items-center">-->
+                                                                            <!--                      <i class="fa-solid fa-sack-dollar"></i>-->
+                                                                            <!--                  </div>-->
+                                                                            <!--                  <p class="text-center">كاش</p>-->
+                                                                            <!--              </div>-->
+                                                                            <!--              <div class="col-4">-->
+                                                                            <!--                <div class="payment-icon d-flex justify-content-center align-items-center">-->
+                                                                            <!--                  <i class="fa-solid fa-credit-card"></i>-->
+                                                                            <!--                </div>-->
+                                                                            <!--                <p class="text-center">بطاقة  ائتمان</p>-->
+                                                                            <!--            </div>-->
+                                                                            <!--            <div class="col-4">-->
+                                                                            <!--              <div class="payment-icon d-flex justify-content-center align-items-center">-->
+                                                                            <!--                <i class="fa-solid fa-wallet"></i>-->
+                                                                            <!--              </div>-->
+                                                                            <!--              <p class="text-center">المحفظة</p>-->
+                                                                            <!--          </div>-->
+                                                                            <!--          </div>-->
+                                                                            <!--          <div class="payment-btn my-3 text-center">-->
+                                                                            <!--              <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">ادفع الآن</div>-->
+                                                                            <!-- Modal -->
+                                                                            <!--              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                                                                            <!--                <div class="modal-dialog">-->
+                                                                            <!--                  <div class="modal-content">-->
+                                                                            <!--                    <div class="modal-header">-->
+                                                                            <!--                      <h5 class="modal-title" id="exampleModalLabel">تأكيد الدفع</h5>-->
+                                                                            <!--                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                                                                            <!--                    </div>-->
+                                                                            <!--                    <div class="modal-body">-->
+                                                                            <!--                      <p class="consfirm-text">هل تريد تأكيد الدفع</p>-->
+                                                                            <!--                    </div>-->
+                                                                            <!--                    <div class="modal-footer">-->
+                                                                            <!--                      <button type="button" class="btn btn-primary">تأكيد</button>-->
+                                                                            <!--                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>-->
+                                                                            <!--                    </div>-->
+                                                                            <!--                  </div>-->
+                                                                            <!--                </div>-->
+                                                                            <!--              </div>-->
+                                                                            <!--          </div>-->
+                                                                            <!--      </div>-->
+                                                                            <!--    </li>-->
+
+
+
+                                                                            <!--</ol>-->
+
                                                                         </div>
                                                                     </div>
 
@@ -562,30 +645,30 @@
 
                                                         </div>
 
+
+
+                                                        @php
+                                                            if ($tables->reservation) {
+                                                                $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
+                                                                    ->where('table_id', $tables->id)
+                                                                    ->where('is_done', 0)
+                                                                    ->with('products')
+                                                                    ->first();
                                                             
-                                                       
-                                                            @php
-                                                                if ($tables->reservation) {
-                                                                    $orders = App\Models\Order::where('package_id', $tables->reservation->package_id)
-                                                                        ->where('table_id', $tables->id)
-                                                                        ->where('is_done', 0)
-                                                                        ->with('products')
-                                                                        ->first();
-                                                                
-                                                                    // Wrap the related products in a collection (even if there's only one result)
-                                                                    if ($orders != null && $orders->products->count() != 0) {
-                                                                        // Calculate total order prices using the map function on the products collection
-                                                                        $totalOrderPrices = $orders->products->sum(function ($product) {
-                                                                            return $product->pivot->price * $product->pivot->quantity;
-                                                                        });
-                                                                    } else {
-                                                                        $totalOrderPrices = 0;
-                                                                    }
+                                                                // Wrap the related products in a collection (even if there's only one result)
+                                                                if ($orders != null && $orders->products->count() != 0) {
+                                                                    // Calculate total order prices using the map function on the products collection
+                                                                    $totalOrderPrices = $orders->products->sum(function ($product) {
+                                                                        return $product->pivot->price * $product->pivot->quantity;
+                                                                    });
                                                                 } else {
-                                                                    $orders = null;
                                                                     $totalOrderPrices = 0;
                                                                 }
-                                                            @endphp
+                                                            } else {
+                                                                $orders = null;
+                                                                $totalOrderPrices = 0;
+                                                            }
+                                                        @endphp
                                                         <!--</div>-->
                                                     </div>
                                                 @endforeach
@@ -668,7 +751,7 @@
             <!--                <div class="payment-btn my-3 text-center">-->
             <!--                    <div class="btn btn-primary btn-lg w-100" data-bs-toggle="modal"-->
             <!--                        data-bs-target="#exampleModal">ادفع الآن</div>-->
-                                <!-- Modal -->
+            <!-- Modal -->
             <!--                    <div class="modal fade" id="exampleModal" tabindex="-1"-->
             <!--                        aria-labelledby="exampleModalLabel" aria-hidden="true">-->
             <!--                        <div class="modal-dialog">-->
@@ -703,8 +786,9 @@
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
 <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-<!--<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"-->
-<!--    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">-->
+<!--<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" -->
+    <!--    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
+    -->
 <!--</script>-->
 <!--<script src="{{ asset('front/js/date.js') }}"></script>-->
 <!--<script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>-->
@@ -773,104 +857,74 @@
     }
 </script>
 <script>
-  $(document).ready(function () {
-//   $('.table-btn-action').on('click', function(){
-//     var newId = $(this).data('id');
-//     var $appendedContent = $('.side-place .appended');
+    $(document).ready(function() {
+        //   $('.table-btn-action').on('click', function(){
+        //     var newId = $(this).data('id');
+        //     var $appendedContent = $('.side-place .appended');
 
-//     if ($appendedContent.length && !$appendedContent.is($(newId))) {
-//       $appendedContent.removeClass('appended');
-//       $appendedContent.remove();
-//     } else {
-//       $appendedContent.addClass('appended');
-//     }
+        //     if ($appendedContent.length && !$appendedContent.is($(newId))) {
+        //       $appendedContent.removeClass('appended');
+        //       $appendedContent.remove();
+        //     } else {
+        //       $appendedContent.addClass('appended');
+        //     }
 
-//     $(newId).toggleClass('appended');
-//     $('.side-place').addClass('have-bg').append($(newId));
-//   });
-  
-  
-    $('.table-btn-orders').on('click', function() {
-    var newId = $(this).data('id');
-    $('.side-place').empty();
-    $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
-    console.log('first');
-});
-
-$('.table-btn-info').on('click', function() {
-    var newId = $(this).data('id');
-    $('.side-place').empty();
-    $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
-    console.log('second');
-});
-
-});
+        //     $(newId).toggleClass('appended');
+        //     $('.side-place').addClass('have-bg').append($(newId));
+        //   });
 
 
+        $('.table-btn-orders').on('click', function() {
+            var newId = $(this).data('id');
+            $('.side-place').empty();
+            $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
+            console.log('first');
+        });
 
+        $('.table-btn-info').on('click', function() {
+            var newId = $(this).data('id');
+            $('.side-place').empty();
+            $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
+            console.log('second');
+        });
 
+    });
 </script>
-<div class="modal fade"
-    id="exampleModalToggle1"
-    aria-hidden="true"
-    aria-labelledby="exampleModalToggleLabel"
+<div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
-    <div
-        class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-light"
-                    id="exampleModalToggleLabe2">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalToggleLabe2">
                     تفعيل الحجز</h1>
-                <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div
-                class="modal-body text-light">
+            <div class="modal-body text-light">
                 هل تود تفعيل الحجز
             </div>
             <div class="modal-footer">
-                <button
-                    class="btn btn-primary"
-                    data-bs-target="#exampleModalToggle2"
-                    data-bs-toggle="modal">تفعيل
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">تفعيل
                     يدوى</button>
-                <button
-                    class="btn btn-primary"
-                    data-bs-target="#exampleModalToggle2"
-                    data-bs-toggle="modal">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
                     QR </button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade"
-    id="exampleModalToggle2"
-    aria-hidden="true"
-    aria-labelledby="exampleModalToggleLabel2"
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
-    <div
-        class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-light"
-                    id="exampleModalToggleLabel2">
+                <h1 class="modal-title fs-5 text-light" id="exampleModalToggleLabel2">
                     تفعيل الحجز</h1>
-                <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div
-                class="modal-body text-light">
+            <div class="modal-body text-light">
                 تم تفعيل الحجز بنجاح
             </div>
             <div class="modal-footer">
-                <button
-                    class="btn btn-primary custome-close"
-                    data-bs-dismiss="modal"
+                <button class="btn btn-primary custome-close" data-bs-dismiss="modal"
                     aria-label="Close">اغلاق</button>
             </div>
         </div>
