@@ -277,7 +277,7 @@
                                                                             class="list-group list-group-numbered reversed bill-info">
                                                                             <li
                                                                                 class="list-group-item d-flex justify-content-between align-items-start w-100">
-                                                                                <a herf="{{ route('branch.reservation') }}"
+                                                                                <a href="{{ route('branch.reservation') }}"
                                                                                     class="btn btn-primary w-100 mb-3">اضافة
                                                                                     حجز </a>
                                                                             </li>
