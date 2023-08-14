@@ -141,6 +141,7 @@ class PosController extends Controller
                 $q->where('status', 'انتهى');
             }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
+        
         return  $render = view('branch._halls', compact('halles'));
     }
     public function hallsNew()
