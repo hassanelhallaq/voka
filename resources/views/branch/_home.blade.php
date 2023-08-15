@@ -132,7 +132,7 @@
                <!--            <button type="button" class="h-filter btn btn-dark"-->
                <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
                <!--
-@endforeach-->
+                @endforeach-->
                <!--    </div>-->
                <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
                <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
@@ -168,10 +168,10 @@
                                    الخدمة</button>
                            </div>
                            <div class="btn-group mt-5 flex-column" role="group" aria-label="Basic example">
-                               <button type="button" class="page-refresh btn btn-primary">
+                               <a onclick="home()" type="button" class="page-refresh btn btn-primary">
                                    <i class="fa-solid fa-arrow-rotate-right"></i>
                                    تحديث الصفحة
-                               </button>
+                               </a>
 
                            </div>
 
@@ -191,7 +191,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-                                           
+
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -664,7 +664,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-                                           
+
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -1147,7 +1147,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-                                           
+
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -1873,7 +1873,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-                                           
+
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -2373,7 +2373,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-                                           
+
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -2865,7 +2865,7 @@
                                            ->where('is_done', 0)
                                            ->with('products')
                                            ->first();
-                                   
+
                                        // Wrap the related products in a collection (even if there's only one result)
                                        if ($orders != null && $orders->products->count() != 0) {
                                            // Calculate total order prices using the map function on the products collection
@@ -3485,13 +3485,20 @@
        updateCountdown();
    </script>
 
-   //
+
    <script>
-       //     var tableclick = document.getElementById("tableclick").value;
-       //     console.log(tableclick);
-       //     var x = document.getElementById("casher-section");
-       //     if (tableclick === "available") {
-       //         x.style.display = "block";
-       //     }
-       //
+    function home() {
+        $('.nav-item.active').removeClass('active');
+
+        // Add active class to "القائمة" link
+        $('.home').addClass('active');
+        $('#mainPage').empty(); // Clear the previous page content
+        $.get('/branch/branch/_home', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
+        });
+    }
    </script>
