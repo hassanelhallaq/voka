@@ -145,12 +145,13 @@
                                                                             <button type="button"
                                                                                 class="btn btn-primary w-100"
                                                                                 data-bs-toggle="modal"
-                                                                                data-bs-target="#exampleModal">
+                                                                                data-bs-target="#exampleModal_{{ $tables->id }}">
                                                                                 تفعيل
                                                                             </button>
 
                                                                             <!-- Modal -->
-                                                                            <div class="modal fade" id="exampleModal"
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $tables->id }}"
                                                                                 tabindex="-1"
                                                                                 aria-labelledby="exampleModalLabel"
                                                                                 aria-hidden="true">
@@ -172,9 +173,10 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="modal-footer">
-                                                                                            <button type="button"
+                                                                                            <a type="button"
                                                                                                 class="btn btn-secondary"
-                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                                onclick="activeTable({{ $tables->id }})"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
                                                                                             <button type="button"
                                                                                                 class="btn btn-primary">تأكيد
                                                                                             </button>
@@ -415,7 +417,7 @@
                                                                                                 vip</span></p>
                                                                                     </div>
                                                                                     <div class="rev-statu text-center">
-                                                                                        <a href=""
+                                                                                        <a
                                                                                             class="btn btn-primary">تفعيل</a>
                                                                                         <br />
                                                                                         <span class="s-time">
@@ -697,6 +699,27 @@
 
     }
 </script>
+<script>
+    function product(id) {
+        let formData = new FormData();
+        formData.append("_method", "PUT")
+        store('/branch/active/table/' + id, formData)
+        $('.nav-item.active').removeClass('active');
+
+        // Add active class to "القائمة" link
+        $('.halls').addClass('active');
+
+        $('#mainPage').empty(); // Clear the previous page content
+        $.get('/branch/branch/halls', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
+        });
+    }
+</script>
+
 <script>
     $(document).ready(function() {
         //   $('.table-btn-action').on('click', function(){
