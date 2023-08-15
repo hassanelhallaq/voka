@@ -295,6 +295,7 @@ class PosController extends Controller
 
         $package = Package::find($request->packageId);
         $minutesPerPackage = $package->time;
+
         // Generate time slots based on the package minutes
         $startTime = Carbon::createFromTime(0, 0, 0);
         $endTime = Carbon::createFromTime(23, 59, 59);
@@ -304,10 +305,15 @@ class PosController extends Controller
         while ($currentTime->lte($endTime)) {
             $endTimeSlot = clone $currentTime;
             $endTimeSlot->addMinutes($minutesPerPackage);
-            $timeSlots[] = [
-                'start' => $currentTime->format('g:i A'),
-                'end' => $endTimeSlot->format('g:i A'),
-            ];
+
+            // Check if the time slot is in the past
+            if ($endTimeSlot->isFuture()) {
+                $timeSlots[] = [
+                    'start' => $currentTime->format('g:i A'),
+                    'end' => $endTimeSlot->format('g:i A'),
+                ];
+            }
+
             $currentTime->addMinutes($minutesPerPackage);
         }
         // Calculate the available and unavailable time slots

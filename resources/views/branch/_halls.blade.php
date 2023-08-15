@@ -301,34 +301,38 @@
                                                                             @php
                                                                                 $now = Carbon\Carbon::now();
 
-                                                                                // Query to get all reservations for today
-                                                                                $reservations = App\Models\Reservation::where('table_id', $tables->id)
-                                                                                    ->where(function ($query) use ($now) {
-                                                                                        $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
-                                                                                    })
-                                                                                    ->orderBy('date')
-                                                                                    ->get();
+// Query to get all reservations for today
+$reservations = App\Models\Reservation::where('table_id', $request->table_id)
+    ->where(function ($query) use ($now) {
+        $query->whereDate('date', $now->toDateString())
+            ->whereTime('date', '>=', $now->toTimeString());
+    })
+    ->orderBy('date')
+    ->get();
 
-                                                                                $packages = $tables->packages;
-                                                                                foreach ($packages as $key => $package) {
-                                                                                    # code...
+$package = App\Models\Package::find($request->packageId);
+$minutesPerPackage = $package->time;
 
-                                                                                    $minutesPerPackage = $package->time;
-                                                                                    // Generate time slots based on the package minutes
-                                                                                    $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
-                                                                                    $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
-                                                                                    $timeSlots = [];
+// Generate time slots based on the package minutes
+$startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+$endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+$timeSlots = [];
 
-                                                                                    $currentTime = clone $startTime;
-                                                                                    while ($currentTime->lte($endTime)) {
-                                                                                        $endTimeSlot = clone $currentTime;
-                                                                                        $endTimeSlot->addMinutes($minutesPerPackage);
-                                                                                        $timeSlots[] = [
-                                                                                            'start' => $currentTime->format('g:i A'),
-                                                                                            'end' => $endTimeSlot->format('g:i A'),
-                                                                                        ];
-                                                                                        $currentTime->addMinutes($minutesPerPackage);
-                                                                                    }
+$currentTime = clone $startTime;
+while ($currentTime->lte($endTime)) {
+    $endTimeSlot = clone $currentTime;
+    $endTimeSlot->addMinutes($minutesPerPackage);
+
+    // Check if the time slot is in the past
+    if ($endTimeSlot->isFuture()) {
+        $timeSlots[] = [
+            'start' => $currentTime->format('g:i A'),
+            'end' => $endTimeSlot->format('g:i A'),
+        ];
+    }
+
+    $currentTime->addMinutes($minutesPerPackage);
+}
                                                                                     // Calculate the available and unavailable time slots
                                                                                     $availableSlots = [];
                                                                                     $unavailableSlots = [];
