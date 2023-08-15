@@ -59,11 +59,11 @@
         }
 
         /* .sofa:hover .fill {
-                                                    fill: var(--orange);
-                                                    }
-                                                    .sofa:hover .line {
-                                                    fill: var(--white);
-                                                    } */
+                                                        fill: var(--orange);
+                                                        }
+                                                        .sofa:hover .line {
+                                                        fill: var(--white);
+                                                        } */
 
         .sofa svg {
             filter: brightness(1);
@@ -120,11 +120,11 @@
             <!--<div class="filter-btns d-flex mb-2">-->
             <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
             <!--        @foreach ($halles as $key => $item)
-    -->
+                             -->
             <!--            <button type="button" class="h-filter btn btn-dark"-->
             <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
             <!--
-    @endforeach-->
+                    @endforeach-->
             <!--    </div>-->
             <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
             <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
@@ -183,7 +183,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -649,7 +649,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -1125,7 +1125,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -1844,7 +1844,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2322,7 +2322,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2797,7 +2797,7 @@
                                         ->where('is_done', 0)
                                         ->with('products')
                                         ->first();
-                                
+
                                     // Wrap the related products in a collection (even if there's only one result)
                                     if ($orders != null && $orders->products->count() != 0) {
                                         // Calculate total order prices using the map function on the products collection
@@ -2981,7 +2981,7 @@
                                                             $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                             $reservationDateTime = $table->reservation->date;
                                                         }
-                                                        
+
                                                     @endphp
                                                     <div class="card-item body-time d-flex justify-content-between">
                                                         <p class="hall-name"> الوقت المنقضى</p>
@@ -3036,15 +3036,14 @@
                                                                     </button>
                                                                 </div>
                                                             @else
-                                                                @if ($table->reservation)
-                                                                    <div class="col-md-6">
-                                                                        <button disabled
-                                                                            class="table-btn-action btn btn-primary w-100"
-                                                                            type="button" data-id="#tableend">
-                                                                            انهاء الحجز
-                                                                        </button>
-                                                                    </div>
-                                                                @endif
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @endif
                                                         </div>
 
                                                     </div>
