@@ -359,7 +359,7 @@ class PosController extends Controller
     public function activeTable($id)
     {
         $table = Table::find($id);
-        $table->status = '$table';
+        $table->status = 'in_service';
         $isSaved = $table->update();
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
