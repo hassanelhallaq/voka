@@ -28,24 +28,44 @@ class PosController extends Controller
         //             ->where('status', '!=', 'انتهى');
         //     }]);
         // }])->where('branch_id', Auth::user()->branch_id)->get();
-        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
-        $loungesSortOne = Lounge::where('sort', 1)->with('tables')
+        $halles = Lounge::with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])->where('branch_id', Auth::user()->branch_id)->get();
+        $loungesSortOne = Lounge::where('sort', 1)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
-        $loungesSortow = Lounge::where('sort', 2)->with('tables')
+        $loungesSortow = Lounge::where('sort', 2)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
         $halfCount = ceil($loungesSortow->tables->count() / 2);
         $firstHalfTwo = $loungesSortow->tables->slice(0, $halfCount);
         $secondHalfTwo = $loungesSortow->tables->slice($halfCount);
-        $loungesSorThree = Lounge::where('sort', 4)->with('tables')
+        $loungesSorThree = Lounge::where('sort', 4)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
 
-        $loungesSortowSilver = Lounge::where('sort', 3)->with('tables')
+        $loungesSortowSilver = Lounge::where('sort', 3)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
@@ -82,24 +102,44 @@ class PosController extends Controller
         //             ->where('status', '!=', 'انتهى');
         //     }]);
         // }])->where('branch_id', Auth::user()->branch_id)->get();
-        $halles = Lounge::with('tables')->where('branch_id', Auth::user()->branch_id)->get();
-        $loungesSortOne = Lounge::where('sort', 1)->with('tables')
+        $halles = Lounge::with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])->where('branch_id', Auth::user()->branch_id)->get();
+        $loungesSortOne = Lounge::where('sort', 1)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
-        $loungesSortow = Lounge::where('sort', 2)->with('tables')
+        $loungesSortow = Lounge::where('sort', 2)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
         $halfCount = ceil($loungesSortow->tables->count() / 2);
         $firstHalfTwo = $loungesSortow->tables->slice(0, $halfCount);
         $secondHalfTwo = $loungesSortow->tables->slice($halfCount);
-        $loungesSorThree = Lounge::where('sort', 4)->with('tables')
+        $loungesSorThree = Lounge::where('sort', 4)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
 
-        $loungesSortowSilver = Lounge::where('sort', 3)->with('tables')
+        $loungesSortowSilver = Lounge::where('sort', 3)->with(['tables' => function ($q) {
+            $q->with(['reservation' => function ($q) {
+                $q->where('status', '!=', 'انتهى');
+            }]);
+        }])
             ->where('branch_id', Auth::user()->id)
             ->first();
 
