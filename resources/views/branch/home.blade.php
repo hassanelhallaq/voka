@@ -117,6 +117,29 @@
     <div class="col-md-11" id="mainPage">
 
         <div class="container-fluid">
+            <!--<div class="filter-btns d-flex mb-2">-->
+            <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
+            <!--        @foreach ($halles as $key => $item)
+                 -->
+            <!--            <button type="button" class="h-filter btn btn-dark"-->
+            <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
+            <!--
+                         @endforeach-->
+            <!--    </div>-->
+            <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
+            <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
+            <!--            الحالات</button>-->
+            <!--        <button type="button" class="s-filter btn btn-dark" data-st="reserved">-->
+            <!--            المحجوزة</button>-->
+            <!--        <button type="button" class="s-filter btn btn-dark" data-st="available">-->
+            <!--            المتاحة</button>-->
+            <!--        <button type="button" class="s-filter btn btn-dark" data-st="serv"> فى-->
+            <!--            الخدمة</button>-->
+            <!--    </div>-->
+
+            <!--</div>-->
+            <!-- salone table  -->
+
             <div class="row home-card mt-2 active-salon" id="salon{{ $item->id }}">
                 <div class="col-md-1">
                     <div class="filter-btns d-flex flex-column mb-2">
