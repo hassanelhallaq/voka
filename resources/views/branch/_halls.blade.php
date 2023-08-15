@@ -703,7 +703,6 @@
 <script>
     function activeTable(id) {
         let formData = new FormData();
-        formData.append("_method", "PUT")
         store('/branch/active/table/' + id, formData)
         $('.nav-item.active').removeClass('active');
         // Add active class to "القائمة" link
