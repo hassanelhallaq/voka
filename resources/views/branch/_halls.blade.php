@@ -175,9 +175,9 @@
                                                                                         <div class="modal-footer">
                                                                                             <a type="button"
                                                                                                 class="btn btn-secondary"
-                                                                                                onclick="activeTable({{ $tables->id }})"
                                                                                                 data-bs-dismiss="modal">اغلاق</a>
                                                                                             <button type="button"
+                                                                                                onclick="activeTable({{ $tables->id }})"
                                                                                                 class="btn btn-primary">تأكيد
                                                                                             </button>
                                                                                         </div>
@@ -754,4 +754,3 @@
 
     });
 </script>
-
