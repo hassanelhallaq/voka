@@ -141,7 +141,7 @@ class PosController extends Controller
                 $q->where('status', 'انتهى');
             }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
-        
+
         return  $render = view('branch._halls', compact('halles'));
     }
     public function hallsNew()
@@ -354,5 +354,13 @@ class PosController extends Controller
         $point = $reservationPayment->where('payment_type', 'المحفظة')->sum('price');
 
         return view('branch.casher', compact('visa', 'cash', 'online'))->render();
+    }
+
+    public function activeTable($id)
+    {
+        $table = Table::find($id);
+        $table->status = '$table';
+        $isSaved = $table->update();
+        return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
 }
