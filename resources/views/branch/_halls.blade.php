@@ -193,7 +193,8 @@
                                                                                 انهاء الحجز
                                                                             </button>
                                                                             <!-- Modal -->
-                                                                            <div class="modal fade" id="close_{{ $tables->id }}"
+                                                                            <div class="modal fade"
+                                                                                id="close_{{ $tables->id }}"
                                                                                 tabindex="-1"
                                                                                 aria-labelledby="exampleModalLabel"
                                                                                 aria-hidden="true">
@@ -301,38 +302,41 @@
                                                                             @php
                                                                                 $now = Carbon\Carbon::now();
 
-// Query to get all reservations for today
-$reservations = App\Models\Reservation::where('table_id', $request->table_id)
-    ->where(function ($query) use ($now) {
-        $query->whereDate('date', $now->toDateString())
-            ->whereTime('date', '>=', $now->toTimeString());
-    })
-    ->orderBy('date')
-    ->get();
+                                                                                // Query to get all reservations for today
+                                                                                $reservations = App\Models\Reservation::where('table_id', $request->table_id)
+                                                                                    ->where(function ($query) use ($now) {
+                                                                                        $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                    })
+                                                                                    ->orderBy('date')
+                                                                                    ->get();
 
-$package = App\Models\Package::find($request->packageId);
-$minutesPerPackage = $package->time;
+                                                                                $packages = $tables->packages;
+                                                                                foreach ($packages as $key => $package) {
+                                                                                    # code...
 
-// Generate time slots based on the package minutes
-$startTime = Carbon\Carbon::createFromTime(0, 0, 0);
-$endTime = Carbon\Carbon::createFromTime(23, 59, 59);
-$timeSlots = [];
+                                                                                    $package = App\Models\Package::find($request->packageId);
+                                                                                    $minutesPerPackage = $package->time;
 
-$currentTime = clone $startTime;
-while ($currentTime->lte($endTime)) {
-    $endTimeSlot = clone $currentTime;
-    $endTimeSlot->addMinutes($minutesPerPackage);
+                                                                                    // Generate time slots based on the package minutes
+                                                                                    $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                    $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                    $timeSlots = [];
 
-    // Check if the time slot is in the past
-    if ($endTimeSlot->isFuture()) {
-        $timeSlots[] = [
-            'start' => $currentTime->format('g:i A'),
-            'end' => $endTimeSlot->format('g:i A'),
-        ];
-    }
+                                                                                    $currentTime = clone $startTime;
+                                                                                    while ($currentTime->lte($endTime)) {
+                                                                                        $endTimeSlot = clone $currentTime;
+                                                                                        $endTimeSlot->addMinutes($minutesPerPackage);
 
-    $currentTime->addMinutes($minutesPerPackage);
-}
+                                                                                        // Check if the time slot is in the past
+                                                                                        if ($endTimeSlot->isFuture()) {
+                                                                                            $timeSlots[] = [
+                                                                                                'start' => $currentTime->format('g:i A'),
+                                                                                                'end' => $endTimeSlot->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+
+                                                                                        $currentTime->addMinutes($minutesPerPackage);
+                                                                                    }
                                                                                     // Calculate the available and unavailable time slots
                                                                                     $availableSlots = [];
                                                                                     $unavailableSlots = [];
