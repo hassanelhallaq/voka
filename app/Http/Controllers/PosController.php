@@ -372,8 +372,10 @@ class PosController extends Controller
         $reservation =  $table->reservation;
         $reservation->status = 'انتهى';
         $order = Order::where([['table_id', $reservation->table_id], ['package_id', $reservation->package_id], ['is_done', 0]])->first();
-        $order->is_done = 1;
-        $order->update();
+        if ($order) {
+            $order->is_done = 1;
+            $order->update();
+        }
         $reservation = $reservation->update();
 
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
