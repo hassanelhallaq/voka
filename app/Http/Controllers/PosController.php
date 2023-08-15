@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Lounge;
+use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Package;
 use App\Models\ProductCategory;
@@ -361,6 +362,20 @@ class PosController extends Controller
         $table = Table::find($id);
         $table->status = 'in_service';
         $isSaved = $table->update();
+        return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
+    }
+    public function closeTable($id)
+    {
+        $table = Table::find($id);
+        $table->status = 'available';
+        $isSaved = $table->update();
+        $reservation =  $table->reservation;
+        $reservation->status = 'انتهى';
+        $order = Order::where([['table_id', $reservation->table_id], ['package_id', $reservation->package_id], ['is_done', 0]])->first();
+        $order->is_done = 1;
+        $order->update();
+        $reservation = $reservation->update();
+
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
 }

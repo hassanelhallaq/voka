@@ -100,7 +100,7 @@
                                                                                 $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $tables->reservation->time)->format('H:i');
                                                                                 $reservationDateTime = $tables->reservation->date;
                                                                             }
-                                                                            
+
                                                                         @endphp
                                                                         <p class="hall-name"> الوقت المنقضى</p>
                                                                         <div class="countdown-timer"
@@ -218,9 +218,10 @@
                                                                                             <button type="button"
                                                                                                 class="btn btn-secondary"
                                                                                                 data-bs-dismiss="modal">اغلاق</button>
-                                                                                            <button type="button"
+                                                                                            <a type="button"
+                                                                                                onclick="closeTable({{ $tables->id }})"
                                                                                                 class="btn btn-primary">انهاء
-                                                                                            </button>
+                                                                                            </a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -299,7 +300,7 @@
                                                                             @endif
                                                                             @php
                                                                                 $now = Carbon\Carbon::now();
-                                                                                
+
                                                                                 // Query to get all reservations for today
                                                                                 $reservations = App\Models\Reservation::where('table_id', $tables->id)
                                                                                     ->where(function ($query) use ($now) {
@@ -307,17 +308,17 @@
                                                                                     })
                                                                                     ->orderBy('date')
                                                                                     ->get();
-                                                                                
+
                                                                                 $packages = $tables->packages;
                                                                                 foreach ($packages as $key => $package) {
                                                                                     # code...
-                                                                                
+
                                                                                     $minutesPerPackage = $package->time;
                                                                                     // Generate time slots based on the package minutes
                                                                                     $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
                                                                                     $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
                                                                                     $timeSlots = [];
-                                                                                
+
                                                                                     $currentTime = clone $startTime;
                                                                                     while ($currentTime->lte($endTime)) {
                                                                                         $endTimeSlot = clone $currentTime;
@@ -331,12 +332,12 @@
                                                                                     // Calculate the available and unavailable time slots
                                                                                     $availableSlots = [];
                                                                                     $unavailableSlots = [];
-                                                                                
+
                                                                                     $prevEndTime = $startTime;
                                                                                     foreach ($reservations as $reservation) {
                                                                                         $start = Carbon\Carbon::parse($reservation->date);
                                                                                         $end = Carbon\Carbon::parse($reservation->end);
-                                                                                
+
                                                                                         if ($prevEndTime->lt($start)) {
                                                                                             $availableSlots[] = [
                                                                                                 'start' => $prevEndTime->format('g:i A'),
@@ -347,7 +348,7 @@
                                                                                             'start' => $start->format('g:i A'),
                                                                                             'end' => $end->format('g:i A'),
                                                                                         ];
-                                                                                
+
                                                                                         $prevEndTime = $end;
                                                                                     }
                                                                                     if ($prevEndTime->lt($endTime)) {
@@ -463,7 +464,7 @@
                                                                     ->where('is_done', 0)
                                                                     ->with('products')
                                                                     ->first();
-                                                            
+
                                                                 // Wrap the related products in a collection (even if there's only one result)
                                                                 if ($orders != null && $orders->products->count() != 0) {
                                                                     // Calculate total order prices using the map function on the products collection
@@ -707,6 +708,20 @@
         $('.nav-item.active').removeClass('active');
         // Add active class to "القائمة" link
         $('.halls').addClass('active');
+
+        // $('#mainPage').empty(); // Clear the previous page content
+        $.get('/branch/branch/halls', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
+        });
+    }
+
+    function closeTable(id) {
+        let formData = new FormData();
+        store('/branch/close/table/' + id, formData)
 
         // $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {

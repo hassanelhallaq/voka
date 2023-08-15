@@ -106,6 +106,7 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/branch/halls/new', [App\Http\Controllers\PosController::class, 'hallsNew'])->name('branch.halls.new');
 
     Route::post('/active/table/{id}', [App\Http\Controllers\PosController::class, 'activeTable'])->name('active.table');
+    Route::post('/close/table/{id}', [App\Http\Controllers\PosController::class, 'closeTable'])->name('close.table');
 
     Route::get('/cal', [App\Http\Controllers\PosController::class, 'ajaxCalender'])->name('ajaxCalender');
     Route::get('/calendar', function () {
