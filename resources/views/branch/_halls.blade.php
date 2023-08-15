@@ -276,9 +276,18 @@
                                                                                     class="list-group-item d-flex justify-content-between align-items-start">
                                                                                     <div
                                                                                         class="rev-item d-flex w-100  align-items-start">
+                                                                                        @php
+                                                                                            $dateString = $tables->reservation->date;
+                                                                                            
+                                                                                            // Create a DateTime object from the date string
+                                                                                            $date = new DateTime($dateString);
+                                                                                            
+                                                                                            // Format the time as desired (e.g., "H:i")
+                                                                                            $formattedTime = $date->format('H:i');
+                                                                                        @endphp
                                                                                         <div
                                                                                             class="rev-time text-center">
-                                                                                            <span>{{ $tables->reservation->date }}</span>
+                                                                                            <span>{{ $formattedTime }}</span>
                                                                                             <br>
                                                                                             <span>PM</span>
                                                                                         </div>
