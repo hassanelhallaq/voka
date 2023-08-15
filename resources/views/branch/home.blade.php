@@ -2916,50 +2916,126 @@
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
+                                            <div class="card bg-info text-dark" data-id="table1" data-stat="serv">
                                             <div class="modal-header">
+                                                <div class="card-header primary-bg-color w-100 d-flex justify-content-between">
                                                 <h3 class="modal-title fs-5" id="exampleModalLabel">
                                                     {{ $table->name }}</h3>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
+                                                    </div>
                                             </div>
-                                            <div class="modal-body">
-                                                <ul class="list-group">
-                                                    <li class="list-group-item">
-                                                        <div class="d-flex">
-                                                            <div class="left t-packagename">VVIP</div>
-                                                            <div class="right t-statu">{{ $table->status }}</div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="d-flex">
-                                                            <div class="left t-packagepeice">باقة ساعاتان</div>
-                                                            <div class="right t-capicity">4 أشخاص</div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="d-flex">
-                                                            <div class="left t-packagedate"> 10-8</div>
-                                                            <div class="right t-time">08:00 </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <div class="d-flex">
-                                                            <div class="left t-waiter"> أسم الويتر: </div>
-                                                            <div class="right t-time">أحمد مرزوق </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="left t-allpoint"> <span class="point">800</span> الرصيد
+                                            
+                                            
+                                        
+                                        <!--<div class="card-header primary-bg-color">-->
+                                        <!--  <div class="top d-flex justify-content-between ">-->
+                                        <!--    <h5 class="card-title"> طاولة رقم 1</h5>-->
+                                        <!--    <span class="tableid" > #37856 </span>-->
+                                        <!--  </div>-->
+                                        <!--</div>-->
+                                        <div class="card-body">
+                                          <div class="card-item mid d-flex justify-content-between">
+                                            <p class="hall-name"> الباقة</p>
+                                            <span class="sta">عشاء فاخر </span>
+                                          </div>
+                                          <div class="card-item body-package d-flex justify-content-between">
+                                            <p class="hall-name">  المقاعد</p>
+                                            <span class="sta"> 4 اشخاص</span>
+                                          </div>
+                                          <div class="card-item body-time d-flex justify-content-between">
+                                            <p class="hall-name"> الحجز</p>
+                                            <span class="sta"> 500 ريال</span>
+                                          </div>
+                                          <div class="card-item body-time d-flex justify-content-between">
+                                            <p class="hall-name"> المدة</p>
+                                            <span class="sta"> 2 ساعة </span>
+                                          </div>
+                                          <div class="card-item body-time d-flex justify-content-between">
+                                            <p class="hall-name"> الحالة</p>
+                                            <span class="sta">  على الطاولة</span>
+                                          </div>
+                                          <div class="card-item body-time d-flex justify-content-between">
+                                            <p class="hall-name"> الرصيد الحالى</p>
+                                            <span class="sta"> 300 ريال </span>
+                                          </div>
+                                          <div class="card-item body-time d-flex justify-content-between">
+                                            <p class="hall-name"> الوقت المنقضى</p>
+                                            <span class="sta"> 01:25:00 </span>
+                                          </div>
+                                        </div>
+                                        <div class="card-footer">
+                                          <div class="table-btn my-3 text-center">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-2" >
+                                                    <button class="table-btn-action btn btn-primary w-100" type="button" data-id="#tableorders">
+                                                          الطلبات
+                                                    </button>
                                                 </div>
-                                                <div class="right t-points"> <span class="have-point">200</span> الرصيد
-                                                    المتبقى </div>
+                                                <div class="col-md-6">
+                                                    <button class="table-btn-action btn btn-primary w-100" type="button" data-id="#tableinfo">
+                                                         استعراض 
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button class="table-btn-action btn btn-primary w-100" type="button"
+                                                        disabled data-id="#tableactive">
+                                                           تفعيل الحجز
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button class="table-btn-action btn btn-primary w-100" type="button" data-id="#tableend">
+                                                          انهاء الحجز 
+                                                    </button>
+                                                </div>
                                             </div>
+
+                                        </div>
+                                        </div>
+
+                                      </div>
+                                      
+                                      
+                                            <!--<div class="modal-body">-->
+                                            <!--    <ul class="list-group">-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagename">VVIP</div>-->
+                                            <!--                <div class="right t-statu">{{ $table->status }}</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagepeice">باقة ساعاتان</div>-->
+                                            <!--                <div class="right t-capicity">4 أشخاص</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagedate"> 10-8</div>-->
+                                            <!--                <div class="right t-time">08:00 </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-waiter"> أسم الويتر: </div>-->
+                                            <!--                <div class="right t-time">أحمد مرزوق </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--    </ul>-->
+                                            <!--</div>-->
+                                            <!--<div class="modal-footer">-->
+                                            <!--    <div class="left t-allpoint"> <span class="point">800</span> الرصيد-->
+                                            <!--    </div>-->
+                                            <!--    <div class="right t-points"> <span class="have-point">200</span> الرصيد-->
+                                            <!--        المتبقى </div>-->
+                                            <!--</div>-->
                                         </div>
                                     </div>
 
                                 </div>
+                                
+                                
 
                                 @if ($table->status == 'in_service')
                                     <div class="table-side-bar" id="tableee{{ $table->id }}">
