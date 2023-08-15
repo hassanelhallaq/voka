@@ -303,7 +303,7 @@
                                                                                 $now = Carbon\Carbon::now();
 
                                                                                 // Query to get all reservations for today
-                                                                                $reservations = App\Models\Reservation::where('table_id', $request->table_id)
+                                                                                $reservations = App\Models\Reservation::where('table_id', $tables->id)
                                                                                     ->where(function ($query) use ($now) {
                                                                                         $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
                                                                                     })
@@ -314,7 +314,7 @@
                                                                                 foreach ($packages as $key => $package) {
                                                                                     # code...
 
-                                                                                    $package = App\Models\Package::find($request->packageId);
+                                                                                    $package = App\Models\Package::find($package->id);
                                                                                     $minutesPerPackage = $package->time;
 
                                                                                     // Generate time slots based on the package minutes
