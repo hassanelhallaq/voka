@@ -158,7 +158,7 @@
                                 الخدمة</button>
                         </div>
                         <div class="btn-group mt-5 flex-column" role="group" aria-label="Basic example">
-                            <button type="button" class="page-refresh btn btn-primary">
+                            <a type="button" class="page-refresh btn btn-primary">
                                 <i class="fa-solid fa-arrow-rotate-right"></i>
                                 تحديث الصفحة
                                 </button>
