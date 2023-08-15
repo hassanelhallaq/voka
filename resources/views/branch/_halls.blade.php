@@ -189,11 +189,11 @@
                                                                             <button type="button"
                                                                                 class="btn btn-primary w-100"
                                                                                 data-bs-toggle="modal"
-                                                                                data-bs-target="#exampleModal">
+                                                                                data-bs-target="#close_{{ $tables->id }}">
                                                                                 انهاء الحجز
                                                                             </button>
                                                                             <!-- Modal -->
-                                                                            <div class="modal fade" id="exampleModal"
+                                                                            <div class="modal fade" id="close_{{ $tables->id }}"
                                                                                 tabindex="-1"
                                                                                 aria-labelledby="exampleModalLabel"
                                                                                 aria-hidden="true">
