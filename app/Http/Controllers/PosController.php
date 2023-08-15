@@ -139,7 +139,7 @@ class PosController extends Controller
     {
         $halles = Lounge::with(['tables' => function ($q) {
             $q->with(['reservation' => function ($q) {
-                $q->where('status', 'انتهى');
+                $q->where('status', '!=', 'انتهى');
             }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
 
