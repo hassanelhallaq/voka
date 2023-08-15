@@ -731,43 +731,4 @@
 
     });
 </script>
-<div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 text-light" id="exampleModalToggleLabe2">
-                    تفعيل الحجز</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-light">
-                هل تود تفعيل الحجز
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">تفعيل
-                    يدوى</button>
-                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
-                    QR </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 text-light" id="exampleModalToggleLabel2">
-                    تفعيل الحجز</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-light">
-                تم تفعيل الحجز بنجاح
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary custome-close" data-bs-dismiss="modal"
-                    aria-label="Close">اغلاق</button>
-            </div>
-        </div>
-    </div>
-</div>
+
