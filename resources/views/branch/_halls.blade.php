@@ -278,7 +278,7 @@
                                                                                         class="rev-item d-flex w-100  align-items-start">
                                                                                         <div
                                                                                             class="rev-time text-center">
-                                                                                            <span>{{ $tables->reservation->date->format('H:i') }}</span>
+                                                                                            <span>{{ $tables->reservation->date }}</span>
                                                                                             <br>
                                                                                             <span>PM</span>
                                                                                         </div>
