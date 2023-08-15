@@ -125,29 +125,6 @@
                </form>
            </div>
            <div class="container-fluid">
-               <!--<div class="filter-btns d-flex mb-2">-->
-               <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
-               <!--        @foreach ($halles as $key => $item)
--->
-               <!--            <button type="button" class="h-filter btn btn-dark"-->
-               <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
-               <!--
-                @endforeach-->
-               <!--    </div>-->
-               <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
-               <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
-               <!--            الحالات</button>-->
-               <!--        <button type="button" class="s-filter btn btn-dark" data-st="reserved">-->
-               <!--            المحجوزة</button>-->
-               <!--        <button type="button" class="s-filter btn btn-dark" data-st="available">-->
-               <!--            المتاحة</button>-->
-               <!--        <button type="button" class="s-filter btn btn-dark" data-st="serv"> فى-->
-               <!--            الخدمة</button>-->
-               <!--    </div>-->
-
-               <!--</div>-->
-               <!-- salone table  -->
-
                <div class="row home-card mt-2 active-salon" id="salon{{ $item->id }}">
                    <div class="col-md-1">
                        <div class="filter-btns d-flex flex-column mb-2">
@@ -191,7 +168,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-
+                                           
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -664,7 +641,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-
+                                           
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -1147,7 +1124,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-
+                                           
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -1873,7 +1850,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-
+                                           
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -1914,19 +1891,16 @@
                                                        <path class="fill" fill-rule="evenodd" clip-rule="evenodd"
                                                            d="M6.99667 48.7954L24.9305 48.7954C26.9083 48.7954 28.5157 47.1886 28.5157 45.2105L28.5157 32.2328C28.5157 30.2537 26.9086 28.6466 24.9305 28.6466L6.99667 28.6466C5.01668 28.6466 3.41172 30.2537 3.41172 32.2328L3.41172 45.2105C3.4114 47.1886 5.01668 48.7954 6.99667 48.7954ZM6.99667 29.3045L24.9305 29.3045C26.5461 29.3045 27.8578 30.6165 27.8578 32.2328L27.8578 45.2105C27.8578 46.8264 26.5461 48.1388 24.9305 48.1388L6.99667 48.1388C5.38103 48.1388 4.06931 46.8267 4.06931 45.2105L4.06931 32.2328C4.06931 30.6165 5.38102 29.3045 6.99667 29.3045Z"
                                                            fill="#3E3F41" />
-                                                       <path class="fill" fill-rule="evenodd"
-                                                           clip-rule="evenodd"
+                                                       <path class="fill" fill-rule="evenodd" clip-rule="evenodd"
                                                            d="M49.6353 29.8184L62.6098 29.8184C64.4064 29.8184 65.866 31.2777 65.866 33.0752L65.866 51.0093C65.866 52.8065 64.4064 54.2661 62.6098 54.2661L49.6353 54.2661C47.8362 54.2661 46.3788 52.8065 46.3788 51.0093L46.3788 33.0752C46.3788 31.278 47.8362 29.8184 49.6353 29.8184Z"
                                                            fill="#212325" />
                                                        <path class="line"fill-rule="evenodd" clip-rule="evenodd"
                                                            d="M49.6352 54.5933L62.6116 54.5933C64.5894 54.5933 66.1969 52.9874 66.1969 51.008L66.1969 33.0732C66.1969 31.0958 64.5897 29.4896 62.6116 29.4896L49.6352 29.4896C47.6552 29.4896 46.0499 31.0958 46.0499 33.0732L46.0499 51.0083C46.0499 52.9877 47.6552 54.5933 49.6352 54.5933ZM49.6352 30.1465L62.6116 30.1465C64.2273 30.1465 65.539 31.4585 65.539 33.0732L65.539 51.0083C65.539 52.6243 64.2273 53.9354 62.6116 53.9354L49.6352 53.9354C48.0173 53.9354 46.706 52.6243 46.706 51.0083L46.706 33.0736C46.7056 31.4585 48.0173 30.1465 49.6352 30.1465Z"
                                                            fill="#3E3F41" />
-                                                       <path class="fill" fill-rule="evenodd"
-                                                           clip-rule="evenodd"
+                                                       <path class="fill" fill-rule="evenodd" clip-rule="evenodd"
                                                            d="M30.5745 29.8186L43.549 29.8186C45.3456 29.8186 46.8052 31.2791 46.8052 33.0763L46.8052 51.0089C46.8052 52.8061 45.3456 54.2666 43.549 54.2666L30.5745 54.2666C28.7754 54.2666 27.3161 52.8061 27.3161 51.0089L27.3161 33.0766C27.3161 31.2791 28.7757 29.8186 30.5745 29.8186Z"
                                                            fill="#212325" />
-                                                       <path class="fill" fill-rule="evenodd"
-                                                           clip-rule="evenodd"
+                                                       <path class="fill" fill-rule="evenodd" clip-rule="evenodd"
                                                            d="M69.0825 29.8181L82.0548 29.8181C83.8517 29.8181 85.3129 31.2786 85.3129 33.0758L85.3129 51.0084C85.3129 52.8056 83.8514 54.2661 82.0548 54.2661L69.0825 54.2661C67.2834 54.2661 65.8241 52.8056 65.8241 51.0084L65.8241 33.0761C65.8241 31.2786 67.2834 29.8181 69.0825 29.8181Z"
                                                            fill="#212325" />
                                                        <path class="line" fill-rule="evenodd"
@@ -2373,7 +2347,7 @@
                                                    ->where('is_done', 0)
                                                    ->with('products')
                                                    ->first();
-
+                                           
                                                // Wrap the related products in a collection (even if there's only one result)
                                                if ($orders != null && $orders->products->count() != 0) {
                                                    // Calculate total order prices using the map function on the products collection
@@ -2865,7 +2839,7 @@
                                            ->where('is_done', 0)
                                            ->with('products')
                                            ->first();
-
+                                   
                                        // Wrap the related products in a collection (even if there's only one result)
                                        if ($orders != null && $orders->products->count() != 0) {
                                            // Calculate total order prices using the map function on the products collection
@@ -2985,50 +2959,173 @@
                                        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                        <div class="modal-dialog modal-dialog-centered">
                                            <div class="modal-content">
-                                               <div class="modal-header">
-                                                   <h3 class="modal-title fs-5" id="exampleModalLabel">
-                                                       {{ $table->name }}</h3>
-                                                   <button type="button" class="btn-close"
-                                                       data-bs-dismiss="modal" aria-label="Close"></button>
+                                               <div class="card  @if ($table->status == 'in_service') bg-info
+                                                 @elseif($table->status == 'available')
+                                                bg-success text-light
+                                                @elseif ($table->status == 'reserved')
+                                                   bg-danger  text-light @endif"
+                                                   data-id="table1" data-stat="serv">
+                                                   <div class="modal-header">
+                                                       <div
+                                                           class="card-header primary-bg-color w-100 d-flex justify-content-between">
+                                                           <h3 class="modal-title fs-5" id="exampleModalLabel">
+                                                               {{ $table->name }}</h3>
+                                                           <button type="button" class="btn-close"
+                                                               data-bs-dismiss="modal" aria-label="Close"></button>
+                                                       </div>
+                                                   </div>
+
+
+
+                                                   <!--<div class="card-header primary-bg-color">-->
+                                                   <!--  <div class="top d-flex justify-content-between ">-->
+                                                   <!--    <h5 class="card-title"> طاولة رقم 1</h5>-->
+                                                   <!--    <span class="tableid" > #37856 </span>-->
+                                                   <!--  </div>-->
+                                                   <!--</div>-->
+                                                   <div class="card-body">
+                                                       <div class="card-item mid d-flex justify-content-between">
+                                                           <p class="hall-name"> الباقة</p>
+                                                           <span class="sta">
+                                                               {{ $table->reservation != null ? $table->reservation->package->name : 'لا توجد باقة' }}
+                                                           </span>
+                                                       </div>
+                                                       <div
+                                                           class="card-item body-package d-flex justify-content-between">
+                                                           <p class="hall-name"> المقاعد</p>
+                                                           <span class="sta">
+                                                               {{ $table->reservation != null ? $table->reservation->package->count_of_visitors : 0 }}
+                                                               اشخاص</span>
+                                                       </div>
+                                                       <div
+                                                           class="card-item body-time d-flex justify-content-between">
+                                                           <p class="hall-name"> الحجز</p>
+                                                           <span
+                                                               class="sta">{{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                               ريال</span>
+                                                       </div>
+                                                       <div
+                                                           class="card-item body-time d-flex justify-content-between">
+                                                           <p class="hall-name"> المدة</p>
+                                                           <span
+                                                               class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
+                                                               ساعة </span>
+                                                       </div>
+                                                       <div
+                                                           class="card-item body-time d-flex justify-content-between">
+                                                           <p class="hall-name"> الحالة</p>
+                                                           <span class="sta">
+                                                               {{ $table->reservation != null ? $table->reservation->status : 'لا يوجد حجز' }}</span>
+                                                       </div>
+                                                       <div
+                                                           class="card-item body-time d-flex justify-content-between">
+                                                           <p class="hall-name"> الرصيد الحالى</p>
+                                                           <span class="sta">
+                                                               {{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                               ريال </span>
+                                                       </div>
+                                                       @php
+                                                           if ($table->reservation) {
+                                                               $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                                               $reservationDateTime = $table->reservation->date;
+                                                           }
+                                                           
+                                                       @endphp
+                                                       <div
+                                                           class="card-item body-time d-flex justify-content-between">
+                                                           <p class="hall-name"> الوقت المنقضى</p>
+                                                           <div class="countdown-timer"
+                                                               data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
+                                                               data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                               <!-- Add a span to display the countdown timer -->
+                                                               @if ($table->reservation)
+                                                                   <span class="countdown-timer-text">00:00:00</span>
+                                                               @else
+                                                                   <span>انتهى</span>
+                                                               @endif
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                                   <div class="card-footer">
+                                                       <div class="table-btn my-3 text-center">
+                                                           <div class="row">
+                                                               <div class="col-md-6 mb-2">
+                                                                   <button
+                                                                       class="table-btn-action btn btn-primary w-100"
+                                                                       type="button" data-id="#tableorders">
+                                                                       الطلبات
+                                                                   </button>
+                                                               </div>
+                                                               <div class="col-md-6">
+                                                                   <button
+                                                                       class="table-btn-action btn btn-primary w-100"
+                                                                       type="button" data-id="#tableinfo">
+                                                                       استعراض
+                                                                   </button>
+                                                               </div>
+                                                               <div class="col-md-6">
+                                                                   <button
+                                                                       class="table-btn-action btn btn-primary w-100"
+                                                                       type="button" disabled
+                                                                       data-id="#tableactive">
+                                                                       تفعيل الحجز
+                                                                   </button>
+                                                               </div>
+                                                               <div class="col-md-6">
+                                                                   <button
+                                                                       class="table-btn-action btn btn-primary w-100"
+                                                                       type="button" data-id="#tableend">
+                                                                       انهاء الحجز
+                                                                   </button>
+                                                               </div>
+                                                           </div>
+
+                                                       </div>
+                                                   </div>
+
                                                </div>
-                                               <div class="modal-body">
-                                                   <ul class="list-group">
-                                                       <li class="list-group-item">
-                                                           <div class="d-flex">
-                                                               <div class="left t-packagename">VVIP</div>
-                                                               <div class="right t-statu">{{ $table->status }}</div>
-                                                           </div>
-                                                       </li>
-                                                       <li class="list-group-item">
-                                                           <div class="d-flex">
-                                                               <div class="left t-packagepeice">باقة ساعاتان</div>
-                                                               <div class="right t-capicity">4 أشخاص</div>
-                                                           </div>
-                                                       </li>
-                                                       <li class="list-group-item">
-                                                           <div class="d-flex">
-                                                               <div class="left t-packagedate"> 10-8</div>
-                                                               <div class="right t-time">08:00 </div>
-                                                           </div>
-                                                       </li>
-                                                       <li class="list-group-item">
-                                                           <div class="d-flex">
-                                                               <div class="left t-waiter"> أسم الويتر: </div>
-                                                               <div class="right t-time">أحمد مرزوق </div>
-                                                           </div>
-                                                       </li>
-                                                   </ul>
-                                               </div>
-                                               <div class="modal-footer">
-                                                   <div class="left t-allpoint"> <span class="point">800</span>
-                                                       الرصيد</div>
-                                                   <div class="right t-points"> <span class="have-point">200</span>
-                                                       الرصيد المتبقى </div>
-                                               </div>
+
+
+                                               <!--<div class="modal-body">-->
+                                               <!--    <ul class="list-group">-->
+                                               <!--        <li class="list-group-item">-->
+                                               <!--            <div class="d-flex">-->
+                                               <!--                <div class="left t-packagename">VVIP</div>-->
+                                               <!--                <div class="right t-statu">{{ $table->status }}</div>-->
+                                               <!--            </div>-->
+                                               <!--        </li>-->
+                                               <!--        <li class="list-group-item">-->
+                                               <!--            <div class="d-flex">-->
+                                               <!--                <div class="left t-packagepeice">باقة ساعاتان</div>-->
+                                               <!--                <div class="right t-capicity">4 أشخاص</div>-->
+                                               <!--            </div>-->
+                                               <!--        </li>-->
+                                               <!--        <li class="list-group-item">-->
+                                               <!--            <div class="d-flex">-->
+                                               <!--                <div class="left t-packagedate"> 10-8</div>-->
+                                               <!--                <div class="right t-time">08:00 </div>-->
+                                               <!--            </div>-->
+                                               <!--        </li>-->
+                                               <!--        <li class="list-group-item">-->
+                                               <!--            <div class="d-flex">-->
+                                               <!--                <div class="left t-waiter"> أسم الويتر: </div>-->
+                                               <!--                <div class="right t-time">أحمد مرزوق </div>-->
+                                               <!--            </div>-->
+                                               <!--        </li>-->
+                                               <!--    </ul>-->
+                                               <!--</div>-->
+                                               <!--<div class="modal-footer">-->
+                                               <!--    <div class="left t-allpoint"> <span class="point">800</span> الرصيد-->
+                                               <!--    </div>-->
+                                               <!--    <div class="right t-points"> <span class="have-point">200</span> الرصيد-->
+                                               <!--        المتبقى </div>-->
+                                               <!--</div>-->
                                            </div>
                                        </div>
 
                                    </div>
+
+
 
                                    @if ($table->status == 'in_service')
                                        <div class="table-side-bar" id="tableee{{ $table->id }}">
@@ -3487,18 +3584,18 @@
 
 
    <script>
-    function home() {
-        $('.nav-item.active').removeClass('active');
+       function home() {
+           $('.nav-item.active').removeClass('active');
 
-        // Add active class to "القائمة" link
-        $('.home').addClass('active');
-        $('#mainPage').empty(); // Clear the previous page content
-        $.get('/branch/branch/_home', {}).done(function(data) {
-            $('#mainPage').html(data); // Show the new content
-        }).done(function() {
-            $('#casher-section').show(); // Hide the casher section
-            $('#reserv-main-section').hide();
-            $('#reservSideContainer').hide(); // Show the reserv main section
-        });
-    }
+           // Add active class to "القائمة" link
+           $('.home').addClass('active');
+           $('#mainPage').empty(); // Clear the previous page content
+           $.get('/branch/branch/_home', {}).done(function(data) {
+               $('#mainPage').html(data); // Show the new content
+           }).done(function() {
+               $('#casher-section').show(); // Hide the casher section
+               $('#reserv-main-section').hide();
+               $('#reservSideContainer').hide(); // Show the reserv main section
+           });
+       }
    </script>

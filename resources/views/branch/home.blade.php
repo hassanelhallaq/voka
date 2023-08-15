@@ -59,11 +59,11 @@
         }
 
         /* .sofa:hover .fill {
-                fill: var(--orange);
-                }
-                .sofa:hover .line {
-                fill: var(--white);
-                } */
+                                            fill: var(--orange);
+                                            }
+                                            .sofa:hover .line {
+                                            fill: var(--white);
+                                            } */
 
         .sofa svg {
             filter: brightness(1);
@@ -117,29 +117,6 @@
     <div class="col-md-11" id="mainPage">
 
         <div class="container-fluid">
-            <!--<div class="filter-btns d-flex mb-2">-->
-            <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
-            <!--        @foreach ($halles as $key => $item)
-    -->
-            <!--            <button type="button" class="h-filter btn btn-dark"-->
-            <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
-            <!--
-    @endforeach-->
-            <!--    </div>-->
-            <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
-            <!--            الحالات</button>-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="reserved">-->
-            <!--            المحجوزة</button>-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="available">-->
-            <!--            المتاحة</button>-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="serv"> فى-->
-            <!--            الخدمة</button>-->
-            <!--    </div>-->
-
-            <!--</div>-->
-            <!-- salone table  -->
-
             <div class="row home-card mt-2 active-salon" id="salon{{ $item->id }}">
                 <div class="col-md-1">
                     <div class="filter-btns d-flex flex-column mb-2">
@@ -183,7 +160,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -649,7 +626,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -1125,7 +1102,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -1844,7 +1821,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2322,7 +2299,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2797,7 +2774,7 @@
                                         ->where('is_done', 0)
                                         ->with('products')
                                         ->first();
-                                
+
                                     // Wrap the related products in a collection (even if there's only one result)
                                     if ($orders != null && $orders->products->count() != 0) {
                                         // Calculate total order prices using the map function on the products collection
@@ -2916,86 +2893,122 @@
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
-                                            <div class="card bg-info text-dark" data-id="table1" data-stat="serv">
-                                            <div class="modal-header">
-                                                <div class="card-header primary-bg-color w-100 d-flex justify-content-between">
-                                                <h3 class="modal-title fs-5" id="exampleModalLabel">
-                                                    {{ $table->name }}</h3>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                            <div class="card  @if ($table->status == 'in_service') bg-info
+                                                 @elseif($table->status == 'available')
+                                                bg-success text-light
+                                                @elseif ($table->status == 'reserved')
+                                                   bg-danger  text-light @endif"
+                                                data-id="table1" data-stat="serv">
+                                                <div class="modal-header">
+                                                    <div
+                                                        class="card-header primary-bg-color w-100 d-flex justify-content-between">
+                                                        <h3 class="modal-title fs-5" id="exampleModalLabel">
+                                                            {{ $table->name }}</h3>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                            </div>
-                                            
-                                            
-                                        
-                                        <!--<div class="card-header primary-bg-color">-->
-                                        <!--  <div class="top d-flex justify-content-between ">-->
-                                        <!--    <h5 class="card-title"> طاولة رقم 1</h5>-->
-                                        <!--    <span class="tableid" > #37856 </span>-->
-                                        <!--  </div>-->
-                                        <!--</div>-->
-                                        <div class="card-body">
-                                          <div class="card-item mid d-flex justify-content-between">
-                                            <p class="hall-name"> الباقة</p>
-                                            <span class="sta">عشاء فاخر </span>
-                                          </div>
-                                          <div class="card-item body-package d-flex justify-content-between">
-                                            <p class="hall-name">  المقاعد</p>
-                                            <span class="sta"> 4 اشخاص</span>
-                                          </div>
-                                          <div class="card-item body-time d-flex justify-content-between">
-                                            <p class="hall-name"> الحجز</p>
-                                            <span class="sta"> 500 ريال</span>
-                                          </div>
-                                          <div class="card-item body-time d-flex justify-content-between">
-                                            <p class="hall-name"> المدة</p>
-                                            <span class="sta"> 2 ساعة </span>
-                                          </div>
-                                          <div class="card-item body-time d-flex justify-content-between">
-                                            <p class="hall-name"> الحالة</p>
-                                            <span class="sta">  على الطاولة</span>
-                                          </div>
-                                          <div class="card-item body-time d-flex justify-content-between">
-                                            <p class="hall-name"> الرصيد الحالى</p>
-                                            <span class="sta"> 300 ريال </span>
-                                          </div>
-                                          <div class="card-item body-time d-flex justify-content-between">
-                                            <p class="hall-name"> الوقت المنقضى</p>
-                                            <span class="sta"> 01:25:00 </span>
-                                          </div>
-                                        </div>
-                                        <div class="card-footer">
-                                          <div class="table-btn my-3 text-center">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-2" >
-                                                    <button class="table-btn-action btn btn-primary w-100" type="button" data-id="#tableorders">
-                                                          الطلبات
-                                                    </button>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <button class="table-btn-action btn btn-primary w-100" type="button" data-id="#tableinfo">
-                                                         استعراض 
-                                                    </button>
+
+
+
+                                                <!--<div class="card-header primary-bg-color">-->
+                                                <!--  <div class="top d-flex justify-content-between ">-->
+                                                <!--    <h5 class="card-title"> طاولة رقم 1</h5>-->
+                                                <!--    <span class="tableid" > #37856 </span>-->
+                                                <!--  </div>-->
+                                                <!--</div>-->
+                                                <div class="card-body">
+                                                    <div class="card-item mid d-flex justify-content-between">
+                                                        <p class="hall-name"> الباقة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->name : 'لا توجد باقة' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-item body-package d-flex justify-content-between">
+                                                        <p class="hall-name"> المقاعد</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->count_of_visitors : 0 }}
+                                                            اشخاص</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحجز</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> المدة</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
+                                                            ساعة </span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحالة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->status : 'لا يوجد حجز' }}</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الرصيد الحالى</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال </span>
+                                                    </div>
+                                                    @php
+                                                        if ($table->reservation) {
+                                                            $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                                            $reservationDateTime = $table->reservation->date;
+                                                        }
+
+                                                    @endphp
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الوقت المنقضى</p>
+                                                        <div class="countdown-timer"
+                                                            data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
+                                                            data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                            <!-- Add a span to display the countdown timer -->
+                                                            @if ($table->reservation)
+                                                                <span class="countdown-timer-text">00:00:00</span>
+                                                            @else
+                                                                <span>انتهى</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <button class="table-btn-action btn btn-primary w-100" type="button"
-                                                        disabled data-id="#tableactive">
-                                                           تفعيل الحجز
-                                                    </button>
+                                                <div class="card-footer">
+                                                    <div class="table-btn my-3 text-center">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-2">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableorders">
+                                                                    الطلبات
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableinfo">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" disabled data-id="#tableactive">
+                                                                    تفعيل الحجز
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableend">
+                                                                    انهاء الحجز
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <button class="table-btn-action btn btn-primary w-100" type="button" data-id="#tableend">
-                                                          انهاء الحجز 
-                                                    </button>
-                                                </div>
+
                                             </div>
 
-                                        </div>
-                                        </div>
 
-                                      </div>
-                                      
-                                      
                                             <!--<div class="modal-body">-->
                                             <!--    <ul class="list-group">-->
                                             <!--        <li class="list-group-item">-->
@@ -3034,8 +3047,8 @@
                                     </div>
 
                                 </div>
-                                
-                                
+
+
 
                                 @if ($table->status == 'in_service')
                                     <div class="table-side-bar" id="tableee{{ $table->id }}">
@@ -3459,6 +3472,52 @@
 
     // // Initialize the countdown on page load
     // updateCountdown();
+</script>
+<script>
+    Function to update the countdown timer display
+
+    function updateCountdown() {
+        // Get all the countdown-timer elements
+        const countdownTimers = document.querySelectorAll('.countdown-timer');
+
+        countdownTimers.forEach(countdownTimer => {
+            const countdownTimerText = countdownTimer.querySelector('.countdown-timer-text');
+
+            // Get the data-start and data-package-time values from the data attributes
+            const startTimeString = countdownTimer.getAttribute('data-start');
+            const packageTime = parseInt(countdownTimer.getAttribute('data-package-time'));
+
+            // Convert the startTimeString to a Date object
+            const startTime = new Date(startTimeString);
+
+            // Calculate the target end time by adding the packageTime in minutes to the start time
+            const endTime = new Date(startTime.getTime() + packageTime * 60000);
+
+            const currentTime = new Date().getTime();
+            const timeRemaining = endTime - currentTime;
+
+            if (timeRemaining <= 0) {
+                // Timer has ended
+                countdownTimerText.textContent = 'انتهى';
+            } else {
+                // Calculate hours, minutes, and seconds
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                // Format the time and update the countdown display
+                const formattedTime =
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                countdownTimerText.textContent = formattedTime;
+            }
+        });
+    }
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+
+    // Initialize the countdown on page load
+    updateCountdown();
 </script>
 <script>
     // $(document).ready(function() {
