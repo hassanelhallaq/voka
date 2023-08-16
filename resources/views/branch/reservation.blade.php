@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <span class="top-title"> تسجيل حجز جديد  </span>
+                    <span class="top-title"> تسجيل حجز جديد </span>
                 </div>
                 <!--<div class="col-4 text-left px-5">-->
                 <!--    <a href="{{ route('branch.home') }}" class="close-icon">-->
@@ -109,7 +109,7 @@
 
                                 </a>
                             </li>
-                           
+
                             <!--<li class="nav-item py-3 show-content" data-id="#date-content" data-v="0">-->
                             <!--    <a class="nav-link" href="#">-->
                             <!--        <div class="d-flex w-100">-->
@@ -142,11 +142,14 @@
 
                                 </a>
                             </li>
-                             <li class="mt-5">
+                            <li class="mt-5">
                                 <div class="btn-group flex-column w-100" role="group" aria-label="Basic example">
-                                    <a href="{{ route('branch.home') }}" type="button" class="s-filter btn btn-lg btn-primary" > الغاء الحجز </a>
-                                    <a href="{{ route('branch.home') }}" type="button" class="s-filter btn btn-lg btn-primary my-3" > عرض الصالة </a>
-                                    <a href="{{ route('branch.home') }}" type="button" class="s-filter btn btn-lg btn-primary" > اقفال الشاشة </a>
+                                    <a href="{{ route('branch.home') }}" type="button"
+                                        class="s-filter btn btn-lg btn-primary"> الغاء الحجز </a>
+                                    <a href="{{ route('branch.home') }}" type="button"
+                                        class="s-filter btn btn-lg btn-primary my-3"> عرض الصالة </a>
+                                    <a href="{{ route('branch.home') }}" type="button"
+                                        class="s-filter btn btn-lg btn-primary"> اقفال الشاشة </a>
                                 </div>
                             </li>
                             <li class="nav-item py-3 show-content no-border" data-id="#pay" data-v="0">
@@ -193,15 +196,15 @@
                             <div class="container pt-3">
                                 <!--<div class="row">-->
                                 <!--    <div class="col-10">-->
-                                        
-                                        <!--<div class="seacr-bar mb-5">-->
-                                        <!--    <form class="d-flex search w-100 " role="search">-->
-                                        <!--        <input class="form-control" oninput="clients()" id="search"-->
-                                        <!--            type="search" aria-label="Search">-->
-                                        <!--        <button class="btn search-btn"><i-->
-                                        <!--                class="fa-solid fa-magnifying-glass"></i></button>-->
-                                        <!--    </form>-->
-                                        <!--</div>-->
+
+                                <!--<div class="seacr-bar mb-5">-->
+                                <!--    <form class="d-flex search w-100 " role="search">-->
+                                <!--        <input class="form-control" oninput="clients()" id="search"-->
+                                <!--            type="search" aria-label="Search">-->
+                                <!--        <button class="btn search-btn"><i-->
+                                <!--                class="fa-solid fa-magnifying-glass"></i></button>-->
+                                <!--    </form>-->
+                                <!--</div>-->
                                 <!--    </div>-->
                                 <!--    <div class="col-md-2">-->
                                 <!--        <div class="top-prev change-content btn btn-primary" data-id="#all-tables">السابق</div>-->
@@ -263,7 +266,8 @@
                                     </div>
                                     <div class="col-md-6"></div>
                                     <div class="col-md-2">
-                                        <div class="top-prev change-content btn btn-primary" data-id="#all-tables">السابق</div>
+                                        <div class="top-prev change-content btn btn-primary" data-id="#all-tables">
+                                            السابق</div>
                                     </div>
                                 </div>
                                 <div class="row gust-cards" id="clients">
@@ -274,10 +278,10 @@
                                 <!--        <div class="change-content btn btn-primary" data-id="#all-tables">السابق</div>-->
                                 <!--    </div>-->
                                 <!--    <div class="col-md-8"></div>-->
-                                    <!--<div class="col-md-2">-->
-                                    <!--    <button class="change-content btn btn-primary"-->
-                                    <!--        data-id="#date-content">التالى</button>-->
-                                    <!--</div>-->
+                                <!--<div class="col-md-2">-->
+                                <!--    <button class="change-content btn btn-primary"-->
+                                <!--        data-id="#date-content">التالى</button>-->
+                                <!--</div>-->
                                 <!--</div>-->
                             </div>
                         </div>
@@ -293,7 +297,7 @@
                                 <div class="row">
                                     <div class="col-md-10"></div>
                                     <div class="col-md-2">
-                                         <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>
+                                        <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -322,12 +326,15 @@
                                                     </div>
                                                     <span class="pay-total">286 ريال</span>
                                                 </div>
-                                                 <div class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
+                                                <div
+                                                    class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
 
                                                     <div class="discount-inputs input-group">
-                                                        <label  class="col-sm-2 col-form-label"> %</label>
-                                                      <input class="discount-input form-control" lang="en" type="number" placeholder="قيمة الخصم" aria-label="default input example">
-                                                      <button class="btn btn-primary" type="button">تطبيق</button>
+                                                        <label class="col-sm-2 col-form-label"> %</label>
+                                                        <input class="discount-input form-control" lang="en"
+                                                            type="number" placeholder="قيمة الخصم"
+                                                            aria-label="default input example">
+                                                        <button class="btn btn-primary" type="button">تطبيق</button>
                                                     </div>
                                                 </div>
                                                 <div
@@ -366,23 +373,26 @@
                                                             <div class="col-md-6">
                                                                 <button class="btn btn-primary w-100" type="button"
                                                                     data-bs-toggle="modal" data-bs-target="#modalPay">
-                                                                     تسجيل الطلب
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button class="btn btn-primary w-100" type="button" disabled>
-                                                                     تفعيل الحجز
+                                                                    تسجيل الطلب
                                                                 </button>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <button class="btn btn-primary w-100" type="button"
-                                                                    data-bs-toggle="modal" data-bs-target="#bill" disabled>
-                                                                      طباعة الفاتورة
+                                                                    disabled>
+                                                                    تفعيل الحجز
                                                                 </button>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <button class="btn btn-primary w-100" type="button" disabled>
-                                                                     تغيير الصالة 
+                                                                <button class="btn btn-primary w-100" type="button"
+                                                                    data-bs-toggle="modal" data-bs-target="#bill"
+                                                                    disabled>
+                                                                    طباعة الفاتورة
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="btn btn-primary w-100" type="button"
+                                                                    disabled>
+                                                                    تغيير الصالة
                                                                 </button>
                                                             </div>
                                                         </div>
