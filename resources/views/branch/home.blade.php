@@ -63,11 +63,11 @@
         }
 
         /* .sofa:hover .fill {
-                                                                fill: var(--orange);
-                                                                }
-                                                                .sofa:hover .line {
-                                                                fill: var(--white);
-                                                                } */
+                                                            fill: var(--orange);
+                                                            }
+                                                            .sofa:hover .line {
+                                                            fill: var(--white);
+                                                            } */
 
         .sofa svg {
             filter: brightness(1);
@@ -132,11 +132,11 @@
             <!--<div class="filter-btns d-flex mb-2">-->
             <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
             <!--        @foreach ($halles as $key => $item)
-    -->
+                     -->
             <!--            <button type="button" class="h-filter btn btn-dark"-->
             <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
             <!--
-    @endforeach-->
+             @endforeach-->
             <!--    </div>-->
             <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
             <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
@@ -1103,40 +1103,40 @@
                                                                                 </button>
                                                                             </div>
 
-                                                                            <div class="modal fade"
-                                                                                id="exampleModal_{{ $table->id }}"
-                                                                                tabindex="-1"
-                                                                                aria-labelledby="exampleModalLabel"
-                                                                                aria-hidden="true">
-                                                                                <div class="modal-dialog">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <h1 class="modal-title fs-5"
-                                                                                                id="exampleModalLabel">
-                                                                                                تفعيل الحجز</h1>
-                                                                                            <button type="button"
-                                                                                                class="btn-close"
-                                                                                                data-bs-dismiss="modal"
-                                                                                                aria-label="Close"></button>
-                                                                                        </div>
-                                                                                        <div class="modal-body">
-                                                                                            <div
-                                                                                                class="modal-body text-light">
-                                                                                                هل تود تفعيل الحجز
+                                                                              <div class="modal fade"
+                                                                                    id="exampleModal_{{ $table->id }}"
+                                                                                    tabindex="-1"
+                                                                                    aria-labelledby="exampleModalLabel"
+                                                                                    aria-hidden="true">
+                                                                                    <div class="modal-dialog">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h1 class="modal-title fs-5"
+                                                                                                    id="exampleModalLabel">
+                                                                                                    تفعيل الحجز</h1>
+                                                                                                <button type="button"
+                                                                                                    class="btn-close"
+                                                                                                    data-bs-dismiss="modal"
+                                                                                                    aria-label="Close"></button>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <a type="button"
-                                                                                                class="btn btn-secondary"
-                                                                                                data-bs-dismiss="modal">اغلاق</a>
-                                                                                            <button type="button"
-                                                                                                onclick="activeTable({{ $table->id }})"
-                                                                                                class="btn btn-primary">تأكيد
-                                                                                            </button>
+                                                                                            <div class="modal-body">
+                                                                                                <div
+                                                                                                    class="modal-body text-light">
+                                                                                                    هل تود تفعيل الحجز
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <a type="button"
+                                                                                                    class="btn btn-secondary"
+                                                                                                    data-bs-dismiss="modal">اغلاق</a>
+                                                                                                <button type="button"
+                                                                                                    onclick="activeTable({{ $table->id }})"
+                                                                                                    class="btn btn-primary">تأكيد
+                                                                                                </button>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
                                                                         @else
                                                                             <div class="col-md-6">
                                                                                 <button disabled
@@ -2081,40 +2081,40 @@
                                                                                 </button>
                                                                             </div>
 
-                                                                            <div class="modal fade"
-                                                                                id="exampleModal_{{ $table->id }}"
-                                                                                tabindex="-1"
-                                                                                aria-labelledby="exampleModalLabel"
-                                                                                aria-hidden="true">
-                                                                                <div class="modal-dialog">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <h1 class="modal-title fs-5"
-                                                                                                id="exampleModalLabel">
-                                                                                                تفعيل الحجز</h1>
-                                                                                            <button type="button"
-                                                                                                class="btn-close"
-                                                                                                data-bs-dismiss="modal"
-                                                                                                aria-label="Close"></button>
-                                                                                        </div>
-                                                                                        <div class="modal-body">
-                                                                                            <div
-                                                                                                class="modal-body text-light">
-                                                                                                هل تود تفعيل الحجز
+                                                                               <div class="modal fade"
+                                                                                    id="exampleModal_{{ $table->id }}"
+                                                                                    tabindex="-1"
+                                                                                    aria-labelledby="exampleModalLabel"
+                                                                                    aria-hidden="true">
+                                                                                    <div class="modal-dialog">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h1 class="modal-title fs-5"
+                                                                                                    id="exampleModalLabel">
+                                                                                                    تفعيل الحجز</h1>
+                                                                                                <button type="button"
+                                                                                                    class="btn-close"
+                                                                                                    data-bs-dismiss="modal"
+                                                                                                    aria-label="Close"></button>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <a type="button"
-                                                                                                class="btn btn-secondary"
-                                                                                                data-bs-dismiss="modal">اغلاق</a>
-                                                                                            <button type="button"
-                                                                                                onclick="activeTable({{ $table->id }})"
-                                                                                                class="btn btn-primary">تأكيد
-                                                                                            </button>
+                                                                                            <div class="modal-body">
+                                                                                                <div
+                                                                                                    class="modal-body text-light">
+                                                                                                    هل تود تفعيل الحجز
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <a type="button"
+                                                                                                    class="btn btn-secondary"
+                                                                                                    data-bs-dismiss="modal">اغلاق</a>
+                                                                                                <button type="button"
+                                                                                                    onclick="activeTable({{ $table->id }})"
+                                                                                                    class="btn btn-primary">تأكيد
+                                                                                                </button>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
                                                                         @else
                                                                             <div class="col-md-6">
                                                                                 <button
@@ -2124,7 +2124,7 @@
                                                                                     تفعيل الحجز
                                                                                 </button>
                                                                                 <!-- Modal -->
-                                                                                <div class="modal fade"
+                                                                                  <div class="modal fade"
                                                                                     id="close_{{ $table->id }}"
                                                                                     tabindex="-1"
                                                                                     aria-labelledby="exampleModalLabel"
@@ -2817,40 +2817,40 @@
                                                                                     تفعيل الحجز
                                                                                 </button>
                                                                             </div>
-                                                                            <div class="modal fade"
-                                                                                id="exampleModal_{{ $table->id }}"
-                                                                                tabindex="-1"
-                                                                                aria-labelledby="exampleModalLabel"
-                                                                                aria-hidden="true">
-                                                                                <div class="modal-dialog">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <h1 class="modal-title fs-5"
-                                                                                                id="exampleModalLabel">
-                                                                                                تفعيل الحجز</h1>
-                                                                                            <button type="button"
-                                                                                                class="btn-close"
-                                                                                                data-bs-dismiss="modal"
-                                                                                                aria-label="Close"></button>
-                                                                                        </div>
-                                                                                        <div class="modal-body">
-                                                                                            <div
-                                                                                                class="modal-body text-light">
-                                                                                                هل تود تفعيل الحجز
+                                                                             <div class="modal fade"
+                                                                                    id="exampleModal_{{ $table->id }}"
+                                                                                    tabindex="-1"
+                                                                                    aria-labelledby="exampleModalLabel"
+                                                                                    aria-hidden="true">
+                                                                                    <div class="modal-dialog">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h1 class="modal-title fs-5"
+                                                                                                    id="exampleModalLabel">
+                                                                                                    تفعيل الحجز</h1>
+                                                                                                <button type="button"
+                                                                                                    class="btn-close"
+                                                                                                    data-bs-dismiss="modal"
+                                                                                                    aria-label="Close"></button>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <a type="button"
-                                                                                                class="btn btn-secondary"
-                                                                                                data-bs-dismiss="modal">اغلاق</a>
-                                                                                            <button type="button"
-                                                                                                onclick="activeTable({{ $table->id }})"
-                                                                                                class="btn btn-primary">تأكيد
-                                                                                            </button>
+                                                                                            <div class="modal-body">
+                                                                                                <div
+                                                                                                    class="modal-body text-light">
+                                                                                                    هل تود تفعيل الحجز
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <a type="button"
+                                                                                                    class="btn btn-secondary"
+                                                                                                    data-bs-dismiss="modal">اغلاق</a>
+                                                                                                <button type="button"
+                                                                                                    onclick="activeTable({{ $table->id }})"
+                                                                                                    class="btn btn-primary">تأكيد
+                                                                                                </button>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
                                                                         @else
                                                                             <div class="col-md-6">
                                                                                 <button disabled
@@ -5158,16 +5158,24 @@
 <script>
     function activeTable(id) {
         let formData = new FormData();
-        activeTable('/branch/active/table/' + id, formData)
-        // $('#mainPage').empty(); // Clear the previous page content
+        store('/branch/active/table/' + id, formData)
+        halles();
 
     }
 
     function closeTable(id) {
         let formData = new FormData();
-        closeTable('/branch/close/table/' + id, formData)
-
-
+        store('/branch/close/table/' + id, formData)
+        halles();
+    }
+    function halles(){
+         $.get('/branch/branch/halls', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
+        });
     }
     $(document).ready(function() {
 
