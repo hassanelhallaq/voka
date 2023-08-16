@@ -132,11 +132,11 @@
             <!--<div class="filter-btns d-flex mb-2">-->
             <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
             <!--        @foreach ($halles as $key => $item)
-    -->
+                     -->
             <!--            <button type="button" class="h-filter btn btn-dark"-->
             <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
             <!--
-    @endforeach-->
+             @endforeach-->
             <!--    </div>-->
             <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
             <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
