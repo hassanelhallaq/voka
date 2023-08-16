@@ -749,29 +749,16 @@
 <script>
     function activeTable(id) {
         let formData = new FormData();
-        store('/branch/active/table/' + id, formData)
-        $('#mainPage').empty(); // Clear the previous page content
-        $.get('/branch/branch/halls', {}).done(function(data) {
-            $('#mainPage').html(data); // Show the new content
-        }).done(function() {
-            $('#casher-section').show(); // Hide the casher section
-            $('#reserv-main-section').hide();
-            $('#reservSideContainer').hide(); // Show the reserv main section
-        });
+        activeTable('/branch/active/table/' + id, formData)
+        // $('#mainPage').empty(); // Clear the previous page content
+
     }
 
     function closeTable(id) {
         let formData = new FormData();
-        store('/branch/close/table/' + id, formData)
+        closeTable('/branch/close/table/' + id, formData)
 
-        $('#mainPage').empty(); // Clear the previous page content
-        $.get('/branch/branch/halls', {}).done(function(data) {
-            $('#mainPage').html(data); // Show the new content
-        }).done(function() {
-            $('#casher-section').show(); // Hide the casher section
-            $('#reserv-main-section').hide();
-            $('#reservSideContainer').hide(); // Show the reserv main section
-        });
+
     }
 </script>
 

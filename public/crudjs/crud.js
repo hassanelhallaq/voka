@@ -41,6 +41,31 @@ function activeTable(url, data) {
         });
 
 }
+
+function closeTable(url, data) {
+    axios.post(url, data)
+        .then(function (response) {
+            // $('#mainPage').empty(); // Clear the previous page content
+        $.get('/branch/branch/halls', {}).done(function(data) {
+            $('#mainPage').html(data); // Show the new content
+        }).done(function() {
+            $('#casher-section').show(); // Hide the casher section
+            $('#reserv-main-section').hide();
+            $('#reservSideContainer').hide(); // Show the reserv main section
+        });
+
+        })
+        .catch(function (error) {
+
+            if (error.response.data.errors !== undefined) {
+                showErrorMessages(error.response.data.errors);
+            } else {
+
+                showMessage(error.response.data);
+            }
+        });
+
+}
 function storepart(url, data) {
 
     axios.post(url, data)
