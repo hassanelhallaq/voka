@@ -12,13 +12,13 @@
                     }
                 @endphp
                 @if ($slotClosed)
-                    {{-- <button class="btn btn-lg btn-danger change-content btn-clock" data-choos="{{ $slot['start'] }} -
-                        {{ $slot['end'] }}" data-id="#all-tables" disabled >{{ $slot['start'] }} -
-                        {{ $slot['end'] }}</button> --}}
+                    {{-- <div class="btn btn-lg btn-danger time-slot btn-clock" data-choos="{{ $slot['start'] }} -
+                        {{ $slot['end'] }}" data-id="#pay" disabled >{{ $slot['start'] }} -
+                        {{ $slot['end'] }}</div> --}}
                 @else
-                    <button class="btn btn-lg btn-success change-content btn-clock" data-choos="{{ $slot['start'] }} -
+                    <div class="btn btn-lg btn-success time-slot change-content btn-clock" data-choos="{{ $slot['start'] }} -
                         {{ $slot['end'] }}" data-id="#pay">{{ $slot['start'] }} -
-                        {{ $slot['end'] }}</button>
+                        {{ $slot['end'] }}</div>
                 @endif
             @endforeach
 
@@ -36,3 +36,15 @@
 <!--    </div>-->
 <!--</div>-->
 <script src="{{ asset('front/js/main.js') }}"></script>
+<script>
+    $(document).ready(function () {
+     $('.time-slot').on('click', function(){ 
+            var showenId = $(this).data('id');
+            $('.reservation-tabs').hide();
+            $(showenId).show();
+            var forDataV = $(this).html();
+            $('.reserv-time').html(forDataV);
+            console.log(forDataV);
+        });
+    }); 
+</script>
