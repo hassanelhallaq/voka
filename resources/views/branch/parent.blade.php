@@ -10,11 +10,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
-    
-    
+
+
    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
    <style>
-   
+
    .new-reversation .fa-plus {
        margin-left: 6px;
    }
@@ -343,8 +343,8 @@
                 </div>
                 <div class="col-md-1">
                     <div class=" new-reversation">
-                        <a href="" class="btn btn-primary"> <i class="fa-solid fa-plus"></i> حجز جديد</a>
-                        
+                        <a href="{{ route('branch.reservation') }}" class="btn btn-primary"> <i class="fa-solid fa-plus"></i> حجز جديد</a>
+
                     </div>
                 </div>
             </div>
@@ -425,7 +425,7 @@
                 </div>
                 @yield('contentFront')
 
-                
+
                 @include('branch.reservSide')
 
             </div>
@@ -570,12 +570,12 @@
               <button class="pin-submit" id="pinSubmit">فتح</button>
             </div>
           </div>
-          
+
     </div>
-    
-    
-    
-    
+
+
+
+
     <div class="the-calc inactive-calc flex-column">
         <button class="calc-close btn btn-primary my-3">اغلاق</button>
         <div class="calc calc-container">
@@ -598,7 +598,7 @@
           <span class="num" onclick="calc.txt.value+='0'"><i>0</i></span>
           <span class="num" onclick="calc.txt.value+='00'"><i>00</i></span>
           <span class="num" onclick="calc.txt.value+='.'"><i>.</i></span>
-  
+
           <span
             class="num equal"
             onclick="document.calc.txt.value=eval(calc.txt.value)"
@@ -607,7 +607,7 @@
         </form>
       </div>
     </div>
-    
+
     <script>
         $(document).ready(function() {
           $('.close-the-screen').on('click', function(){
@@ -615,14 +615,14 @@
             $('.lock-screen').fadeIn();
             $('#pinInput').val('');
           });
-    
+
             const correctPin = "1234"; // رمز PIN الصحيح
             const $pinInput = $('#pinInput');
             const $pinSubmit = $('#pinSubmit');
-            
+
             $pinSubmit.on('click', function() {
                 const enteredPin = $pinInput.val();
-                
+
                 if (enteredPin === correctPin) {
                 $('.lock-screen').fadeOut();
                 $('.closed-screen').removeClass('opened-screen');
@@ -630,7 +630,7 @@
                 alert('رمز PIN غير صحيح');
                 }
             });
-            
+
             $('.numeric-key').on('click', function() {
                 const key = $(this).text();
                 const currentPin = $pinInput.val();
@@ -638,14 +638,14 @@
                 $pinInput.val(currentPin + key);
                 }
             });
-            
+
             $('.calc').on('click', function(){
                 $('.the-calc').removeClass('inactive-calc').addClass('active-calc');
             });
              $('.calc-close').on('click', function(){
                 $('.the-calc').removeClass('active-calc').addClass('inactive-calc');
             });
-            
+
         });
 
       </script>
