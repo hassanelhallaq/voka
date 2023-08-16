@@ -124,7 +124,7 @@
                                                                         <div class="col-md-6 mb-2">
                                                                             <button
                                                                                 class="table-btn-orders btn btn-primary w-100"
-                                                                                type="button"
+                                                                                type="button" @if (!$tables->reservation) disabled @endif
                                                                                 data-id="#tableorders{{ $tables->id }}">
                                                                                 الطلبات
                                                                             </button>
@@ -802,7 +802,7 @@
             $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
             console.log('second');
         });
-        
+
          $('.salon-table-tabs .nav-link').on('click', function() {
              console.log('ghghghgh');
              $('.salon-table-tabs-content').removeClass('active');
