@@ -750,13 +750,9 @@
     function activeTable(id) {
         let formData = new FormData();
         store('/branch/active/table/' + id, formData)
-        $('.nav-item.active').removeClass('active');
-        // Add active class to "القائمة" link
-        $('.halls').addClass('active');
-
         // $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {
-            // $('#mainPage').html(data); // Show the new content
+            $('#mainPage').html(data); // Show the new content
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section
             $('#reserv-main-section').hide();
@@ -770,7 +766,7 @@
 
         // $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {
-            // $('#mainPage').html(data); // Show the new content
+            $('#mainPage').html(data); // Show the new content
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section
             $('#reserv-main-section').hide();
