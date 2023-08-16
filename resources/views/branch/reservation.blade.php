@@ -326,7 +326,7 @@
                                                     </div>
                                                     <span class="pay-total">286 ريال</span>
                                                 </div>
-                                                <div
+                                                 <div
                                                     class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
 
                                                     <div class="discount-inputs input-group">
