@@ -10,6 +10,212 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/main.css') }}">
+    
+    
+   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+   <style>
+   
+   .new-reversation .fa-plus {
+       margin-left: 6px;
+   }
+   .calc {
+       font-size: 30px;
+       cursor: pointer;
+   }
+       /*--------------------------------------------- css for the lock screen ----------------------------------------*/
+ .closed-screen {
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(27, 27, 27);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 9999;
+            display: none;
+        }
+        .opened-screen {
+            display: block;
+        }
+
+        .lock-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            direction: ltr;
+            }
+
+            .pin-container {
+                text-align: center;
+                padding: 20px;
+                border: 1px solid #ccc;
+                background-color: white;
+                border-radius: 8px;
+            }
+
+            .pin-input {
+                width: 60px;
+                padding: 8px;
+                text-align: center;
+                font-size: 18px;
+            }
+
+            .pin-submit {
+                margin-top: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+             .numeric-keypad {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 10px;
+                margin-top: 10px;
+            }
+
+            .numeric-key {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .numeric-key:hover {
+                background-color: #ccc;
+            }
+/*----------------------------------------------end of the lock screen css code ----------------------------------------*/
+/*--------------------------------- the calculater css -----------------------------------------------------------------*/
+            .the-calc {
+              display: flex;
+              height: 100vh;
+              align-items: center;
+              justify-content: center;
+              background-color: #202020;
+              position: fixed;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              height: 100vh;
+              width: 100%;
+              direction: ltr;
+            }
+            .calc-container {
+              position: relative;
+              min-width: 300px;
+              min-height: 400px;
+              padding: 40px 30px 30px;
+              border-radius: 20px;
+              box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25),
+                10px 10px 70px rgba(0, 0, 0, 0.25), inset -5px -5px 15px rgba(0, 0, 0, 0.25),
+                inset 5px 5px 15px rgba(0, 0, 0, 0.25);
+                width: 500px;
+            }
+            .calc-container span {
+              color: #fff;
+              position: relative;
+              display: grid;
+              width: 80px;
+              place-items: center;
+              margin: 8px;
+              height: 80px;
+              background: linear-gradient(180deg, #2f2f2f, #3f3f3f);
+              box-shadow: inset -8px 0 8px rgba(0, 0, 0, 0.15),
+                inset 0 -8px 8px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(0, 0, 0, 0.75),
+                10px 20px 25px rgba(0, 0, 0, 0.4);
+              user-select: none;
+              cursor: pointer;
+              font-weight: 400;
+              border-radius: 10px;
+            }
+            .calculator span:active {
+              filter: brightness(1.5);
+            }
+            .calculator span::before {
+              content: "";
+              position: absolute;
+              top: 3px;
+              left: 4px;
+              bottom: 14px;
+              right: 12px;
+              border-radius: 10px;
+              background: linear-gradient(90deg, #2d2d2d, #4d4d4d);
+              box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.1),
+                10px 5px 10px rgba(0, 0, 0, 0.15);
+              border-left: 1px solid #0004;
+              border-bottom: 1px solid #0004;
+              border-top: 1px solid #0009;
+            }
+            .calculator span i {
+              position: relative;
+              font-style: normal;
+              font-size: 1.5em;
+              text-transform: uppercase;
+            }
+            .calculator {
+              position: relative;
+              display: grid;
+            }
+            .calculator .value {
+              position: relative;
+              grid-column: span 4;
+              height: 100px;
+              width: calc(100% - 20px);
+              left: 10px;
+              border: none;
+              outline: none;
+              background-color: #a7af7c;
+              margin-bottom: 10px;
+              border-radius: 10px;
+              box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.75);
+              text-align: right;
+              padding: 10px;
+              font-size: 2em;
+            }
+            .calculator .clear {
+              grid-column: span 2;
+              width: 180px;
+              background: #f00;
+            }
+            .calculator .clear::before {
+              background: linear-gradient(90deg, #d20000, #ffffff5c);
+              border-left: 1px solid #fff4;
+              border-bottom: 1px solid #fff4;
+              border-top: 1px solid #fff4;
+            }
+            .calculator .plus {
+              grid-row: span 2;
+              height: 180px;
+            }
+            .calculator .equal {
+              background: #2196f3;
+            }
+            .calculator .equal::before{
+              background: linear-gradient(90deg, #1479c9, #ffffff5c);
+              border-left: 1px solid #fff4;
+              border-bottom: 1px solid #fff4;
+              border-top: 1px solid #fff4;
+            }
+            .active-calc {
+                display: flex;
+                z-index: 9999;
+            }
+            .inactive-calc {
+                display: none;
+            }
+   </style>
+
 
 
 
@@ -30,7 +236,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="notifications-wrap">
                         <div class="logout mb-5">
                             <div class="card mb-3">
@@ -126,8 +332,19 @@
                     </div>
                 </div>
                 <div class="col-md-1">
-                    <div class="lock">
+                    <div class="calc">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="lock close-the-screen">
                         <i class="fa-solid fa-unlock-keyhole"></i>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class=" new-reversation">
+                        <a href="" class="btn btn-primary"> <i class="fa-solid fa-plus"></i> حجز جديد</a>
+                        
                     </div>
                 </div>
             </div>
@@ -332,6 +549,106 @@
         });
     }
 </script>
+
+<div class="closed-screen">
+        <div class="lock-screen">
+            <div class="pin-container">
+              <h2>أدخل رمز PIN</h2>
+              <input type="password" class="pin-input" id="pinInput" maxlength="4">
+              <div class="numeric-keypad">
+                <button class="numeric-key">1</button>
+                <button class="numeric-key">2</button>
+                <button class="numeric-key">3</button>
+                <button class="numeric-key">4</button>
+                <button class="numeric-key">5</button>
+                <button class="numeric-key">6</button>
+                <button class="numeric-key">7</button>
+                <button class="numeric-key">8</button>
+                <button class="numeric-key">9</button>
+                <button class="numeric-key">0</button>
+              </div>
+              <button class="pin-submit" id="pinSubmit">فتح</button>
+            </div>
+          </div>
+          
+    </div>
+    
+    
+    
+    
+    <div class="the-calc inactive-calc flex-column">
+        <button class="calc-close btn btn-primary my-3">اغلاق</button>
+        <div class="calc calc-container">
+        <form action="" name="calc" class="calculator">
+          <input type="text" class="value" readonly name="txt" />
+          <span class="num clear" onclick="calc.txt.value=''"><i>C</i></span>
+          <span class="num" onclick="calc.txt.value+='/'"><i>/</i></span>
+          <span class="num" onclick="calc.txt.value+='*'"><i>*</i></span>
+          <span class="num" onclick="calc.txt.value+='7'"><i>7</i></span>
+          <span class="num" onclick="calc.txt.value+='8'"><i>8</i></span>
+          <span class="num" onclick="calc.txt.value+='9'"><i>9</i></span>
+          <span class="num" onclick="calc.txt.value+='-'"><i>-</i></span>
+          <span class="num" onclick="calc.txt.value+='4'"><i>4</i></span>
+          <span class="num" onclick="calc.txt.value+='5'"><i>5</i></span>
+          <span class="num" onclick="calc.txt.value+='6'"><i>6</i></span>
+          <span class="num plus" onclick="calc.txt.value+='+'"><i>+</i></span>
+          <span class="num" onclick="calc.txt.value+='1'"><i>1</i></span>
+          <span class="num" onclick="calc.txt.value+='2'"><i>2</i></span>
+          <span class="num" onclick="calc.txt.value+='3'"><i>3</i></span>
+          <span class="num" onclick="calc.txt.value+='0'"><i>0</i></span>
+          <span class="num" onclick="calc.txt.value+='00'"><i>00</i></span>
+          <span class="num" onclick="calc.txt.value+='.'"><i>.</i></span>
+  
+          <span
+            class="num equal"
+            onclick="document.calc.txt.value=eval(calc.txt.value)"
+            ><i>=</i></span
+          >
+        </form>
+      </div>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+          $('.close-the-screen').on('click', function(){
+            $('.closed-screen').addClass('opened-screen');
+            $('.lock-screen').fadeIn();
+            $('#pinInput').val('');
+          });
+    
+            const correctPin = "1234"; // رمز PIN الصحيح
+            const $pinInput = $('#pinInput');
+            const $pinSubmit = $('#pinSubmit');
+            
+            $pinSubmit.on('click', function() {
+                const enteredPin = $pinInput.val();
+                
+                if (enteredPin === correctPin) {
+                $('.lock-screen').fadeOut();
+                $('.closed-screen').removeClass('opened-screen');
+                } else {
+                alert('رمز PIN غير صحيح');
+                }
+            });
+            
+            $('.numeric-key').on('click', function() {
+                const key = $(this).text();
+                const currentPin = $pinInput.val();
+                if (currentPin.length < 4) {
+                $pinInput.val(currentPin + key);
+                }
+            });
+            
+            $('.calc').on('click', function(){
+                $('.the-calc').removeClass('inactive-calc').addClass('active-calc');
+            });
+             $('.calc-close').on('click', function(){
+                $('.the-calc').removeClass('active-calc').addClass('inactive-calc');
+            });
+            
+        });
+
+      </script>
 </body>
 
 </html>

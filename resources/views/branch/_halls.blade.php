@@ -7,11 +7,11 @@
                         <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
                         <div class="nav-tabs-navigation">
                             <div class="nav-tabs-wrapper">
-                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                <ul class="nav salon-table-tabs nav-tabs" data-tabs="tabs">
                                     @foreach ($halles as $key => $item)
                                         <li class="nav-item">
                                             <a class="nav-link {{ $key === 0 ? ' active' : '' }}"
-                                                href="#hall{{ $item->id }}"
+                                                data-salonTab="#hall{{ $item->id }}"
                                                 data-toggle="tab">{{ $item->name }}</a>
                                         </li>
                                     @endforeach
@@ -22,7 +22,7 @@
                     <div class="card-body new">
                         <div class="tab-content text-center">
                             @foreach ($halles as $e => $item)
-                                <div class="tab-pane {{ $e === 0 ? ' active' : '' }}" id="hall{{ $item->id }}">
+                                <div class="tab-pane salon-table-tabs-content  {{ $e === 0 ? ' active' : '' }}" id="hall{{ $item->id }}">
                                     <div class="row new-reservation-tables">
                                         <!--<h2 class="text-center text-light">{{ $item->name }}</h2>-->
                                         <div class="col-md-12">
@@ -676,7 +676,7 @@
     -->
 <!--</script>-->
 <script src="{{ asset('front/js/date.js') }}"></script>
-<script src="{{ asset('front/js/main.js') }}"></script>>
+<script src="{{ asset('front/js/main.js') }}"></script>
 <script>
     Function to update the countdown timer display
 
@@ -801,6 +801,13 @@
             $('.side-place').empty();
             $('.side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
             console.log('second');
+        });
+        
+         $('.salon-table-tabs .nav-link').on('click', function() {
+             console.log('ghghghgh');
+             $('.salon-table-tabs-content').removeClass('active');
+            var salonKey = $(this).data('salontab');
+            $(salonKey).addClass('active')
         });
 
     });
