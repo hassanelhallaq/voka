@@ -21,25 +21,27 @@ function store(url, data) {
 function activeTable(url, data) {
     axios.post(url, data)
         .then(function (response) {
-           $.get('/branch/branch/halls', {}).done(function(data) {
-            $('#mainPage').html(data); // Show the new content
-        }).done(function() {
-            $('#casher-section').show(); // Hide the casher section
-            $('#reserv-main-section').hide();
-            $('#reservSideContainer').hide(); // Show the reserv main section
-        });
-
+            $.get('/branch/branch/halls', {})
+                .done(function(data) {
+                    $('#mainPage').html(data); // Show the new content
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    // Handle the error from $.get
+                    console.error("Error in $.get:", errorThrown);
+                })
+                .always(function() {
+                    $('#casher-section').show(); // Hide the casher section
+                    $('#reserv-main-section').hide();
+                    $('#reservSideContainer').hide(); // Show the reserv main section
+                });
         })
         .catch(function (error) {
-
             if (error.response.data.errors !== undefined) {
                 showErrorMessages(error.response.data.errors);
             } else {
-
                 showMessage(error.response.data);
             }
         });
-
 }
 
 function closeTable(url, data) {
