@@ -169,23 +169,23 @@ $(document).ready(function () {
     $('.reservations-container .the-day').text(formattedDate);
 
     // كود عند الضغط على الحجز داخل الجدول
-    $('.statue').on('click', function(){
-      $('.statue').css('opacity', '0.5');
-      $(this).css('opacity', '1');
-       var dataTable = $(this).data('table');
-       var dataname = $(this).data('name');
-       var dataguests = $(this).data('guests');
-       var dataphone = $(this).data('phone');
-       var datapackage = $(this).data('package');
-       var datastute = $(this).data('stute');
-       var datapoints = $(this).data('guests');
-    $('.reservations-table-nmber').text(dataTable);
-    $('.guest-name').text(dataname);
-    $('.guest-number').text(dataguests);
-    $('.reservations-phone').text(dataphone);
-    $('.reservations-package').text(datapackage);
-    $('.reservations-statue').text(datastute);
-    $('.reservations-points').text(datapoints);
+    // $('.statue').on('click', function(){
+    //   $('.statue').css('opacity', '0.5');
+    //   $(this).css('opacity', '1');
+    //   var dataTable = $(this).data('table');
+    //   var dataname = $(this).data('name');
+    //   var dataguests = $(this).data('guests');
+    //   var dataphone = $(this).data('phone');
+    //   var datapackage = $(this).data('package');
+    //   var datastute = $(this).data('stute');
+    //   var datapoints = $(this).data('guests');
+    // $('.reservations-table-nmber').text(dataTable);
+    // $('.guest-name').text(dataname);
+    // $('.guest-number').text(dataguests);
+    // $('.reservations-phone').text(dataphone);
+    // $('.reservations-package').text(datapackage);
+    // $('.reservations-statue').text(datastute);
+    // $('.reservations-points').text(datapoints);
 
 
     });

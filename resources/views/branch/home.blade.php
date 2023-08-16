@@ -17,7 +17,10 @@
         .top {
             gap: 20px;
             justify-content: space-between;
-            height: 100%;
+            
+        }
+        .vvip-salon {
+            height: 714px;
         }
 
         .other {
@@ -113,6 +116,13 @@
         .not-selected .line {
             fill: #3E3F41;
         }
+        .div-placeholder {
+            font-size: 20px;
+            text-align: center;
+            border: 1px dashed #b5b5b5;
+            padding: 16px 0;
+            border-radius: 10px;
+        }
     </style>
     <div class="col-md-11" id="mainPage">
 
@@ -144,9 +154,11 @@
                 <div class="col-md-1">
                     <div class="filter-btns d-flex flex-column mb-2">
                         <div class="btn-group mb-5 flex-column" role="group" aria-label="Basic example">
+                            <button type="button" class="h-filter btn btn-dark"
+                                    data-salon="allsalon">كل الصالات</button>
                             @foreach ($halles as $key => $item)
                                 <button type="button" class="h-filter btn btn-dark"
-                                    data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>
+                                    data-salon=".salon{{ $item->id }}">{{ $item->name }}</button>
                             @endforeach
                         </div>
                         <div class="btn-group flex-column" role="group" aria-label="Basic example">
@@ -169,11 +181,10 @@
 
                     </div>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <div class="other d-flex flex-column">
                         <div class="right">
-                            <div class="row">
+                            <div class="row salon6">
 
                                 @foreach ($firstHalfTwo as $e => $table)
                                     @php
@@ -207,6 +218,7 @@
                                                                {{-- {{ $e === 0 ? '  not-selected' : '' }} --}}
                                                                "
                                             data-id="table{{ $table->id }}" data-stat="serv"
+                                            data-bs-toggle="modal" data-bs-target="#modal{{ $table->id }}"
                                             @if ($table->status == 'in_service') data-pstat="serv"
                                                             @elseif($table->status == 'available')
                                                              data-pstat ="available"
@@ -282,6 +294,212 @@
                                                 </svg>
                                                 <h4>{{ $table->name }}</h4>
                                             </div>
+                                            <div class="modal table-modal fade" id="modal{{ $table->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="card  @if ($table->status == 'in_service') bg-info
+                                                 @elseif($table->status == 'available')
+                                                bg-success text-light
+                                                @elseif ($table->status == 'reserved')
+                                                   bg-danger  text-light @endif"
+                                                data-id="table1" data-stat="serv">
+                                                <div class="modal-header">
+                                                    <div
+                                                        class="card-header primary-bg-color w-100 d-flex justify-content-between">
+                                                        <h3 class="modal-title fs-5" id="exampleModalLabel">
+                                                            {{ $table->name }}</h3>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-item mid d-flex justify-content-between">
+                                                        <p class="hall-name"> الباقة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->name : 'لا توجد باقة' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-item body-package d-flex justify-content-between">
+                                                        <p class="hall-name"> المقاعد</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->count_of_visitors : 0 }}
+                                                            اشخاص</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحجز</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> المدة</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
+                                                            ساعة </span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحالة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->status : 'لا يوجد حجز' }}</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الرصيد الحالى</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال </span>
+                                                    </div>
+                                                    @php
+                                                        if ($table->reservation) {
+                                                            $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                                            $reservationDateTime = $table->reservation->date;
+                                                        }
+
+                                                    @endphp
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الوقت المنقضى</p>
+                                                        <div class="countdown-timer"
+                                                            data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
+                                                            data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                            <!-- Add a span to display the countdown timer -->
+                                                            @if ($table->reservation)
+                                                                <span class="countdown-timer-text">00:00:00</span>
+                                                            @else
+                                                                <span>انتهى</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="table-btn my-3 text-center">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-2">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableorders">
+                                                                    الطلبات
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableinfo">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                     <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @endif
+                                                              
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                      <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="close_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                انهاء الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود انهاء الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <a type="button"
+                                                                                                onclick="closeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">انهاء
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                         
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
                                             @if ($table->status == 'in_service')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
                                                     <h2 class="text-center mb-4">طاولة رقم
@@ -639,7 +857,7 @@
                                 @endforeach
 
                             </div>
-                            <div class="row">
+                            <div class="row salon7">
 
                                 @foreach ($firstHalfSilverTwo as $table)
                                     @php
@@ -671,6 +889,7 @@
                                                              @elseif ($table->status == 'reserved')
                                                               sofa-reserved @endif"
                                             data-id="table{{ $table->id }}" data-stat="serv"
+                                            data-bs-toggle="modal" data-bs-target="#modal{{ $table->id }}"
                                             data-h="hall{{ $loungesSortowSilver->id }}"
                                             @if ($table->status == 'in_service') data-pstat="serv"
                                                             @elseif($table->status == 'available')
@@ -755,6 +974,247 @@
                                                 </svg>
                                                 <h4>{{ $table->name }}</h4>
                                             </div>
+                                            
+                                            <div class="modal table-modal fade" id="modal{{ $table->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="card  @if ($table->status == 'in_service') bg-info
+                                                 @elseif($table->status == 'available')
+                                                bg-success text-light
+                                                @elseif ($table->status == 'reserved')
+                                                   bg-danger  text-light @endif"
+                                                data-id="table1" data-stat="serv">
+                                                <div class="modal-header">
+                                                    <div
+                                                        class="card-header primary-bg-color w-100 d-flex justify-content-between">
+                                                        <h3 class="modal-title fs-5" id="exampleModalLabel">
+                                                            {{ $table->name }}</h3>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-item mid d-flex justify-content-between">
+                                                        <p class="hall-name"> الباقة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->name : 'لا توجد باقة' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-item body-package d-flex justify-content-between">
+                                                        <p class="hall-name"> المقاعد</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->count_of_visitors : 0 }}
+                                                            اشخاص</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحجز</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> المدة</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
+                                                            ساعة </span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحالة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->status : 'لا يوجد حجز' }}</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الرصيد الحالى</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال </span>
+                                                    </div>
+                                                    @php
+                                                        if ($table->reservation) {
+                                                            $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                                            $reservationDateTime = $table->reservation->date;
+                                                        }
+
+                                                    @endphp
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الوقت المنقضى</p>
+                                                        <div class="countdown-timer"
+                                                            data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
+                                                            data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                            <!-- Add a span to display the countdown timer -->
+                                                            @if ($table->reservation)
+                                                                <span class="countdown-timer-text">00:00:00</span>
+                                                            @else
+                                                                <span>انتهى</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="table-btn my-3 text-center">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-2">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableorders">
+                                                                    الطلبات
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableinfo">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                     <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @endif
+                                                              
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                      <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="close_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                انهاء الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود انهاء الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <a type="button"
+                                                                                                onclick="closeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">انهاء
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <!--<div class="modal-body">-->
+                                            <!--    <ul class="list-group">-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagename">VVIP</div>-->
+                                            <!--                <div class="right t-statu">{{ $table->status }}</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagepeice">باقة ساعاتان</div>-->
+                                            <!--                <div class="right t-capicity">4 أشخاص</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagedate"> 10-8</div>-->
+                                            <!--                <div class="right t-time">08:00 </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-waiter"> أسم الويتر: </div>-->
+                                            <!--                <div class="right t-time">أحمد مرزوق </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--    </ul>-->
+                                            <!--</div>-->
+                                            <!--<div class="modal-footer">-->
+                                            <!--    <div class="left t-allpoint"> <span class="point">800</span> الرصيد-->
+                                            <!--    </div>-->
+                                            <!--    <div class="right t-points"> <span class="have-point">200</span> الرصيد-->
+                                            <!--        المتبقى </div>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+
+                                </div>
                                             @if ($table->status == 'in_service')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
                                                     <h2 class="text-center mb-4">طاولة رقم
@@ -1114,7 +1574,7 @@
 
                             </div>
                         </div>
-                        <div class="middel">
+                        <div class="middel salon8">
                             <h1 class="dine-set">DINE SET</h1>
                             <div class="row">
                                 @foreach ($loungesSorThree->tables as $table)
@@ -1147,6 +1607,8 @@
                                                              @elseif ($table->status == 'reserved')
                                                               sofa-reserved @endif"
                                             data-id="table{{ $table->id }}" data-stat="serv"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modal{{ $table->id }}"
                                             data-h="hall{{ $loungesSorThree->id }}"
                                             @if ($table->status == 'in_service') data-pstat="serv"
                                                             @elseif($table->status == 'available')
@@ -1475,6 +1937,247 @@
                                                         fill="#212325" />
                                                 </svg>
                                             </div>
+                                            
+                                            <div class="modal table-modal fade" id="modal{{ $table->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="card  @if ($table->status == 'in_service') bg-info
+                                                 @elseif($table->status == 'available')
+                                                bg-success text-light
+                                                @elseif ($table->status == 'reserved')
+                                                   bg-danger  text-light @endif"
+                                                data-id="table1" data-stat="serv">
+                                                <div class="modal-header">
+                                                    <div
+                                                        class="card-header primary-bg-color w-100 d-flex justify-content-between">
+                                                        <h3 class="modal-title fs-5" id="exampleModalLabel">
+                                                            {{ $table->name }}</h3>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-item mid d-flex justify-content-between">
+                                                        <p class="hall-name"> الباقة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->name : 'لا توجد باقة' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-item body-package d-flex justify-content-between">
+                                                        <p class="hall-name"> المقاعد</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->count_of_visitors : 0 }}
+                                                            اشخاص</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحجز</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> المدة</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
+                                                            ساعة </span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحالة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->status : 'لا يوجد حجز' }}</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الرصيد الحالى</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال </span>
+                                                    </div>
+                                                    @php
+                                                        if ($table->reservation) {
+                                                            $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                                            $reservationDateTime = $table->reservation->date;
+                                                        }
+
+                                                    @endphp
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الوقت المنقضى</p>
+                                                        <div class="countdown-timer"
+                                                            data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
+                                                            data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                            <!-- Add a span to display the countdown timer -->
+                                                            @if ($table->reservation)
+                                                                <span class="countdown-timer-text">00:00:00</span>
+                                                            @else
+                                                                <span>انتهى</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="table-btn my-3 text-center">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-2">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableorders">
+                                                                    الطلبات
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableinfo">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                     <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @endif
+                                                              
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                      <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="close_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                انهاء الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود انهاء الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <a type="button"
+                                                                                                onclick="closeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">انهاء
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <!--<div class="modal-body">-->
+                                            <!--    <ul class="list-group">-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagename">VVIP</div>-->
+                                            <!--                <div class="right t-statu">{{ $table->status }}</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagepeice">باقة ساعاتان</div>-->
+                                            <!--                <div class="right t-capicity">4 أشخاص</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagedate"> 10-8</div>-->
+                                            <!--                <div class="right t-time">08:00 </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-waiter"> أسم الويتر: </div>-->
+                                            <!--                <div class="right t-time">أحمد مرزوق </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--    </ul>-->
+                                            <!--</div>-->
+                                            <!--<div class="modal-footer">-->
+                                            <!--    <div class="left t-allpoint"> <span class="point">800</span> الرصيد-->
+                                            <!--    </div>-->
+                                            <!--    <div class="right t-points"> <span class="have-point">200</span> الرصيد-->
+                                            <!--        المتبقى </div>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+
+                                </div>
 
                                             @if ($table->status == 'in_service')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
@@ -1835,7 +2538,7 @@
 
                         </div>
                         <div class="left">
-                            <div class="row">
+                            <div class="row salon7">
                                 @foreach ($secondHalfSilverTwo as $table)
                                     @php
                                         if ($table->reservation) {
@@ -1866,6 +2569,7 @@
                                                              @elseif ($table->status == 'reserved')
                                                               sofa-reserved @endif"
                                             data-id="table{{ $table->id }}" data-stat="serv"
+                                            data-bs-toggle="modal" data-bs-target="#modal{{ $table->id }}"
                                             data-h="hall{{ $loungesSortowSilver->id }}"
                                             @if ($table->status == 'in_service') data-pstat="serv"
                                                             @elseif($table->status == 'available')
@@ -1950,6 +2654,247 @@
                                                         fill="white" />
                                                 </svg>
                                             </div>
+                                            
+                                            <div class="modal table-modal fade" id="modal{{ $table->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="card  @if ($table->status == 'in_service') bg-info
+                                                 @elseif($table->status == 'available')
+                                                bg-success text-light
+                                                @elseif ($table->status == 'reserved')
+                                                   bg-danger  text-light @endif"
+                                                data-id="table1" data-stat="serv">
+                                                <div class="modal-header">
+                                                    <div
+                                                        class="card-header primary-bg-color w-100 d-flex justify-content-between">
+                                                        <h3 class="modal-title fs-5" id="exampleModalLabel">
+                                                            {{ $table->name }}</h3>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-item mid d-flex justify-content-between">
+                                                        <p class="hall-name"> الباقة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->name : 'لا توجد باقة' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-item body-package d-flex justify-content-between">
+                                                        <p class="hall-name"> المقاعد</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->count_of_visitors : 0 }}
+                                                            اشخاص</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحجز</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> المدة</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
+                                                            ساعة </span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحالة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->status : 'لا يوجد حجز' }}</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الرصيد الحالى</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال </span>
+                                                    </div>
+                                                    @php
+                                                        if ($table->reservation) {
+                                                            $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                                            $reservationDateTime = $table->reservation->date;
+                                                        }
+
+                                                    @endphp
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الوقت المنقضى</p>
+                                                        <div class="countdown-timer"
+                                                            data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
+                                                            data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                            <!-- Add a span to display the countdown timer -->
+                                                            @if ($table->reservation)
+                                                                <span class="countdown-timer-text">00:00:00</span>
+                                                            @else
+                                                                <span>انتهى</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="table-btn my-3 text-center">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-2">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableorders">
+                                                                    الطلبات
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableinfo">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                     <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @endif
+                                                              
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                      <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="close_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                انهاء الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود انهاء الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <a type="button"
+                                                                                                onclick="closeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">انهاء
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <!--<div class="modal-body">-->
+                                            <!--    <ul class="list-group">-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagename">VVIP</div>-->
+                                            <!--                <div class="right t-statu">{{ $table->status }}</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagepeice">باقة ساعاتان</div>-->
+                                            <!--                <div class="right t-capicity">4 أشخاص</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagedate"> 10-8</div>-->
+                                            <!--                <div class="right t-time">08:00 </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-waiter"> أسم الويتر: </div>-->
+                                            <!--                <div class="right t-time">أحمد مرزوق </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--    </ul>-->
+                                            <!--</div>-->
+                                            <!--<div class="modal-footer">-->
+                                            <!--    <div class="left t-allpoint"> <span class="point">800</span> الرصيد-->
+                                            <!--    </div>-->
+                                            <!--    <div class="right t-points"> <span class="have-point">200</span> الرصيد-->
+                                            <!--        المتبقى </div>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+
+                                </div>
 
 
                                             @if ($table->status == 'in_service')
@@ -2313,7 +3258,7 @@
 
 
                             </div>
-                            <div class="row">
+                            <div class="row salon6">
                                 @foreach ($secondHalfTwo as $table)
                                     @php
                                         if ($table->reservation) {
@@ -2344,6 +3289,7 @@
                                                              @elseif ($table->status == 'reserved')
                                                               sofa-reserved @endif"
                                             data-id="table{{ $table->id }}" data-stat="serv"
+                                            data-bs-toggle="modal" data-bs-target="#modal{{ $table->id }}"
                                             data-h="hall{{ $loungesSortow->id }}"
                                             @if ($table->status == 'in_service') data-pstat="serv"
                                                             @elseif($table->status == 'available')
@@ -2419,6 +3365,248 @@
                                                         fill="white"></path>
                                                 </svg>
                                             </div>
+                                            
+                                            <div class="modal table-modal fade" id="modal{{ $table->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="card  @if ($table->status == 'in_service') bg-info
+                                                 @elseif($table->status == 'available')
+                                                bg-success text-light
+                                                @elseif ($table->status == 'reserved')
+                                                   bg-danger  text-light @endif"
+                                                data-id="table1" data-stat="serv">
+                                                <div class="modal-header">
+                                                    <div
+                                                        class="card-header primary-bg-color w-100 d-flex justify-content-between">
+                                                        <h3 class="modal-title fs-5" id="exampleModalLabel">
+                                                            {{ $table->name }}</h3>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-item mid d-flex justify-content-between">
+                                                        <p class="hall-name"> الباقة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->name : 'لا توجد باقة' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="card-item body-package d-flex justify-content-between">
+                                                        <p class="hall-name"> المقاعد</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->package->count_of_visitors : 0 }}
+                                                            اشخاص</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحجز</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> المدة</p>
+                                                        <span
+                                                            class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
+                                                            ساعة </span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الحالة</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->status : 'لا يوجد حجز' }}</span>
+                                                    </div>
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الرصيد الحالى</p>
+                                                        <span class="sta">
+                                                            {{ $table->reservation != null ? $table->reservation->price : 0 }}
+                                                            ريال </span>
+                                                    </div>
+                                                    @php
+                                                        if ($table->reservation) {
+                                                            $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
+                                                            $reservationDateTime = $table->reservation->date;
+                                                        }
+
+                                                    @endphp
+                                                    <div class="card-item body-time d-flex justify-content-between">
+                                                        <p class="hall-name"> الوقت المنقضى</p>
+                                                        <div class="countdown-timer"
+                                                            data-start="{{ $table->reservation ? $table->reservation->date : '' }}"
+                                                            data-package-time="{{ $table->reservation->package->time ?? 0 }}">
+                                                            <!-- Add a span to display the countdown timer -->
+                                                            @if ($table->reservation)
+                                                                <span class="countdown-timer-text">00:00:00</span>
+                                                            @else
+                                                                <span>انتهى</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="table-btn my-3 text-center">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-2">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableorders">
+                                                                    الطلبات
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="table-btn-action btn btn-primary w-100"
+                                                                    type="button" data-id="#tableinfo">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                     <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @endif
+                                                              
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                      <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="close_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                انهاء الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود انهاء الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <a type="button"
+                                                                                                onclick="closeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">انهاء
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <!--<div class="modal-body">-->
+                                            <!--    <ul class="list-group">-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagename">VVIP</div>-->
+                                            <!--                <div class="right t-statu">{{ $table->status }}</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagepeice">باقة ساعاتان</div>-->
+                                            <!--                <div class="right t-capicity">4 أشخاص</div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-packagedate"> 10-8</div>-->
+                                            <!--                <div class="right t-time">08:00 </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--        <li class="list-group-item">-->
+                                            <!--            <div class="d-flex">-->
+                                            <!--                <div class="left t-waiter"> أسم الويتر: </div>-->
+                                            <!--                <div class="right t-time">أحمد مرزوق </div>-->
+                                            <!--            </div>-->
+                                            <!--        </li>-->
+                                            <!--    </ul>-->
+                                            <!--</div>-->
+                                            <!--<div class="modal-footer">-->
+                                            <!--    <div class="left t-allpoint"> <span class="point">800</span> الرصيد-->
+                                            <!--    </div>-->
+                                            <!--    <div class="right t-points"> <span class="have-point">200</span> الرصيد-->
+                                            <!--        المتبقى </div>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
                                             @if ($table->status == 'in_service')
                                                 <div class="table-side-bar" id="table{{ $table->id }}">
                                                     <h2 class="text-center mb-4">طاولة رقم
@@ -2787,8 +3975,8 @@
 
                 </div>
                 <!-- VVIP tables  -->
-                <div class="col-md-2">
-                    <div class="top d-flex flex-column">
+                <div class="col-md-2 salon5">
+                    <div class="top vvip-salon d-flex flex-column">
                         @foreach ($loungesSortOne->tables as $table)
                             @php
                                 if ($table->reservation) {
@@ -2931,15 +4119,6 @@
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                 </div>
-
-
-
-                                                <!--<div class="card-header primary-bg-color">-->
-                                                <!--  <div class="top d-flex justify-content-between ">-->
-                                                <!--    <h5 class="card-title"> طاولة رقم 1</h5>-->
-                                                <!--    <span class="tableid" > #37856 </span>-->
-                                                <!--  </div>-->
-                                                <!--</div>-->
                                                 <div class="card-body">
                                                     <div class="card-item mid d-flex justify-content-between">
                                                         <p class="hall-name"> الباقة</p>
@@ -3001,91 +4180,521 @@
                                                     <div class="table-btn my-3 text-center">
                                                         <div class="row">
                                                             <div class="col-md-6 mb-2">
-                                                                <button class="table-btn-action btn btn-primary w-100"
-                                                                    type="button" data-id="#tableorders">
+                                                                <button class="table-btn-orders btn btn-primary w-100"
+                                                                    type="button" data-id="#tableorders{{ $table->id }}">
                                                                     الطلبات
                                                                 </button>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <button class="table-btn-action btn btn-primary w-100"
-                                                                    type="button" data-id="#tableinfo">
+                                                                <button class="table-btn-info btn btn-primary w-100"
+                                                                    type="button" data-id="#tableinfo{{ $table->id }}">
                                                                     استعراض
                                                                 </button>
                                                             </div>
-                                                            @if ($table->reservation)
-                                                                <div class="col-md-6">
-                                                                    <button class="table-btn-action btn btn-primary w-100"
-                                                                        type="button" disabled data-id="#tableactive">
-                                                                        تفعيل الحجز
-                                                                    </button>
+                                                             <!--بيانات كل طاولة  فى السايد بار -->
+                                                             <div class="table-side-bar side-bar-info"
+                                                            id="tableinfo{{ $table->id }}">
+                                                            <div class="tablebrowse">
+                                                                <div class="tab-nav-wraper">
+                                                                    <div
+                                                                        class="nav-btns d-flex justify-content-around align-items-center">
+                                                                        <div class="home-btn btn btn-dark" data-tab="rev">
+                                                                            الحجوزات</div>
+                                                                        <div class="home-btn btn btn-dark" data-tab="waitings">
+                                                                            الأنتظار</div>
+                                                                    </div>
+                                                                    <form action="">
+                                                                        <input
+                                                                            class="form-control bg-dark text-light text-center"
+                                                                            type="text" placeholder="ابحث عن ضيف"
+                                                                            aria-label="default input example">
+                                                                    </form>
                                                                 </div>
-                                                            @else
-                                                                <div class="col-md-6">
-                                                                    <button disabled
-                                                                        class="table-btn-action btn btn-primary w-100"
-                                                                        type="button" disabled data-id="#tableactive">
-                                                                        تفعيل الحجز
-                                                                    </button>
-                                                                </div>
-                                                            @endif
-                                                            @if ($table->reservation)
-                                                                <div class="col-md-6">
-                                                                    <button class="table-btn-action btn btn-primary w-100"
-                                                                        type="button" data-id="#tableend">
-                                                                        انهاء الحجز
-                                                                    </button>
-                                                                </div>
-                                                            @else
-                                                                <div class="col-md-6">
-                                                                    <button disabled
-                                                                        class="table-btn-action btn btn-primary w-100"
-                                                                        type="button" data-id="#tableend">
-                                                                        انهاء الحجز
-                                                                    </button>
-                                                                </div>
-                                                            @endif
-                                                        </div>
+                                                                <!-- عناصر التاب -->
+                                                                <div class="side-tab-content">
+                                                                    <div id="rev"
+                                                                        class="home-table-bar-info reversation-side-bar rev active-tab">
+                                                                        <div
+                                                                            class="first-tabb d-flex justify-content-between align-items-start">
+                                                                            <p>حجوزات الطاولة</p>
+                                                                            <span> 3 <i
+                                                                                    class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                                        </div>
+                                                                        <ol
+                                                                            class="list-group list-group-numbered reversed bill-info">
+                                                                            <li
+                                                                                class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                <a href="{{ route('branch.reservation') }}"
+                                                                                    class="btn btn-primary w-100 mb-3">اضافة
+                                                                                    حجز </a>
+                                                                            </li>
+                                                                            @if ($table->reservation)
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        @php
+                                                                                            $dateString = $table->reservation->date;
 
+                                                                                            // Create a DateTime object from the date string
+                                                                                            $date = new DateTime($dateString);
+
+                                                                                            // Format the time as desired (e.g., "H:i")
+                                                                                            $formattedTime = $date->format('h:i A');
+                                                                                        @endphp
+                                                                                        <div
+                                                                                            class="rev-time text-center">
+                                                                                            <span>{{ $formattedTime }}</span>
+                                                                                            <br>
+                                                                                            {{-- <span>PM</span> --}}
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>{{ $table->reservation->client->name }}
+                                                                                            </h4>
+                                                                                            <p>{{ $table->reservation->client->phone }}
+                                                                                            </p>
+                                                                                            <p><span>{{ $table->reservation->package->count_of_visitors }}
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    {{ $table->reservation->package->name }}</span>
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <p>{{ $table->reservation->package->name }}
+                                                                                            </p>
+                                                                                            <span>{{ $table->status }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endif
+                                                                            @php
+                                                                                $now = Carbon\Carbon::now();
+
+                                                                                // Query to get all reservations for today
+                                                                                $reservations = App\Models\Reservation::where('table_id', $table->id)
+                                                                                    ->where(function ($query) use ($now) {
+                                                                                        $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                    })
+                                                                                    ->orderBy('date')
+                                                                                    ->get();
+
+                                                                                $packages = $table->packages;
+                                                                                foreach ($packages as $key => $package) {
+                                                                                    # code...
+
+                                                                                    $package = App\Models\Package::find($package->id);
+                                                                                    $minutesPerPackage = $package->time;
+
+                                                                                    // Generate time slots based on the package minutes
+                                                                                    $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                    $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                    $timeSlots = [];
+
+                                                                                    $currentTime = clone $startTime;
+                                                                                    while ($currentTime->lte($endTime)) {
+                                                                                        $endTimeSlot = clone $currentTime;
+                                                                                        $endTimeSlot->addMinutes($minutesPerPackage);
+
+                                                                                        // Check if the time slot is in the past
+                                                                                        if ($endTimeSlot->isFuture()) {
+                                                                                            $timeSlots[] = [
+                                                                                                'start' => $currentTime->format('g:i A'),
+                                                                                                'end' => $endTimeSlot->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+
+                                                                                        $currentTime->addMinutes($minutesPerPackage);
+                                                                                    }
+                                                                                    // Calculate the available and unavailable time slots
+                                                                                    $availableSlots = [];
+                                                                                    $unavailableSlots = [];
+
+                                                                                    $prevEndTime = $startTime;
+                                                                                    foreach ($reservations as $reservation) {
+                                                                                        $start = Carbon\Carbon::parse($reservation->date);
+                                                                                        $end = Carbon\Carbon::parse($reservation->end);
+
+                                                                                        if ($prevEndTime->lt($start)) {
+                                                                                            $availableSlots[] = [
+                                                                                                'start' => $prevEndTime->format('g:i A'),
+                                                                                                'end' => $start->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+                                                                                        $unavailableSlots[] = [
+                                                                                            'start' => $start->format('g:i A'),
+                                                                                            'end' => $end->format('g:i A'),
+                                                                                        ];
+
+                                                                                        $prevEndTime = $end;
+                                                                                    }
+                                                                                    if ($prevEndTime->lt($endTime)) {
+                                                                                        $availableSlots[] = [
+                                                                                            'start' => $prevEndTime->format('g:i A'),
+                                                                                            'end' => $endTime->format('g:i A'),
+                                                                                        ];
+                                                                                    }
+                                                                                }
+                                                                            @endphp
+                                                                            @foreach ($timeSlots as $slot)
+                                                                                @php
+                                                                                    $slotClosed = false;
+                                                                                    foreach ($unavailableSlots as $unavailableSlot) {
+                                                                                        if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                                                                                            $slotClosed = true;
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100 align-items-start">
+
+                                                                                        @if ($slotClosed)
+                                                                                        @else
+                                                                                            <div
+                                                                                                class="rev-time text-center">
+                                                                                                <span>{{ $slot['start'] }}</span>
+                                                                                                <br>
+                                                                                                <span>{{ $slot['end'] }}</span>
+                                                                                            </div>
+                                                                                        @endif
+                                                                                        <div class="rev-info">
+                                                                                            <a href="{{ route('branch.reservation') }}"
+                                                                                                class="btn btn-primary">احجز
+                                                                                                الآن</a>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <p>VVIP-1</p>
+                                                                                            <span>شاغرة</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endforeach
+
+                                                                        </ol>
+                                                                    </div>
+                                                                    <div id="waithings"
+                                                                        class="home-table-bar-info waitings-side-bar waitings hidden-tab">
+                                                                        <ol
+                                                                            class="list-group list-group-numbered reversed bill-info">
+                                                                            <li
+                                                                                class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                <div
+                                                                                    class="rev-item d-flex w-100  align-items-start">
+                                                                                    <div class="rev-time text-center">
+                                                                                        <span>1</span>
+                                                                                    </div>
+                                                                                    <div class="rev-info">
+                                                                                        <h4>محمد عبدالعزيز</h4>
+                                                                                        <p>012586439</p>
+                                                                                        <p><span>4
+                                                                                                اشخاص</span><span>/باقة
+                                                                                                vip</span></p>
+                                                                                    </div>
+                                                                                    <div class="rev-statu text-center">
+                                                                                        <a
+                                                                                            class="btn btn-primary">تفعيل</a>
+                                                                                        <br />
+                                                                                        <span class="s-time">
+                                                                                            1:20:00</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li
+                                                                                class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                <div
+                                                                                    class="rev-item d-flex w-100  align-items-start">
+                                                                                    <div class="rev-time text-center">
+                                                                                        <span>2</span>
+                                                                                    </div>
+                                                                                    <div class="rev-info">
+                                                                                        <h4>محمد عبدالعزيز</h4>
+                                                                                        <p>012586439</p>
+                                                                                        <p><span>4
+                                                                                                اشخاص</span><span>/باقة
+                                                                                                vip</span></p>
+                                                                                    </div>
+                                                                                    <div class="rev-statu text-center">
+                                                                                        <a href=""
+                                                                                            class="btn btn-primary">تفعيل</a>
+                                                                                        <br />
+                                                                                        <span class="s-time">
+                                                                                            1:20:00</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+
+                                                                        </ol>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        @php
+                                                            if ($table->reservation) {
+                                                                $orders = App\Models\Order::where('package_id', $table->reservation->package_id)
+                                                                    ->where('table_id', $table->id)
+                                                                    ->where('is_done', 0)
+                                                                    ->with('products')
+                                                                    ->first();
+
+                                                                // Wrap the related products in a collection (even if there's only one result)
+                                                                if ($orders != null && $orders->products->count() != 0) {
+                                                                    // Calculate total order prices using the map function on the products collection
+                                                                    $totalOrderPrices = $orders->products->sum(function ($product) {
+                                                                        return $product->pivot->price * $product->pivot->quantity;
+                                                                    });
+                                                                } else {
+                                                                    $totalOrderPrices = 0;
+                                                                }
+                                                            } else {
+                                                                $orders = null;
+                                                                $totalOrderPrices = 0;
+                                                            }
+                                                        @endphp
+                                                        <div class="table-side-bar side-bar-orders"
+                                                            id="tableorders{{ $table->id }}">
+                                                            <div class="tablebrowse">
+                                                                <div class="tab-nav-wraper">
+                                                                    <div
+                                                                        class="nav-btns d-flex justify-content-around align-items-center">
+                                                                        <div class="btn btn-dark"
+                                                                            data-tab="newOrders">
+                                                                            الطلبات</div>
+                                                                        <a onclick="product({{ $table->id }})"
+                                                                            class="btn btn-primary  mb-1"> طلب جديد</a>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- عناصر التاب -->
+                                                                <div class="side-tab-content">
+                                                                    <div id="rev"
+                                                                        class="table-bar-info reversation-side-bar rev active-tab">
+                                                                        <ol
+                                                                            class="list-group list-group-numbered reversed bill-info">
+                                                                            @if ($orders != null && $orders->products->count() != 0)
+                                                                                @foreach ($orders->products as $product)
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div class="me-2 ms-auto">
+                                                                                            <div class="fw-bold">
+                                                                                                {{ $product->name }}
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <span>{{ $product->pivot->price }}
+                                                                                            ريال</span>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            @endif
+                                                                        </ol>
+                                                                    </div>
+                                                                    <div id="waithings"
+                                                                        class="table-bar-info waitings-side-bar waitings hidden-tab">
+                                                                        <ol
+                                                                            class="list-group list-group-numbered reversed bill-info">
+
+                                                                            <li
+                                                                                class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                <div
+                                                                                    class="rev-item d-flex w-100  align-items-start">
+                                                                                    <div class="rev-time text-center">
+                                                                                        <span>1</span>
+                                                                                    </div>
+                                                                                    <div class="rev-info">
+                                                                                        <h4>محمد عبدالعزيز</h4>
+                                                                                        <p>012586439</p>
+                                                                                        <p><span>4
+                                                                                                اشخاص</span><span>/باقة
+                                                                                                vip</span></p>
+                                                                                    </div>
+                                                                                    <div class="rev-statu text-center">
+                                                                                        <a href=""
+                                                                                            class="btn btn-primary">تفعيل</a>
+                                                                                        <br />
+                                                                                        <span class="s-time">
+                                                                                            1:20:00</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li
+                                                                                class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                <div
+                                                                                    class="rev-item d-flex w-100  align-items-start">
+                                                                                    <div class="rev-time text-center">
+                                                                                        <span>2</span>
+                                                                                    </div>
+                                                                                    <div class="rev-info">
+                                                                                        <h4>محمد عبدالعزيز</h4>
+                                                                                        <p>012586439</p>
+                                                                                        <p><span>4
+                                                                                                اشخاص</span><span>/باقة
+                                                                                                vip</span></p>
+                                                                                    </div>
+                                                                                    <div class="rev-statu text-center">
+                                                                                        <a href=""
+                                                                                            class="btn btn-primary">تفعيل</a>
+                                                                                        <br />
+                                                                                        <span class="s-time">
+                                                                                            1:20:00</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+
+                                                                        </ol>
+                                                                    </div>
+                                                                    <div id="newOrders"
+                                                                        class="table-bar-info newOrders-side-bar newOrders active-tab">
+                                                                        <div id="tab1"
+                                                                            class="tab-pane fade show active">
+                                                                            <ol
+                                                                                class="table-list list-group list-group-numbered reversed food-items pr-0">
+                                                                                @if ($orders != null && $orders->products->count() != 0)
+                                                                                    @foreach ($orders->products as $product)
+                                                                                        <li class="list-group-item drag d-flex justify-content-between align-items-start"
+                                                                                            draggable="true">
+                                                                                            <div class="me-2 ms-auto">
+                                                                                                <div class="fw-bold">
+                                                                                                    <span
+                                                                                                        class="title">
+                                                                                                        {{ $product->name }}</span><span
+                                                                                                        class="count-wrap mr-2"><i
+                                                                                                            class="fa-solid fa-x"></i><span
+                                                                                                            class="count">3</span></span>
+                                                                                                </div>
+                                                                                            </div><span
+                                                                                                class="list-price">{{ $product->pivot->price }}
+                                                                                                ريال</span><button
+                                                                                                class="order-remove btn btn-danger"
+                                                                                                type="button"><i
+                                                                                                    class="fa-solid fa-trash-can"></i></button>
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                @endif
+                                                                            </ol>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                             <!--بيانات كل طاولة  فى السايد بار -->
+
+                                                            
+                                                            
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" disabled data-id="#exampleModal_{{ $table->id }}">
+                                                                        تفعيل الحجز
+                                                                    </button>
+                                                                     <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @endif
+                                                              
+                                                            @if ($table->reservation)
+                                                                <div class="col-md-6">
+                                                                    <button class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                      <!-- Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="close_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                انهاء الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود انهاء الحجز
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</button>
+                                                                                            <a type="button"
+                                                                                                onclick="closeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">انهاء
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-6">
+                                                                    <button disabled
+                                                                        class="table-btn-action btn btn-primary w-100"
+                                                                        type="button" data-id="#tableend">
+                                                                        انهاء الحجز
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                            
+                                                            
+                                                        </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
-                                            <!--<div class="modal-body">-->
-                                            <!--    <ul class="list-group">-->
-                                            <!--        <li class="list-group-item">-->
-                                            <!--            <div class="d-flex">-->
-                                            <!--                <div class="left t-packagename">VVIP</div>-->
-                                            <!--                <div class="right t-statu">{{ $table->status }}</div>-->
-                                            <!--            </div>-->
-                                            <!--        </li>-->
-                                            <!--        <li class="list-group-item">-->
-                                            <!--            <div class="d-flex">-->
-                                            <!--                <div class="left t-packagepeice">باقة ساعاتان</div>-->
-                                            <!--                <div class="right t-capicity">4 أشخاص</div>-->
-                                            <!--            </div>-->
-                                            <!--        </li>-->
-                                            <!--        <li class="list-group-item">-->
-                                            <!--            <div class="d-flex">-->
-                                            <!--                <div class="left t-packagedate"> 10-8</div>-->
-                                            <!--                <div class="right t-time">08:00 </div>-->
-                                            <!--            </div>-->
-                                            <!--        </li>-->
-                                            <!--        <li class="list-group-item">-->
-                                            <!--            <div class="d-flex">-->
-                                            <!--                <div class="left t-waiter"> أسم الويتر: </div>-->
-                                            <!--                <div class="right t-time">أحمد مرزوق </div>-->
-                                            <!--            </div>-->
-                                            <!--        </li>-->
-                                            <!--    </ul>-->
-                                            <!--</div>-->
-                                            <!--<div class="modal-footer">-->
-                                            <!--    <div class="left t-allpoint"> <span class="point">800</span> الرصيد-->
-                                            <!--    </div>-->
-                                            <!--    <div class="right t-points"> <span class="have-point">200</span> الرصيد-->
-                                            <!--        المتبقى </div>-->
-                                            <!--</div>-->
                                         </div>
                                     </div>
 
@@ -3438,13 +5047,14 @@
                                 @endif
 
                             </div>
-                        @endforeach
-
-
-
+                 @endforeach
                     </div>
                 </div>
-                <div class="col-md-1"></div>
+                 <div class="col-md-3">
+                     <div class="home-side-place">
+                         <h2 class="div-placeholder">الرجاء اختيار طاولة</h2>
+                     </div>
+                 </div>
 
             </div>
 
@@ -3454,6 +5064,59 @@
 <script src="{{ asset('front/js/jquery.js') }}"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+
+        // فلتر الحالات للصفحة الرئيسية
+        $('.s-filter').on('click', function() {
+            var key = $(this).data('st');
+            if (key === 'all') {
+                $('.sofa').removeClass('not-selected');
+            } else {
+                $('.sofa').addClass('not-selected'); // إخفاء جميع العناصر
+                // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
+                $('.sofa[data-pstat="' + key + '"]').removeClass('not-selected');
+            }
+        });
+        // فلتر الصالات 
+        $('.h-filter').on('click', function() {
+            var key = $(this).data('salon');
+            var getSalonId = $(key);
+            console.log(key);
+            if (key === 'allsalon') {
+                $('.sofa').removeClass('not-selected');
+            } else {
+                $('.sofa').addClass('not-selected'); // إخفاء جميع العناصر
+                // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
+                $(getSalonId).find('.sofa').removeClass('not-selected');
+            }
+        });
+         //  حدث عرض الطلبات فى السايد بار عند الضغط على زر الطلبات
+         $('.table-btn-orders').on('click', function() {
+             console.log('first');
+            var newId = $(this).data('id');
+            $('.home-side-place').empty();
+            $('.home-side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
+            
+        });
+
+        // حدث  الاستعراض لبيانات الطاولة عند الضغط على زر استعراض
+        $('.table-btn-info').on('click', function() {
+            console.log('second');
+            var newId = $(this).data('id');
+            $('.home-side-place').empty();
+            $('.home-side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
+            console.log('second');
+        });
+        
+        $('.nav-btns .home-btn').on('click', function(){
+            var tabpanid = $(this).data('tab');
+            $('.home-table-bar-info').addClass('hidden-tab').removeClass('active-tab')
+            $('.' + tabpanid).addClass('active-tab').removeClass('hidden-tab');
+            console.log($(tabpanid));
+        });
+    });
+</script>
 <script>
     function product(id) {
 
@@ -3562,23 +5225,7 @@
     // Initialize the countdown on page load
     updateCountdown();
 </script>
-<script>
-    // $(document).ready(function() {
 
-    //     // فلتر الحالات للصفحة الرئيسية
-    //     $('.s-filter').on('click', function() {
-    //         console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-    //         var key = $(this).data('st');
-    //         if (key === 'all') {
-    //             $('.sofa').removeClass('not-selected');
-    //         } else {
-    //             $('.sofa').addClass('not-selected'); // إخفاء جميع العناصر
-    //             // إظهار العناصر التي تحمل قيمة مطابقة لـ data-pstat
-    //             $('.sofa[data-pstat="' + key + '"]').removeClass('not-selected');
-    //         }
-    //     });
-    // });
-</script>
 
 <script>
     //     var tableclick = document.getElementById("tableclick").value;
