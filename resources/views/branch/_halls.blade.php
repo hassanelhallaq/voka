@@ -750,7 +750,7 @@
     function activeTable(id) {
         let formData = new FormData();
         store('/branch/active/table/' + id, formData)
-        // $('#mainPage').empty(); // Clear the previous page content
+        $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
         }).done(function() {
@@ -764,7 +764,7 @@
         let formData = new FormData();
         store('/branch/close/table/' + id, formData)
 
-        // $('#mainPage').empty(); // Clear the previous page content
+        $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
         }).done(function() {
