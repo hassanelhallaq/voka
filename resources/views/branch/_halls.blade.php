@@ -22,7 +22,8 @@
                     <div class="card-body new">
                         <div class="tab-content text-center">
                             @foreach ($halles as $e => $item)
-                                <div class="tab-pane salon-table-tabs-content  {{ $e === 0 ? ' active' : '' }}" id="hall{{ $item->id }}">
+                                <div class="tab-pane salon-table-tabs-content  {{ $e === 0 ? ' active' : '' }}"
+                                    id="hall{{ $item->id }}">
                                     <div class="row new-reservation-tables">
                                         <!--<h2 class="text-center text-light">{{ $item->name }}</h2>-->
                                         <div class="col-md-12">
@@ -51,8 +52,7 @@
                                                                     <div
                                                                         class="card-item mid d-flex justify-content-between align-items-center">
                                                                         <p class="hall-name"> الباقة</p>
-                                                                        <span
-                                                                            class="sta">
+                                                                        <span class="sta">
                                                                             {{ $tables->reservation != null ? $tables->reservation->package->name : 'لا توجد باقة' }}
                                                                         </span>
                                                                     </div>
@@ -122,12 +122,20 @@
                                                                 <div class="table-btn my-3 text-center">
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
-                                                                            <button
-                                                                                class="table-btn-orders btn btn-primary w-100"
-                                                                                type="button" @if (!$tables->reservation) disabled @endif
-                                                                                data-id="#tableorders{{ $tables->id }}">
-                                                                                الطلبات
-                                                                            </button>
+                                                                            @if ($tables->reservation)
+                                                                                <button
+                                                                                    class="table-btn-orders btn btn-primary w-100"
+                                                                                    type="button"
+                                                                                    data-id="#tableorders{{ $tables->id }}">
+                                                                                    الطلبات
+                                                                                </button>
+                                                                            @else
+                                                                                <a class="table-btn-orders btn btn-primary w-100"
+                                                                                    type="button"
+                                                                                     href="{{ route('branch.reservation') }}">
+                                                                                    احجز الان
+                                                                                </a>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
@@ -803,9 +811,9 @@
             console.log('second');
         });
 
-         $('.salon-table-tabs .nav-link').on('click', function() {
-             console.log('ghghghgh');
-             $('.salon-table-tabs-content').removeClass('active');
+        $('.salon-table-tabs .nav-link').on('click', function() {
+            console.log('ghghghgh');
+            $('.salon-table-tabs-content').removeClass('active');
             var salonKey = $(this).data('salontab');
             $(salonKey).addClass('active')
         });
