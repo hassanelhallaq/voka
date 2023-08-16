@@ -132,7 +132,7 @@
                                                                             @else
                                                                                 <a class="table-btn-orders btn btn-primary w-100"
                                                                                     type="button"
-                                                                                     href="{{ route('branch.reservation') }}">
+                                                                                    href="{{ route('branch.reservation') }}">
                                                                                     احجز الان
                                                                                 </a>
                                                                             @endif
@@ -754,7 +754,7 @@
         // Add active class to "القائمة" link
         $('.halls').addClass('active');
 
-        $('#mainPage').empty(); // Clear the previous page content
+        // $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {
             // $('#mainPage').html(data); // Show the new content
         }).done(function() {
@@ -768,7 +768,7 @@
         let formData = new FormData();
         store('/branch/close/table/' + id, formData)
 
-        $('#mainPage').empty(); // Clear the previous page content
+        // $('#mainPage').empty(); // Clear the previous page content
         $.get('/branch/branch/halls', {}).done(function(data) {
             // $('#mainPage').html(data); // Show the new content
         }).done(function() {
