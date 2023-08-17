@@ -109,6 +109,8 @@ class MenuController extends Controller
                 $orderProduct->order_id = $order->id;
                 $orderProduct->quantity = $cartItem->quantity;
                 $orderProduct->price = $cartItem->price;
+                $orderProduct->payment_type = $paymentMethod;
+                $orderProduct->payment_status = 'paid';
                 $orderProduct->save();
             }
         } elseif ($paymentMethod == 'دفع إلكتروني') {
@@ -131,7 +133,7 @@ class MenuController extends Controller
             // return with success - price before discount - price after discount - order id - coupon object
             $data = [
                 'NotificationOption' => 'ALL',
-                 'CustomerName'       => $reservation->client->name ?? 'customer',
+                'CustomerName'       => $reservation->client->name ?? 'customer',
                 'DisplayCurrencyIso' => 'SAR',
                 'MobileCountryCode'  => '0096',
                 'CustomerMobile'     => $reservation->client->phone,
@@ -152,13 +154,24 @@ class MenuController extends Controller
             $data = $this->sendPayment($mf_base_url, $api_token, $data);
 
             return ['redirect' => $data];
+
+            foreach ($cartItems as $cartItem) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->product_id = $cartItem->id;
+                $orderProduct->order_id = $order->id;
+                $orderProduct->quantity = $cartItem->quantity;
+                $orderProduct->price = $cartItem->price;
+                $orderProduct->payment_type = $paymentMethod;
+                $orderProduct->payment_status = 'unpaid';
+                $orderProduct->save();
+            }
         }
         // You can also save cart items related to this order
 
         return response()->json(['message' => 'Order stored successfully']);
     }
 
-   
+
     function sendPayment($apiURL, $apiKey, $postFields)
     {
         $json = $this->callAPI($apiURL, $apiKey, $postFields);
@@ -205,7 +218,7 @@ class MenuController extends Controller
             ], 'json' => $data
         ]);
         $result = ($response->getBody());
-      return  $result = json_decode($result, true);
+        return  $result = json_decode($result, true);
         $table =  $result['Data']['CustomerReference'];
         return view('menu.faild');
         // get all counts of products in basket
