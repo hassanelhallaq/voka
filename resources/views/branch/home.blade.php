@@ -126,7 +126,7 @@
             border-radius: 10px;
         }
     </style>
-    <div class="col-md-11" id="mainPage">
+    <div class="main-from-home col-md-11" id="mainPage">
 
         <div class="container-fluid">
             <!--<div class="filter-btns d-flex mb-2">-->

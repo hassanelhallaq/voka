@@ -1,8 +1,4 @@
-<style>
-    .modal-backdrop.show {
-    	display: none !important;
-    }
-</style>
+
 <div class="card-header card-header-danger">
     <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
     <div class="nav-tabs-navigation">

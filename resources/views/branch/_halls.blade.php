@@ -197,7 +197,7 @@
                                                                                                 <a type="button"
                                                                                                     class="btn btn-secondary"
                                                                                                     data-bs-dismiss="modal">اغلاق</a>
-                                                                                                <button type="button"
+                                                                                                <button  class="forceclosing btn btn-primary" type="button"
                                                                                                     onclick="activeTable({{ $tables->id }})"
                                                                                                     class="btn btn-primary">تأكيد
                                                                                                 </button>
@@ -811,6 +811,10 @@
         //     $(newId).toggleClass('appended');
         //     $('.side-place').addClass('have-bg').append($(newId));
         //   });
+        
+        $('.forceclosing').on('click', function(){
+            $('.modal-backdrop.show').hide();
+        });
 
 
         $('.table-btn-orders').on('click', function() {

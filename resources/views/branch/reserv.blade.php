@@ -46,7 +46,7 @@
            background-color: #d59161 !important;
        }
    </style>
-   <div id="mainPage">
+   <div id="mainPage" class="reves-main">
        <div class="container mt-5">
            <div id="calendar">
            </div>
@@ -108,6 +108,8 @@
                },
 
            });
+           
+           $('#mainPage').removeClass('col-md-11').addClass('col-md-8');
 
        });
    </script>
