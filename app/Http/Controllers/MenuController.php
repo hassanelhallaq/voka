@@ -185,7 +185,7 @@ class MenuController extends Controller
             'DisplayCurrencyIso' => 'SAR',
             'MobileCountryCode'  => '0096',
             'CustomerMobile'     => $reservation->client->phone,
-            'CustomerEmail'      => 'customer@yalago.com',
+            'CustomerEmail'      => 'customer@vkoa.com',
             'InvoiceValue'       => $FinalPrice,
             'Language'           => app()->getLocale() == 'en' ? 'en' : 'ar',
             'CustomerReference'  => $reservation->client->id,
@@ -207,7 +207,7 @@ class MenuController extends Controller
     function sendPayment($apiURL, $apiKey, $postFields)
     {
         $json = $this->callAPI($apiURL, $apiKey, $postFields);
-            
+
         return $json['Data']['InvoiceURL'];
     }
 
@@ -238,14 +238,14 @@ class MenuController extends Controller
     {
         $data['Key'] = request('paymentId');
         $data['KeyType'] = 'paymentId';
-
-        $url = "https://api-sa.myfatoorah.com/v2/getPaymentStatus";
+        $api_token = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL";
+        $url = "https://apitest.myfatoorah.com/v2/SendPayment";
         $client  = new Client();
         $response  = $client->request('post', $url, [
             'verify' => false,
             'http_errors' => false,
             'headers' => [
-                'Authorization' => "Bearer HO_GVNA4pZBcAD_KOmtjYzZ9pCqu1cvNg9es78dzH9Rj6JDDyAAOAHasooE7tN2HKqa9GLLCYrmYxvcM8yhFu9SsDaZ4wcyPD07aP8GMK4u37mTH2M_pZyphT9A-tfuhTck2Awt1bf1zA9cxv9bYzaujQllStH_NQda0BcQIUSpY2zD7Q_cTM8lWvhHCPO2BGd8YFbMs_UCsgUQfZzJzJJDJahPT19mN7Tm6NkJUzRrParecUwYZ7Getxw9rOQP7b9jqVq9E7Zivh7UutIPnu-aor_PzCvaJVK_uuyussbxsCLp0kPDjAosG-d07tIudvA27kJpnAnGfKpAJdnqB9l2x0D9levEWWhQ8BVPp5PArjBMWxqp7UYIPbIKNlYDnbWHcuacUe7u2DeRqB-VexwXdlz7LCC86vZvLmNnt3RYSjXTA79fwD6z7IS-rkHofn8UW1bua6yMcEg2sFc-v7gEsRE2XNJ0LrMKC_EcB-QD8vs4EYrxr0wVKk8aSYILKq_4GfXZG7AcMpnR6IqLGYkZuMTri3b-Uj6cq8f1_05iv-6hw_TdHBGn8RLWPRE1bvG7KS-TUSWeoG87Adp1QAsTz1Fr1Q7I_GZvtB3Gai2JkZ8jwRaObuGFf1kKa3wmYgd1fZG2yF_443YnMnSpkTayGK51h0VMHNEU1eUq6toK88n2pD7r4jYXUncCc6ONCnGV39Q",
+                'Authorization' => "Bearer " . $api_token,
                 'Content-Type' => 'application/json'
             ], 'json' => $data
         ]);
@@ -260,13 +260,14 @@ class MenuController extends Controller
         $client  = new Client();
         $data['Key'] = request('paymentId');
         $data['KeyType'] = 'paymentId';
-        $url = "https://apitest.myfatoorah.com/v2/getPaymentStatus";
+        $api_token = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL";
+        $url = "https://apitest.myfatoorah.com/v2/SendPayment";
         $client  = new Client();
         $response  = $client->request('post', $url, [
             'verify' => false,
             'http_errors' => false,
             'headers' => [
-                'Authorization' => "Bearer HO_GVNA4pZBcAD_KOmtjYzZ9pCqu1cvNg9es78dzH9Rj6JDDyAAOAHasooE7tN2HKqa9GLLCYrmYxvcM8yhFu9SsDaZ4wcyPD07aP8GMK4u37mTH2M_pZyphT9A-tfuhTck2Awt1bf1zA9cxv9bYzaujQllStH_NQda0BcQIUSpY2zD7Q_cTM8lWvhHCPO2BGd8YFbMs_UCsgUQfZzJzJJDJahPT19mN7Tm6NkJUzRrParecUwYZ7Getxw9rOQP7b9jqVq9E7Zivh7UutIPnu-aor_PzCvaJVK_uuyussbxsCLp0kPDjAosG-d07tIudvA27kJpnAnGfKpAJdnqB9l2x0D9levEWWhQ8BVPp5PArjBMWxqp7UYIPbIKNlYDnbWHcuacUe7u2DeRqB-VexwXdlz7LCC86vZvLmNnt3RYSjXTA79fwD6z7IS-rkHofn8UW1bua6yMcEg2sFc-v7gEsRE2XNJ0LrMKC_EcB-QD8vs4EYrxr0wVKk8aSYILKq_4GfXZG7AcMpnR6IqLGYkZuMTri3b-Uj6cq8f1_05iv-6hw_TdHBGn8RLWPRE1bvG7KS-TUSWeoG87Adp1QAsTz1Fr1Q7I_GZvtB3Gai2JkZ8jwRaObuGFf1kKa3wmYgd1fZG2yF_443YnMnSpkTayGK51h0VMHNEU1eUq6toK88n2pD7r4jYXUncCc6ONCnGV39Q",
+                'Authorization' => "Bearer " . $api_token,
                 'Content-Type' => 'application/json'
             ], 'json' => $data
         ]);
