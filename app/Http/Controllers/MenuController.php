@@ -102,6 +102,18 @@ class MenuController extends Controller
         $cartItems = $request->input('cartItems');
         $reservation = Reservation::where([['table_id', $id], ['status', '!=', 'انتهى']])->first();
         $order = Order::where([['table_id', $id], ['package_id', $reservation->package_id], ['is_done', 0]])->first();
+
+        $packagePrice = $order->table->reservation->where('status', '!=', 'انتهى')->first()->price;
+        if ($order) {
+            $totalOrderPrices = $order->products->sum(function ($product) {
+                return $product->price * $product->quantity;
+            });
+        } else {
+            $totalOrderPrices = 0;
+        }
+        if ($packagePrice < $totalOrderPrices && $paymentMethod == 'الرصيد') {
+            return response()->json(['icon' => 'error', 'title' => 'لقد استهلكت رصيد باقتك'], 400);
+        }
         if ($paymentMethod == 'الرصيد') {
             foreach ($cartItems as $cartItem) {
                 $orderProduct = new OrderProduct();
@@ -167,8 +179,7 @@ class MenuController extends Controller
             }
         }
         // You can also save cart items related to this order
-
-        return response()->json(['message' => 'Order stored successfully']);
+        return response()->json(['icon' => 'success', 'title' => 'Order stored successfully'], 400);
     }
 
 

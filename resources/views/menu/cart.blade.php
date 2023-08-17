@@ -164,17 +164,31 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data.message);
-
-                        // Handle success, reset cart, etc.
-                        if (paymentMethod === 'دفع إلكتروني') {
-                            // Assuming the response contains a redirect URL
-                            if (data.redirect) {
-                               
-                                debugger
-            window.location.href = data.redirect;
+                        if (data.icon === 'error') {
+                            // Show an error message to the user using a library like SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: data.title,
+                                showConfirmButton: true,
+                            });
+                        } else {
+                            if (paymentMethod === 'دفع إلكتروني') {
+                                // Assuming the response contains a redirect URL
+                                if (data.redirect) {
+                                    debugger
+                                    window.location.href = data.redirect;
+                                }
+                            } else {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.title,
+                                    showConfirmButton: true,
+                                });
                             }
                         }
+
+                        // Handle success, reset cart, etc.
+
                     })
                     .catch(error => {
                         console.error('Error:', error);
