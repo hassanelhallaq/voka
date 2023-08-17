@@ -112,14 +112,14 @@ class MenuController extends Controller
                 $orderProduct->save();
             }
         } elseif ($paymentMethod == 'دفع إلكتروني') {
-            return   new handlerPaymentOrder($request, $cartItems, $reservation);
+            return   $this->handlerPaymentOrder($cartItems, $reservation, $id, $branch_id);
         }
         // You can also save cart items related to this order
 
         return response()->json(['message' => 'Order stored successfully']);
     }
 
-    private function handlerPaymentOrder(Request $request, $cartItems, $reservation)
+    private function handlerPaymentOrder($cartItems, $reservation, $id, $branch_id)
     {
 
 
@@ -153,8 +153,8 @@ class MenuController extends Controller
             'UserDefinedField'   => $dataApiReturn,
             'ApiCustomFileds'    => $dataApiReturn,
             'InvoiceItems'       => $products,
-            "callBackUrl"        =>  route('paymentStatus', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]),
-            'ErrorUrl'           =>  route('faild.payments', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]),
+            "callBackUrl"        =>  route('paymentStatus', ['table_id' => $id, 'branch_id' => $branch_id]),
+            'ErrorUrl'           =>  route('faild.payments', ['table_id' => $id, 'branch_id' => $branch_id]),
             "callBackUrl"        => 'https://dashboard.metaemenu.com/en/dashboard/congrate/marketplaces/pill',
             'API_URL'            => 'https://apitest.myfatoorah.com',
         ];
