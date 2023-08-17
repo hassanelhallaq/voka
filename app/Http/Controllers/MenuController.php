@@ -112,8 +112,47 @@ class MenuController extends Controller
                 $orderProduct->save();
             }
         } elseif ($paymentMethod == 'دفع إلكتروني') {
-              return $data = $this->handlerPaymentOrder($cartItems, $reservation, $id, $branch_id);
-              
+            $fullPrice = 0;
+            $products  = [];
+            foreach ($cartItems as $index =>  $cartItem) {
+                $fullPrice += $cartItem['price'] * $cartItem['quantity'];
+                $products[$index]['ItemName']  =  $cartItem['name'];
+                $products[$index]['Quantity']  = $cartItem['quantity'];
+                $products[$index]['UnitPrice'] = $cartItem['price'];
+            }
+
+
+            // final price without any discount
+            $FinalPrice = number_format($fullPrice, 2, '.', '');
+
+            $dataApiReturn = json_encode([
+                'order_id' => '',
+            ]);
+            // return with success - price before discount - price after discount - order id - coupon object
+            $data = [
+                'NotificationOption' => 'ALL',
+                'CustomerName'       => 'vkoa',
+                'DisplayCurrencyIso' => 'SAR',
+                'MobileCountryCode'  => '0096',
+                'CustomerMobile'     => $reservation->client->phone,
+                'CustomerEmail'      => 'customer@yalago.com',
+                'InvoiceValue'       => $FinalPrice,
+                'Language'           => app()->getLocale() == 'en' ? 'en' : 'ar',
+                'CustomerReference'  => $reservation->client->id,
+                'UserDefinedField'   => $dataApiReturn,
+                'ApiCustomFileds'    => $dataApiReturn,
+                'InvoiceItems'       => $products,
+                "callBackUrl"        =>  route('paymentStatus', ['table_id' => $id, 'branch_id' => $branch_id]),
+                'ErrorUrl'           =>  route('faild.payments', ['table_id' => $id, 'branch_id' => $branch_id]),
+                "callBackUrl"        => 'https://dashboard.metaemenu.com/en/dashboard/congrate/marketplaces/pill',
+                'API_URL'            => 'https://apitest.myfatoorah.com',
+            ];
+            $mf_base_url  = "https://apitest.myfatoorah.com/v2/SendPayment";
+            $api_token = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL";
+
+            $data = $this->sendPayment($mf_base_url, $api_token, $data);
+
+            return ['redirect' => $data];
         }
         // You can also save cart items related to this order
 
@@ -162,15 +201,14 @@ class MenuController extends Controller
         $mf_base_url  = "https://apitest.myfatoorah.com/v2/SendPayment";
         $api_token = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL";
 
-           $data = $this->sendPayment($mf_base_url, $api_token, $data);
-         
-                   return ['redirect' => $data];
+        $data = $this->sendPayment($mf_base_url, $api_token, $data);
 
+        return ['redirect' => $data];
     }
     function sendPayment($apiURL, $apiKey, $postFields)
     {
         $json = $this->callAPI($apiURL, $apiKey, $postFields);
-        
+
         return redirect()->to($json['Data']['InvoiceURL']);
     }
 
