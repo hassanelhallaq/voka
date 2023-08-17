@@ -12,7 +12,7 @@ use App\Models\Setting;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-9
+
 class MenuController extends Controller
 {
     public function __construct()
@@ -102,15 +102,15 @@ class MenuController extends Controller
         $cartItems = $request->input('cartItems');
         $reservation = Reservation::where([['table_id', $id], ['status', '!=', 'انتهى']])->first();
         $order = Order::where([['table_id', $id], ['package_id', $reservation->package_id], ['is_done', 0]])->first();
-        if($paymentMethod == 'الرصيد'){
-        foreach ($cartItems as $cartItem) {
-            $orderProduct = new OrderProduct();
-            $orderProduct->product_id = $cartItem->id;
-            $orderProduct->order_id = $order->id;
-            $orderProduct->quantity = $cartItem->quantity;
-            $orderProduct->price = $cartItem->price;
-            $orderProduct->save();
-        }
+        if ($paymentMethod == 'الرصيد') {
+            foreach ($cartItems as $cartItem) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->product_id = $cartItem->id;
+                $orderProduct->order_id = $order->id;
+                $orderProduct->quantity = $cartItem->quantity;
+                $orderProduct->price = $cartItem->price;
+                $orderProduct->save();
+            }
         } elseif ($paymentMethod == 'دفع إلكتروني') {
             return   new handlerPaymentOrder($request, $cartItems, $reservation);
         }
@@ -153,7 +153,7 @@ class MenuController extends Controller
             'UserDefinedField'   => $dataApiReturn,
             'ApiCustomFileds'    => $dataApiReturn,
             'InvoiceItems'       => $products,
-            "callBackUrl"        =>  route('paymentStatus', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]) ,
+            "callBackUrl"        =>  route('paymentStatus', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]),
             'ErrorUrl'           =>  route('faild.payments', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]),
             "callBackUrl"        => 'https://dashboard.metaemenu.com/en/dashboard/congrate/marketplaces/pill',
             'API_URL'            => 'https://apitest.myfatoorah.com',
@@ -245,7 +245,5 @@ class MenuController extends Controller
         $table =  $result['Data']['CustomerReference'];
         $vendor_uuid = $this->vendor_uuid;
         return view('menu.sucess', compact('vendor_uuid', 'table'));
-
-
     }
 }
