@@ -12,8 +12,8 @@
                             style="background-color: transparent; justify-content: space-between; align-items: end;">
                             <div class="breadcrumb-item">
                                 <h4 class="tableDetails">رصيد الطاولة: <span>
-                                    {{ $reservation->package->price }}
-                                    ريال
+                                        {{ $reservation->package->price }}
+                                        ريال
                                     </span></h4>
                             </div>
                             <div class="breadcrumb-item">
@@ -27,7 +27,7 @@
             </div>
         </div>
         <!-- Subheader End -->
-        
+
         <!-- Menu Categories Start -->
         <div class="ct-menu-categories menu-filter" style="margin-top:10px">
             <div class="container">
@@ -42,7 +42,8 @@
                         </div>
                     </a>
                     @foreach ($categories as $item)
-                        <a href="#" data-filter=".{{ $item->category_id }}" class="ct-menu-category-item itemNotActive">
+                        <a href="#" data-filter=".{{ $item->category_id }}"
+                            class="ct-menu-category-item itemNotActive">
                             <div class="menu-category-thumb">
                                 <img src="{{ $item->getFirstMediaUrl('category_image', 'thumb') }}" alt="category">
                             </div>
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Menu Categories End -->
 
         <!-- Menu Wrapper Start -->
@@ -81,11 +82,11 @@
                                             </div>
                                             <span>اسم الفئة</span>
                                             <p>{{ $product->description }}</p>
-                                           
+
                                         </div>
                                         <div class="product-controls">
                                             <a href="#" class="اطلب-item btn-custom btn-sm shadow-none"
-                                                data-product='{"name": "{{ $product->name }}", "price": "{{ $product->price }}", "image": "{{ $product->getFirstMediaUrl('product', 'thumb') }}"}'>
+                                                data-product='{"id":{{ $product->product_id }},"name": "{{ $product->name }}", "price": "{{ $product->price }}", "image": "{{ $product->getFirstMediaUrl('product', 'thumb') }}"}'>
                                                 أضف للطلب <i class="fas fa-shopping-cart"></i>
                                             </a>
                                         </div>
@@ -157,13 +158,12 @@
                     addToCart(product);
                     // alert('Item added to cart!');
                     Swal.fire(
-                      'تم إضافة المنتج إلى السلة!',
-                      'حسناَ'
+                        'تم إضافة المنتج إلى السلة!',
+                        'حسناَ'
                     )
                 });
             });
 
             document.addEventListener('DOMContentLoaded', updateCartItemCount);
         </script>
-      
     @endsection
