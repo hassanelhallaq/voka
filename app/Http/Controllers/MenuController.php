@@ -126,11 +126,10 @@ class MenuController extends Controller
         $fullPrice = 0;
         $products  = [];
         foreach ($cartItems as $index =>  $cartItem) {
-            dd($cartItem);
-            $fullPrice += $cartItem->price * $cartItem->quantity;
-            $products[$index]['ItemName']  = $cartItem->name;
-            $products[$index]['Quantity']  = $cartItem->quantity;
-            $products[$index]['UnitPrice'] = $cartItem->price;
+            $fullPrice += $cartItem['price'] * $cartItem['quantity'];
+            $products[$index]['ItemName']  =  $cartItem['name'];
+            $products[$index]['Quantity']  = $cartItem['quantity'];
+            $products[$index]['UnitPrice'] = $cartItem['price'];
         }
 
 
