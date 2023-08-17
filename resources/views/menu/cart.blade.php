@@ -173,7 +173,7 @@
                             console.log(data);
                             debugger
 
-                            window.location.href = data.redirectUrl;
+                         
 
                         }
                     })
