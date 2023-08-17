@@ -92,6 +92,8 @@
         if (countDown == 0) {
             console.log(countDown);
             clearInterval(x);
+            localStorage.removeItem('cartItems');
+
             // window.setTimeout(function() {
             //     location.href =
             //         "{{ route('table.tracking', ['vendor_uuid' => $vendor_uuid, 'table_id' => $table]) }}";

@@ -183,7 +183,10 @@
                                     icon: 'success',
                                     title: data.title,
                                     showConfirmButton: true,
+
                                 });
+                                localStorage.removeItem('cartItems');
+
                             }
                         }
 
