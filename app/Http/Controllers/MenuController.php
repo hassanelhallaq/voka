@@ -151,7 +151,7 @@ class MenuController extends Controller
 
             $data = $this->sendPayment($mf_base_url, $api_token, $data);
 
-            return $data;
+            return ['redirect' => $data];
         }
         // You can also save cart items related to this order
 
@@ -207,8 +207,8 @@ class MenuController extends Controller
     function sendPayment($apiURL, $apiKey, $postFields)
     {
         $json = $this->callAPI($apiURL, $apiKey, $postFields);
-
-        return redirect()->to($json['Data']['InvoiceURL']);
+            
+        return $json['Data']['InvoiceURL'];
     }
 
     function callAPI($endpointURL, $apiKey, $postFields = [], $requestType = 'POST')
