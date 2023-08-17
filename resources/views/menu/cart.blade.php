@@ -165,7 +165,14 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log(data.message);
+
                         // Handle success, reset cart, etc.
+                        if (paymentMethod === 'دفع إلكتروني') {
+                            // Assuming the response contains a redirect URL
+                            if (data.redirectUrl) {
+                                window.location.href = data.redirectUrl;
+                            }
+                        }
                     })
                     .catch(error => {
                         console.error('Error:', error);
