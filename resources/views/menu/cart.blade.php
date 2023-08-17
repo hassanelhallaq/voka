@@ -169,12 +169,10 @@
                         // Handle success, reset cart, etc.
                         if (paymentMethod === 'دفع إلكتروني') {
                             // Assuming the response contains a redirect URL
-
-                            console.log(data);
-                            debugger
-
-                         
-
+                            if (data.redirectUrl) {
+                                debugger
+                                window.location.href = data.redirectUrl;
+                            }
                         }
                     })
                     .catch(error => {

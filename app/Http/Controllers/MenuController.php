@@ -112,14 +112,14 @@ class MenuController extends Controller
                 $orderProduct->save();
             }
         } elseif ($paymentMethod == 'دفع إلكتروني') {
-            return   $this->handlerPaymentOrder($cartItems, $reservation, $id, $branch_id);
+            return $pay =   $this->handlerPaymentOrder($cartItems, $reservation, $id, $branch_id);
         }
         // You can also save cart items related to this order
 
         return response()->json(['message' => 'Order stored successfully']);
     }
 
-    private function handlerPaymentOrder($cartItems, $reservation, $id, $branch_id)
+    public function handlerPaymentOrder($cartItems, $reservation, $id, $branch_id)
     {
 
 
@@ -161,11 +161,13 @@ class MenuController extends Controller
         $mf_base_url  = "https://apitest.myfatoorah.com/v2/SendPayment";
         $api_token = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL";
 
-        return  $data = $this->sendPayment($mf_base_url, $api_token, $data);
+        $data = $this->sendPayment($mf_base_url, $api_token, $data);
+        return ['redirect' => $data];
     }
     function sendPayment($apiURL, $apiKey, $postFields)
     {
         $json = $this->callAPI($apiURL, $apiKey, $postFields);
+
         return redirect()->to($json['Data']['InvoiceURL']);
     }
 
@@ -209,9 +211,8 @@ class MenuController extends Controller
         ]);
         $result = ($response->getBody());
         $result = json_decode($result, true);
-        $vendor_uuid = $this->vendor_uuid;
         $table =  $result['Data']['CustomerReference'];
-        return view('menu.faild', compact('vendor_uuid', 'table'));
+        return view('menu.faild');
         // get all counts of products in basket
     }
     public function paymentStatus()
@@ -220,9 +221,7 @@ class MenuController extends Controller
         $client  = new Client();
         $response  = $client->request('get', $url, [
             'verify' => false,
-            'headers' => [
-                'Lang' => \LaravelLocalization::getCurrentLocale()
-            ],
+
         ]);
         $result = ($response->getBody());
         $result = json_decode($result, true);
@@ -243,7 +242,6 @@ class MenuController extends Controller
         $result = json_decode($result, true);
 
         $table =  $result['Data']['CustomerReference'];
-        $vendor_uuid = $this->vendor_uuid;
-        return view('menu.sucess', compact('vendor_uuid', 'table'));
+        return view('menu.sucess');
     }
 }
