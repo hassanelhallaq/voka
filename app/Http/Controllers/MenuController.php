@@ -152,7 +152,7 @@ class MenuController extends Controller
 
             $data = $this->sendPayment($mf_base_url, $api_token, $data);
 
-            return ['redirect' => $data];
+            return $data;
         }
         // You can also save cart items related to this order
 
