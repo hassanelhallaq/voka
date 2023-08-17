@@ -186,6 +186,8 @@
 
                                 });
                                 localStorage.removeItem('cartItems');
+                                window.location.href =
+                                    "{{ route('menu.home', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}";
 
                             }
                         }
