@@ -20,7 +20,7 @@
                             <th class="remove-item"></th>
                             <th>المنتج</th>
                             <th>السعر</th>
-                           
+
                         </tr>
                     </thead>
                     <tbody id="cart-body">
@@ -64,14 +64,17 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                  <div class="tab-pane fade show active" id="tab-palance" role="tabpanel" aria-labelledby="tab-palance-tab">
-                      <p>يمكنك التمتع برصيد الباقة وطلب مختلف الأصناف من خلال زر إنشاء طلب</p>
-                      <button class=" btn-custom btn-sm shadow-non" style="width:100%">إنشاء طلب</button>
-                  </div>
-                <div class="tab-pane" id="tab-e-pay" role="tabpanel" aria-labelledby="tab-e-pay-tab">
-                      <p>يمكنك التمتع برصيد الباقة وطلب مختلف الأصناف من خلال زر إنشاء طلب</p>
-                      <button class=" btn-custom btn-sm shadow-non" style="width:100%">إنشاء طلب</button>
-                </div>
+                    <div class="tab-pane fade show active" id="tab-palance" role="tabpanel"
+                        aria-labelledby="tab-palance-tab">
+                        <p>يمكنك التمتع برصيد الباقة وطلب مختلف الأصناف من خلال زر إنشاء طلب</p>
+                        <button id="balancePaymentButton" class="btn-custom btn-sm shadow-non" style="width:100%">إنشاء
+                            طلب</button>
+                    </div>
+                    <div class="tab-pane" id="tab-e-pay" role="tabpanel" aria-labelledby="tab-e-pay-tab">
+                        <p>يمكنك التمتع برصيد الباقة وطلب مختلف الأصناف من خلال زر إنشاء طلب</p>
+                        <button id="electronicPaymentButton" class="btn-custom btn-sm shadow-non" style="width:100%">إنشاء
+                            طلب</button>
+                    </div>
                 </div>
                 <!-- end pay -->
 
@@ -108,7 +111,7 @@
                     </div>
                 </td>
                 <td data-title="السعر"> <strong>${item.price}$</strong> </td>
-               
+
             `;
                     cartBody.appendChild(cartItemRow);
                 });
@@ -136,6 +139,38 @@
 
                 // Save the updated cart items back to local storage
                 localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            }
+            const balancePaymentButton = document.getElementById('balancePaymentButton');
+            const electronicPaymentButton = document.getElementById('electronicPaymentButton');
+
+            balancePaymentButton.addEventListener('click', () => createOrder('الرصيد'));
+            electronicPaymentButton.addEventListener('click', () => createOrder('دفع إلكتروني'));
+
+            function createOrder(paymentMethod) {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const routeUrl = `{!! route('store.order', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]) !!}`;
+
+                // Send data to Laravel
+                fetch(routeUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Assuming you're using CSRF protection
+                        },
+                        body: JSON.stringify({
+                            paymentMethod: paymentMethod,
+                            cartItems: cartItems,
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                        // Handle success, reset cart, etc.
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Handle error
+                    });
             }
         </script>
         <script>

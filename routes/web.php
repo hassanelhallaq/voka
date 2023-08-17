@@ -118,6 +118,7 @@ Route::prefix('menu/{table_id}/{branch_id}')->group(function () {
     Route::get('/home', [App\Http\Controllers\MenuController::class, 'index'])->name('menu.home');
     Route::get('/cart', [App\Http\Controllers\MenuController::class, 'cart'])->name('menu.cart');
     Route::get('/product/{id}', [App\Http\Controllers\MenuController::class, 'product'])->name('product.index');
+    Route::get('/store-order', [App\Http\Controllers\MenuController::class, 'storeOrder'])->name('store.order');
 });
 Route::get('/time-slots', [ReservationController::class, 'index'])->name('time-slots.index')->middleware('auth:branch');
 

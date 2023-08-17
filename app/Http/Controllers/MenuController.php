@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Reservation;
@@ -91,5 +93,29 @@ class MenuController extends Controller
             'reservation',
             'product'
         ));
+    }
+
+    public function storeOrder(Request $request, $id, $branch_id)
+    {
+        $paymentMethod = $request->input('paymentMethod');
+        $cartItems = $request->input('cartItems');
+        dd($cartItems);
+        $branch = Branch::find($branch_id);
+        $table = Table::find($id);
+
+        $reservation = Reservation::where([['table_id', $id], ['status', '!=', 'انتهى']])->first();
+        // Save the order and payment method to the database
+        $order = Order::where([['table_id', $id], ['package_id', $reservation->package_id], ['is_done', 0]])->first();
+        foreach ($cartItems as $cartItem) {
+            $orderProduct = new OrderProduct();
+            $orderProduct->product_id = $request->product_id;
+            $orderProduct->order_id = $order->id;
+            $orderProduct->quantity = $request->quantity;
+            $orderProduct->price = 'as';
+            $orderProduct->save();
+        }
+        // You can also save cart items related to this order
+
+        return response()->json(['message' => 'Order stored successfully']);
     }
 }
