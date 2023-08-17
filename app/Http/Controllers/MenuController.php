@@ -117,10 +117,11 @@ class MenuController extends Controller
         if ($paymentMethod == 'الرصيد') {
             foreach ($cartItems as $cartItem) {
                 $orderProduct = new OrderProduct();
-                $orderProduct->product_id = $cartItem->id;
+                
+                $orderProduct->product_id = $cartItem['id'];
                 $orderProduct->order_id = $order->id;
-                $orderProduct->quantity = $cartItem->quantity;
-                $orderProduct->price = $cartItem->price;
+                $orderProduct->quantity = $cartItem['quantity'];
+                $orderProduct->price = $cartItem['price'];
                 $orderProduct->payment_type = $paymentMethod;
                 $orderProduct->payment_status = 'paid';
                 $orderProduct->save();
@@ -179,7 +180,7 @@ class MenuController extends Controller
             }
         }
         // You can also save cart items related to this order
-        return response()->json(['icon' => 'success', 'title' => 'Order stored successfully'], 400);
+        return response()->json(['icon' => 'success', 'title' => 'Order stored successfully'], 200);
     }
 
 
