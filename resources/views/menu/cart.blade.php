@@ -148,7 +148,7 @@
 
             function createOrder(paymentMethod) {
                 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-                const routeUrl = `{!! route('store.order', ['table_id' => $table->id, 'branch_id' => $branch->id, 'id' => $product->product_id]) !!}`;
+                const routeUrl = `{!! route('store.order', ['table_id' => $table->id, 'branch_id' => $branch->id]) !!}`;
 
                 // Send data to Laravel
                 fetch(routeUrl, {
