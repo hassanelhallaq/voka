@@ -576,6 +576,10 @@
 
                     // Update modal content with reservation details
                     $('#modal-body-content').html(htmlContent);
+
+                    $('#modalPay').hide(); // Show the reserv main section
+                    $('#pill').show(); // Show the reserv main section
+
                 })
         }
 
