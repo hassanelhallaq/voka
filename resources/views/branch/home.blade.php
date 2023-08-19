@@ -170,7 +170,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -336,7 +336,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-                                                                    
+
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -358,11 +358,19 @@
                                                                 <div class="table-btn my-3 text-center">
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
+                                                                            @if ($tables->reservation)
                                                                             <button
                                                                                 class="table-btn-action btn btn-primary w-100"
                                                                                 type="button" data-id="#tableorders">
                                                                                 الطلبات
                                                                             </button>
+                                                                            @else
+                                                                            <a
+                                                                                class="table-btn-action btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders" href="{{ route('branch.reservation') }}">
+                                                                                        احجز الان
+                                                                        </a>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
@@ -859,7 +867,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -1033,7 +1041,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-                                                                    
+
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -1055,11 +1063,19 @@
                                                                 <div class="table-btn my-3 text-center">
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
+                                                                            @if ($tables->reservation)
                                                                             <button
                                                                                 class="table-btn-action btn btn-primary w-100"
                                                                                 type="button" data-id="#tableorders">
                                                                                 الطلبات
                                                                             </button>
+                                                                            @else
+                                                                            <a
+                                                                                class="table-btn-action btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders" href="{{ route('branch.reservation') }}">
+                                                                                        احجز الان
+                                                                        </a>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
@@ -1593,7 +1609,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2011,7 +2027,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-                                                                    
+
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -2033,11 +2049,19 @@
                                                                 <div class="table-btn my-3 text-center">
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
+                                                                            @if ($tables->reservation)
                                                                             <button
                                                                                 class="table-btn-action btn btn-primary w-100"
                                                                                 type="button" data-id="#tableorders">
                                                                                 الطلبات
                                                                             </button>
+                                                                            @else
+                                                                            <a
+                                                                                class="table-btn-action btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders" href="{{ route('branch.reservation') }}">
+                                                                                        احجز الان
+                                                                        </a>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
@@ -2574,7 +2598,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2748,7 +2772,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-                                                                    
+
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -2770,11 +2794,19 @@
                                                                 <div class="table-btn my-3 text-center">
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
+                                                                            @if ($tables->reservation)
                                                                             <button
                                                                                 class="table-btn-action btn btn-primary w-100"
                                                                                 type="button" data-id="#tableorders">
                                                                                 الطلبات
                                                                             </button>
+                                                                            @else
+                                                                            <a
+                                                                                class="table-btn-action btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders" href="{{ route('branch.reservation') }}">
+                                                                                        احجز الان
+                                                                        </a>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
@@ -3309,7 +3341,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-                                        
+
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -3474,7 +3506,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-                                                                    
+
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -3496,11 +3528,19 @@
                                                                 <div class="table-btn my-3 text-center">
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
+                                                                           @if ($tables->reservation)
                                                                             <button
                                                                                 class="table-btn-action btn btn-primary w-100"
                                                                                 type="button" data-id="#tableorders">
                                                                                 الطلبات
                                                                             </button>
+                                                                            @else
+                                                                            <a
+                                                                                class="table-btn-action btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders" href="{{ route('branch.reservation') }}">
+                                                                                        احجز الان
+                                                                        </a>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
@@ -4043,7 +4083,7 @@
                                         ->where('is_done', 0)
                                         ->with('products')
                                         ->first();
-                                
+
                                     // Wrap the related products in a collection (even if there's only one result)
                                     if ($orders != null && $orders->products->count() != 0) {
                                         // Calculate total order prices using the map function on the products collection
@@ -4218,7 +4258,7 @@
                                                             $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                             $reservationDateTime = $table->reservation->date;
                                                         }
-                                                        
+
                                                     @endphp
                                                     <div class="card-item body-time d-flex justify-content-between">
                                                         <p class="hall-name"> الوقت المنقضى</p>
@@ -4238,11 +4278,19 @@
                                                     <div class="table-btn my-3 text-center">
                                                         <div class="row">
                                                             <div class="col-md-6 mb-2">
-                                                                <button class="table-btn-orders btn btn-primary w-100"
-                                                                    type="button"
-                                                                    data-id="#tableorders{{ $table->id }}">
-                                                                    الطلبات
-                                                                </button>
+                                                                @if ($tables->reservation)
+                                                                            <button
+                                                                                class="table-btn-action btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders{{ $table->id }}">
+                                                                                الطلبات
+                                                                            </button>
+                                                                            @else
+                                                                            <a
+                                                                                class="table-btn-action btn btn-primary w-100"
+                                                                                type="button" data-id="#tableorders" href="{{ route('branch.reservation') }}">
+                                                                                        احجز الان
+                                                                        </a>
+                                                                            @endif
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <button class="table-btn-info btn btn-primary w-100"
@@ -4297,10 +4345,10 @@
                                                                                             class="rev-item d-flex w-100  align-items-start">
                                                                                             @php
                                                                                                 $dateString = $table->reservation->date;
-                                                                                                
+
                                                                                                 // Create a DateTime object from the date string
                                                                                                 $date = new DateTime($dateString);
-                                                                                                
+
                                                                                                 // Format the time as desired (e.g., "H:i")
                                                                                                 $formattedTime = $date->format('h:i A');
                                                                                             @endphp
@@ -4331,7 +4379,7 @@
                                                                                 @endif
                                                                                 @php
                                                                                     $now = Carbon\Carbon::now();
-                                                                                    
+
                                                                                     // Query to get all reservations for today
                                                                                     $reservations = App\Models\Reservation::where('table_id', $table->id)
                                                                                         ->where(function ($query) use ($now) {
@@ -4339,24 +4387,24 @@
                                                                                         })
                                                                                         ->orderBy('date')
                                                                                         ->get();
-                                                                                    
+
                                                                                     $packages = $table->packages;
                                                                                     foreach ($packages as $key => $package) {
                                                                                         # code...
-                                                                                    
+
                                                                                         $package = App\Models\Package::find($package->id);
                                                                                         $minutesPerPackage = $package->time;
-                                                                                    
+
                                                                                         // Generate time slots based on the package minutes
                                                                                         $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
                                                                                         $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
                                                                                         $timeSlots = [];
-                                                                                    
+
                                                                                         $currentTime = clone $startTime;
                                                                                         while ($currentTime->lte($endTime)) {
                                                                                             $endTimeSlot = clone $currentTime;
                                                                                             $endTimeSlot->addMinutes($minutesPerPackage);
-                                                                                    
+
                                                                                             // Check if the time slot is in the past
                                                                                             if ($endTimeSlot->isFuture()) {
                                                                                                 $timeSlots[] = [
@@ -4364,18 +4412,18 @@
                                                                                                     'end' => $endTimeSlot->format('g:i A'),
                                                                                                 ];
                                                                                             }
-                                                                                    
+
                                                                                             $currentTime->addMinutes($minutesPerPackage);
                                                                                         }
                                                                                         // Calculate the available and unavailable time slots
                                                                                         $availableSlots = [];
                                                                                         $unavailableSlots = [];
-                                                                                    
+
                                                                                         $prevEndTime = $startTime;
                                                                                         foreach ($reservations as $reservation) {
                                                                                             $start = Carbon\Carbon::parse($reservation->date);
                                                                                             $end = Carbon\Carbon::parse($reservation->end);
-                                                                                    
+
                                                                                             if ($prevEndTime->lt($start)) {
                                                                                                 $availableSlots[] = [
                                                                                                     'start' => $prevEndTime->format('g:i A'),
@@ -4386,7 +4434,7 @@
                                                                                                 'start' => $start->format('g:i A'),
                                                                                                 'end' => $end->format('g:i A'),
                                                                                             ];
-                                                                                    
+
                                                                                             $prevEndTime = $end;
                                                                                         }
                                                                                         if ($prevEndTime->lt($endTime)) {
@@ -4504,7 +4552,7 @@
                                                                         ->where('is_done', 0)
                                                                         ->with('products')
                                                                         ->first();
-                                                                
+
                                                                     // Wrap the related products in a collection (even if there's only one result)
                                                                     if ($orders != null && $orders->products->count() != 0) {
                                                                         // Calculate total order prices using the map function on the products collection
