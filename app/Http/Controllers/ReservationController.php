@@ -98,7 +98,9 @@ class ReservationController extends Controller
                 $walletAction->type   = 'Discount';
                 $walletAction->save();
             }
-            return ['reservation' => $reservation->with('client', 'package', 'table')->first()];
+            $reservation->load('client', 'package', 'table');
+
+            return ['reservation' => $reservation];
         } else {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
