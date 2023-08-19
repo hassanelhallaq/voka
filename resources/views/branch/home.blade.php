@@ -358,19 +358,11 @@
                                                                 <div class="table-btn my-3 text-center">
                                                                     <div class="row">
                                                                         <div class="col-md-6 mb-2">
-                                                                            @if ($tables->reservation)
                                                                             <button
                                                                                 class="table-btn-action btn btn-primary w-100"
                                                                                 type="button" data-id="#tableorders">
                                                                                 الطلبات
                                                                             </button>
-                                                                            @else
-                                                                            <a
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableorders" href="{{ route('branch.reservation') }}">
-                                                                                        احجز الان
-                                                                        </a>
-                                                                            @endif
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <button
