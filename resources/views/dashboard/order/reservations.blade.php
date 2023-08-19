@@ -38,6 +38,7 @@
                                                 <th>{{ __('package price') }}</th>
                                                 <th>{{ __('reservation start') }}</th>
                                                 <th>{{ __('reservation end') }}</th>
+                                                <th>{{ __('payment type') }}</th>
 
                                             </tr>
                                         </thead>
@@ -68,6 +69,9 @@
                                                     </td>
                                                     <td>
                                                         {{ $item->end }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->payment_type }}
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-icon btn-sm btn-success"

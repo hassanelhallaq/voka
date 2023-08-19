@@ -245,15 +245,17 @@
                                                                                                     هل تود انهاء الحجز
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="modal-footer">
+                                                                                             <div class="modal-footer">
                                                                                                 <button type="button"
-                                                                                                    class="btn btn-secondary"
+                                                                                                    class=" btn btn-secondary"
                                                                                                     data-bs-dismiss="modal">اغلاق</button>
-                                                                                                <a type="button"
+                                                                                                <a 
                                                                                                     onclick="closeTable({{ $tables->id }})"
-                                                                                                    class="btn btn-primary">انهاء
+                                                                                                    class="rev-close btn btn-primary">انهاء
                                                                                                 </a>
                                                                                             </div>
+                                                                                            
+                                                                                            
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -815,6 +817,12 @@
         $('.forceclosing').on('click', function(){
             $('.modal-backdrop.show').hide();
         });
+        
+        $('.rev-close').on('click', function() {
+           $('.modal-backdrop.show').hide();
+    
+        });
+
 
 
         $('.table-btn-orders').on('click', function() {
@@ -833,6 +841,8 @@
 
         $('.salon-table-tabs .nav-link').on('click', function() {
             console.log('ghghghgh');
+            $('.salon-table-tabs .nav-link').removeClass('active');
+            $(this).addClass('active');
             $('.salon-table-tabs-content').removeClass('active');
             var salonKey = $(this).data('salontab');
             $(salonKey).addClass('active')

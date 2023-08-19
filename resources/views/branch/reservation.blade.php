@@ -47,7 +47,6 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4 text-center">
-                    <span class="top-title"> تسجيل حجز جديد </span>
                 </div>
                 <!--<div class="col-4 text-left px-5">-->
                 <!--    <a href="{{ route('branch.home') }}" class="close-icon">-->
@@ -212,7 +211,7 @@
                                 <!--</div>-->
                                 <div class="row">
                                     <div class="col-1">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-primary addgustbtn" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop">
                                             <i class="fa-solid fa-plus"></i>
                                         </button>
@@ -303,104 +302,121 @@
                                 <div class="row">
                                     <div class="col-md-3"></div>
                                     <div class="col-md-6">
-                                        <ol class="list-group reversed paing-wrp">
-                                            <li class="list-group-item no-number  ">
-                                                <div
-                                                    class="sub-total d-flex justify-content-between align-items-start w-100">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> حاصل الجمع</div>
-                                                    </div>
-                                                    <span class="payment-price">260 ريال</span>
-                                                </div>
-                                                <div
-                                                    class="tax d-flex justify-content-between align-items-start mt-4 w-100">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> ضريبة</div>
-                                                    </div>
-                                                    <span class="tax">10%</span>
-                                                </div>
-                                                <div
-                                                    class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الإجمالى</div>
-                                                    </div>
-                                                    <span class="pay-total">286 ريال</span>
-                                                </div>
-                                                 <div
-                                                    class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
+                                       <ol class="list-group reversed paing-wrp">
+    <li class="list-group-item no-number  ">
+        <div
+            class="sub-total d-flex justify-content-between align-items-start w-100">
+            <div class="me-2 ms-auto">
+                <div class="fw-bold"> المجموع  </div>
+            </div>
+            <span class="payment-price"> </span>
+            <span>ريال</span>
+        </div>
+        <!--<div-->
+        <!--    class="tax d-flex justify-content-between align-items-start mt-4 w-100">-->
+        <!--    <div class="me-2 ms-auto">-->
+        <!--        <div class="fw-bold"> ضريبة</div>-->
+        <!--    </div>-->
+        <!--    <span class="tax">10%</span>-->
+        <!--</div>-->
+        <div
+            class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
+            <div class="me-2 ms-auto">
+                <div class="fw-bold"> الضريبة 15%  </div>
+            </div>
+            <span class="pay-tax"> </span>
+            <span>ريال</span>
+        </div>
+        <div class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
+            <div class="me-2 ms-auto">
+                <div class="fw-bold">  الأجمالى  </div>
+            </div>
+            <span class="pay-total"> </span>
+            <span>ريال</span>
+        </div>
+         <div
+            class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
 
-                                                    <div class="discount-inputs input-group">
-                                                        <label class="col-sm-2 col-form-label"> %</label>
-                                                        <input class="discount-input form-control" lang="en"
-                                                            type="number" placeholder="قيمة الخصم"
-                                                            aria-label="default input example">
-                                                        <button class="btn btn-primary" type="button">تطبيق</button>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
-                                                    <div class="me-2 ms-auto">
-                                                        <div class="fw-bold"> الأجمالى بعد الخصم</div>
-                                                    </div>
-                                                    <span class="pay-total-discount">286 ريال</span>
-                                                </div>
-                                                <div class="payment-method w-100">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
-                                                                id="cash">
-                                                                <i class="fa-solid fa-sack-dollar"></i>
-                                                            </div>
-                                                            <p class="text-center">كاش</p>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
-                                                                id="credit-card">
-                                                                <i class="fa-solid fa-credit-card"></i>
-                                                            </div>
-                                                            <p class="text-center">بطاقة ائتمان</p>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="payment-icon d-flex justify-content-center align-items-center"
-                                                                id="wallet">
-                                                                <i class="fa-solid fa-wallet"></i>
-                                                            </div>
-                                                            <p class="text-center">المحفظة</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="payment-btn my-3 text-center">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <button class="btn btn-primary w-100" type="button"
-                                                                    data-bs-toggle="modal" data-bs-target="#modalPay">
-                                                                    تسجيل الطلب
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button class="btn btn-primary w-100" type="button"
-                                                                    disabled>
-                                                                    تفعيل الحجز
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button class="btn btn-primary w-100" type="button"
-                                                                    data-bs-toggle="modal" data-bs-target="#bill"
-                                                                    disabled>
-                                                                    طباعة الفاتورة
-                                                                </button>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button class="btn btn-primary w-100" type="button"
-                                                                    disabled>
-                                                                    تغيير الصالة
-                                                                </button>
-                                                            </div>
-                                                        </div>
+            <div class="discount-inputs input-group"> 
+                <label class="col-sm-6 col-form-label text-right">   الخصم
+                <select class="form-control discount-select bg-dark " data-bs-theme="dark">
+                    <option value="percent" selected >نسبة مئوية</option>
+                    <!--<option value="testing">كوبون</option>-->
 
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ol>
+                    <option value="copoun">كوبون</option>
+                </select>
+                </label>
+                <input class="discount-input form-control" lang="en"
+                    type="number" placeholder="قيمة الخصم"
+                    aria-label="default input example">
+                <button class="btn btn-primary discount-btn-js" type="button">تطبيق</button>
+            </div>
+        </div>
+        <div
+            class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
+            <div class="me-2 ms-auto">
+                <div class="fw-bold"> الأجمالى بعد الخصم</div>
+            </div>
+            <span class="pay-total-discount"> </span>
+            <span>ريال</span>
+        </div>
+        <div class="payment-method w-100">
+            <div class="row">
+                <div class="col-4">
+                    <div class="payment-icon d-flex justify-content-center align-items-center"
+                        id="cash">
+                        <i class="fa-solid fa-sack-dollar"></i>
+                    </div>
+                    <p class="text-center">كاش</p>
+                </div>
+                <div class="col-4">
+                    <div class="payment-icon d-flex justify-content-center align-items-center"
+                        id="credit-card">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <p class="text-center">بطاقة ائتمان</p>
+                </div>
+                <div class="col-4">
+                    <div class="payment-icon d-flex justify-content-center align-items-center"
+                        id="wallet">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <p class="text-center">المحفظة</p>
+                </div>
+            </div>
+            <div class="payment-btn my-3 text-center">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100" type="button"
+                            data-bs-toggle="modal" data-bs-target="#modalPay">
+                            تسجيل الطلب
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100" type="button"
+                            disabled>
+                            تفعيل الحجز
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100" type="button"
+                            data-bs-toggle="modal" data-bs-target="#pill"
+                            disabled>
+                            طباعة الفاتورة
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100" type="button"
+                            disabled>
+                            تغيير الصالة
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </li>
+</ol>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
@@ -427,7 +443,108 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="storeReaervation()"
-                        style="margin-left: 10px;">تأكيد</button>
+                        style="margin-left: 10px;">تسجيل</button>
+                     <button type="button" class="btn btn-primary" onclick="storeReaervation()"
+                        style="margin-left: 10px;">تسجيل وتغعيل</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--مودال طباعة الفاتورة -->
+      <div class="modal fade" id="pill" tabindex="-1" aria-labelledby="pill" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+                     <div id="invoice-POS">
+    
+    <center id="top">
+      <div class="logo"></div>
+      <div class="info"> 
+        <h2>SBISTechs Inc</h2>
+      </div><!--End Info-->
+    </center><!--End InvoiceTop-->
+    
+    <div id="mid">
+      <div class="info">
+        <h2>Contact Info</h2>
+        <p> 
+            Address : street city, state 0000</br>
+            Email   : JohnDoe@gmail.com</br>
+            Phone   : 555-555-5555</br>
+        </p>
+      </div>
+    </div><!--End Invoice Mid-->
+    
+    <div id="bot">
+
+					<div id="table">
+						<table>
+							<tr class="tabletitle">
+								<td class="item"><h2>Item</h2></td>
+								<td class="Hours"><h2>Qty</h2></td>
+								<td class="Rate"><h2>Sub Total</h2></td>
+							</tr>
+
+							<tr class="service">
+								<td class="tableitem"><p class="itemtext">Communication</p></td>
+								<td class="tableitem"><p class="itemtext">5</p></td>
+								<td class="tableitem"><p class="itemtext">$375.00</p></td>
+							</tr>
+
+							<tr class="service">
+								<td class="tableitem"><p class="itemtext">Asset Gathering</p></td>
+								<td class="tableitem"><p class="itemtext">3</p></td>
+								<td class="tableitem"><p class="itemtext">$225.00</p></td>
+							</tr>
+
+							<tr class="service">
+								<td class="tableitem"><p class="itemtext">Design Development</p></td>
+								<td class="tableitem"><p class="itemtext">5</p></td>
+								<td class="tableitem"><p class="itemtext">$375.00</p></td>
+							</tr>
+
+							<tr class="service">
+								<td class="tableitem"><p class="itemtext">Animation</p></td>
+								<td class="tableitem"><p class="itemtext">20</p></td>
+								<td class="tableitem"><p class="itemtext">$1500.00</p></td>
+							</tr>
+
+							<tr class="service">
+								<td class="tableitem"><p class="itemtext">Animation Revisions</p></td>
+								<td class="tableitem"><p class="itemtext">10</p></td>
+								<td class="tableitem"><p class="itemtext">$750.00</p></td>
+							</tr>
+
+
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate"><h2>tax</h2></td>
+								<td class="payment"><h2>$419.25</h2></td>
+							</tr>
+
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate"><h2>Total</h2></td>
+								<td class="payment"><h2>$3,644.25</h2></td>
+							</tr>
+
+						</table>
+					</div><!--End Table-->
+
+					<div id="legalcopy">
+						<p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices. 
+						</p>
+					</div>
+
+				</div><!--End InvoiceBot-->
+  </div><!--End Invoice-->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="storeReaervation()"
+                        style="margin-left: 10px;">طباعة</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
                 </div>
             </div>
@@ -447,6 +564,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
+         <script src="{{ asset('front/js/main.js') }}"></script>
+
     <script>
         function pack(id) {
 

@@ -4,64 +4,93 @@ $(document).ready(function () {
 
     $('.custome-close').on('click', function() {
        $('.active-the-reversation .modal-backdrop').addClass('none');
-        
-    });
-    
-    //  $('.table-btn-action').on('click', function(){
 
-    //     $('.table-side-bar').hide();
-    //     var newId = $(this).data('id');
-    
-    //     if($(this).data('stat') == 'available') {
-    //       $('#tab-place').show();
-    //       $(newId).hide();
-    //     } else {
-    //       $('#tab-place').hide();
-    //       $('#tab-place').removeClass('show');
-    //       $(newId).show();
-    //       $('.side-place').append($(newId)).addClass('have-bg');
-    //     }
-    //   });
-    
-    
-      $('.table-btn-action').on('click', function(){
-         var newId = $(this).data('id');
-         $(newId).addClass('appended');
+    });
+    $('.rev-close').on('click', function() {
+       $('.active-the-reversation .modal-backdrop').addClass('none');
+
+    });
+
+     $('.table-btn-action').on('click', function(){
+
+        $('.table-side-bar').hide();
+        var newId = $(this).data('id');
+
+        if($(this).data('stat') == 'available') {
+          $('#tab-place').show();
+          $(newId).hide();
+        } else {
+          $('#tab-place').hide();
+          $('#tab-place').removeClass('show');
+          $(newId).show();
           $('.side-place').append($(newId)).addClass('have-bg');
+        }
       });
 
- 
+
      $('.nav-btns .btn').on('click', function(){
         var tabpanid = $(this).data('tab');
         $('.table-bar-info').addClass('hidden-tab').removeClass('active-tab')
         $('.' + tabpanid).addClass('active-tab').removeClass('hidden-tab');
         console.log($(tabpanid));
     });
-    
-    
-    
+
+
+
     $('.to-pay').parent().hide();
       //  getting package id
     $('.choos-btn').on('click', function(){
       var parentElement = $(this).parent(); // الوصول إلى العنصر الأب لزر الإضافة
       var forDataV = parentElement.find('.card-title');
       var cardTitle = parentElement.find('.card-title').text();
-      var packagePrice = parentElement.find('#packageprice').val();
+      
+      
+      
+      
+      
       $('.package-name').html(cardTitle );
-      $('.payment-price').text(packagePrice + ' ريال ');
+      
         var itemId = $(this).closest('.card').data('choosen');
       $('.package-name').attr('data-choos', itemId);
       
-        const result = packagePrice * 0.10;
-        const formattedResult = (result).toFixed(2);
-        $('.pay-total').text(packagePrice + formattedResult + ' ريال ');
+       var packagePrice = parseFloat(parentElement.find('#packageprice').val());
+       $('.payment-price').text(packagePrice );
+       console.log(packagePrice);
+
+        
+         var afterTaxPrice = packagePrice + (packagePrice * 0.15)
+        
+        $('.pay-tax').text(packagePrice * 0.15);
+        $('.pay-total').text(afterTaxPrice);
+        
+          $('.discount-btn-js').on('click', function(){
+            var discountType = $('.discount-select').val();
+            var discountValue = parseFloat($('.discount-input').val());
+            var discountAmount;
+            
+            if (discountType === 'percent') {
+                 discountAmount = (afterTaxPrice) * (discountValue / 100);
+                   
+            } else if (discountType === 'copoun') {
+                var discountAmount = discountValue;
+                
+            }  else {
+                return;
+            }
+            
+            // السعر بعد الخصم
+            var priceAfterDiscount = (afterTaxPrice) - discountAmount;
+            $('.pay-total-discount').text(priceAfterDiscount.toFixed(2));
+        });
 
        });
+       
+       
        $('.btn-clock').on('click', function(){
            var theClock = $(this).text();
            $('.reserv-time').text(theClock);
        });
-       
+
 
         $('.reservations-wrap').on('click', function(){
             console.log('hjhjhjhj');
@@ -78,7 +107,7 @@ $(document).ready(function () {
       });
 
        $('.save-all').on('click', function() {
-       
+
 
 
             var data = {
@@ -169,23 +198,23 @@ $(document).ready(function () {
     $('.reservations-container .the-day').text(formattedDate);
 
     // كود عند الضغط على الحجز داخل الجدول
-    // $('.statue').on('click', function(){
-    //   $('.statue').css('opacity', '0.5');
-    //   $(this).css('opacity', '1');
-    //   var dataTable = $(this).data('table');
-    //   var dataname = $(this).data('name');
-    //   var dataguests = $(this).data('guests');
-    //   var dataphone = $(this).data('phone');
-    //   var datapackage = $(this).data('package');
-    //   var datastute = $(this).data('stute');
-    //   var datapoints = $(this).data('guests');
-    // $('.reservations-table-nmber').text(dataTable);
-    // $('.guest-name').text(dataname);
-    // $('.guest-number').text(dataguests);
-    // $('.reservations-phone').text(dataphone);
-    // $('.reservations-package').text(datapackage);
-    // $('.reservations-statue').text(datastute);
-    // $('.reservations-points').text(datapoints);
+    $('.statue').on('click', function(){
+      $('.statue').css('opacity', '0.5');
+      $(this).css('opacity', '1');
+       var dataTable = $(this).data('table');
+       var dataname = $(this).data('name');
+       var dataguests = $(this).data('guests');
+       var dataphone = $(this).data('phone');
+       var datapackage = $(this).data('package');
+       var datastute = $(this).data('stute');
+       var datapoints = $(this).data('guests');
+    $('.reservations-table-nmber').text(dataTable);
+    $('.guest-name').text(dataname);
+    $('.guest-number').text(dataguests);
+    $('.reservations-phone').text(dataphone);
+    $('.reservations-package').text(datapackage);
+    $('.reservations-statue').text(datastute);
+    $('.reservations-points').text(datapoints);
 
 
     });
@@ -394,7 +423,7 @@ mins.on('click', function() {
       $('.casher-box').addClass('box-block');
     });
 
-   
+
     // دالة لجمع المجموع قبل الضرائب
     function updateSubTotal() {
       var total = 0;
@@ -428,9 +457,9 @@ mins.on('click', function() {
       $('.payment-icon').removeClass('active');
       $(this).addClass('active');
     });
-    
+
     $('.discount-inputs .menu-btn').on('click', function(){
-        
+
           var total = $('.table-total').text();
           var discountval = $('.discount-input').val();
           var discountAmount = (discountval / 100) * total;
@@ -485,8 +514,8 @@ mins.on('click', function() {
       }, 400, "linear");
     });
 
-     
-    
+
+
     var currentDate = new Date();
     var monthNames = [
       "January", "February", "March", "April", "May", "June",
@@ -678,7 +707,7 @@ $('.reserv-date').on('click', function(){
       });
     });
 
-  
+
 
 
        //  getting table id

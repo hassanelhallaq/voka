@@ -408,6 +408,10 @@ class PosController extends Controller
         $table = Table::find($id);
         $table->status = 'in_service';
         $isSaved = $table->update();
+        $reservation =  $table->reservation;
+         $reservation->status = 'تم الحضور';
+                            $reservation = $reservation->update();
+
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
     public function closeTable($id)

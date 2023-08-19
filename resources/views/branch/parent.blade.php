@@ -214,6 +214,77 @@
             .inactive-calc {
                 display: none;
             }
+            /*-------------------------------- loading css ----------------------------------------*/
+              .loading-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+                display: none; /* Start hidden */
+              }
+              
+              .loading-screen .lds-ellipsis {
+              display: inline-block;
+              position: relative;
+              width: 80px;
+              height: 80px;
+              }
+            .lds-ellipsis div {
+              position: absolute;
+              top: 33px;
+              width: 13px;
+              height: 13px;
+              border-radius: 50%;
+              background: #fff;
+              animation-timing-function: cubic-bezier(0, 1, 1, 0);
+            }
+            .lds-ellipsis div:nth-child(1) {
+              left: 8px;
+              animation: lds-ellipsis1 0.6s infinite;
+            }
+            .lds-ellipsis div:nth-child(2) {
+              left: 8px;
+              animation: lds-ellipsis2 0.6s infinite;
+            }
+            .lds-ellipsis div:nth-child(3) {
+              left: 32px;
+              animation: lds-ellipsis2 0.6s infinite;
+            }
+            .lds-ellipsis div:nth-child(4) {
+              left: 56px;
+              animation: lds-ellipsis3 0.6s infinite;
+            }
+            @keyframes lds-ellipsis1 {
+              0% {
+                transform: scale(0);
+              }
+              100% {
+                transform: scale(1);
+              }
+            }
+            @keyframes lds-ellipsis3 {
+              0% {
+                transform: scale(1);
+              }
+              100% {
+                transform: scale(0);
+              }
+            }
+            @keyframes lds-ellipsis2 {
+              0% {
+                transform: translate(0, 0);
+              }
+              100% {
+                transform: translate(24px, 0);
+              }
+            }
    </style>
 
 
@@ -223,6 +294,10 @@
 </head>
 
 <body>
+    
+    <div class="loading-screen" id="loadingScreen">
+      <div class="lds-ellipsis" ><div></div><div></div><div></div><div></div></div>
+    </div>
 
     <section class="main">
         <div class="container-fluid text-light">
@@ -362,7 +437,7 @@
                             <ul class="navbar-nav justify-content-center flex-grow-1">
                                 @can('branch_home')
                                     <li class="nav-item home active">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center active"
+                                        <a  class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link active"
                                             aria-current="page" onclick="home()">
                                             <i class="fa-solid fa-house"></i>
                                             <span>الرئيسية</span>
@@ -371,7 +446,7 @@
                                 @endcan
                                 @can('branch_tables')
                                     <li class="nav-item halls dropdown">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
                                             onclick="halls()" role="button">
                                             <i class="fa-solid fa-table-cells-large"></i>
                                             <span>الطاولات</span>
@@ -380,7 +455,7 @@
                                 @endcan
                                 @can('branch_reservations')
                                     <li class="nav-item resver">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
                                             onclick="resver()">
                                             <i class="fa-solid fa-utensils"></i>
                                             <span>الحجوزات</span>
@@ -388,14 +463,14 @@
                                     </li>
                                 @endcan
                                 {{-- <li class="nav-item package">
-                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
                                         onclick="packages()">
                                         <i class="fa-solid fa-box-open"></i>
                                         <span>الباقات</span>
                                     </a>
                                 </li> --}}
                                 {{-- <li class="nav-item">
-                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                    <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
                                         href="waitingList.html">
                                         <i class="fa-regular fa-clock"></i>
                                         <span>الأنتظار</span>
@@ -403,7 +478,7 @@
                                 </li> --}}
                                 @can('branch_menu')
                                     <li class="nav-item product">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center"
+                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
                                             onclick="products()">
                                             <i class="fa-solid fa-clipboard-list "></i>
                                             <span>القائمة</span>
@@ -413,7 +488,7 @@
                                 @can('branch_casher')
                                     <li class="nav-item  casher">
                                         <a onclick="casher()"
-                                            class="nav-link d-flex flex-column justify-content-center align-items-center">
+                                            class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link">
                                             <i class="fa-solid fa-clipboard-list "></i>
                                             <span>الجرد</span>
                                         </a>
@@ -645,6 +720,36 @@
              $('.calc-close').on('click', function(){
                 $('.the-calc').removeClass('active-calc').addClass('inactive-calc');
             });
+            
+            
+            $(document).ready(function() {
+              $(".menu-nav-link").on("click", function(event) {
+                event.preventDefault(); // منع سلوك الرابط الافتراضي
+                
+                var loadingScreen = $("#loadingScreen");
+                
+                loadingScreen.css("display", "flex"); // عرض شاشة التحميل
+                
+                // محاكاة تأخير التحميل باستخدام setTimeout
+                setTimeout(function() {
+                  var clickedLink = $(event.target).closest("a");
+                  
+                  if (clickedLink.hasClass("home")) {
+                    home();
+                  } else if (clickedLink.hasClass("halls")) {
+                    halls();
+                  } else if (clickedLink.hasClass("resver")) {
+                    resver();
+                  }
+                  // وهكذا يمكنك إضافة الصفحات الأخرى هنا
+                  
+                  // إخفاء شاشة التحميل بعد اكتمال الإجراءات
+                  loadingScreen.css("display", "none");
+                  
+                }, 2000); // محاكاة توقيت التحميل
+              });
+            });
+
 
         });
 

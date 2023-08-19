@@ -1,5 +1,5 @@
 <div class="row" style="margin-bottom:50px; margin-top:50px">
-    <div class="col-lg-12">
+    <div class="col-lg-12 time-slots">
 
                  @foreach ($timeSlots as $slot)
                 @php

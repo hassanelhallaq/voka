@@ -73,11 +73,12 @@
 
                                                     <td> {{ $totalSum }}</td>
                                                     <td>
-                                                        {{ $item->reservation->date }}
+                                                        {{ $item->reservation->date ??'' }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->reservation->end }}
+                                                        {{ $item->reservation->end ??'' }}
                                                     </td>
+                                                    @if($item->reservation)
                                                     <td>
                                                         <a data-bs-toggle="modal"
                                                             data-bs-target="#time_{{ $item->id }}"
@@ -89,6 +90,7 @@
                                                             href="{{ route('orders.show', [$item->id]) }}">
                                                             <i class="fa fa-eye"></i></a>
                                                     </td>
+                                                    @endif
                                                 </tr>
                                                 <div class="modal fade" id="time_{{ $item->id }}" tabindex="-1"
                                                     aria-hidden="true">
@@ -103,7 +105,7 @@
                                                                         <div class="row">
                                                                             <div class="form-group mb-6">
                                                                                 <label>{{ __('time') }}</label>
-
+                                                                                     @if($item->reservation)
                                                                                 <div class="input-group mb-3">
                                                                                     <input type="text"
                                                                                         class="form-control meal_price"
@@ -111,6 +113,7 @@
                                                                                         id='time_{{ $item->reservation->id }}'
                                                                                         value="{{ old('time') }}">
                                                                                 </div>
+                                                                                @endif
                                                                                 @if ($errors->has('time'))
                                                                                     <p style="color: red">
                                                                                         {{ $errors->first('time') }}
@@ -127,11 +130,13 @@
                                                                             data-bs-dismiss="modal"
                                                                             data-kt-roles-modal-action="cancel">
                                                                             {{ __('Discard') }}</button>
+                                                                            @if($item->reservation)
                                                                         <button
                                                                             onclick="performUpdate({{ $item->reservation->id }})"
                                                                             type="button" class="btn btn-primary">
                                                                             {{ __('Submit') }}
                                                                         </button>
+                                                                           @endif
                                                                     </div>
                                                                     <!--end::Actions-->
                                                                 </form>

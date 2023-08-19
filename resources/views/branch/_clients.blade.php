@@ -1,3 +1,10 @@
+   <!-- Search form -->
+    <form class="form-inline d-flex justify-content-center md-form form-sm mt-5">
+      
+      <input class="form-control form-control-sm  ml-3 w-75" type="text" placeholder="بحث عن ضيف"
+        aria-label="Search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+    </form>
     @foreach ($clients as $client)
         <div class="col-12 col-md-4">
 
