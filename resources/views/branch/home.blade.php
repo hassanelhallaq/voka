@@ -62,13 +62,6 @@
             fill: var(--white);
         }
 
-        /* .sofa:hover .fill {
-                                                            fill: var(--orange);
-                                                            }
-                                                            .sofa:hover .line {
-                                                            fill: var(--white);
-                                                            } */
-
         .sofa svg {
             filter: brightness(1);
             /* تعتيم افتراضي */
@@ -129,28 +122,10 @@
     <div class="main-from-home col-md-11" id="mainPage">
 
         <div class="container-fluid">
-            <!--<div class="filter-btns d-flex mb-2">-->
-            <!--    <div class="btn-group" role="group" aria-label="Basic example">-->
-            <!--        @foreach ($halles as $key => $item)
-                     -->
-            <!--            <button type="button" class="h-filter btn btn-dark"-->
-            <!--                data-salon="#salon{{ $item->id }}">{{ $item->name }}</button>-->
-            <!--
-             @endforeach-->
-            <!--    </div>-->
-            <!--    <div class="btn-group mx-3" role="group" aria-label="Basic example">-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="all">كل-->
-            <!--            الحالات</button>-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="reserved">-->
-            <!--            المحجوزة</button>-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="available">-->
-            <!--            المتاحة</button>-->
-            <!--        <button type="button" class="s-filter btn btn-dark" data-st="serv"> فى-->
-            <!--            الخدمة</button>-->
-            <!--    </div>-->
-
-            <!--</div>-->
-            <!-- salone table  -->
+            @foreach ($halles as $key => $item)
+                {{-- <button type="button" class="h-filter btn btn-dark"
+                    data-salon="#salon{{ $item->id }}">{{ $item->name }}</button> --}}
+            @endforeach
 
             <div class="row home-card mt-2 active-salon" id="salon{{ $item->id }}">
                 <div class="col-md-1">
@@ -195,7 +170,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-
+                                        
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -361,7 +336,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-
+                                                                    
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -884,7 +859,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-
+                                        
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -1058,7 +1033,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-
+                                                                    
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -1103,40 +1078,40 @@
                                                                                 </button>
                                                                             </div>
 
-                                                                              <div class="modal fade"
-                                                                                    id="exampleModal_{{ $table->id }}"
-                                                                                    tabindex="-1"
-                                                                                    aria-labelledby="exampleModalLabel"
-                                                                                    aria-hidden="true">
-                                                                                    <div class="modal-dialog">
-                                                                                        <div class="modal-content">
-                                                                                            <div class="modal-header">
-                                                                                                <h1 class="modal-title fs-5"
-                                                                                                    id="exampleModalLabel">
-                                                                                                    تفعيل الحجز</h1>
-                                                                                                <button type="button"
-                                                                                                    class="btn-close"
-                                                                                                    data-bs-dismiss="modal"
-                                                                                                    aria-label="Close"></button>
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
                                                                                             </div>
-                                                                                            <div class="modal-body">
-                                                                                                <div
-                                                                                                    class="modal-body text-light">
-                                                                                                    هل تود تفعيل الحجز
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="modal-footer">
-                                                                                                <a type="button"
-                                                                                                    class="btn btn-secondary"
-                                                                                                    data-bs-dismiss="modal">اغلاق</a>
-                                                                                                <button type="button"
-                                                                                                    onclick="activeTable({{ $table->id }})"
-                                                                                                    class="btn btn-primary">تأكيد
-                                                                                                </button>
-                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
                                                                         @else
                                                                             <div class="col-md-6">
                                                                                 <button disabled
@@ -1618,7 +1593,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-
+                                        
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2036,7 +2011,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-
+                                                                    
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -2081,40 +2056,40 @@
                                                                                 </button>
                                                                             </div>
 
-                                                                               <div class="modal fade"
-                                                                                    id="exampleModal_{{ $table->id }}"
-                                                                                    tabindex="-1"
-                                                                                    aria-labelledby="exampleModalLabel"
-                                                                                    aria-hidden="true">
-                                                                                    <div class="modal-dialog">
-                                                                                        <div class="modal-content">
-                                                                                            <div class="modal-header">
-                                                                                                <h1 class="modal-title fs-5"
-                                                                                                    id="exampleModalLabel">
-                                                                                                    تفعيل الحجز</h1>
-                                                                                                <button type="button"
-                                                                                                    class="btn-close"
-                                                                                                    data-bs-dismiss="modal"
-                                                                                                    aria-label="Close"></button>
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
                                                                                             </div>
-                                                                                            <div class="modal-body">
-                                                                                                <div
-                                                                                                    class="modal-body text-light">
-                                                                                                    هل تود تفعيل الحجز
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="modal-footer">
-                                                                                                <a type="button"
-                                                                                                    class="btn btn-secondary"
-                                                                                                    data-bs-dismiss="modal">اغلاق</a>
-                                                                                                <button type="button"
-                                                                                                    onclick="activeTable({{ $table->id }})"
-                                                                                                    class="btn btn-primary">تأكيد
-                                                                                                </button>
-                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
                                                                         @else
                                                                             <div class="col-md-6">
                                                                                 <button
@@ -2124,7 +2099,7 @@
                                                                                     تفعيل الحجز
                                                                                 </button>
                                                                                 <!-- Modal -->
-                                                                                  <div class="modal fade"
+                                                                                <div class="modal fade"
                                                                                     id="close_{{ $table->id }}"
                                                                                     tabindex="-1"
                                                                                     aria-labelledby="exampleModalLabel"
@@ -2599,7 +2574,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-
+                                        
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -2773,7 +2748,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-
+                                                                    
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -2817,40 +2792,40 @@
                                                                                     تفعيل الحجز
                                                                                 </button>
                                                                             </div>
-                                                                             <div class="modal fade"
-                                                                                    id="exampleModal_{{ $table->id }}"
-                                                                                    tabindex="-1"
-                                                                                    aria-labelledby="exampleModalLabel"
-                                                                                    aria-hidden="true">
-                                                                                    <div class="modal-dialog">
-                                                                                        <div class="modal-content">
-                                                                                            <div class="modal-header">
-                                                                                                <h1 class="modal-title fs-5"
-                                                                                                    id="exampleModalLabel">
-                                                                                                    تفعيل الحجز</h1>
-                                                                                                <button type="button"
-                                                                                                    class="btn-close"
-                                                                                                    data-bs-dismiss="modal"
-                                                                                                    aria-label="Close"></button>
+                                                                            <div class="modal fade"
+                                                                                id="exampleModal_{{ $table->id }}"
+                                                                                tabindex="-1"
+                                                                                aria-labelledby="exampleModalLabel"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="exampleModalLabel">
+                                                                                                تفعيل الحجز</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div
+                                                                                                class="modal-body text-light">
+                                                                                                هل تود تفعيل الحجز
                                                                                             </div>
-                                                                                            <div class="modal-body">
-                                                                                                <div
-                                                                                                    class="modal-body text-light">
-                                                                                                    هل تود تفعيل الحجز
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="modal-footer">
-                                                                                                <a type="button"
-                                                                                                    class="btn btn-secondary"
-                                                                                                    data-bs-dismiss="modal">اغلاق</a>
-                                                                                                <button type="button"
-                                                                                                    onclick="activeTable({{ $table->id }})"
-                                                                                                    class="btn btn-primary">تأكيد
-                                                                                                </button>
-                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <a type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">اغلاق</a>
+                                                                                            <button type="button"
+                                                                                                onclick="activeTable({{ $table->id }})"
+                                                                                                class="btn btn-primary">تأكيد
+                                                                                            </button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
                                                                         @else
                                                                             <div class="col-md-6">
                                                                                 <button disabled
@@ -3334,7 +3309,7 @@
                                                 ->where('is_done', 0)
                                                 ->with('products')
                                                 ->first();
-
+                                        
                                             // Wrap the related products in a collection (even if there's only one result)
                                             if ($orders != null && $orders->products->count() != 0) {
                                                 // Calculate total order prices using the map function on the products collection
@@ -3499,7 +3474,7 @@
                                                                         $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                         $reservationDateTime = $table->reservation->date;
                                                                     }
-
+                                                                    
                                                                 @endphp
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -4068,7 +4043,7 @@
                                         ->where('is_done', 0)
                                         ->with('products')
                                         ->first();
-
+                                
                                     // Wrap the related products in a collection (even if there's only one result)
                                     if ($orders != null && $orders->products->count() != 0) {
                                         // Calculate total order prices using the map function on the products collection
@@ -4243,7 +4218,7 @@
                                                             $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                             $reservationDateTime = $table->reservation->date;
                                                         }
-
+                                                        
                                                     @endphp
                                                     <div class="card-item body-time d-flex justify-content-between">
                                                         <p class="hall-name"> الوقت المنقضى</p>
@@ -4322,10 +4297,10 @@
                                                                                             class="rev-item d-flex w-100  align-items-start">
                                                                                             @php
                                                                                                 $dateString = $table->reservation->date;
-
+                                                                                                
                                                                                                 // Create a DateTime object from the date string
                                                                                                 $date = new DateTime($dateString);
-
+                                                                                                
                                                                                                 // Format the time as desired (e.g., "H:i")
                                                                                                 $formattedTime = $date->format('h:i A');
                                                                                             @endphp
@@ -4356,7 +4331,7 @@
                                                                                 @endif
                                                                                 @php
                                                                                     $now = Carbon\Carbon::now();
-
+                                                                                    
                                                                                     // Query to get all reservations for today
                                                                                     $reservations = App\Models\Reservation::where('table_id', $table->id)
                                                                                         ->where(function ($query) use ($now) {
@@ -4364,24 +4339,24 @@
                                                                                         })
                                                                                         ->orderBy('date')
                                                                                         ->get();
-
+                                                                                    
                                                                                     $packages = $table->packages;
                                                                                     foreach ($packages as $key => $package) {
                                                                                         # code...
-
+                                                                                    
                                                                                         $package = App\Models\Package::find($package->id);
                                                                                         $minutesPerPackage = $package->time;
-
+                                                                                    
                                                                                         // Generate time slots based on the package minutes
                                                                                         $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
                                                                                         $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
                                                                                         $timeSlots = [];
-
+                                                                                    
                                                                                         $currentTime = clone $startTime;
                                                                                         while ($currentTime->lte($endTime)) {
                                                                                             $endTimeSlot = clone $currentTime;
                                                                                             $endTimeSlot->addMinutes($minutesPerPackage);
-
+                                                                                    
                                                                                             // Check if the time slot is in the past
                                                                                             if ($endTimeSlot->isFuture()) {
                                                                                                 $timeSlots[] = [
@@ -4389,18 +4364,18 @@
                                                                                                     'end' => $endTimeSlot->format('g:i A'),
                                                                                                 ];
                                                                                             }
-
+                                                                                    
                                                                                             $currentTime->addMinutes($minutesPerPackage);
                                                                                         }
                                                                                         // Calculate the available and unavailable time slots
                                                                                         $availableSlots = [];
                                                                                         $unavailableSlots = [];
-
+                                                                                    
                                                                                         $prevEndTime = $startTime;
                                                                                         foreach ($reservations as $reservation) {
                                                                                             $start = Carbon\Carbon::parse($reservation->date);
                                                                                             $end = Carbon\Carbon::parse($reservation->end);
-
+                                                                                    
                                                                                             if ($prevEndTime->lt($start)) {
                                                                                                 $availableSlots[] = [
                                                                                                     'start' => $prevEndTime->format('g:i A'),
@@ -4411,7 +4386,7 @@
                                                                                                 'start' => $start->format('g:i A'),
                                                                                                 'end' => $end->format('g:i A'),
                                                                                             ];
-
+                                                                                    
                                                                                             $prevEndTime = $end;
                                                                                         }
                                                                                         if ($prevEndTime->lt($endTime)) {
@@ -4529,7 +4504,7 @@
                                                                         ->where('is_done', 0)
                                                                         ->with('products')
                                                                         ->first();
-
+                                                                
                                                                     // Wrap the related products in a collection (even if there's only one result)
                                                                     if ($orders != null && $orders->products->count() != 0) {
                                                                         // Calculate total order prices using the map function on the products collection
@@ -5169,8 +5144,9 @@
         store('/branch/close/table/' + id, formData)
         halles();
     }
-    function halles(){
-         $.get('/branch/branch/halls', {}).done(function(data) {
+
+    function halles() {
+        $.get('/branch/branch/halls', {}).done(function(data) {
             $('#mainPage').html(data); // Show the new content
         }).done(function() {
             $('#casher-section').show(); // Hide the casher section

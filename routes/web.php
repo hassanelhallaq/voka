@@ -104,6 +104,7 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/casher/create', [App\Http\Controllers\PosController::class, 'casher'])->name('casher.create');
     Route::post('/casher/store', [App\Http\Controllers\CasherController::class, 'store'])->name('casher.store');
     Route::get('/branch/halls/new', [App\Http\Controllers\PosController::class, 'hallsNew'])->name('branch.halls.new');
+    Route::get('/payment', [App\Http\Controllers\ReservationController::class, 'payment'])->name('payment');
 
     Route::post('/active/table/{id}', [App\Http\Controllers\PosController::class, 'activeTable'])->name('active.table');
     Route::post('/close/table/{id}', [App\Http\Controllers\PosController::class, 'closeTable'])->name('close.table');

@@ -313,12 +313,12 @@ class PosController extends Controller
         $clients = Client::paginate(10);
 
         $halles = [];
-        $reservations = [];
+        $reservation = null;
         $availableSlots = [];
         $unavailableSlots = [];
         $timeSlots = [];
         $minutesPerPackage = [];
-        return response()->view('branch.reservation', compact('halles', 'packages', 'clients', 'availableSlots', 'unavailableSlots', 'timeSlots'));
+        return response()->view('branch.reservation', compact('halles', 'packages', 'clients', 'availableSlots', 'unavailableSlots', 'timeSlots', 'reservation'));
     }
     public function tableSlots(Request $request)
     {
@@ -409,8 +409,8 @@ class PosController extends Controller
         $table->status = 'in_service';
         $isSaved = $table->update();
         $reservation =  $table->reservation;
-         $reservation->status = 'تم الحضور';
-                            $reservation = $reservation->update();
+        $reservation->status = 'تم الحضور';
+        $reservation = $reservation->update();
 
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }

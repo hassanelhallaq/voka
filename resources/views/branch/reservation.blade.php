@@ -211,8 +211,8 @@
                                 <!--</div>-->
                                 <div class="row">
                                     <div class="col-1">
-                                        <button type="button" class="btn btn-primary addgustbtn" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop">
+                                        <button type="button" class="btn btn-primary addgustbtn"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                             <i class="fa-solid fa-plus"></i>
                                         </button>
                                         <!-- Modal -->
@@ -290,138 +290,8 @@
 
                             </div>
                         </div>
-
-                        <div class="reservation-tabs notes pt-5 mt-5" id="pay">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-10"></div>
-                                    <div class="col-md-2">
-                                        <div class="change-content btn btn-primary" data-id="#alltime">السابق</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-6">
-                                       <ol class="list-group reversed paing-wrp">
-    <li class="list-group-item no-number  ">
-        <div
-            class="sub-total d-flex justify-content-between align-items-start w-100">
-            <div class="me-2 ms-auto">
-                <div class="fw-bold"> المجموع  </div>
-            </div>
-            <span class="payment-price"> </span>
-            <span>ريال</span>
-        </div>
-        <!--<div-->
-        <!--    class="tax d-flex justify-content-between align-items-start mt-4 w-100">-->
-        <!--    <div class="me-2 ms-auto">-->
-        <!--        <div class="fw-bold"> ضريبة</div>-->
-        <!--    </div>-->
-        <!--    <span class="tax">10%</span>-->
-        <!--</div>-->
-        <div
-            class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
-            <div class="me-2 ms-auto">
-                <div class="fw-bold"> الضريبة 15%  </div>
-            </div>
-            <span class="pay-tax"> </span>
-            <span>ريال</span>
-        </div>
-        <div class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
-            <div class="me-2 ms-auto">
-                <div class="fw-bold">  الأجمالى  </div>
-            </div>
-            <span class="pay-total"> </span>
-            <span>ريال</span>
-        </div>
-         <div
-            class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
-
-            <div class="discount-inputs input-group"> 
-                <label class="col-sm-6 col-form-label text-right">   الخصم
-                <select class="form-control discount-select bg-dark " data-bs-theme="dark">
-                    <option value="percent" selected >نسبة مئوية</option>
-                    <!--<option value="testing">كوبون</option>-->
-
-                    <option value="copoun">كوبون</option>
-                </select>
-                </label>
-                <input class="discount-input form-control" lang="en"
-                    type="number" placeholder="قيمة الخصم"
-                    aria-label="default input example">
-                <button class="btn btn-primary discount-btn-js" type="button">تطبيق</button>
-            </div>
-        </div>
-        <div
-            class="tax d-flex justify-content-between align-items-start mt-4 total w-100">
-            <div class="me-2 ms-auto">
-                <div class="fw-bold"> الأجمالى بعد الخصم</div>
-            </div>
-            <span class="pay-total-discount"> </span>
-            <span>ريال</span>
-        </div>
-        <div class="payment-method w-100">
-            <div class="row">
-                <div class="col-4">
-                    <div class="payment-icon d-flex justify-content-center align-items-center"
-                        id="cash">
-                        <i class="fa-solid fa-sack-dollar"></i>
-                    </div>
-                    <p class="text-center">كاش</p>
-                </div>
-                <div class="col-4">
-                    <div class="payment-icon d-flex justify-content-center align-items-center"
-                        id="credit-card">
-                        <i class="fa-solid fa-credit-card"></i>
-                    </div>
-                    <p class="text-center">بطاقة ائتمان</p>
-                </div>
-                <div class="col-4">
-                    <div class="payment-icon d-flex justify-content-center align-items-center"
-                        id="wallet">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
-                    <p class="text-center">المحفظة</p>
-                </div>
-            </div>
-            <div class="payment-btn my-3 text-center">
-                <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" type="button"
-                            data-bs-toggle="modal" data-bs-target="#modalPay">
-                            تسجيل الطلب
-                        </button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" type="button"
-                            disabled>
-                            تفعيل الحجز
-                        </button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" type="button"
-                            data-bs-toggle="modal" data-bs-target="#pill"
-                            disabled>
-                            طباعة الفاتورة
-                        </button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" type="button"
-                            disabled>
-                            تغيير الصالة
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </li>
-</ol>
-                                    </div>
-                                    <div class="col-md-3"></div>
-                                </div>
-
-                            </div>
+                        <div id="pay-mod">
+                            @include('branch.pay')
                         </div>
                     </div>
                 </div>
@@ -444,7 +314,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="storeReaervation()"
                         style="margin-left: 10px;">تسجيل</button>
-                     <button type="button" class="btn btn-primary" onclick="storeReaervation()"
+                    <button type="button" class="btn btn-primary" onclick="storeReaervation()"
                         style="margin-left: 10px;">تسجيل وتغعيل</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
                 </div>
@@ -452,99 +322,92 @@
         </div>
     </div>
     <!--مودال طباعة الفاتورة -->
-      <div class="modal fade" id="pill" tabindex="-1" aria-labelledby="pill" aria-hidden="true">
+    <div class="modal fade" id="pill" tabindex="-1" aria-labelledby="pill" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                
-                <div class="modal-body">
-                     <div id="invoice-POS">
-    
-    <center id="top">
-      <div class="logo"></div>
-      <div class="info"> 
-        <h2>SBISTechs Inc</h2>
-      </div><!--End Info-->
-    </center><!--End InvoiceTop-->
-    
-    <div id="mid">
-      <div class="info">
-        <h2>Contact Info</h2>
-        <p> 
-            Address : street city, state 0000</br>
-            Email   : JohnDoe@gmail.com</br>
-            Phone   : 555-555-5555</br>
-        </p>
-      </div>
-    </div><!--End Invoice Mid-->
-    
-    <div id="bot">
 
-					<div id="table">
-						<table>
-							<tr class="tabletitle">
-								<td class="item"><h2>Item</h2></td>
-								<td class="Hours"><h2>Qty</h2></td>
-								<td class="Rate"><h2>Sub Total</h2></td>
-							</tr>
+                <div class="modal-body" id="modal-body-content">
+                    <div id="invoice-POS">
 
-							<tr class="service">
-								<td class="tableitem"><p class="itemtext">Communication</p></td>
-								<td class="tableitem"><p class="itemtext">5</p></td>
-								<td class="tableitem"><p class="itemtext">$375.00</p></td>
-							</tr>
+                        <center id="top">
+                            <div class="logo"></div>
+                            <div class="info">
+                                <h2>SBISTechs Inc</h2>
+                            </div><!--End Info-->
+                        </center><!--End InvoiceTop-->
 
-							<tr class="service">
-								<td class="tableitem"><p class="itemtext">Asset Gathering</p></td>
-								<td class="tableitem"><p class="itemtext">3</p></td>
-								<td class="tableitem"><p class="itemtext">$225.00</p></td>
-							</tr>
+                        <div id="mid">
+                            <div class="info">
+                                <h2>Contact Info</h2>
+                                <p>
+                                    Address : street city, state 0000</br>
+                                    Email : JohnDoe@gmail.com</br>
+                                    Phone : 555-555-5555</br>
+                                </p>
+                            </div>
+                        </div><!--End Invoice Mid-->
 
-							<tr class="service">
-								<td class="tableitem"><p class="itemtext">Design Development</p></td>
-								<td class="tableitem"><p class="itemtext">5</p></td>
-								<td class="tableitem"><p class="itemtext">$375.00</p></td>
-							</tr>
+                        <div id="bot">
 
-							<tr class="service">
-								<td class="tableitem"><p class="itemtext">Animation</p></td>
-								<td class="tableitem"><p class="itemtext">20</p></td>
-								<td class="tableitem"><p class="itemtext">$1500.00</p></td>
-							</tr>
+                            <div id="table">
+                                <table>
+                                    <tr class="tabletitle">
+                                        <td class="item">
+                                            <h2>Item</h2>
+                                        </td>
+                                        <td class="Hours">
+                                            <h2>Qty</h2>
+                                        </td>
+                                        <td class="Rate">
+                                            <h2>Sub Total</h2>
+                                        </td>
+                                    </tr>
+                                    <tr class="service">
+                                        <td class="tableitem">
+                                            <p class="itemtext">Animation Revisions</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">10</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">$750.00</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="tabletitle">
+                                        <td></td>
+                                        <td class="Rate">
+                                            <h2>tax</h2>
+                                        </td>
+                                        <td class="payment">
+                                            <h2>$419.25</h2>
+                                        </td>
+                                    </tr>
+                                    <tr class="tabletitle">
+                                        <td></td>
+                                        <td class="Rate">
+                                            <h2>Total</h2>
+                                        </td>
+                                        <td class="payment">
+                                            <h2>$3,644.25</h2>
+                                        </td>
+                                    </tr>
 
-							<tr class="service">
-								<td class="tableitem"><p class="itemtext">Animation Revisions</p></td>
-								<td class="tableitem"><p class="itemtext">10</p></td>
-								<td class="tableitem"><p class="itemtext">$750.00</p></td>
-							</tr>
+                                </table>
+                            </div><!--End Table-->
 
+                            <div id="legalcopy">
+                                <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected
+                                    within 31 days; please process this invoice within that time. There will be a 5%
+                                    interest charge per month on late invoices.
+                                </p>
+                            </div>
 
-							<tr class="tabletitle">
-								<td></td>
-								<td class="Rate"><h2>tax</h2></td>
-								<td class="payment"><h2>$419.25</h2></td>
-							</tr>
-
-							<tr class="tabletitle">
-								<td></td>
-								<td class="Rate"><h2>Total</h2></td>
-								<td class="payment"><h2>$3,644.25</h2></td>
-							</tr>
-
-						</table>
-					</div><!--End Table-->
-
-					<div id="legalcopy">
-						<p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices. 
-						</p>
-					</div>
-
-				</div><!--End InvoiceBot-->
-  </div><!--End Invoice-->
+                        </div><!--End InvoiceBot-->
+                    </div><!--End Invoice-->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="storeReaervation()"
-                        style="margin-left: 10px;">طباعة</button>
+                    <button type="button" class="btn btn-primary" style="margin-left: 10px;">طباعة</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
                 </div>
             </div>
@@ -564,7 +427,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
-         <script src="{{ asset('front/js/main.js') }}"></script>
+    <script src="{{ asset('front/js/main.js') }}"></script>
 
     <script>
         function pack(id) {
@@ -687,25 +550,92 @@
 
         // Function to handle form submission
         function storeReaervation() {
-
-
             var packageId = $('.package-name').attr('data-choos');
             var tableId = $('.table-name').attr('data-choos');
             var guestId = $('.guest-name').attr('data-choos');
             var date = $('.reserv-date').text();
             var time = $('.reserv-time').text();
             var status = $('.nav-statues').text();
-
             let formData = new FormData();
             formData.append('client_id', guestId);
             formData.append('package_id', packageId);
             formData.append('table_id', tableId);
             formData.append('time', time);
             formData.append('payment', selectedOption);
-
             // Call the 'store' function to handle the form data submission
-            storeRoute('/branch/reservations', formData);
+            axios.post('/branch/reservations', formData)
+                .then(function(response) {
+                    var reservationId = response.data.reservation.id;
+                    updateReservationDetails(reservationId);
+                    // Add onClick event to the "تفعيل الحجز" button
+                    document.getElementById('activate-reservation-btn').onclick = function() {
+                        activateReservation(reservationId);
+                    };
 
+                    var htmlContent = generateReservationHTML(response.data.reservation);
+
+                    // Update modal content with reservation details
+                    $('#modal-body-content').html(htmlContent);
+                })
+        }
+
+        function generateReservationHTML(reservation) {
+            // Generate the HTML content using reservation data
+            var html = `
+        <!-- Populate the content with reservation details -->
+        <h2>Reservation Details</h2>
+        <p class="info">Client: ${reservation.client.name}</p>
+        <p class="info">Phone: ${reservation.client.phone}</p>
+        <p class="info">Table: ${reservation.table.name}</p>
+        <!-- Update client information here -->
+        <!-- Add more details as needed -->
+              <div id="table">
+                                <table>
+                                    <tr class="tabletitle">
+                                        <td class="item">
+                                            <h2>Item</h2>
+                                        </td>
+                                        <td class="Hours">
+                                            <h2>Qty</h2>
+                                        </td>
+                                        <td class="Rate">
+                                            <h2>Sub Total</h2>
+                                        </td>
+                                    </tr>
+                                    <tr class="service">
+                                        <td class="tableitem">
+                                            <p class="itemtext">${reservation.package.name}</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">1</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">${reservation.package.price}</p>
+                                        </td>
+                                    </tr>
+
+
+
+                                </table>
+                            </div>
+        `;
+            return html;
+        }
+
+        function updateReservationDetails(reservationId) {
+            $('#reservation-details').attr('data-reservation-id', reservationId);
+            $('#reservation-details button[disabled]').prop('disabled', false);
+            $('#reservation-details button[data-bs-target="#pill"]').removeAttr('disabled');
+            $('#reservation-details button[data-bs-target="#activate-reservation-btn"]').removeAttr('disabled');
+
+
+        }
+
+        function activateReservation(reservationId) {
+            // Perform actions related to activating the reservation using the reservationId
+            let formData = new FormData();
+            store('/branch/active/table/' + reservationId, formData)
+            // You can replace the console.log with your desired logic
         }
         // Add event listener to form submission
         $('#reservation-form').on('submit', function(event) {

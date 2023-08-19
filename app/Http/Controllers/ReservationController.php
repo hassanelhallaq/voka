@@ -98,12 +98,16 @@ class ReservationController extends Controller
                 $walletAction->type   = 'Discount';
                 $walletAction->save();
             }
-            return ['redirect' => route('branch.home')];
+            return ['reservation' => $reservation->with('client', 'package', 'table')->first()];
         } else {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
     }
-
+    public function payment(Request $request)
+    {
+        $reservation =  Reservation::find($request->id);
+        return  $render = view('branch.pay', compact('reservation'));
+    }
     public function time(Request $request, $id)
     {
         $reservation = Reservation::find($id);
