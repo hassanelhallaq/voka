@@ -325,6 +325,10 @@
     <div class="modal fade" id="pill" tabindex="-1" aria-labelledby="pill" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" style="margin-left: 10px;">طباعة</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
+                </div>
 
                 <div class="modal-body" id="modal-body-content">
                     <div id="invoice-POS">
@@ -406,10 +410,7 @@
                     </div><!--End Invoice-->
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" style="margin-left: 10px;">طباعة</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -590,7 +591,7 @@
         <div id="invoice-POS">
         <center id="top">
             <div class="logo"></div>
-            <div class="info">
+            <div class="info"> 
               <h2>SBISTechs Inc</h2>
             </div><!--End Info-->
           </center>
@@ -603,7 +604,7 @@
                 <!-- Update client information here -->
             </div>
         </div>
-
+        
         <!-- Add more details as needed -->
             <div id="bot">
               <div id="table">
@@ -619,7 +620,7 @@
                                 <h2>Sub Total</h2>
                             </td>
                         </tr>
-
+                         
                         <tr class="service">
                             <td class="tableitem">
                                 <p class="itemtext">${reservation.package.name}</p>
@@ -631,14 +632,14 @@
                                 <p class="itemtext">${reservation.package.price}</p>
                             </td>
                         </tr>
-
+                        
                         <tr class="tabletitle">
-
+                          
                           <td class="Rate"><h2>tax</h2></td>
                           <td class="payment"><h2>$4</h2></td>
                           <td></td>
                         </tr>
-
+            
                         <tr class="tabletitle">
                           <td class="Rate"><h2>Total</h2></td>
                           <td class="payment"><h2>$3,644.25</h2></td>
@@ -648,7 +649,7 @@
                 </div>
             </div>
             <div id="legalcopy">
-          <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
+          <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices. 
           </p>
         </div>
         </div>
@@ -676,15 +677,15 @@
             event.preventDefault();
             handleFormSubmission();
         });
-
+        
         $('#pill').addClass('dis-none');
-
-        $('.register-and-close').on('click', function() {
+        
+         $('.register-and-close').on('click', function(){
             $('.modal-backdrop.show').hide();
-
+            
         });
-
-        $('.bill-print').on('click', function() {
+        
+        $('.bill-print').on('click', function(){
             $('#pill').removeClass('dis-none');
         });
     </script>

@@ -25,8 +25,9 @@ class sendNotificationsNewOrder implements ShouldBroadcast
     public function __construct($config)
     {
         $this->config    = $config;
+       
         $this->broadcastName = 'realtimeBranchID_' . $this->config['branch_id'];
-
+            
         if ( isset($this->config['broadcastName']) )
         {
             $this->broadcastName = $this->config['broadcastName'];

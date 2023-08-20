@@ -846,7 +846,7 @@
                         // إخفاء شاشة التحميل بعد اكتمال الإجراءات
                         loadingScreen.css("display", "none");
 
-                    }, 2000); // محاكاة توقيت التحميل
+                    }, 3000); // محاكاة توقيت التحميل
                 });
             });
             
@@ -866,7 +866,6 @@
             cluster: 'eu'
         });
         var channel = pusher.subscribe('newOrdersDigitalMenu');
-        var channel = pusher.subscribe('my-channel');
         channel.bind('realtimeWaiterBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
             var orderData = JSON.parse(JSON.stringify(data));
             swal("Table " + orderData.config.table_id + " Request the Waiter!", '', "info");
