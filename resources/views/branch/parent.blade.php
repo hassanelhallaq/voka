@@ -849,8 +849,8 @@
                     }, 3000); // محاكاة توقيت التحميل
                 });
             });
-            
-            $('.home-link').on('click', function(){
+
+            $('.home-link').on('click', function() {
                 $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
                 console.log('hhhhhhhhhhhhhhhhhh');
             });
