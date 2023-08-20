@@ -521,7 +521,7 @@
                             <ul class="navbar-nav justify-content-center flex-grow-1">
                                 @can('branch_home')
                                     <li class="nav-item home active">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link active"
+                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link home-link active"
                                             aria-current="page" onclick="home()">
                                             <i class="fa-solid fa-house"></i>
                                             <span>الرئيسية</span>
@@ -843,6 +843,11 @@
 
                     }, 2000); // محاكاة توقيت التحميل
                 });
+            });
+            
+            $('.home-link').on('click', function(){
+                $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
+                console.log('hhhhhhhhhhhhhhhhhh');
             });
 
 

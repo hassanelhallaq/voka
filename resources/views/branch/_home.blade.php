@@ -117,7 +117,7 @@
          border-radius: 10px;
      }
  </style>
- <div class="main-from-home col-md-11" id="mainPage">
+ <div class="main-from-home test col-md-11" id="mainPage">
 
      {{-- <div class="seacr-bar mb-5">
          <form class="d-flex search  justify-content-between" role="search">
