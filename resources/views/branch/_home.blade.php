@@ -119,7 +119,7 @@
  </style>
  <div class="main-from-home col-md-11" id="mainPage">
 
-     <div class="seacr-bar mb-5">
+     {{-- <div class="seacr-bar mb-5">
          <form class="d-flex search  justify-content-between" role="search">
              <p>اكتب رقم الطاولة</p>
              <input class="search-input form-control" type="search" aria-label="Search" placeholder="12">
@@ -128,7 +128,7 @@
                  <i class="fa-solid fa-magnifying-glass"></i>
              </button>
          </form>
-     </div>
+     </div> --}}
 
      <div class="container-fluid">
          @foreach ($halles as $key => $item)
@@ -179,7 +179,7 @@
                                              ->where('is_done', 0)
                                              ->with('products')
                                              ->first();
-
+                                     
                                          // Wrap the related products in a collection (even if there's only one result)
                                          if ($orders != null && $orders->products->count() != 0) {
                                              // Calculate total order prices using the map function on the products collection
@@ -345,7 +345,7 @@
                                                                      $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                      $reservationDateTime = $table->reservation->date;
                                                                  }
-
+                                                                 
                                                              @endphp
                                                              <div
                                                                  class="card-item body-time d-flex justify-content-between">
@@ -872,7 +872,7 @@
                                              ->where('is_done', 0)
                                              ->with('products')
                                              ->first();
-
+                                     
                                          // Wrap the related products in a collection (even if there's only one result)
                                          if ($orders != null && $orders->products->count() != 0) {
                                              // Calculate total order prices using the map function on the products collection
@@ -1046,7 +1046,7 @@
                                                                      $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                      $reservationDateTime = $table->reservation->date;
                                                                  }
-
+                                                                 
                                                              @endphp
                                                              <div
                                                                  class="card-item body-time d-flex justify-content-between">
@@ -1610,7 +1610,7 @@
                                              ->where('is_done', 0)
                                              ->with('products')
                                              ->first();
-
+                                     
                                          // Wrap the related products in a collection (even if there's only one result)
                                          if ($orders != null && $orders->products->count() != 0) {
                                              // Calculate total order prices using the map function on the products collection
@@ -2031,7 +2031,7 @@
                                                                      $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                      $reservationDateTime = $table->reservation->date;
                                                                  }
-
+                                                                 
                                                              @endphp
                                                              <div
                                                                  class="card-item body-time d-flex justify-content-between">
@@ -2594,7 +2594,7 @@
                                              ->where('is_done', 0)
                                              ->with('products')
                                              ->first();
-
+                                     
                                          // Wrap the related products in a collection (even if there's only one result)
                                          if ($orders != null && $orders->products->count() != 0) {
                                              // Calculate total order prices using the map function on the products collection
@@ -2771,7 +2771,7 @@
                                                                      $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                      $reservationDateTime = $table->reservation->date;
                                                                  }
-
+                                                                 
                                                              @endphp
                                                              <div
                                                                  class="card-item body-time d-flex justify-content-between">
@@ -3332,7 +3332,7 @@
                                              ->where('is_done', 0)
                                              ->with('products')
                                              ->first();
-
+                                     
                                          // Wrap the related products in a collection (even if there's only one result)
                                          if ($orders != null && $orders->products->count() != 0) {
                                              // Calculate total order prices using the map function on the products collection
@@ -3500,7 +3500,7 @@
                                                                      $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                                      $reservationDateTime = $table->reservation->date;
                                                                  }
-
+                                                                 
                                                              @endphp
                                                              <div
                                                                  class="card-item body-time d-flex justify-content-between">
@@ -4069,7 +4069,7 @@
                                      ->where('is_done', 0)
                                      ->with('products')
                                      ->first();
-
+                             
                                  // Wrap the related products in a collection (even if there's only one result)
                                  if ($orders != null && $orders->products->count() != 0) {
                                      // Calculate total order prices using the map function on the products collection
@@ -4244,7 +4244,7 @@
                                                          $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $table->reservation->time)->format('H:i');
                                                          $reservationDateTime = $table->reservation->date;
                                                      }
-
+                                                     
                                                  @endphp
                                                  <div class="card-item body-time d-flex justify-content-between">
                                                      <p class="hall-name"> الوقت المنقضى</p>
@@ -4324,10 +4324,10 @@
                                                                                          class="rev-item d-flex w-100  align-items-start">
                                                                                          @php
                                                                                              $dateString = $table->reservation->date;
-
+                                                                                             
                                                                                              // Create a DateTime object from the date string
                                                                                              $date = new DateTime($dateString);
-
+                                                                                             
                                                                                              // Format the time as desired (e.g., "H:i")
                                                                                              $formattedTime = $date->format('h:i A');
                                                                                          @endphp
@@ -4358,7 +4358,7 @@
                                                                              @endif
                                                                              @php
                                                                                  $now = Carbon\Carbon::now();
-
+                                                                                 
                                                                                  // Query to get all reservations for today
                                                                                  $reservations = App\Models\Reservation::where('table_id', $table->id)
                                                                                      ->where(function ($query) use ($now) {
@@ -4366,24 +4366,24 @@
                                                                                      })
                                                                                      ->orderBy('date')
                                                                                      ->get();
-
+                                                                                 
                                                                                  $packages = $table->packages;
                                                                                  foreach ($packages as $key => $package) {
                                                                                      # code...
-
+                                                                                 
                                                                                      $package = App\Models\Package::find($package->id);
                                                                                      $minutesPerPackage = $package->time;
-
+                                                                                 
                                                                                      // Generate time slots based on the package minutes
                                                                                      $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
                                                                                      $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
                                                                                      $timeSlots = [];
-
+                                                                                 
                                                                                      $currentTime = clone $startTime;
                                                                                      while ($currentTime->lte($endTime)) {
                                                                                          $endTimeSlot = clone $currentTime;
                                                                                          $endTimeSlot->addMinutes($minutesPerPackage);
-
+                                                                                 
                                                                                          // Check if the time slot is in the past
                                                                                          if ($endTimeSlot->isFuture()) {
                                                                                              $timeSlots[] = [
@@ -4391,18 +4391,18 @@
                                                                                                  'end' => $endTimeSlot->format('g:i A'),
                                                                                              ];
                                                                                          }
-
+                                                                                 
                                                                                          $currentTime->addMinutes($minutesPerPackage);
                                                                                      }
                                                                                      // Calculate the available and unavailable time slots
                                                                                      $availableSlots = [];
                                                                                      $unavailableSlots = [];
-
+                                                                                 
                                                                                      $prevEndTime = $startTime;
                                                                                      foreach ($reservations as $reservation) {
                                                                                          $start = Carbon\Carbon::parse($reservation->date);
                                                                                          $end = Carbon\Carbon::parse($reservation->end);
-
+                                                                                 
                                                                                          if ($prevEndTime->lt($start)) {
                                                                                              $availableSlots[] = [
                                                                                                  'start' => $prevEndTime->format('g:i A'),
@@ -4413,7 +4413,7 @@
                                                                                              'start' => $start->format('g:i A'),
                                                                                              'end' => $end->format('g:i A'),
                                                                                          ];
-
+                                                                                 
                                                                                          $prevEndTime = $end;
                                                                                      }
                                                                                      if ($prevEndTime->lt($endTime)) {
@@ -4533,7 +4533,7 @@
                                                                      ->where('is_done', 0)
                                                                      ->with('products')
                                                                      ->first();
-
+                                                             
                                                                  // Wrap the related products in a collection (even if there's only one result)
                                                                  if ($orders != null && $orders->products->count() != 0) {
                                                                      // Calculate total order prices using the map function on the products collection
