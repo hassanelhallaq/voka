@@ -15,7 +15,9 @@
     <!-- Icon Fonts -->
     <link rel="stylesheet" href="{{ asset('/menu/assets/fonts/flaticon/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('/menu/assets/fonts/font-awesome/css/all.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,49 +65,51 @@
 
         <div class="top-header">
             <div class="container">
-            <div class="top-header-inner">
-            <div class="container">
-            <nav class="navbar">
-                <ul class="top-header-nav header-cta">
-                    <li> 
-                    <a href="#">
-                     <i class="fa-solid fa-bell"></i>
-                    استدعي الويتر
-                    </a>
-                     </li>
-                </ul>
-                <!-- Logo -->
-                <a class="navbar-brand"
-                    href="{{ route('menu.home', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}"> <img
-                        src="{{ asset('menu/assets/img/VOKALOGOBLACK_page-0001 (1).jpg') }}" alt="logo">
-                </a>
-                <!-- Menu -->
-                <div class="header-controls">
-                    <ul class="navbar-nav">
-                        <li class="menu-item menu-item-has-children">
-                            <a
-                                href="{{ route('menu.home', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}">الرئيسية</a>
-                        </li>
-                    </ul>
-                    <ul class="header-controls-inner">
-                        <a href="{{ route('menu.cart', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}">
-                            <li class="cart-dropdown-wrapper cart-trigger">
-                                <span class="cart-item-count" id="cart-item-count">0</span>
-                                <i class="flaticon-shopping-bag"></i>
-                            </li>
-                        </a>
-                        <li class="search-dropdown-wrapper search-trigger">
-                            <i class="flaticon-search"></i>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+                <div class="top-header-inner">
+                    <div class="container">
+                        <nav class="navbar">
+                            <ul class="top-header-nav header-cta">
+                                <li>
+                                    <a id="request_waiter" href="javascript:void(0)">
+                                        <i class="fa-solid fa-bell"></i>
+                                        استدعي الويتر
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- Logo -->
+                            <a class="navbar-brand"
+                                href="{{ route('menu.home', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}">
+                                <img src="{{ asset('menu/assets/img/VOKALOGOBLACK_page-0001 (1).jpg') }}"
+                                    alt="logo">
+                            </a>
+                            <!-- Menu -->
+                            <div class="header-controls">
+                                <ul class="navbar-nav">
+                                    <li class="menu-item menu-item-has-children">
+                                        <a
+                                            href="{{ route('menu.home', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}">الرئيسية</a>
+                                    </li>
+                                </ul>
+                                <ul class="header-controls-inner">
+                                    <a
+                                        href="{{ route('menu.cart', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}">
+                                        <li class="cart-dropdown-wrapper cart-trigger">
+                                            <span class="cart-item-count" id="cart-item-count">0</span>
+                                            <i class="flaticon-shopping-bag"></i>
+                                        </li>
+                                    </a>
+                                    <li class="search-dropdown-wrapper search-trigger">
+                                        <i class="flaticon-search"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
 
-       
+
 
     </header>
     @yield('content')
@@ -125,9 +129,9 @@
                 <div class="row" style="justify-content: center; align-items: center;">
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 footer-widget">
                         <a href="#" style="text-align:center">
-                        <p>
-                            تحقق من رصيدك
-                        </p>
+                            <p>
+                                تحقق من رصيدك
+                            </p>
                         </a>
                         <h5 class="widget-title">ابقى على تواصل معنا</h5>
                         <ul class="social-media">
@@ -168,7 +172,54 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Slices Scripts -->
     <script src="{{ asset('menu/assets/js/main.js') }}"></script>
+    <script>
+        $('#request_waiter').on('click', function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // do ajax
+            $.ajax({
+                url: "{{ route('table.requestWaiter', ['table_id' => $table->id, 'branch_id' => $branch->id]) }}",
+                type: "POST",
+                beforeSend: function() {
+                    $('.loader-ready').addClass('loader');
+                    $('.loader-ready').removeClass('d-none');
+                },
+                success: function(response) {
+                    $('.loader-ready').removeClass('loader');
+                    $('.loader-ready').addClass('d-none');
 
+                    if (response.status.HTTP_code == 200) {
+                        Swal.fire({
+                            title: "{{ __('app.awesome') }}",
+                            text: "{{ __('app.request_waiter_sent') }}",
+                            icon: 'success',
+                            confirmButtonText: "{{ __('app.okay') }}",
+                        });
+
+                        seconds = 50;
+                        $('#request_waiter span').html("{!! __('app.request_waiter_delay', ['seconds' => 10]) !!}");
+                        $('#request_waiter').prop("disabled", true);
+                        $('#request_waiter').addClass("disabled");
+
+                        setInterval(function() {
+                            var newSeconds = seconds--;
+                            $('#request_waiter span span').html(newSeconds);
+                            if (newSeconds == 0 || newSeconds < 0) {
+                                $('#request_waiter span').html(
+                                    "{{ __('app.request_waiter') }}");
+                                $('#request_waiter').prop("disabled", false);
+                                $('#request_waiter').removeClass("disabled");
+                            }
+                        }, 1000);
+                    }
+                },
+            });
+            return false;
+        });
+    </script>
 
 </body>
 

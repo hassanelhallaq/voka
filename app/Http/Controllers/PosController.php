@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BranchAccount;
 use App\Models\Client;
 use App\Models\Lounge;
 use App\Models\Order;
@@ -430,4 +431,6 @@ class PosController extends Controller
 
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
+
+
 }

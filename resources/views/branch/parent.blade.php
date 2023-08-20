@@ -317,9 +317,9 @@
                 transform: translate(24px, 0);
             }
         }
-        
+
         /*--------------- the notifcation card css style -------------------*/
-          .noitification-card  {
+        .noitification-card {
             position: fixed;
             bottom: 50px;
             right: 50px;
@@ -327,27 +327,30 @@
             padding-top: 30px;
             padding-bottom: 30px;
             z-index: 9999;
-          }
-          .icon {
-        	display: flex;
-        	/* padding: 32px; */
-        	font-size: 32px;
-        	background-color: #e5772a;
-          color: #fff;
-        	border-radius: 50%;
-        	height: 80px;
-        	width: 80px;
-        	justify-content: center;
-        	align-items: center;
-        	margin-left: auto;
-        	margin-right: auto;
-          margin-bottom: 20px;
         }
+
+        .icon {
+            display: flex;
+            /* padding: 32px; */
+            font-size: 32px;
+            background-color: #e5772a;
+            color: #fff;
+            border-radius: 50%;
+            height: 80px;
+            width: 80px;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
+        }
+
         .noitification-card .card-subtitle {
             font-size: 27px;
-            
+
         }
-         /*--------------- end of  notifcation card css style -------------------*/
+
+        /*--------------- end of  notifcation card css style -------------------*/
     </style>
 
 
@@ -359,16 +362,16 @@
 <body>
     <!--notification card for waiter -->
     <div class="noitification-card card" style="width: 18rem;">
-      <div class="card-body text-center">
-        <div class="icon">
-          <i class="fa-solid fa-bell"></i>
+        <div class="card-body text-center">
+            <div class="icon">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+            <h5 class="card-title"> استدعاء ويتر لطاولة </h5>
+            <h6 class="card-subtitle my-3 text-light"> VVIP1 </h6>
+            <a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>
         </div>
-        <h5 class="card-title"> استدعاء ويتر لطاولة </h5>
-        <h6 class="card-subtitle my-3 text-light"> VVIP1   </h6>
-        <a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>
-      </div>
     </div>
-  <!-- end of notification card for waiter -->
+    <!-- end of notification card for waiter -->
 
     <!--loading effects -->
     <div class="loading-screen" id="loadingScreen">
@@ -605,13 +608,14 @@
                 // Hide the container after loading the view
                 $('#reservSideContainer').hide();
             });
-            
+
             $('.noitification-card-close').on('click', function() {
                 var notificationCard = $('.noitification-card');
-                
+
                 // استخدام animate() لتحريك العنصر إلى اليمين ثم إخفائه
-                notificationCard.animate(
-                    { left: '100%' }, // يمكنك ضبط القيمة حسب الحاجة
+                notificationCard.animate({
+                        left: '100%'
+                    }, // يمكنك ضبط القيمة حسب الحاجة
                     {
                         duration: 500, // مدة الانزلاق بالميلي ثانية
                         complete: function() {
@@ -777,6 +781,7 @@
             </form>
         </div>
     </div>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -846,6 +851,20 @@
             });
 
 
+        });
+    </script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('0de470f391dd841845ff', {
+            cluster: 'eu'
+        });
+        var channel = pusher.subscribe('newOrdersDigitalMenu');
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('realtimeWaiterBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
+            var orderData = JSON.parse(JSON.stringify(data));
+            swal("Table " + orderData.config.table_id + " Request the Waiter!", '', "info");
         });
     </script>
 </body>

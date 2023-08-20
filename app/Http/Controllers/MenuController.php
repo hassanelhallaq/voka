@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
+use App\Models\BranchAccount;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
@@ -117,7 +118,7 @@ class MenuController extends Controller
         if ($paymentMethod == 'الرصيد') {
             foreach ($cartItems as $cartItem) {
                 $orderProduct = new OrderProduct();
-                
+
                 $orderProduct->product_id = $cartItem['id'];
                 $orderProduct->order_id = $order->id;
                 $orderProduct->quantity = $cartItem['quantity'];
@@ -257,5 +258,18 @@ class MenuController extends Controller
         $table =  $result['Data']['CustomerReference'];
 
         return view('menu.sucess');
+    }
+
+    public function Waiter(Request $request, $id, $branch_id)
+    {
+        $table = Table::find($id);
+        $user = BranchAccount::where('branch_id', $branch_id)->first();
+        $optionsOrderEvent = [
+            'branch_id' => $branch_id,
+            'table_id' => $table->name,
+            'broadcastName' => 'realtimeWaiterBranchID_' . $branch_id,
+            // 'channelName' => 'newOrdersDigitalMenu',
+        ];
+        event(new \App\Events\sendNotificationsNewOrder($optionsOrderEvent));
     }
 }
