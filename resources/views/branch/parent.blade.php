@@ -317,6 +317,37 @@
                 transform: translate(24px, 0);
             }
         }
+        
+        /*--------------- the notifcation card css style -------------------*/
+          .noitification-card  {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            background-color: var(--accentDark);
+            padding-top: 30px;
+            padding-bottom: 30px;
+            z-index: 9999;
+          }
+          .icon {
+        	display: flex;
+        	/* padding: 32px; */
+        	font-size: 32px;
+        	background-color: #e5772a;
+          color: #fff;
+        	border-radius: 50%;
+        	height: 80px;
+        	width: 80px;
+        	justify-content: center;
+        	align-items: center;
+        	margin-left: auto;
+        	margin-right: auto;
+          margin-bottom: 20px;
+        }
+        .noitification-card .card-subtitle {
+            font-size: 27px;
+            
+        }
+         /*--------------- end of  notifcation card css style -------------------*/
     </style>
 
 
@@ -326,7 +357,20 @@
 </head>
 
 <body>
+    <!--notification card for waiter -->
+    <div class="noitification-card card" style="width: 18rem;">
+      <div class="card-body text-center">
+        <div class="icon">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <h5 class="card-title"> استدعاء ويتر لطاولة </h5>
+        <h6 class="card-subtitle my-3 text-light"> VVIP1   </h6>
+        <a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>
+      </div>
+    </div>
+  <!-- end of notification card for waiter -->
 
+    <!--loading effects -->
     <div class="loading-screen" id="loadingScreen">
         <div class="lds-ellipsis">
             <div></div>
@@ -335,6 +379,8 @@
             <div></div>
         </div>
     </div>
+    <!--end of loading effects -->
+
 
     <section class="main">
         <div class="container-fluid text-light">
@@ -558,6 +604,21 @@
                 // $('#reservSideContainer').html(data);
                 // Hide the container after loading the view
                 $('#reservSideContainer').hide();
+            });
+            
+            $('.noitification-card-close').on('click', function() {
+                var notificationCard = $('.noitification-card');
+                
+                // استخدام animate() لتحريك العنصر إلى اليمين ثم إخفائه
+                notificationCard.animate(
+                    { left: '100%' }, // يمكنك ضبط القيمة حسب الحاجة
+                    {
+                        duration: 500, // مدة الانزلاق بالميلي ثانية
+                        complete: function() {
+                            notificationCard.hide(); // بعد اكتمال الانزلاق، قم بإخفاء العنصر
+                        }
+                    }
+                );
             });
         });
 

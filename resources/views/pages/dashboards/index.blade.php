@@ -7,7 +7,7 @@
             <!--begin::Content container-->
             <div id="kt_app_content_container" class="app-container container-xxl">
                 <div class="row">
-                    <div class="col-xl-4">
+                    <div class="col-lg-4 gy-5">
                         <!--begin::Chart Widget 33-->
                         <div class="card card-flush h-xl-100">
                             <!--begin::Header-->
@@ -438,12 +438,13 @@
                         </div>
                         <!--end::Chart Widget 33-->
                     </div>
-                    <div class="row gy-5 g-xl-10">
+                    <div class="gy-5 col-lg-8">
+                    <div class="row">
                         <!--begin::Col-->
-                        <div class="col-sm-6 col-xl-2 mb-xl-10">
+                        <div class="col-lg-3">
 
                             <!--begin::Card widget 2-->
-                            <div class="card h-lg-100">
+                            <div class="card">
                                 <!--begin::Body-->
 
                                 <div class="card-body d-flex justify-content-between align-items-start flex-column">
@@ -477,9 +478,9 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-sm-6 col-xl-2 mb-xl-10">
+                        <div class="col-lg-3">
                             <!--begin::Card widget 2-->
-                            <div class="card h-lg-100">
+                            <div class="card">
                                 <!--begin::Body-->
                                 <div class="card-body d-flex justify-content-between align-items-start flex-column">
                                     <!--begin::Icon-->
@@ -511,9 +512,9 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-sm-6 col-xl-2 mb-xl-10">
+                        <div class="col-lg-3">
                             <!--begin::Card widget 2-->
-                            <div class="card h-lg-100">
+                            <div class="card">
                                 <!--begin::Body-->
                                 <div class="card-body d-flex justify-content-between align-items-start flex-column">
                                     <!--begin::Icon-->
@@ -544,9 +545,9 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-sm-6 col-xl-2 mb-xl-10">
+                        <div class="col-lg-3">
                             <!--begin::Card widget 2-->
-                            <div class="card h-lg-100">
+                            <div class="card">
                                 <!--begin::Body-->
                                 <div class="card-body d-flex justify-content-between align-items-start flex-column">
                                     <!--begin::Icon-->
@@ -583,6 +584,9 @@
 
                         <!--end::Col-->
                     </div>
+                    
+                    </div>
+                    
 
                 </div>
 

@@ -105,7 +105,7 @@
 
 
                                     <div class="col-md-6">
-                                        <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal"
+                                        <button class="btn btn-primary bill-print w-100" type="button" data-bs-toggle="modal"
                                             data-bs-target="#pill" disabled>
 
                                             طباعة الفاتورة

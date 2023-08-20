@@ -312,9 +312,9 @@
                     <p class="consfirm-text" style="color: #fff; text-align: center;">هل تريد تأكيد الدفع </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="storeReaervation()"
+                    <button type="button" class="btn btn-primary register-and-close" onclick="storeReaervation()"
                         style="margin-left: 10px;">تسجيل</button>
-                    <button type="button" class="btn btn-primary" onclick="storeReaervation()"
+                    <button type="button" class="btn btn-primary register-and-close" onclick="storeReaervation()"
                         style="margin-left: 10px;">تسجيل وتغعيل</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
                 </div>
@@ -587,41 +587,71 @@
             // Generate the HTML content using reservation data
             var html = `
         <!-- Populate the content with reservation details -->
-        <h2>Reservation Details</h2>
-        <p class="info">Client: ${reservation.client.name}</p>
-        <p class="info">Phone: ${reservation.client.phone}</p>
-        <p class="info">Table: ${reservation.table.name}</p>
-        <!-- Update client information here -->
+        <div id="invoice-POS">
+        <center id="top">
+            <div class="logo"></div>
+            <div class="info"> 
+              <h2>SBISTechs Inc</h2>
+            </div><!--End Info-->
+          </center>
+        <div id="mid">
+            <div class="info">
+                <h2>Reservation Details</h2>
+                <p>Client: ${reservation.client.name}</p>
+                <p>Phone: ${reservation.client.phone}</p>
+                <p>Table: ${reservation.table.name}</p>
+                <!-- Update client information here -->
+            </div>
+        </div>
+        
         <!-- Add more details as needed -->
+            <div id="bot">
               <div id="table">
-                                <table>
-                                    <tr class="tabletitle">
-                                        <td class="item">
-                                            <h2>Item</h2>
-                                        </td>
-                                        <td class="Hours">
-                                            <h2>Qty</h2>
-                                        </td>
-                                        <td class="Rate">
-                                            <h2>Sub Total</h2>
-                                        </td>
-                                    </tr>
-                                    <tr class="service">
-                                        <td class="tableitem">
-                                            <p class="itemtext">${reservation.package.name}</p>
-                                        </td>
-                                        <td class="tableitem">
-                                            <p class="itemtext">1</p>
-                                        </td>
-                                        <td class="tableitem">
-                                            <p class="itemtext">${reservation.package.price}</p>
-                                        </td>
-                                    </tr>
-
-
-
-                                </table>
-                            </div>
+                    <table style="color: #333;">
+                        <tr class="tabletitle">
+                            <td class="item">
+                                <h2>Item</h2>
+                            </td>
+                            <td class="Hours">
+                                <h2>Qty</h2>
+                            </td>
+                            <td class="Rate">
+                                <h2>Sub Total</h2>
+                            </td>
+                        </tr>
+                         
+                        <tr class="service">
+                            <td class="tableitem">
+                                <p class="itemtext">${reservation.package.name}</p>
+                            </td>
+                            <td class="tableitem">
+                                <p class="itemtext">1</p>
+                            </td>
+                            <td class="tableitem">
+                                <p class="itemtext">${reservation.package.price}</p>
+                            </td>
+                        </tr>
+                        
+                        <tr class="tabletitle">
+                          
+                          <td class="Rate"><h2>tax</h2></td>
+                          <td class="payment"><h2>$4</h2></td>
+                          <td></td>
+                        </tr>
+            
+                        <tr class="tabletitle">
+                          <td class="Rate"><h2>Total</h2></td>
+                          <td class="payment"><h2>$3,644.25</h2></td>
+                          <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="legalcopy">
+          <p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices. 
+          </p>
+        </div>
+        </div>
         `;
             return html;
         }
@@ -645,6 +675,17 @@
         $('#reservation-form').on('submit', function(event) {
             event.preventDefault();
             handleFormSubmission();
+        });
+        
+        $('#pill').addClass('dis-none');
+        
+         $('.register-and-close').on('click', function(){
+            $('.modal-backdrop.show').hide();
+            
+        });
+        
+        $('.bill-print').on('click', function(){
+            $('#pill').removeClass('dis-none');
         });
     </script>
     <script>

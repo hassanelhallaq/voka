@@ -1725,8 +1725,10 @@ table .active-day {
     background-color: var(--white);
 }
 #invoice-POS .tabletitle {
-	font-size: 0.5em;
-	background: var(--white);
+    font-size: 0.5em;
+    /* background: #818181; */
+    border-radius: 0px;
+    background-color: #eee;
 }
 .discount-select {
     width: 105px;
