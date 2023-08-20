@@ -849,8 +849,8 @@
                     }, 2000); // محاكاة توقيت التحميل
                 });
             });
-            
-            $('.home-link').on('click', function(){
+
+            $('.home-link').on('click', function() {
                 $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
                 console.log('hhhhhhhhhhhhhhhhhh');
             });
@@ -866,7 +866,6 @@
             cluster: 'eu'
         });
         var channel = pusher.subscribe('newOrdersDigitalMenu');
-        var channel = pusher.subscribe('my-channel');
         channel.bind('realtimeWaiterBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
             var orderData = JSON.parse(JSON.stringify(data));
             swal("Table " + orderData.config.table_id + " Request the Waiter!", '', "info");
