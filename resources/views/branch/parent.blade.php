@@ -866,6 +866,7 @@
             cluster: 'eu'
         });
         var channel = pusher.subscribe('newOrdersDigitalMenu');
+       
         channel.bind('realtimeWaiterBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
             var orderData = JSON.parse(JSON.stringify(data));
             swal("Table " + orderData.config.table_id + " Request the Waiter!", '', "info");
