@@ -192,30 +192,30 @@
                     $('.loader-ready').removeClass('loader');
                     $('.loader-ready').addClass('d-none');
 
-                    if (response.status.HTTP_code == 200) {
-                        Swal.fire({
-                            title: "{{ __('app.awesome') }}",
-                            text: "{{ __('app.request_waiter_sent') }}",
-                            icon: 'success',
-                            confirmButtonText: "{{ __('app.okay') }}",
-                        });
 
-                        seconds = 50;
-                        $('#request_waiter span').html("{!! __('app.request_waiter_delay', ['seconds' => 10]) !!}");
-                        $('#request_waiter').prop("disabled", true);
-                        $('#request_waiter').addClass("disabled");
+                    Swal.fire({
+                        title: "{{ __('app.awesome') }}",
+                        text: "{{ __('app.request_waiter_sent') }}",
+                        icon: 'success',
+                        confirmButtonText: "{{ __('app.okay') }}",
+                    });
 
-                        setInterval(function() {
-                            var newSeconds = seconds--;
-                            $('#request_waiter span span').html(newSeconds);
-                            if (newSeconds == 0 || newSeconds < 0) {
-                                $('#request_waiter span').html(
-                                    "{{ __('app.request_waiter') }}");
-                                $('#request_waiter').prop("disabled", false);
-                                $('#request_waiter').removeClass("disabled");
-                            }
-                        }, 1000);
-                    }
+                    seconds = 50;
+                    $('#request_waiter span').html("{!! __('app.request_waiter_delay', ['seconds' => 10]) !!}");
+                    $('#request_waiter').prop("disabled", true);
+                    $('#request_waiter').addClass("disabled");
+
+                    setInterval(function() {
+                        var newSeconds = seconds--;
+                        $('#request_waiter span span').html(newSeconds);
+                        if (newSeconds == 0 || newSeconds < 0) {
+                            $('#request_waiter span').html(
+                                "{{ __('app.request_waiter') }}");
+                            $('#request_waiter').prop("disabled", false);
+                            $('#request_waiter').removeClass("disabled");
+                        }
+                    }, 1000);
+
                 },
             });
             return false;
