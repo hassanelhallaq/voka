@@ -439,9 +439,9 @@
                         <!--end::Chart Widget 33-->
                     </div>
                     <div class="gy-5 col-lg-8">
-                    <div class="row">
+                        <div class="row">
                         <!--begin::Col-->
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="margin-bottom: 10px;">
 
                             <!--begin::Card widget 2-->
                             <div class="card">
@@ -478,7 +478,7 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="margin-bottom: 10px;">
                             <!--begin::Card widget 2-->
                             <div class="card">
                                 <!--begin::Body-->
@@ -512,7 +512,7 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="margin-bottom: 10px;">
                             <!--begin::Card widget 2-->
                             <div class="card">
                                 <!--begin::Body-->
@@ -545,7 +545,7 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="margin-bottom: 10px;">
                             <!--begin::Card widget 2-->
                             <div class="card">
                                 <!--begin::Body-->
@@ -584,7 +584,218 @@
 
                         <!--end::Col-->
                     </div>
+                        <div class="row" style="margin-top: 20px;">
+                            <!--begin::Col-->
+                            <div class="col-lg-4 mb-5" >
+                                <!--begin::List widget 6-->
+                                <div class="card card-flush ">
+                                    <!--begin::Header-->
+                                    <div class="card-header pt-7">
+                                        <!--begin::Title-->
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label fw-bold text-gray-800">الأصناف الاكثر مبيعاً
+                                            </span>
+                                        </h3>
                     
+                                    </div>
+                                    <!--end::Header-->
+                                    <!--begin::Body-->
+                                    <div class="card-body pt-4">
+                                        <!--begin::Table container-->
+                                        <div class="table-responsive">
+                                            <!--begin::Table-->
+                                            <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+                                                <!--begin::Table head-->
+                                                <thead>
+                                                    <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">
+                                                        <th class="p-0 w-50px pb-1">الصنف</th>
+                                                        <th class="ps-0 min-w-140px"></th>
+                                                        <th class="text-end min-w-140px p-0 pb-1">السعر الكلي</th>
+                                                    </tr>
+                                                </thead>
+                                                <!--end::Table head-->
+                                                <!--begin::Table body-->
+                                                <tbody>
+                                                    @foreach ($mostSellingProducts as $item)
+                                                        <tr>
+                                                            <td>
+                                                                <img src="{{ asset($item->product_photo) }}" class="w-50px"
+                                                                    alt="" />
+                                                            </td>
+                                                            <td class="ps-0">
+                                                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html"
+                                                                    class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6 text-start pe-0">{{ $item->name }}
+                                                                    {{ $item->total_quantity }}</a>
+                    
+                                                            </td>
+                                                            <td>
+                                                                <span
+                                                                    class="text-gray-800 fw-bold d-block fs-6 ps-0 text-end">{{ $item->total_revenue }}
+                                                                    S.R</span>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                <!--end::Table body-->
+                                            </table>
+                                        </div>
+                                        <!--end::Table-->
+                                    </div>
+                                    <!--end::Body-->
+                                </div>
+                                <!--end::List widget 6-->
+        </div>
+                            <div class="col-lg-4">
+                                <!--begin::List widget 12-->
+                                <div class="card card-flush">
+                                    <!--begin::Header-->
+                                    <div class="card-header pt-7">
+                                        <!--begin::Title-->
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label fw-bold text-gray-800">قائمة اكتمال
+                                                الحجوزات لليوم</span>
+                                        </h3>
+                    
+                                    </div>
+                                    <!--end::Header-->
+                                    <!--begin::Body-->
+                                    <div class="card-body d-flex align-items-end">
+                                        <!--begin::Wrapper-->
+                                        <div class="w-100">
+                    
+                                            @foreach ($reservationOnlineFinish as $item)
+                                                <div class="d-flex align-items-center">
+                                                    <div
+                                                        class="d-flex align-items-center flex-stack flex-wrap d-grid gap-1 flex-row-fluid">
+                                                        <!--begin::Content-->
+                                                        <div class="me-5">
+                                                            <!--begin::Title-->
+                                                            <a href="#"
+                                                                class="text-gray-800 fw-bold text-hover-primary fs-6">{{ $item->package->name }}</a>
+                                                        </div>
+                                                        <!--end::Content-->
+                                                        <!--begin::Wrapper-->
+                                                        <div class="d-flex align-items-center">
+                                                            <!--begin::Number-->
+                                                            <span
+                                                                class="text-gray-800 fw-bold fs-4 me-3">{{ $item->total_price * $item->reservation_count }}
+                                                                S.R</span>
+                                                            <!--end::Number-->
+                                                            <!--begin::Info-->
+                                                            <!--begin::label-->
+                    
+                                                            <!--end::label-->
+                                                            <!--end::Info-->
+                                                        </div>
+                                                        <!--end::Wrapper-->
+                                                    </div>
+                                                    <!--end::Container-->
+                                                </div>
+                                                <div class="separator separator-dashed my-3"></div>
+                                            @endforeach
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Body-->
+                    
+                    
+                                </div>
+                    
+                                <!--end::List widget 12-->
+        </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-lg-4">
+                    
+                                <div class="card overflow-hidden h-md-50 mb-5 mb-xl-10">
+                                    <!--begin::Card body-->
+                                    <div class="card-body d-flex justify-content-between flex-column px-0 pb-0">
+                                        <!--begin::Statistics-->
+                                        <div class="mb-4 px-9">
+                                            <!--begin::Info-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <!--begin::Value-->
+                                                <span
+                                                    class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">{{ $branchSales->sum('total_sales') }}
+                                                </span>
+                                                <!--end::Value-->
+                                                <!--begin::Label-->
+                                                <span class="d-flex align-items-end text-gray-400 fs-6 fw-semibold">S.R</span>
+                                                <!--end::Label-->
+                                            </div>
+                                            <!--end::Info-->
+                                            <!--begin::Description-->
+                                            <span class="fs-6 fw-semibold text-gray-400">اجمالي المبيعات</span>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Statistics-->
+                                        <!--begin::Chart-->
+                                        <div id="kt_card_widget_12_chart" class="min-h-auto" style="height: 125px"></div>
+                                        <!--end::Chart-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                                <div class="card card-flush h-md-50 mb-lg-10">
+                                <!--begin::Header-->
+                                <div class="card-header pt-5">
+                                    <!--begin::Title-->
+                                    <div class="card-title d-flex flex-column">
+                                        <!--begin::Amount-->
+                                        <span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">{{ $branchSales->sum('total_sales') }}
+                                            S.R</span>
+                                        <!--end::Amount-->
+                                        <!--begin::Subtitle-->
+                                        <span class="text-gray-400 pt-1 fw-semibold fs-6">مبيعات الفروع</span>
+                                        <!--end::Subtitle-->
+                                    </div>
+                                    <!--end::Title-->
+            </div>
+                                <!--end::Header-->
+                                <!--begin::Card body-->
+                                <div class="card-body d-flex align-items-end pt-0">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <!--begin::Chart-->
+                                        <div class="d-flex me-7 me-xxl-10">
+                                            <div id="kt_card_widget_10_chart" class="min-h-auto" style="height: 78px; width: 78px"
+                                                data-kt-size="78" data-kt-line="11"></div>
+                                        </div>
+                                        <!--end::Chart-->
+                                        <!--begin::Labels-->
+                                        <div class="d-flex flex-column content-justify-center flex-grow-1">
+                                            @foreach ($branchSales as $item)
+                                                <div class="d-flex fs-6 fw-semibold align-items-center">
+                                                    <!--begin::Bullet-->
+                                                    <div class="bullet w-8px h-6px rounded-2 bg-success me-3"></div>
+                                                    <!--end::Bullet-->
+                                                    <!--begin::Label-->
+                                                    <div class="fs-6 fw-semibold text-gray-400 flex-shrink-0">{{ $item->name }}</div>
+                                                    <!--end::Label-->
+                                                    <!--begin::Separator-->
+                                                    <div class="separator separator-dashed min-w-10px flex-grow-1 mx-2"></div>
+                                                    <!--end::Separator-->
+                                                    <!--begin::Stats-->
+                                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{ $item->total_sales }}S.R
+                                                    </div>
+                                                    <!--end::Stats-->
+                                                </div>
+                                            @endforeach
+                                            <!--end::Label-->
+                                            <!--begin::Label-->
+                    
+                                            <!--end::Label-->
+                                            <!--begin::Label-->
+                    
+                                            <!--end::Label-->
+                                        </div>
+                                        <!--end::Labels-->
+                                    </div>
+                                    <!--end::Wrapper-->
+            </div>
+                                <!--end::Card body-->
+                        </div>
+                        </div>
+                        </div>
                     </div>
                     
 
@@ -593,221 +804,6 @@
             </div>
             <!--end::Content container-->
         </div>
-        <!--end::Col-->
-        <!--begin::Col-->
-        <div class="col-xl-4 mb-5 mb-xl-10">
-            <!--begin::List widget 6-->
-            <div class="card card-flush h-md-100">
-                <!--begin::Header-->
-                <div class="card-header pt-7">
-                    <!--begin::Title-->
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold text-gray-800">الأصناف الاكثر مبيعاً
-                        </span>
-                    </h3>
-
-                </div>
-                <!--end::Header-->
-                <!--begin::Body-->
-                <div class="card-body pt-4">
-                    <!--begin::Table container-->
-                    <div class="table-responsive">
-                        <!--begin::Table-->
-                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
-                            <!--begin::Table head-->
-                            <thead>
-                                <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">
-                                    <th class="p-0 w-50px pb-1">الصنف</th>
-                                    <th class="ps-0 min-w-140px"></th>
-                                    <th class="text-end min-w-140px p-0 pb-1">السعر الكلي</th>
-                                </tr>
-                            </thead>
-                            <!--end::Table head-->
-                            <!--begin::Table body-->
-                            <tbody>
-                                @foreach ($mostSellingProducts as $item)
-                                    <tr>
-                                        <td>
-                                            <img src="{{ asset($item->product_photo) }}" class="w-50px"
-                                                alt="" />
-                                        </td>
-                                        <td class="ps-0">
-                                            <a href="../../demo1/dist/apps/ecommerce/sales/details.html"
-                                                class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6 text-start pe-0">{{ $item->name }}
-                                                {{ $item->total_quantity }}</a>
-
-                                        </td>
-                                        <td>
-                                            <span
-                                                class="text-gray-800 fw-bold d-block fs-6 ps-0 text-end">{{ $item->total_revenue }}
-                                                S.R</span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                            <!--end::Table body-->
-                        </table>
-                    </div>
-                    <!--end::Table-->
-                </div>
-                <!--end::Body-->
-            </div>
-            <!--end::List widget 6-->
-        </div>
-
-        <div class="col-xl-4">
-            <!--begin::List widget 12-->
-            <div class="card card-flush h-xl-100">
-                <!--begin::Header-->
-                <div class="card-header pt-7">
-                    <!--begin::Title-->
-                    <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold text-gray-800">قائمة اكتمال
-                            الحجوزات لليوم</span>
-                    </h3>
-
-                </div>
-                <!--end::Header-->
-                <!--begin::Body-->
-                <div class="card-body d-flex align-items-end">
-                    <!--begin::Wrapper-->
-                    <div class="w-100">
-
-                        @foreach ($reservationOnlineFinish as $item)
-                            <div class="d-flex align-items-center">
-                                <div
-                                    class="d-flex align-items-center flex-stack flex-wrap d-grid gap-1 flex-row-fluid">
-                                    <!--begin::Content-->
-                                    <div class="me-5">
-                                        <!--begin::Title-->
-                                        <a href="#"
-                                            class="text-gray-800 fw-bold text-hover-primary fs-6">{{ $item->package->name }}</a>
-                                    </div>
-                                    <!--end::Content-->
-                                    <!--begin::Wrapper-->
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Number-->
-                                        <span
-                                            class="text-gray-800 fw-bold fs-4 me-3">{{ $item->total_price * $item->reservation_count }}
-                                            S.R</span>
-                                        <!--end::Number-->
-                                        <!--begin::Info-->
-                                        <!--begin::label-->
-
-                                        <!--end::label-->
-                                        <!--end::Info-->
-                                    </div>
-                                    <!--end::Wrapper-->
-                                </div>
-                                <!--end::Container-->
-                            </div>
-                            <div class="separator separator-dashed my-3"></div>
-                        @endforeach
-                    </div>
-                    <!--end::Wrapper-->
-                </div>
-                <!--end::Body-->
-
-
-            </div>
-
-            <!--end::List widget 12-->
-        </div>
-
-        <!--end::Col-->
-        <!--begin::Col-->
-        <div class="col-xxl-4">
-
-            <div class="card overflow-hidden h-md-50 mb-5 mb-xl-10">
-                <!--begin::Card body-->
-                <div class="card-body d-flex justify-content-between flex-column px-0 pb-0">
-                    <!--begin::Statistics-->
-                    <div class="mb-4 px-9">
-                        <!--begin::Info-->
-                        <div class="d-flex align-items-center mb-2">
-                            <!--begin::Value-->
-                            <span
-                                class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">{{ $branchSales->sum('total_sales') }}
-                            </span>
-                            <!--end::Value-->
-                            <!--begin::Label-->
-                            <span class="d-flex align-items-end text-gray-400 fs-6 fw-semibold">S.R</span>
-                            <!--end::Label-->
-                        </div>
-                        <!--end::Info-->
-                        <!--begin::Description-->
-                        <span class="fs-6 fw-semibold text-gray-400">اجمالي المبيعات</span>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Statistics-->
-                    <!--begin::Chart-->
-                    <div id="kt_card_widget_12_chart" class="min-h-auto" style="height: 125px"></div>
-                    <!--end::Chart-->
-                </div>
-                <!--end::Card body-->
-            </div>
-        </div>
-
-        <div class="card card-flush h-md-50 mb-lg-10">
-            <!--begin::Header-->
-            <div class="card-header pt-5">
-                <!--begin::Title-->
-                <div class="card-title d-flex flex-column">
-                    <!--begin::Amount-->
-                    <span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">{{ $branchSales->sum('total_sales') }}
-                        S.R</span>
-                    <!--end::Amount-->
-                    <!--begin::Subtitle-->
-                    <span class="text-gray-400 pt-1 fw-semibold fs-6">مبيعات الفروع</span>
-                    <!--end::Subtitle-->
-                </div>
-                <!--end::Title-->
-            </div>
-            <!--end::Header-->
-            <!--begin::Card body-->
-            <div class="card-body d-flex align-items-end pt-0">
-                <!--begin::Wrapper-->
-                <div class="d-flex align-items-center flex-wrap">
-                    <!--begin::Chart-->
-                    <div class="d-flex me-7 me-xxl-10">
-                        <div id="kt_card_widget_10_chart" class="min-h-auto" style="height: 78px; width: 78px"
-                            data-kt-size="78" data-kt-line="11"></div>
-                    </div>
-                    <!--end::Chart-->
-                    <!--begin::Labels-->
-                    <div class="d-flex flex-column content-justify-center flex-grow-1">
-                        @foreach ($branchSales as $item)
-                            <div class="d-flex fs-6 fw-semibold align-items-center">
-                                <!--begin::Bullet-->
-                                <div class="bullet w-8px h-6px rounded-2 bg-success me-3"></div>
-                                <!--end::Bullet-->
-                                <!--begin::Label-->
-                                <div class="fs-6 fw-semibold text-gray-400 flex-shrink-0">{{ $item->name }}</div>
-                                <!--end::Label-->
-                                <!--begin::Separator-->
-                                <div class="separator separator-dashed min-w-10px flex-grow-1 mx-2"></div>
-                                <!--end::Separator-->
-                                <!--begin::Stats-->
-                                <div class="ms-auto fw-bolder text-gray-700 text-end">{{ $item->total_sales }}S.R
-                                </div>
-                                <!--end::Stats-->
-                            </div>
-                        @endforeach
-                        <!--end::Label-->
-                        <!--begin::Label-->
-
-                        <!--end::Label-->
-                        <!--begin::Label-->
-
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Labels-->
-                </div>
-                <!--end::Wrapper-->
-            </div>
-            <!--end::Card body-->
-        </div>
-        <!--end::Col-->
     </div>
 
 </x-default-layout>
