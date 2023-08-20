@@ -122,7 +122,7 @@ Route::prefix('menu/{table_id}/{branch_id}')->group(function () {
     Route::post('/store-order', [App\Http\Controllers\MenuController::class, 'storeOrder'])->name('store.order');
     Route::get('/sucess-payments', [App\Http\Controllers\MenuController::class, 'paymentStatus'])->name('paymentStatus');
     Route::get('/faild-payments', [App\Http\Controllers\MenuController::class, 'faild'])->name('faild.payments');
-    Route::post('/table-request-waiter', 'TableTrackingOrderController@requestWaiter')->name('table.requestWaiter');
+    Route::post('/table-request-waiter', [App\Http\Controllers\MenuController::class, 'requestWaiter'])->name('table.requestWaiter');
 });
 Route::get('/time-slots', [ReservationController::class, 'index'])->name('time-slots.index')->middleware('auth:branch');
 
