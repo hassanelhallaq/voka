@@ -260,7 +260,7 @@ class MenuController extends Controller
         return view('menu.sucess');
     }
 
-    public function Waiter(Request $request, $id, $branch_id)
+    public function waiter(Request $request, $id, $branch_id)
     {
         $table = Table::find($id);
         $user = BranchAccount::where('branch_id', $branch_id)->first();
