@@ -30,4 +30,5 @@
 	</div>
 	<!--end::Card body-->
 </div>
-<!--end::Card widget 20-->
+<!--end::Card widget 20-->
+
