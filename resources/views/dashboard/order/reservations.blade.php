@@ -39,6 +39,7 @@
                                                 <th>{{ __('reservation start') }}</th>
                                                 <th>{{ __('reservation end') }}</th>
                                                 <th>{{ __('payment type') }}</th>
+                                                <th>{{ __('time extend') }}</th>
 
                                             </tr>
                                         </thead>
@@ -74,7 +75,7 @@
                                                         {{ $item->payment_type }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->payment_type }}
+                                                        {{ $item->extend_time == 1 ? تمديد اداري : لا يوجد تمديد }}
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-icon btn-sm btn-success"

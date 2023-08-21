@@ -119,6 +119,8 @@ class ReservationController extends Controller
         $reservation->minutes = $request->time;
         $carbonDate = Carbon::parse($reservation->end);
         $reservation->end = $carbonDate->addMinute($request->time);
+        $reservation->extend_time = 1;
+
         $isSaved = $reservation->update();
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
