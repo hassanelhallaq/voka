@@ -383,7 +383,7 @@
                 <i class="fa-solid fa-bell"></i>
             </div>
             <h5 class="card-title"> استدعاء ويتر لطاولة </h5>
-            <h6 class="card-subtitle my-3 text-light"> VVIP1 </h6>
+            <h6 class="card-subtitle my-3 text-light">  </h6>
             <!--<a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>-->
             <button type="button" class="noitification-modal-close btn btn-primary mt-3" data-bs-dismiss="modal">اغلاق</button>
         </div>
@@ -962,22 +962,23 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+<script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
 
-        var pusher = new Pusher('0de470f391dd841845ff', {
-            cluster: 'eu'
-        });
-        var channel = pusher.subscribe('newOrdersDigitalMenu');
-        channel.bind('realtimeBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
-            var orderData = JSON.parse(JSON.stringify(data));
-                console.log('Showing modal');
+    var pusher = new Pusher('0de470f391dd841845ff', {
+        cluster: 'eu'
+    });
+    var channel = pusher.subscribe('newOrdersDigitalMenu');
+    channel.bind('realtimeBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
+        var orderData = JSON.parse(JSON.stringify(data));
 
-    $('#waiter-notification').modal('show'); // Use .modal('show') to open the modal
-
-        });
-    </script>
+        var table = data.config.table_id;
+        console.log(table);
+        $('#waiter-notification .card-subtitle').text(table); // Update the subtitle text
+        $('#waiter-notification').modal('show'); // Use .modal('show') to open the modal
+    });
+</script>
 </body>
 
 </html>

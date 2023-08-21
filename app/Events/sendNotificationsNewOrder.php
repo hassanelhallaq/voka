@@ -14,25 +14,23 @@ class sendNotificationsNewOrder implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    
+    public $config;
 
-    public $broadcastName; 
+    public $broadcastName;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($broadcastName)
+    public function __construct($config)
     {
-      
-       
-        $this->broadcastName = $broadcastName['broadcastName'];
-            
-        if ( isset($this->config['broadcastName']) )
-        {
-            $this->broadcastName = $broadcastName['broadcastName'];
-        }
+        $this->config    = $config;
 
+        $this->broadcastName = 'realtimeBranchID_' . $this->config['branch_id'];
+
+        if (isset($this->config['broadcastName'])) {
+            $this->broadcastName = $this->config['broadcastName'];
+        }
     }
 
     /**
@@ -42,9 +40,7 @@ class sendNotificationsNewOrder implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-      return ['newOrdersDigitalMenu'];
-
-       
+        return new Channel('newOrdersDigitalMenu');
     }
 
     public function broadcastAs()

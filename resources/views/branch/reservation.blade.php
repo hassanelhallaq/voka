@@ -669,7 +669,7 @@
         function activateReservation(reservationId) {
             // Perform actions related to activating the reservation using the reservationId
             let formData = new FormData();
-            store('/branch/active/table/' + reservationId, formData)
+            store('/branch/active/reservation/' + reservationId, formData)
             // You can replace the console.log with your desired logic
         }
         // Add event listener to form submission

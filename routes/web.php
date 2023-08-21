@@ -107,6 +107,9 @@ Route::prefix('branch')->middleware('auth:branch')->group(function () {
     Route::get('/payment', [App\Http\Controllers\ReservationController::class, 'payment'])->name('payment');
 
     Route::post('/active/table/{id}', [App\Http\Controllers\PosController::class, 'activeTable'])->name('active.table');
+        Route::post('/active/reservation/{id}', [App\Http\Controllers\PosController::class, 'activeReservation'])->name('active.reservation');
+
+    
     Route::post('/close/table/{id}', [App\Http\Controllers\PosController::class, 'closeTable'])->name('close.table');
 
     Route::get('/cal', [App\Http\Controllers\PosController::class, 'ajaxCalender'])->name('ajaxCalender');
