@@ -270,6 +270,8 @@ class MenuController extends Controller
             'broadcastName' => 'realtimeBranchID_' . $branch_id,
             // 'channelName' => 'newOrdersDigitalMenu',
         ];
-        return event(new \App\Events\sendNotificationsNewOrder($optionsOrderEvent));
+          event(new \App\Events\sendNotificationsNewOrder($optionsOrderEvent));
+          return "Event has been sent!";
+
     }
 }

@@ -14,7 +14,7 @@ class sendNotificationsNewOrder implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $config;
+    
 
     public $broadcastName; 
     /**
@@ -22,15 +22,15 @@ class sendNotificationsNewOrder implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($config)
+    public function __construct($broadcastName)
     {
-        $this->config    = $config;
+      
        
-        $this->broadcastName = 'realtimeBranchID_' . $this->config['branch_id'];
+        $this->broadcastName = $broadcastName['broadcastName'];
             
         if ( isset($this->config['broadcastName']) )
         {
-            $this->broadcastName = $this->config['broadcastName'];
+            $this->broadcastName = $broadcastName['broadcastName'];
         }
 
     }
@@ -42,8 +42,9 @@ class sendNotificationsNewOrder implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('newOrdersDigitalMenu');
-        // return ['status-liked'];
+      return ['newOrdersDigitalMenu'];
+
+       
     }
 
     public function broadcastAs()
