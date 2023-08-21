@@ -12,7 +12,7 @@
   </style>
   <div id="mainPage">
       <div class="inventory-table">
-           <div class="row pt-2">
+          <div class="row pt-2">
               <div class="col-md-1"></div>
               <div class="col-md-4">
                   <h1>عمليات الجرد   </h1>
@@ -404,8 +404,7 @@
           <div class="col-md-1"></div>
       </div>
           <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-8">
+          <div class="col-md-9">
               <form class="form" method="post" id='create_form'>
                   @csrf
                   <div class="card-body">
