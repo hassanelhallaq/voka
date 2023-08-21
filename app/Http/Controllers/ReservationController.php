@@ -72,7 +72,7 @@ class ReservationController extends Controller
             $reservation->end = $formattedEndDatetime;
             $reservation->time_end = $formattedEndTime;
             $reservation->note = $request->note;
-            $reservation->status = 'مؤكد';
+            $reservation->status = $request->status ;
             $reservation->payment_type = $request->payment;
             $isSaved = $reservation->save();
 

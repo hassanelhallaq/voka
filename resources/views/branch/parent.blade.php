@@ -53,7 +53,7 @@
          #waiter-notification {
     display: none;
     /* Other modal styles */
-}   
+}
         .pin-container {
             text-align: center;
             padding: 20px;
@@ -366,7 +366,7 @@
 </head>
 
 <body>
-    
+
     <!-- Button trigger modal -->
 <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#waiter-notification">-->
 <!--  Notification-->
@@ -644,7 +644,7 @@
                     }
                 );
             });
-            
+
             $('.noitification-modal-close').on('click', function(){
                 $('.notification-modal').removeClass('active-notification show');
             });
@@ -873,7 +873,7 @@
                     }, 3000); // محاكاة توقيت التحميل
                 });
             });
-            
+
             $('.home-link').on('click', function(){
                 $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
                 console.log('hhhhhhhhhhhhhhhhhh');
