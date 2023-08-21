@@ -88,8 +88,6 @@ class PosController extends Controller
         }])->whereHas('tables', function ($query) use ($request) {
             $query->with('packages', 'reservation')->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
-            })->whereHas('reservation', function ($q) use ($request) {
-                $q->whereDate('date', '>=', Carbon::now())->where('status', '!=', 'انتهى');
             });
         })->get();
         return view('branch._halles_branch', compact('halles'))->render();
