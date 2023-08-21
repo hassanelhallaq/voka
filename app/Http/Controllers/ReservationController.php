@@ -72,7 +72,7 @@ class ReservationController extends Controller
             $reservation->end = $formattedEndDatetime;
             $reservation->time_end = $formattedEndTime;
             $reservation->note = $request->note;
-            $reservation->status = $request->status ;
+            $reservation->status = $request->status;
             $reservation->payment_type = $request->payment;
             $isSaved = $reservation->save();
 
@@ -98,6 +98,9 @@ class ReservationController extends Controller
                 $walletAction->type   = 'Discount';
                 $walletAction->save();
             }
+            $table = Table::find($request->table_id);
+            $table->status = 'in_service';
+            $table->update();
             $reservation->load('client', 'package', 'table');
 
             return ['reservation' => $reservation];
