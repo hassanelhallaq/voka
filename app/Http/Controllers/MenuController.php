@@ -267,7 +267,7 @@ class MenuController extends Controller
         $optionsOrderEvent = [
             'branch_id' => $branch_id,
             'table_id' => $table->name,
-            'broadcastName' => 'realtimeWaiterBranchID_' . $branch_id,
+            'broadcastName' => 'realtimeBranchID_' . $branch_id,
             // 'channelName' => 'newOrdersDigitalMenu',
         ];
         return event(new \App\Events\sendNotificationsNewOrder($optionsOrderEvent));

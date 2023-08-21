@@ -86,6 +86,8 @@ $(document).ready(function () {
        });
        
        
+    
+       
        $('.btn-clock').on('click', function(){
            var theClock = $(this).text();
            $('.reserv-time').text(theClock);

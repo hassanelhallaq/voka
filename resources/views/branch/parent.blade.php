@@ -50,7 +50,10 @@
             background-color: #f0f0f0;
             direction: ltr;
         }
-
+         #waiter-notification {
+    display: none;
+    /* Other modal styles */
+}   
         .pin-container {
             text-align: center;
             padding: 20px;
@@ -319,14 +322,17 @@
         }
 
         /*--------------- the notifcation card css style -------------------*/
+        .active-notification {
+            display: block;
+        }
         .noitification-card {
-            position: fixed;
-            bottom: 50px;
-            right: 50px;
+            /*position: fixed;*/
+            /*bottom: 50px;*/
+            /*right: 50px;*/
             background-color: var(--accentDark);
             padding-top: 30px;
             padding-bottom: 30px;
-            z-index: 9999;
+            /*z-index: 9999;*/
         }
 
         .icon {
@@ -360,18 +366,32 @@
 </head>
 
 <body>
-    <!--notification card for waiter -->
-    <div class="noitification-card card" style="width: 18rem;">
+    
+    <!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#waiter-notification">-->
+<!--  Notification-->
+<!--</button>-->
+
+<!-- Modal -->
+<div class="modal fade notification-modal active-notification " id="waiter-notification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!--notification card for waiter -->
+    <div class="noitification-card card">
         <div class="card-body text-center">
             <div class="icon">
                 <i class="fa-solid fa-bell"></i>
             </div>
             <h5 class="card-title"> استدعاء ويتر لطاولة </h5>
             <h6 class="card-subtitle my-3 text-light"> VVIP1 </h6>
-            <a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>
+            <!--<a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>-->
+            <button type="button" class="noitification-modal-close btn btn-primary mt-3" data-bs-dismiss="modal">اغلاق</button>
         </div>
     </div>
     <!-- end of notification card for waiter -->
+    </div>
+  </div>
+</div>
 
     <!--loading effects -->
     <div class="loading-screen" id="loadingScreen">
@@ -624,6 +644,10 @@
                     }
                 );
             });
+            
+            $('.noitification-modal-close').on('click', function(){
+                $('.notification-modal').removeClass('active-notification show');
+            });
         });
 
         function products() {
@@ -849,6 +873,83 @@
                     }, 3000); // محاكاة توقيت التحميل
                 });
             });
+            
+            $('.home-link').on('click', function(){
+                $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
+                console.log('hhhhhhhhhhhhhhhhhh');
+            });
+
+
+        });
+    </script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.close-the-screen').on('click', function() {
+                $('.closed-screen').addClass('opened-screen');
+                $('.lock-screen').fadeIn();
+                $('#pinInput').val('');
+            });
+
+            const correctPin = "1234"; // رمز PIN الصحيح
+            const $pinInput = $('#pinInput');
+            const $pinSubmit = $('#pinSubmit');
+
+            $pinSubmit.on('click', function() {
+                const enteredPin = $pinInput.val();
+
+                if (enteredPin === correctPin) {
+                    $('.lock-screen').fadeOut();
+                    $('.closed-screen').removeClass('opened-screen');
+                } else {
+                    alert('رمز PIN غير صحيح');
+                }
+            });
+
+            $('.numeric-key').on('click', function() {
+                const key = $(this).text();
+                const currentPin = $pinInput.val();
+                if (currentPin.length < 4) {
+                    $pinInput.val(currentPin + key);
+                }
+            });
+
+            $('.calc').on('click', function() {
+                $('.the-calc').removeClass('inactive-calc').addClass('active-calc');
+            });
+            $('.calc-close').on('click', function() {
+                $('.the-calc').removeClass('active-calc').addClass('inactive-calc');
+            });
+
+
+            $(document).ready(function() {
+                $(".menu-nav-link").on("click", function(event) {
+                    event.preventDefault(); // منع سلوك الرابط الافتراضي
+
+                    var loadingScreen = $("#loadingScreen");
+
+                    loadingScreen.css("display", "flex"); // عرض شاشة التحميل
+
+                    // محاكاة تأخير التحميل باستخدام setTimeout
+                    setTimeout(function() {
+                        var clickedLink = $(event.target).closest("a");
+
+                        if (clickedLink.hasClass("home")) {
+                            home();
+                        } else if (clickedLink.hasClass("halls")) {
+                            halls();
+                        } else if (clickedLink.hasClass("resver")) {
+                            resver();
+                        }
+                        // وهكذا يمكنك إضافة الصفحات الأخرى هنا
+
+                        // إخفاء شاشة التحميل بعد اكتمال الإجراءات
+                        loadingScreen.css("display", "none");
+
+                    }, 3000); // محاكاة توقيت التحميل
+                });
+            });
 
             $('.home-link').on('click', function() {
                 $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
@@ -858,6 +959,9 @@
 
         });
     </script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
@@ -866,10 +970,12 @@
             cluster: 'eu'
         });
         var channel = pusher.subscribe('newOrdersDigitalMenu');
-       
-        channel.bind('realtimeWaiterBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
+        channel.bind('realtimeBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
             var orderData = JSON.parse(JSON.stringify(data));
-            swal("Table " + orderData.config.table_id + " Request the Waiter!", '', "info");
+                console.log('Showing modal');
+
+    $('#waiter-notification').modal('show'); // Use .modal('show') to open the modal
+
         });
     </script>
 </body>
