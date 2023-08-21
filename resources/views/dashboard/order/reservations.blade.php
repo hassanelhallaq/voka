@@ -74,6 +74,9 @@
                                                         {{ $item->payment_type }}
                                                     </td>
                                                     <td>
+                                                        {{ $item->payment_type }}
+                                                    </td>
+                                                    <td>
                                                         <a class="btn btn-icon btn-sm btn-success"
                                                             href="{{ route('reservations.now.edit', [$item->id]) }}">
                                                             <i class="fa fa-eye"></i></a>
