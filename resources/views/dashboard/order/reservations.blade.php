@@ -75,7 +75,7 @@
                                                         {{ $item->payment_type }}
                                                     </td>
                                                     <td>
-                                                        {{ $item->extend_time == 1 ? تمديد اداري : لا يوجد تمديد }}
+                                                        {{ $item->extend_time == 1 ? 'تمديد اداري' : 'لا يوجد تمديد' }}
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-icon btn-sm btn-success"
