@@ -86,8 +86,10 @@ class PosController extends Controller
                 $q->where('package_id', $request->id);
             });
         }])->whereHas('tables', function ($query) use ($request) {
-            $query->with('packages')->whereHas('packages', function ($q) use ($request) {
+            $query->with('packages', 'reservation')->whereHas('packages', function ($q) use ($request) {
                 $q->where('package_id', $request->id);
+            })->whereHas('reservation', function ($q) use ($request) {
+                $q->whereDate('date', '>=', Carbon::now())->where('status', '!=', 'انتهى');
             });
         })->get();
         return view('branch._halles_branch', compact('halles'))->render();
@@ -418,14 +420,14 @@ class PosController extends Controller
     public function activeReservation($id)
     {
         $reservation = Reservation::find($id);
-          $table = Table::find($reservation->table_id);
+        $table = Table::find($reservation->table_id);
 
         $table->status = 'in_service';
         $table->update();
         $reservation->status = 'تم الحضور';
-      $isSaved =   $reservation = $reservation->update();
-      
-       
+        $isSaved =   $reservation = $reservation->update();
+
+
 
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
@@ -445,6 +447,4 @@ class PosController extends Controller
 
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
-
-
 }
