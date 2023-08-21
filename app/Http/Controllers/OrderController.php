@@ -18,7 +18,7 @@ class OrderController extends Controller
     }
     public function reservations()
     {
-        $reservations = Reservation::where([['status', '!=', 'انتهى'], ['back_price', '!=', 0]])->paginate(40);
+        $reservations = Reservation::where([['status', '!=', 'انتهى'], ['back_price',  0]])->paginate(40);
         return view('dashboard.order.reservations', compact('reservations'));
     }
     public function reservationsRefund()
