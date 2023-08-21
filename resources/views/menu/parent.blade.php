@@ -194,7 +194,7 @@
 
 
                     Swal.fire({
-                        title: "{{ __('app.awesome') }}",
+                        title: "{{ __('رائع') }}",
                         text: "{{ __('تم ارسال الطلب للويتر') }}",
                         icon: 'success',
                         confirmButtonText: "{{ __('تم') }}",
