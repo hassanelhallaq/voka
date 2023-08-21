@@ -195,9 +195,9 @@
 
                     Swal.fire({
                         title: "{{ __('app.awesome') }}",
-                        text: "{{ __('app.request_waiter_sent') }}",
+                        text: "{{ __('تم ارسال الطلب للويتر') }}",
                         icon: 'success',
-                        confirmButtonText: "{{ __('app.okay') }}",
+                        confirmButtonText: "{{ __('تم') }}",
                     });
 
                     seconds = 50;
