@@ -280,10 +280,15 @@ class PosController extends Controller
 
             return response()->json($newData);
         } else {
-
-            $newData = [];
-            $clients = [];
-            $reservationsType = [];
+            foreach ($data as $index => $item) {
+                $reservationDateTime = $item->date;
+                $color = '#48cfcf';
+                $newData[$index]['id']        = $item->id;
+                $str = explode(' ', $item->package->name);
+                $newData[$index]['title']     = "\n" . $item->package->name . "\n";
+                $newData[$index]['start']     = $reservationDateTime;
+                $newData[$index]['color']       = $color;
+            }
         }
         return view('branch.reserv', compact('newData'));
     }
