@@ -15,17 +15,17 @@ class OrderProductController extends Controller
     {
 
         $product = Product::find($request->product_id);
-        
+
         $order = Order::where([['table_id', $request->table_id], ['package_id', $request->package_id], ['is_done', 0]])->first();
         if ($order) {
-        $totalOrderPrices = $order->products->sum(function ($product) {
-        return $product->price * $product->quantity;
-         });
-        }else{
-            $totalOrderPrices =0;
+            $totalOrderPrices = $order->products->sum(function ($product) {
+                return $product->price * $product->quantity;
+            });
+        } else {
+            $totalOrderPrices = 0;
         }
-        
-         
+
+
         $packagePrice = $order->table->reservation->where('status', '!=', 'انتهى')->first()->price;
         if ($packagePrice < $totalOrderPrices) {
             return response()->json(['icon' => 'error', 'title' => 'لقد استهلكت رصيد باقتك'], 400);
@@ -35,6 +35,7 @@ class OrderProductController extends Controller
         $orderProduct->order_id = $order->id;
         $orderProduct->quantity = $request->quantity;
         $orderProduct->price = $product->price;
-        $orderProduct->save();
+        $isSaved = $orderProduct->save();
+        return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
 }
