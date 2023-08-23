@@ -118,8 +118,11 @@
             padding: 16px 0;
             border-radius: 10px;
         }
+        .parent {
+            width: 66.66666667% !imporant;
+        }
     </style>
-    <div class="main-from-home col-md-11" id="mainPage">
+    <div class="main-from-home parent col-md-11" id="mainPage">
 
         <div class="container-fluid">
             @foreach ($halles as $key => $item)

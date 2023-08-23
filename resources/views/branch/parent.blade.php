@@ -951,10 +951,10 @@
                 });
             });
 
-            $('.home-link').on('click', function() {
-                $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
-                console.log('hhhhhhhhhhhhhhhhhh');
-            });
+            // $('.home-link').on('click', function() {
+            //     $('.main-from-home').removeClass('col-md-8'));
+            //     console.log('hhhhhhhhhhhhhhhhhh');
+            // });
 
 
         });
@@ -979,6 +979,16 @@
         $('#waiter-notification').modal('show'); // Use .modal('show') to open the modal
     });
 </script>
+ <script>
+     $( document ).ready(function() {
+         $('.home-link').on('click', function(){
+             console.log( "ready!" );
+             $('.main-from-home').removeClass('col-md-8');
+             
+         });
+        
+    });
+ </script>
 </body>
 
 </html>

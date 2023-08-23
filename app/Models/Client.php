@@ -19,7 +19,7 @@ class Client extends Model
     }
     public function category()
     {
-        return $this->hasOne(ClientCategory::class);
+        return $this->belongsTo(ClientCategory::class);
     }
     public function packages()
     {

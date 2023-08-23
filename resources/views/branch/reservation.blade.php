@@ -37,10 +37,198 @@
             border: none;
             margin-bottom: 10px;
         }
+        .modal-backdrop.show {
+            display: none !important;
+        }
+              /*-------------------------------- loading css ----------------------------------------*/
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            display: none;
+            /* Start hidden */
+        }
+
+        .loading-screen .lds-ellipsis {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-ellipsis div {
+            position: absolute;
+            top: 33px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #fff;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+
+        .lds-ellipsis div:nth-child(1) {
+            left: 8px;
+            animation: lds-ellipsis1 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(2) {
+            left: 8px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(3) {
+            left: 32px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(4) {
+            left: 56px;
+            animation: lds-ellipsis3 0.6s infinite;
+        }
+
+        @keyframes lds-ellipsis1 {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes lds-ellipsis3 {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        @keyframes lds-ellipsis2 {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(24px, 0);
+            }
+        }
+              /*--------------------------------------------- css for the lock screen ----------------------------------------*/
+        .closed-screen {
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(27, 27, 27);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 9999;
+            display: none;
+        }
+
+        .opened-screen {
+            display: block;
+        }
+
+        .lock-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            direction: ltr;
+        }
+         #waiter-notification {
+    display: none;
+    /* Other modal styles */
+}
+        .pin-container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 8px;
+        }
+
+        .pin-input {
+            width: 60px;
+            padding: 8px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .pin-submit {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .numeric-keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            margin-top: 10px;
+        }
+
+        .numeric-key {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .numeric-key:hover {
+            background-color: #ccc;
+        }
+
+        /*----------------------------------------------end of the lock screen css code ----------------------------------------*/
     </style>
 </head>
 
 <body>
+    
+    <div class="closed-screen">
+        <div class="lock-screen">
+            <div class="pin-container">
+                <h2>أدخل رمز PIN</h2>
+                <input type="password" class="pin-input" id="pinInput" maxlength="4">
+                <div class="numeric-keypad">
+                    <button class="numeric-key">1</button>
+                    <button class="numeric-key">2</button>
+                    <button class="numeric-key">3</button>
+                    <button class="numeric-key">4</button>
+                    <button class="numeric-key">5</button>
+                    <button class="numeric-key">6</button>
+                    <button class="numeric-key">7</button>
+                    <button class="numeric-key">8</button>
+                    <button class="numeric-key">9</button>
+                    <button class="numeric-key">0</button>
+                </div>
+                <button class="pin-submit" id="pinSubmit">فتح</button>
+            </div>
+        </div>
+
+    </div>
 
     <section class="main">
         <div class="top-bar">
@@ -147,8 +335,10 @@
                                         class="s-filter btn btn-lg btn-primary"> الغاء الحجز </a>
                                     <a href="{{ route('branch.home') }}" type="button"
                                         class="s-filter btn btn-lg btn-primary my-3"> عرض الصالة </a>
-                                    <a href="{{ route('branch.home') }}" type="button"
-                                        class="s-filter btn btn-lg btn-primary"> اقفال الشاشة </a>
+                                    <button type="button"
+                                        class="s-filter btn btn-lg btn-primary close-the-screen"> 
+                                        اقفال الشاشة
+                                 </button>
                                 </div>
                             </li>
                             <li class="nav-item py-3 show-content no-border" data-id="#pay" data-v="0">
@@ -313,7 +503,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary register-and-close" onclick="storeReaervation()"
-                        style="margin-left: 10px;">تسجيل</button>
+                        style="margin-left: 10px;" >تسجيل</button>
                     <button type="button" class="btn btn-primary register-and-close"
                         onclick="storeReaervationActive()" style="margin-left: 10px;">تسجيل وتغعيل</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
@@ -419,12 +609,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
-        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('crudjs/crud.js') }}"></script>
@@ -716,16 +901,60 @@
 
         $('.register-and-close').on('click', function() {
             $('.modal-backdrop.show').hide();
+            
+            $('.modal-backdrop.show').hide();
+            $('#pill').removeClass('dis-none').addClass('show');
 
         });
 
         $('.bill-print').on('click', function() {
             $('#pill').removeClass('dis-none');
         });
+        
+        
+        
+        
+             $('.register-and-close').on('click', function() {
+            
+                $('#modalPay').modal('hide');
+                $('.fade.show').hide();
+            });
     </script>
     <script>
         var dt = new Date().toLocaleTimeString();
         document.getElementById('date-time').value = dt;
+    </script>
+    <script>
+         $(document).ready(function() {
+            $('.close-the-screen').on('click', function() {
+                $('.closed-screen').addClass('opened-screen');
+                $('.lock-screen').fadeIn();
+                $('#pinInput').val('');
+            });
+
+            const correctPin = "1234"; // رمز PIN الصحيح
+            const $pinInput = $('#pinInput');
+            const $pinSubmit = $('#pinSubmit');
+
+            $pinSubmit.on('click', function() {
+                const enteredPin = $pinInput.val();
+
+                if (enteredPin === correctPin) {
+                    $('.lock-screen').fadeOut();
+                    $('.closed-screen').removeClass('opened-screen');
+                } else {
+                    alert('رمز PIN غير صحيح');
+                }
+            });
+
+            $('.numeric-key').on('click', function() {
+                const key = $(this).text();
+                const currentPin = $pinInput.val();
+                if (currentPin.length < 4) {
+                    $pinInput.val(currentPin + key);
+                }
+            });
+         });
     </script>
 </body>
 

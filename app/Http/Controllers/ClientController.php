@@ -14,8 +14,8 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::with('orders', 'wallet', 'reservation', 'packages')->withCount('packages', 'orders')->withSum('packages', 'price')->paginate(50);
-        // $clientCategory = ClientCategory::all();
-        return view('dashboard.client.index', compact('clients'));
+        $clientCategory = ClientCategory::all();
+        return view('dashboard.client.index', compact('clients','clientCategory'));
     }
 
     public function store(Request $request)

@@ -65,7 +65,7 @@
                         <div class="payment-method w-100">
                             <div class="row">
                                 <div class="col-4">
-                                    <div class="payment-icon d-flex justify-content-center align-items-center"
+                                    <div class="payment-icon d-flex justify-content-center align-items-center active"
                                         id="cash">
                                         <i class="fa-solid fa-sack-dollar"></i>
                                     </div>
@@ -89,7 +89,7 @@
                             <div class="payment-btn my-3 text-center">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal"
+                                        <button class="add-booking btn btn-primary w-100" type="button" data-bs-toggle="modal"
                                             data-bs-target="#modalPay">
                                             تسجيل الطلب
                                         </button>
@@ -112,7 +112,7 @@
                                         </button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button class="btn btn-primary w-100" type="button" disabled>
+                                        <button class="change-salon btn btn-primary w-100" type="button" data-id="#all-packages" disabled >
                                             تغيير الصالة
                                         </button>
                                     </div>

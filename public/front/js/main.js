@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
 
-
+    
     $('.custome-close').on('click', function() {
        $('.active-the-reversation .modal-backdrop').addClass('none');
 
@@ -85,7 +85,11 @@ $(document).ready(function () {
 
        });
        
-       
+       $('.change-salon').on('click', function(){
+           var backId = $(this).data('id');
+           $('.reservation-tabs').hide();
+           $(backId).show();
+       });
     
        
        $('.btn-clock').on('click', function(){
