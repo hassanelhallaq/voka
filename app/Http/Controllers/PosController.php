@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BranchAccount;
+use App\Models\Casher;
 use App\Models\Client;
 use App\Models\Lounge;
 use App\Models\Order;
@@ -406,6 +407,8 @@ class PosController extends Controller
 
     public function casher()
     {
+        $cashers =  Casher::orderBy('date', 'desc')->whereDate('date', Carbon::today())->where('branch_id', Auth::user()->id)->paginate(50);
+
         $reservationPayment = Reservation::whereDate('date', Carbon::today())->with('table')->whereHas('table', function ($q) {
             $q->where('branch_id', Auth::user()->id);
         });
@@ -414,7 +417,7 @@ class PosController extends Controller
         $online = $reservationPayment->where('payment_type', 'online')->sum('price');
         $point = $reservationPayment->where('payment_type', 'المحفظة')->sum('price');
 
-        return view('branch.casher', compact('visa', 'cash', 'online'))->render();
+        return view('branch.casher', compact('visa', 'cash', 'online', 'cashers'))->render();
     }
 
     public function activeTable($id)
