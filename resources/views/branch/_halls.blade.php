@@ -661,10 +661,10 @@
                                                                                                             {{ $product->name }}</span><span
                                                                                                             class="count-wrap mr-2"><i
                                                                                                                 class="fa-solid fa-x"></i><span
-                                                                                                                class="count">3</span></span>
+                                                                                                                class="count">{{ $product->pivot->price }}</span></span>
                                                                                                     </div>
                                                                                                 </div><span
-                                                                                                    class="list-price">{{ $product->pivot->price }}
+                                                                                                    class="list-price">{{ $product->pivot->quantity }}
                                                                                                     ريال</span><button
                                                                                                     class="order-remove btn btn-danger"
                                                                                                     type="button"><i
