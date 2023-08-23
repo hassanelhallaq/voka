@@ -121,6 +121,9 @@
         .parent {
             width: 66.66666667% !imporant;
         }
+        .force-shown {
+            display: block !important;
+        }
     </style>
     <div class="main-from-home parent col-md-11" id="mainPage">
 
@@ -376,13 +379,259 @@
                                                                                 </a>
                                                                             @endif
                                                                         </div>
-                                                                        <div class="col-md-6">
-                                                                            <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableinfo">
-                                                                                استعراض
-                                                                            </button>
+                                                                       <div class="col-md-6">
+                                                                <button class="table-btn-info btn btn-primary w-100"
+                                                                    type="button"
+                                                                    data-id="#tableinfo{{ $table->id }}">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            <!--بيانات كل طاولة  فى السايد بار -->
+                                                            <div class="table-side-bar side-bar-info"
+                                                                id="tableinfo{{ $table->id }}">
+                                                                <div class="tablebrowse">
+                                                                    <div class="tab-nav-wraper">
+                                                                        <div
+                                                                            class="nav-btns d-flex justify-content-around align-items-center">
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="rev">
+                                                                                الحجوزات</div>
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="waitings">
+                                                                                الأنتظار</div>
                                                                         </div>
+                                                                        <form action="">
+                                                                            <input
+                                                                                class="form-control bg-dark text-light text-center"
+                                                                                type="text" placeholder="ابحث عن ضيف"
+                                                                                aria-label="default input example">
+                                                                        </form>
+                                                                    </div>
+                                                                    <!-- عناصر التاب -->
+                                                                    <div class="side-tab-content">
+                                                                        <div id="rev"
+                                                                            class="home-table-bar-info reversation-side-bar rev active-tab">
+                                                                            <div
+                                                                                class="first-tabb d-flex justify-content-between align-items-start">
+                                                                                <p>حجوزات الطاولة</p>
+                                                                                <span> 3 <i
+                                                                                        class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                                            </div>
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                    <a href="{{ route('branch.reservation') }}"
+                                                                                        class="btn btn-primary w-100 mb-3">اضافة
+                                                                                        حجز </a>
+                                                                                </li>
+                                                                                @if ($table->reservation)
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100  align-items-start">
+                                                                                            @php
+                                                                                                $dateString = $table->reservation->date;
+
+                                                                                                // Create a DateTime object from the date string
+                                                                                                $date = new DateTime($dateString);
+
+                                                                                                // Format the time as desired (e.g., "H:i")
+                                                                                                $formattedTime = $date->format('h:i A');
+                                                                                            @endphp
+                                                                                            <div
+                                                                                                class="rev-time text-center">
+                                                                                                <span>{{ $formattedTime }}</span>
+                                                                                                <br>
+                                                                                                {{-- <span>PM</span> --}}
+                                                                                            </div>
+                                                                                            <div class="rev-info">
+                                                                                                <h4>{{ $table->reservation->client->name }}
+                                                                                                </h4>
+                                                                                                <p>{{ $table->reservation->client->phone }}
+                                                                                                </p>
+                                                                                                <p><span>{{ $table->reservation->package->count_of_visitors }}
+                                                                                                        اشخاص</span><span>/باقة
+                                                                                                        {{ $table->reservation->package->name }}</span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>{{ $table->reservation->package->name }}
+                                                                                                </p>
+                                                                                                <span>{{ $table->status }}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endif
+                                                                                @php
+                                                                                    $now = Carbon\Carbon::now();
+
+                                                                                    // Query to get all reservations for today
+                                                                                    $reservations = App\Models\Reservation::where('table_id', $table->id)
+                                                                                        ->where(function ($query) use ($now) {
+                                                                                            $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                        })
+                                                                                        ->orderBy('date')
+                                                                                        ->get();
+
+                                                                                    $packages = $table->packages;
+                                                                                    foreach ($packages as $key => $package) {
+                                                                                        # code...
+
+                                                                                        $package = App\Models\Package::find($package->id);
+                                                                                        $minutesPerPackage = $package->time;
+
+                                                                                        // Generate time slots based on the package minutes
+                                                                                        $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                        $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                        $timeSlots = [];
+
+                                                                                        $currentTime = clone $startTime;
+                                                                                        while ($currentTime->lte($endTime)) {
+                                                                                            $endTimeSlot = clone $currentTime;
+                                                                                            $endTimeSlot->addMinutes($minutesPerPackage);
+
+                                                                                            // Check if the time slot is in the past
+                                                                                            if ($endTimeSlot->isFuture()) {
+                                                                                                $timeSlots[] = [
+                                                                                                    'start' => $currentTime->format('g:i A'),
+                                                                                                    'end' => $endTimeSlot->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+
+                                                                                            $currentTime->addMinutes($minutesPerPackage);
+                                                                                        }
+                                                                                        // Calculate the available and unavailable time slots
+                                                                                        $availableSlots = [];
+                                                                                        $unavailableSlots = [];
+
+                                                                                        $prevEndTime = $startTime;
+                                                                                        foreach ($reservations as $reservation) {
+                                                                                            $start = Carbon\Carbon::parse($reservation->date);
+                                                                                            $end = Carbon\Carbon::parse($reservation->end);
+
+                                                                                            if ($prevEndTime->lt($start)) {
+                                                                                                $availableSlots[] = [
+                                                                                                    'start' => $prevEndTime->format('g:i A'),
+                                                                                                    'end' => $start->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+                                                                                            $unavailableSlots[] = [
+                                                                                                'start' => $start->format('g:i A'),
+                                                                                                'end' => $end->format('g:i A'),
+                                                                                            ];
+
+                                                                                            $prevEndTime = $end;
+                                                                                        }
+                                                                                        if ($prevEndTime->lt($endTime)) {
+                                                                                            $availableSlots[] = [
+                                                                                                'start' => $prevEndTime->format('g:i A'),
+                                                                                                'end' => $endTime->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
+                                                                                @foreach ($timeSlots as $slot)
+                                                                                    @php
+                                                                                        $slotClosed = false;
+                                                                                        foreach ($unavailableSlots as $unavailableSlot) {
+                                                                                            if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                                                                                                $slotClosed = true;
+                                                                                                break;
+                                                                                            }
+                                                                                        }
+                                                                                    @endphp
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100 align-items-start">
+
+                                                                                            @if ($slotClosed)
+                                                                                            @else
+                                                                                                <div
+                                                                                                    class="rev-time text-center">
+                                                                                                    <span>{{ $slot['start'] }}</span>
+                                                                                                    <br>
+                                                                                                    <span>{{ $slot['end'] }}</span>
+                                                                                                </div>
+                                                                                            @endif
+                                                                                            <div class="rev-info">
+                                                                                                <a href="{{ route('branch.reservation') }}"
+                                                                                                    class="btn btn-primary">احجز
+                                                                                                    الآن</a>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>VVIP-1</p>
+                                                                                                <span>شاغرة</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endforeach
+
+                                                                            </ol>
+                                                                        </div>
+                                                                        <div id="waithings"
+                                                                            class="home-table-bar-info waitings-side-bar waitings hidden-tab">
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>1</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>2</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a href=""
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                            </ol>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                                         @if ($table->reservation)
                                                                             <div class="col-md-6">
                                                                                 <button
@@ -1083,12 +1332,258 @@
                                                                             @endif
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableinfo">
-                                                                                استعراض
-                                                                            </button>
+                                                                <button class="table-btn-info btn btn-primary w-100"
+                                                                    type="button"
+                                                                    data-id="#tableinfo{{ $table->id }}">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            <!--بيانات كل طاولة  فى السايد بار -->
+                                                            <div class="table-side-bar side-bar-info"
+                                                                id="tableinfo{{ $table->id }}">
+                                                                <div class="tablebrowse">
+                                                                    <div class="tab-nav-wraper">
+                                                                        <div
+                                                                            class="nav-btns d-flex justify-content-around align-items-center">
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="rev">
+                                                                                الحجوزات</div>
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="waitings">
+                                                                                الأنتظار</div>
                                                                         </div>
+                                                                        <form action="">
+                                                                            <input
+                                                                                class="form-control bg-dark text-light text-center"
+                                                                                type="text" placeholder="ابحث عن ضيف"
+                                                                                aria-label="default input example">
+                                                                        </form>
+                                                                    </div>
+                                                                    <!-- عناصر التاب -->
+                                                                    <div class="side-tab-content">
+                                                                        <div id="rev"
+                                                                            class="home-table-bar-info reversation-side-bar rev active-tab">
+                                                                            <div
+                                                                                class="first-tabb d-flex justify-content-between align-items-start">
+                                                                                <p>حجوزات الطاولة</p>
+                                                                                <span> 3 <i
+                                                                                        class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                                            </div>
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                    <a href="{{ route('branch.reservation') }}"
+                                                                                        class="btn btn-primary w-100 mb-3">اضافة
+                                                                                        حجز </a>
+                                                                                </li>
+                                                                                @if ($table->reservation)
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100  align-items-start">
+                                                                                            @php
+                                                                                                $dateString = $table->reservation->date;
+
+                                                                                                // Create a DateTime object from the date string
+                                                                                                $date = new DateTime($dateString);
+
+                                                                                                // Format the time as desired (e.g., "H:i")
+                                                                                                $formattedTime = $date->format('h:i A');
+                                                                                            @endphp
+                                                                                            <div
+                                                                                                class="rev-time text-center">
+                                                                                                <span>{{ $formattedTime }}</span>
+                                                                                                <br>
+                                                                                                {{-- <span>PM</span> --}}
+                                                                                            </div>
+                                                                                            <div class="rev-info">
+                                                                                                <h4>{{ $table->reservation->client->name }}
+                                                                                                </h4>
+                                                                                                <p>{{ $table->reservation->client->phone }}
+                                                                                                </p>
+                                                                                                <p><span>{{ $table->reservation->package->count_of_visitors }}
+                                                                                                        اشخاص</span><span>/باقة
+                                                                                                        {{ $table->reservation->package->name }}</span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>{{ $table->reservation->package->name }}
+                                                                                                </p>
+                                                                                                <span>{{ $table->status }}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endif
+                                                                                @php
+                                                                                    $now = Carbon\Carbon::now();
+
+                                                                                    // Query to get all reservations for today
+                                                                                    $reservations = App\Models\Reservation::where('table_id', $table->id)
+                                                                                        ->where(function ($query) use ($now) {
+                                                                                            $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                        })
+                                                                                        ->orderBy('date')
+                                                                                        ->get();
+
+                                                                                    $packages = $table->packages;
+                                                                                    foreach ($packages as $key => $package) {
+                                                                                        # code...
+
+                                                                                        $package = App\Models\Package::find($package->id);
+                                                                                        $minutesPerPackage = $package->time;
+
+                                                                                        // Generate time slots based on the package minutes
+                                                                                        $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                        $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                        $timeSlots = [];
+
+                                                                                        $currentTime = clone $startTime;
+                                                                                        while ($currentTime->lte($endTime)) {
+                                                                                            $endTimeSlot = clone $currentTime;
+                                                                                            $endTimeSlot->addMinutes($minutesPerPackage);
+
+                                                                                            // Check if the time slot is in the past
+                                                                                            if ($endTimeSlot->isFuture()) {
+                                                                                                $timeSlots[] = [
+                                                                                                    'start' => $currentTime->format('g:i A'),
+                                                                                                    'end' => $endTimeSlot->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+
+                                                                                            $currentTime->addMinutes($minutesPerPackage);
+                                                                                        }
+                                                                                        // Calculate the available and unavailable time slots
+                                                                                        $availableSlots = [];
+                                                                                        $unavailableSlots = [];
+
+                                                                                        $prevEndTime = $startTime;
+                                                                                        foreach ($reservations as $reservation) {
+                                                                                            $start = Carbon\Carbon::parse($reservation->date);
+                                                                                            $end = Carbon\Carbon::parse($reservation->end);
+
+                                                                                            if ($prevEndTime->lt($start)) {
+                                                                                                $availableSlots[] = [
+                                                                                                    'start' => $prevEndTime->format('g:i A'),
+                                                                                                    'end' => $start->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+                                                                                            $unavailableSlots[] = [
+                                                                                                'start' => $start->format('g:i A'),
+                                                                                                'end' => $end->format('g:i A'),
+                                                                                            ];
+
+                                                                                            $prevEndTime = $end;
+                                                                                        }
+                                                                                        if ($prevEndTime->lt($endTime)) {
+                                                                                            $availableSlots[] = [
+                                                                                                'start' => $prevEndTime->format('g:i A'),
+                                                                                                'end' => $endTime->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
+                                                                                @foreach ($timeSlots as $slot)
+                                                                                    @php
+                                                                                        $slotClosed = false;
+                                                                                        foreach ($unavailableSlots as $unavailableSlot) {
+                                                                                            if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                                                                                                $slotClosed = true;
+                                                                                                break;
+                                                                                            }
+                                                                                        }
+                                                                                    @endphp
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100 align-items-start">
+
+                                                                                            @if ($slotClosed)
+                                                                                            @else
+                                                                                                <div
+                                                                                                    class="rev-time text-center">
+                                                                                                    <span>{{ $slot['start'] }}</span>
+                                                                                                    <br>
+                                                                                                    <span>{{ $slot['end'] }}</span>
+                                                                                                </div>
+                                                                                            @endif
+                                                                                            <div class="rev-info">
+                                                                                                <a href="{{ route('branch.reservation') }}"
+                                                                                                    class="btn btn-primary">احجز
+                                                                                                    الآن</a>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>VVIP-1</p>
+                                                                                                <span>شاغرة</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endforeach
+
+                                                                            </ol>
+                                                                        </div>
+                                                                        <div id="waithings"
+                                                                            class="home-table-bar-info waitings-side-bar waitings hidden-tab">
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>1</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>2</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a href=""
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                            </ol>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                                         @if ($table->reservation)
                                                                             <div class="col-md-6">
                                                                                 <button
@@ -2069,13 +2564,259 @@
                                                                                 </a>
                                                                             @endif
                                                                         </div>
-                                                                        <div class="col-md-6">
-                                                                            <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableinfo">
-                                                                                استعراض
-                                                                            </button>
+                                                                       <div class="col-md-6">
+                                                                <button class="table-btn-info btn btn-primary w-100"
+                                                                    type="button"
+                                                                    data-id="#tableinfo{{ $table->id }}">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            <!--بيانات كل طاولة  فى السايد بار -->
+                                                            <div class="table-side-bar side-bar-info"
+                                                                id="tableinfo{{ $table->id }}">
+                                                                <div class="tablebrowse">
+                                                                    <div class="tab-nav-wraper">
+                                                                        <div
+                                                                            class="nav-btns d-flex justify-content-around align-items-center">
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="rev">
+                                                                                الحجوزات</div>
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="waitings">
+                                                                                الأنتظار</div>
                                                                         </div>
+                                                                        <form action="">
+                                                                            <input
+                                                                                class="form-control bg-dark text-light text-center"
+                                                                                type="text" placeholder="ابحث عن ضيف"
+                                                                                aria-label="default input example">
+                                                                        </form>
+                                                                    </div>
+                                                                    <!-- عناصر التاب -->
+                                                                    <div class="side-tab-content">
+                                                                        <div id="rev"
+                                                                            class="home-table-bar-info reversation-side-bar rev active-tab">
+                                                                            <div
+                                                                                class="first-tabb d-flex justify-content-between align-items-start">
+                                                                                <p>حجوزات الطاولة</p>
+                                                                                <span> 3 <i
+                                                                                        class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                                            </div>
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                    <a href="{{ route('branch.reservation') }}"
+                                                                                        class="btn btn-primary w-100 mb-3">اضافة
+                                                                                        حجز </a>
+                                                                                </li>
+                                                                                @if ($table->reservation)
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100  align-items-start">
+                                                                                            @php
+                                                                                                $dateString = $table->reservation->date;
+
+                                                                                                // Create a DateTime object from the date string
+                                                                                                $date = new DateTime($dateString);
+
+                                                                                                // Format the time as desired (e.g., "H:i")
+                                                                                                $formattedTime = $date->format('h:i A');
+                                                                                            @endphp
+                                                                                            <div
+                                                                                                class="rev-time text-center">
+                                                                                                <span>{{ $formattedTime }}</span>
+                                                                                                <br>
+                                                                                                {{-- <span>PM</span> --}}
+                                                                                            </div>
+                                                                                            <div class="rev-info">
+                                                                                                <h4>{{ $table->reservation->client->name }}
+                                                                                                </h4>
+                                                                                                <p>{{ $table->reservation->client->phone }}
+                                                                                                </p>
+                                                                                                <p><span>{{ $table->reservation->package->count_of_visitors }}
+                                                                                                        اشخاص</span><span>/باقة
+                                                                                                        {{ $table->reservation->package->name }}</span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>{{ $table->reservation->package->name }}
+                                                                                                </p>
+                                                                                                <span>{{ $table->status }}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endif
+                                                                                @php
+                                                                                    $now = Carbon\Carbon::now();
+
+                                                                                    // Query to get all reservations for today
+                                                                                    $reservations = App\Models\Reservation::where('table_id', $table->id)
+                                                                                        ->where(function ($query) use ($now) {
+                                                                                            $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                        })
+                                                                                        ->orderBy('date')
+                                                                                        ->get();
+
+                                                                                    $packages = $table->packages;
+                                                                                    foreach ($packages as $key => $package) {
+                                                                                        # code...
+
+                                                                                        $package = App\Models\Package::find($package->id);
+                                                                                        $minutesPerPackage = $package->time;
+
+                                                                                        // Generate time slots based on the package minutes
+                                                                                        $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                        $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                        $timeSlots = [];
+
+                                                                                        $currentTime = clone $startTime;
+                                                                                        while ($currentTime->lte($endTime)) {
+                                                                                            $endTimeSlot = clone $currentTime;
+                                                                                            $endTimeSlot->addMinutes($minutesPerPackage);
+
+                                                                                            // Check if the time slot is in the past
+                                                                                            if ($endTimeSlot->isFuture()) {
+                                                                                                $timeSlots[] = [
+                                                                                                    'start' => $currentTime->format('g:i A'),
+                                                                                                    'end' => $endTimeSlot->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+
+                                                                                            $currentTime->addMinutes($minutesPerPackage);
+                                                                                        }
+                                                                                        // Calculate the available and unavailable time slots
+                                                                                        $availableSlots = [];
+                                                                                        $unavailableSlots = [];
+
+                                                                                        $prevEndTime = $startTime;
+                                                                                        foreach ($reservations as $reservation) {
+                                                                                            $start = Carbon\Carbon::parse($reservation->date);
+                                                                                            $end = Carbon\Carbon::parse($reservation->end);
+
+                                                                                            if ($prevEndTime->lt($start)) {
+                                                                                                $availableSlots[] = [
+                                                                                                    'start' => $prevEndTime->format('g:i A'),
+                                                                                                    'end' => $start->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+                                                                                            $unavailableSlots[] = [
+                                                                                                'start' => $start->format('g:i A'),
+                                                                                                'end' => $end->format('g:i A'),
+                                                                                            ];
+
+                                                                                            $prevEndTime = $end;
+                                                                                        }
+                                                                                        if ($prevEndTime->lt($endTime)) {
+                                                                                            $availableSlots[] = [
+                                                                                                'start' => $prevEndTime->format('g:i A'),
+                                                                                                'end' => $endTime->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
+                                                                                @foreach ($timeSlots as $slot)
+                                                                                    @php
+                                                                                        $slotClosed = false;
+                                                                                        foreach ($unavailableSlots as $unavailableSlot) {
+                                                                                            if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                                                                                                $slotClosed = true;
+                                                                                                break;
+                                                                                            }
+                                                                                        }
+                                                                                    @endphp
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100 align-items-start">
+
+                                                                                            @if ($slotClosed)
+                                                                                            @else
+                                                                                                <div
+                                                                                                    class="rev-time text-center">
+                                                                                                    <span>{{ $slot['start'] }}</span>
+                                                                                                    <br>
+                                                                                                    <span>{{ $slot['end'] }}</span>
+                                                                                                </div>
+                                                                                            @endif
+                                                                                            <div class="rev-info">
+                                                                                                <a href="{{ route('branch.reservation') }}"
+                                                                                                    class="btn btn-primary">احجز
+                                                                                                    الآن</a>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>VVIP-1</p>
+                                                                                                <span>شاغرة</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endforeach
+
+                                                                            </ol>
+                                                                        </div>
+                                                                        <div id="waithings"
+                                                                            class="home-table-bar-info waitings-side-bar waitings hidden-tab">
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>1</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>2</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a href=""
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                            </ol>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                                         @if ($table->reservation)
                                                                             <div class="col-md-6">
                                                                                 <button
@@ -2816,12 +3557,258 @@
                                                                             @endif
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableinfo">
-                                                                                استعراض
-                                                                            </button>
+                                                                <button class="table-btn-info btn btn-primary w-100"
+                                                                    type="button"
+                                                                    data-id="#tableinfo{{ $table->id }}">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            <!--بيانات كل طاولة  فى السايد بار -->
+                                                            <div class="table-side-bar side-bar-info"
+                                                                id="tableinfo{{ $table->id }}">
+                                                                <div class="tablebrowse">
+                                                                    <div class="tab-nav-wraper">
+                                                                        <div
+                                                                            class="nav-btns d-flex justify-content-around align-items-center">
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="rev">
+                                                                                الحجوزات</div>
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="waitings">
+                                                                                الأنتظار</div>
                                                                         </div>
+                                                                        <form action="">
+                                                                            <input
+                                                                                class="form-control bg-dark text-light text-center"
+                                                                                type="text" placeholder="ابحث عن ضيف"
+                                                                                aria-label="default input example">
+                                                                        </form>
+                                                                    </div>
+                                                                    <!-- عناصر التاب -->
+                                                                    <div class="side-tab-content">
+                                                                        <div id="rev"
+                                                                            class="home-table-bar-info reversation-side-bar rev active-tab">
+                                                                            <div
+                                                                                class="first-tabb d-flex justify-content-between align-items-start">
+                                                                                <p>حجوزات الطاولة</p>
+                                                                                <span> 3 <i
+                                                                                        class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                                            </div>
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                    <a href="{{ route('branch.reservation') }}"
+                                                                                        class="btn btn-primary w-100 mb-3">اضافة
+                                                                                        حجز </a>
+                                                                                </li>
+                                                                                @if ($table->reservation)
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100  align-items-start">
+                                                                                            @php
+                                                                                                $dateString = $table->reservation->date;
+
+                                                                                                // Create a DateTime object from the date string
+                                                                                                $date = new DateTime($dateString);
+
+                                                                                                // Format the time as desired (e.g., "H:i")
+                                                                                                $formattedTime = $date->format('h:i A');
+                                                                                            @endphp
+                                                                                            <div
+                                                                                                class="rev-time text-center">
+                                                                                                <span>{{ $formattedTime }}</span>
+                                                                                                <br>
+                                                                                                {{-- <span>PM</span> --}}
+                                                                                            </div>
+                                                                                            <div class="rev-info">
+                                                                                                <h4>{{ $table->reservation->client->name }}
+                                                                                                </h4>
+                                                                                                <p>{{ $table->reservation->client->phone }}
+                                                                                                </p>
+                                                                                                <p><span>{{ $table->reservation->package->count_of_visitors }}
+                                                                                                        اشخاص</span><span>/باقة
+                                                                                                        {{ $table->reservation->package->name }}</span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>{{ $table->reservation->package->name }}
+                                                                                                </p>
+                                                                                                <span>{{ $table->status }}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endif
+                                                                                @php
+                                                                                    $now = Carbon\Carbon::now();
+
+                                                                                    // Query to get all reservations for today
+                                                                                    $reservations = App\Models\Reservation::where('table_id', $table->id)
+                                                                                        ->where(function ($query) use ($now) {
+                                                                                            $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                        })
+                                                                                        ->orderBy('date')
+                                                                                        ->get();
+
+                                                                                    $packages = $table->packages;
+                                                                                    foreach ($packages as $key => $package) {
+                                                                                        # code...
+
+                                                                                        $package = App\Models\Package::find($package->id);
+                                                                                        $minutesPerPackage = $package->time;
+
+                                                                                        // Generate time slots based on the package minutes
+                                                                                        $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                        $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                        $timeSlots = [];
+
+                                                                                        $currentTime = clone $startTime;
+                                                                                        while ($currentTime->lte($endTime)) {
+                                                                                            $endTimeSlot = clone $currentTime;
+                                                                                            $endTimeSlot->addMinutes($minutesPerPackage);
+
+                                                                                            // Check if the time slot is in the past
+                                                                                            if ($endTimeSlot->isFuture()) {
+                                                                                                $timeSlots[] = [
+                                                                                                    'start' => $currentTime->format('g:i A'),
+                                                                                                    'end' => $endTimeSlot->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+
+                                                                                            $currentTime->addMinutes($minutesPerPackage);
+                                                                                        }
+                                                                                        // Calculate the available and unavailable time slots
+                                                                                        $availableSlots = [];
+                                                                                        $unavailableSlots = [];
+
+                                                                                        $prevEndTime = $startTime;
+                                                                                        foreach ($reservations as $reservation) {
+                                                                                            $start = Carbon\Carbon::parse($reservation->date);
+                                                                                            $end = Carbon\Carbon::parse($reservation->end);
+
+                                                                                            if ($prevEndTime->lt($start)) {
+                                                                                                $availableSlots[] = [
+                                                                                                    'start' => $prevEndTime->format('g:i A'),
+                                                                                                    'end' => $start->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+                                                                                            $unavailableSlots[] = [
+                                                                                                'start' => $start->format('g:i A'),
+                                                                                                'end' => $end->format('g:i A'),
+                                                                                            ];
+
+                                                                                            $prevEndTime = $end;
+                                                                                        }
+                                                                                        if ($prevEndTime->lt($endTime)) {
+                                                                                            $availableSlots[] = [
+                                                                                                'start' => $prevEndTime->format('g:i A'),
+                                                                                                'end' => $endTime->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
+                                                                                @foreach ($timeSlots as $slot)
+                                                                                    @php
+                                                                                        $slotClosed = false;
+                                                                                        foreach ($unavailableSlots as $unavailableSlot) {
+                                                                                            if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                                                                                                $slotClosed = true;
+                                                                                                break;
+                                                                                            }
+                                                                                        }
+                                                                                    @endphp
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100 align-items-start">
+
+                                                                                            @if ($slotClosed)
+                                                                                            @else
+                                                                                                <div
+                                                                                                    class="rev-time text-center">
+                                                                                                    <span>{{ $slot['start'] }}</span>
+                                                                                                    <br>
+                                                                                                    <span>{{ $slot['end'] }}</span>
+                                                                                                </div>
+                                                                                            @endif
+                                                                                            <div class="rev-info">
+                                                                                                <a href="{{ route('branch.reservation') }}"
+                                                                                                    class="btn btn-primary">احجز
+                                                                                                    الآن</a>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>VVIP-1</p>
+                                                                                                <span>شاغرة</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endforeach
+
+                                                                            </ol>
+                                                                        </div>
+                                                                        <div id="waithings"
+                                                                            class="home-table-bar-info waitings-side-bar waitings hidden-tab">
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>1</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>2</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a href=""
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                            </ol>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                                         @if ($table->reservation)
                                                                             <div class="col-md-6">
                                                                                 <button
@@ -3550,13 +4537,259 @@
                                                                                 </a>
                                                                             @endif
                                                                         </div>
-                                                                        <div class="col-md-6">
-                                                                            <button
-                                                                                class="table-btn-action btn btn-primary w-100"
-                                                                                type="button" data-id="#tableinfo">
-                                                                                استعراض
-                                                                            </button>
+                                                                      <div class="col-md-6">
+                                                                <button class="table-btn-info btn btn-primary w-100"
+                                                                    type="button"
+                                                                    data-id="#tableinfo{{ $table->id }}">
+                                                                    استعراض
+                                                                </button>
+                                                            </div>
+                                                            <!--بيانات كل طاولة  فى السايد بار -->
+                                                            <div class="table-side-bar side-bar-info"
+                                                                id="tableinfo{{ $table->id }}">
+                                                                <div class="tablebrowse">
+                                                                    <div class="tab-nav-wraper">
+                                                                        <div
+                                                                            class="nav-btns d-flex justify-content-around align-items-center">
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="rev">
+                                                                                الحجوزات</div>
+                                                                            <div class="home-btn btn btn-dark"
+                                                                                data-tab="waitings">
+                                                                                الأنتظار</div>
                                                                         </div>
+                                                                        <form action="">
+                                                                            <input
+                                                                                class="form-control bg-dark text-light text-center"
+                                                                                type="text" placeholder="ابحث عن ضيف"
+                                                                                aria-label="default input example">
+                                                                        </form>
+                                                                    </div>
+                                                                    <!-- عناصر التاب -->
+                                                                    <div class="side-tab-content">
+                                                                        <div id="rev"
+                                                                            class="home-table-bar-info reversation-side-bar rev active-tab">
+                                                                            <div
+                                                                                class="first-tabb d-flex justify-content-between align-items-start">
+                                                                                <p>حجوزات الطاولة</p>
+                                                                                <span> 3 <i
+                                                                                        class="fa-solid fa-stopwatch-20 ml-1"></i></span>
+                                                                            </div>
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start w-100">
+                                                                                    <a href="{{ route('branch.reservation') }}"
+                                                                                        class="btn btn-primary w-100 mb-3">اضافة
+                                                                                        حجز </a>
+                                                                                </li>
+                                                                                @if ($table->reservation)
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100  align-items-start">
+                                                                                            @php
+                                                                                                $dateString = $table->reservation->date;
+
+                                                                                                // Create a DateTime object from the date string
+                                                                                                $date = new DateTime($dateString);
+
+                                                                                                // Format the time as desired (e.g., "H:i")
+                                                                                                $formattedTime = $date->format('h:i A');
+                                                                                            @endphp
+                                                                                            <div
+                                                                                                class="rev-time text-center">
+                                                                                                <span>{{ $formattedTime }}</span>
+                                                                                                <br>
+                                                                                                {{-- <span>PM</span> --}}
+                                                                                            </div>
+                                                                                            <div class="rev-info">
+                                                                                                <h4>{{ $table->reservation->client->name }}
+                                                                                                </h4>
+                                                                                                <p>{{ $table->reservation->client->phone }}
+                                                                                                </p>
+                                                                                                <p><span>{{ $table->reservation->package->count_of_visitors }}
+                                                                                                        اشخاص</span><span>/باقة
+                                                                                                        {{ $table->reservation->package->name }}</span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>{{ $table->reservation->package->name }}
+                                                                                                </p>
+                                                                                                <span>{{ $table->status }}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endif
+                                                                                @php
+                                                                                    $now = Carbon\Carbon::now();
+
+                                                                                    // Query to get all reservations for today
+                                                                                    $reservations = App\Models\Reservation::where('table_id', $table->id)
+                                                                                        ->where(function ($query) use ($now) {
+                                                                                            $query->whereDate('date', $now->toDateString())->whereTime('date', '>=', $now->toTimeString());
+                                                                                        })
+                                                                                        ->orderBy('date')
+                                                                                        ->get();
+
+                                                                                    $packages = $table->packages;
+                                                                                    foreach ($packages as $key => $package) {
+                                                                                        # code...
+
+                                                                                        $package = App\Models\Package::find($package->id);
+                                                                                        $minutesPerPackage = $package->time;
+
+                                                                                        // Generate time slots based on the package minutes
+                                                                                        $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
+                                                                                        $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
+                                                                                        $timeSlots = [];
+
+                                                                                        $currentTime = clone $startTime;
+                                                                                        while ($currentTime->lte($endTime)) {
+                                                                                            $endTimeSlot = clone $currentTime;
+                                                                                            $endTimeSlot->addMinutes($minutesPerPackage);
+
+                                                                                            // Check if the time slot is in the past
+                                                                                            if ($endTimeSlot->isFuture()) {
+                                                                                                $timeSlots[] = [
+                                                                                                    'start' => $currentTime->format('g:i A'),
+                                                                                                    'end' => $endTimeSlot->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+
+                                                                                            $currentTime->addMinutes($minutesPerPackage);
+                                                                                        }
+                                                                                        // Calculate the available and unavailable time slots
+                                                                                        $availableSlots = [];
+                                                                                        $unavailableSlots = [];
+
+                                                                                        $prevEndTime = $startTime;
+                                                                                        foreach ($reservations as $reservation) {
+                                                                                            $start = Carbon\Carbon::parse($reservation->date);
+                                                                                            $end = Carbon\Carbon::parse($reservation->end);
+
+                                                                                            if ($prevEndTime->lt($start)) {
+                                                                                                $availableSlots[] = [
+                                                                                                    'start' => $prevEndTime->format('g:i A'),
+                                                                                                    'end' => $start->format('g:i A'),
+                                                                                                ];
+                                                                                            }
+                                                                                            $unavailableSlots[] = [
+                                                                                                'start' => $start->format('g:i A'),
+                                                                                                'end' => $end->format('g:i A'),
+                                                                                            ];
+
+                                                                                            $prevEndTime = $end;
+                                                                                        }
+                                                                                        if ($prevEndTime->lt($endTime)) {
+                                                                                            $availableSlots[] = [
+                                                                                                'start' => $prevEndTime->format('g:i A'),
+                                                                                                'end' => $endTime->format('g:i A'),
+                                                                                            ];
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
+                                                                                @foreach ($timeSlots as $slot)
+                                                                                    @php
+                                                                                        $slotClosed = false;
+                                                                                        foreach ($unavailableSlots as $unavailableSlot) {
+                                                                                            if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                                                                                                $slotClosed = true;
+                                                                                                break;
+                                                                                            }
+                                                                                        }
+                                                                                    @endphp
+                                                                                    <li
+                                                                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                        <div
+                                                                                            class="rev-item d-flex w-100 align-items-start">
+
+                                                                                            @if ($slotClosed)
+                                                                                            @else
+                                                                                                <div
+                                                                                                    class="rev-time text-center">
+                                                                                                    <span>{{ $slot['start'] }}</span>
+                                                                                                    <br>
+                                                                                                    <span>{{ $slot['end'] }}</span>
+                                                                                                </div>
+                                                                                            @endif
+                                                                                            <div class="rev-info">
+                                                                                                <a href="{{ route('branch.reservation') }}"
+                                                                                                    class="btn btn-primary">احجز
+                                                                                                    الآن</a>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="rev-statu text-center">
+                                                                                                <p>VVIP-1</p>
+                                                                                                <span>شاغرة</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                @endforeach
+
+                                                                            </ol>
+                                                                        </div>
+                                                                        <div id="waithings"
+                                                                            class="home-table-bar-info waitings-side-bar waitings hidden-tab">
+                                                                            <ol
+                                                                                class="list-group list-group-numbered reversed bill-info">
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>1</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li
+                                                                                    class="list-group-item d-flex justify-content-between align-items-start">
+                                                                                    <div
+                                                                                        class="rev-item d-flex w-100  align-items-start">
+                                                                                        <div class="rev-time text-center">
+                                                                                            <span>2</span>
+                                                                                        </div>
+                                                                                        <div class="rev-info">
+                                                                                            <h4>محمد عبدالعزيز</h4>
+                                                                                            <p>012586439</p>
+                                                                                            <p><span>4
+                                                                                                    اشخاص</span><span>/باقة
+                                                                                                    vip</span></p>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="rev-statu text-center">
+                                                                                            <a href=""
+                                                                                                class="btn btn-primary">تفعيل</a>
+                                                                                            <br />
+                                                                                            <span class="s-time">
+                                                                                                1:20:00</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                            </ol>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                                         @if ($table->reservation)
                                                                             <div class="col-md-6">
                                                                                 <button
@@ -5380,4 +6613,27 @@
     //         x.style.display = "block";
     //     }
     //
+    
+      $(document).ready(function() {
+
+         $('.home-btn').on('click', function(){
+            console.log('jjjjjjjjjjjjjjjjjjj');
+            var tabId = $(this).data('tab');
+            $('.home-table-bar-info').removeClass('active-tab').addClass('hidden-tab');
+            $(tabId).addClass('active-tab').removeClass('hidden-tab');
+        });   
+        
+        
+        
+        $('.table-btn-info').on('click', function() {
+            var newId = $(this).data('id');
+            $('.home-side-place').empty();
+            $('.home-side-place').append($(newId).clone().css('display', 'block').addClass('force-shown')).addClass('have-bg');
+            $(newId).show();
+            console.log($(newId));
+        });
+        
+      
+
+    });
 </script>

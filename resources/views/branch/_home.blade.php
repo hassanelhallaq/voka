@@ -109,6 +109,9 @@
       .not-selected .line {
           fill: #3E3F41;
       }
+      .side-ba-hidden {
+          display: none;
+      }
   </style>
   <div id="mainPage">
       <div class="col-md-12">
@@ -4433,7 +4436,7 @@
                                                                 </button>
                                                             </div>
                                                             <!--بيانات كل طاولة  فى السايد بار -->
-                                                            <div class="table-side-bar side-bar-info"
+                                                            <div class="table-side-bar  home-side-bar-info side-ba-hidden"
                                                                 id="tableinfo{{ $table->id }}">
                                                                 <div class="tablebrowse">
                                                                     <div class="tab-nav-wraper">
@@ -4700,7 +4703,7 @@
                                                                     $totalOrderPrices = 0;
                                                                 }
                                                             @endphp
-                                                            <div class="table-side-bar side-bar-orders"
+                                                            <div class="table-side-bar home-side-bar-orders side-ba-hidden"
                                                                 id="tableorders{{ $table->id }}">
                                                                 <div class="tablebrowse">
                                                                     <div class="tab-nav-wraper">
@@ -5415,4 +5418,37 @@
       //         x.style.display = "block";
       //     }
       //
+      
+      $(document).ready(function() {
+    
+        
+        // $('.forceclosing').on('click', function(){
+        //     $('.modal-backdrop.show').hide();
+        // });
+        
+        // $('.rev-close').on('click', function() {
+        //   $('.modal-backdrop.show').hide();
+    
+        // });
+
+
+
+        $('.table-btn-orders').on('click', function() {
+            var newId = $(this).data('id');
+            $('.home-side-place').empty();
+            $('.home-side-place').append($(newId).clone().css('display', 'block')).addClass('have-bg');
+            console.log('first');
+        });
+
+        $('.table-btn-info').on('click', function() {
+            var newId = $(this).data('id');
+            $('.home-side-place').empty();
+            $('.home-side-place').append($(newId).clone().removeClass('side-ba-hidde')).addClass('have-bg');
+            $(newId).show();
+            console.log('second');
+        });
+
+       
+
+    });
   </script>
