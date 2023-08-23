@@ -262,18 +262,21 @@ class PosController extends Controller
     {
         $data = Reservation::whereDate('date', '>=', $request->start)
             ->get();
-        $newData = [];
-        foreach ($data as $index => $item) {
-            $reservationDateTime = $item->date;
-            $color = '#48cfcf';
-            $newData[$index]['id']        = $item->id;
-            $str = explode(' ', $item->package->name);
-            $newData[$index]['title']     = "\n" . $item->package->name . "\n";
-            $newData[$index]['start']     = $reservationDateTime;
-            $newData[$index]['color']       = $color;
-        }
+        if ($request->ajax()) {
+            $newData = [];
+            foreach ($data as $index => $item) {
+                $reservationDateTime = $item->date;
+                $color = '#48cfcf';
+                $newData[$index]['id']        = $item->id;
+                $str = explode(' ', $item->package->name);
+                $newData[$index]['title']     = "\n" . $item->package->name . "\n";
+                $newData[$index]['start']     = $reservationDateTime;
+                $newData[$index]['color']       = $color;
+            }
 
-        return response()->json($newData);
+            return response()->json($newData);
+        }
+        return view('branch.reserv', compact('newData'));
     }
     public function sideReser(Request $request)
     {
@@ -323,64 +326,64 @@ class PosController extends Controller
     }
     public function tableSlots(Request $request)
     {
-$now = Carbon::now()->setTimezone('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+        $now = Carbon::now()->setTimezone('Asia/Riyadh'); // Set the time zone to Saudi Arabia
 
-// Query to get all reservations for today
-$reservations = Reservation::where('table_id', $request->table_id)
-    ->where(function ($query) use ($now) {
-        $query->whereDate('date', $now->toDateString())
-            ->whereTime('date', '>=', $now->toTimeString());
-    })
-    ->orderBy('date')
-    ->get();
+        // Query to get all reservations for today
+        $reservations = Reservation::where('table_id', $request->table_id)
+            ->where(function ($query) use ($now) {
+                $query->whereDate('date', $now->toDateString())
+                    ->whereTime('date', '>=', $now->toTimeString());
+            })
+            ->orderBy('date')
+            ->get();
 
-$package = Package::find($request->packageId);
-$minutesPerPackage = $package->time;
+        $package = Package::find($request->packageId);
+        $minutesPerPackage = $package->time;
 
-// Generate time slots based on the package minutes
-$startTime = Carbon::createFromTime(0, 0, 0)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
-$endTime = Carbon::createFromTime(23, 59, 59)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
-$timeSlots = [];
+        // Generate time slots based on the package minutes
+        $startTime = Carbon::createFromTime(0, 0, 0)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+        $endTime = Carbon::createFromTime(23, 59, 59)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+        $timeSlots = [];
 
-$currentTime = clone $startTime;
-while ($currentTime->lte($endTime)) {
-    $endTimeSlot = clone $currentTime;
-    $endTimeSlot->addMinutes($minutesPerPackage);
+        $currentTime = clone $startTime;
+        while ($currentTime->lte($endTime)) {
+            $endTimeSlot = clone $currentTime;
+            $endTimeSlot->addMinutes($minutesPerPackage);
 
-    // Check if the time slot is in the future
-    if ($endTimeSlot->isFuture()) {
-        $timeSlots[] = [
-            'start' => $currentTime->format('g:i A'),
-            'end' => $endTimeSlot->format('g:i A'),
-        ];
-    }
+            // Check if the time slot is in the future
+            if ($endTimeSlot->isFuture()) {
+                $timeSlots[] = [
+                    'start' => $currentTime->format('g:i A'),
+                    'end' => $endTimeSlot->format('g:i A'),
+                ];
+            }
 
-    $currentTime->addMinutes($minutesPerPackage);
-}
-
-// Calculate the unavailable time slots
-$unavailableSlots = [];
-foreach ($reservations as $reservation) {
-    $start = Carbon::parse($reservation->date)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
-    $end = Carbon::parse($reservation->end)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
-
-    $unavailableSlots[] = [
-        'start' => $start->format('g:i A'),
-        'end' => $end->format('g:i A'),
-    ];
-}
-
-// Calculate the available time slots by removing reserved slots from all slots
-$availableSlots = array_filter($timeSlots, function ($slot) use ($unavailableSlots) {
-    foreach ($unavailableSlots as $unavailableSlot) {
-        if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
-            return false; // Slot is reserved, so it's not available
+            $currentTime->addMinutes($minutesPerPackage);
         }
-    }
-    return true; // Slot is available
-});
 
-// Now you can use the $availableSlots and $unavailableSlots arrays as needed
+        // Calculate the unavailable time slots
+        $unavailableSlots = [];
+        foreach ($reservations as $reservation) {
+            $start = Carbon::parse($reservation->date)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+            $end = Carbon::parse($reservation->end)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+
+            $unavailableSlots[] = [
+                'start' => $start->format('g:i A'),
+                'end' => $end->format('g:i A'),
+            ];
+        }
+
+        // Calculate the available time slots by removing reserved slots from all slots
+        $availableSlots = array_filter($timeSlots, function ($slot) use ($unavailableSlots) {
+            foreach ($unavailableSlots as $unavailableSlot) {
+                if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+                    return false; // Slot is reserved, so it's not available
+                }
+            }
+            return true; // Slot is available
+        });
+
+        // Now you can use the $availableSlots and $unavailableSlots arrays as needed
 
 
         return  $render = view('branch.time_slots', compact('availableSlots', 'unavailableSlots', 'timeSlots'));

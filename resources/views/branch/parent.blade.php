@@ -50,10 +50,12 @@
             background-color: #f0f0f0;
             direction: ltr;
         }
-         #waiter-notification {
-    display: none;
-    /* Other modal styles */
-}
+
+        #waiter-notification {
+            display: none;
+            /* Other modal styles */
+        }
+
         .pin-container {
             text-align: center;
             padding: 20px;
@@ -325,6 +327,7 @@
         .active-notification {
             display: block;
         }
+
         .noitification-card {
             /*position: fixed;*/
             /*bottom: 50px;*/
@@ -368,30 +371,32 @@
 <body>
 
     <!-- Button trigger modal -->
-<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#waiter-notification">-->
-<!--  Notification-->
-<!--</button>-->
+    <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#waiter-notification">-->
+    <!--  Notification-->
+    <!--</button>-->
 
-<!-- Modal -->
-<div class="modal fade notification-modal active-notification " id="waiter-notification" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <!--notification card for waiter -->
-    <div class="noitification-card card">
-        <div class="card-body text-center">
-            <div class="icon">
-                <i class="fa-solid fa-bell"></i>
+    <!-- Modal -->
+    <div class="modal fade notification-modal active-notification " id="waiter-notification" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!--notification card for waiter -->
+                <div class="noitification-card card">
+                    <div class="card-body text-center">
+                        <div class="icon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <h5 class="card-title"> استدعاء ويتر لطاولة </h5>
+                        <h6 class="card-subtitle my-3 text-light"> </h6>
+                        <!--<a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>-->
+                        <button type="button" class="noitification-modal-close btn btn-primary mt-3"
+                            data-bs-dismiss="modal">اغلاق</button>
+                    </div>
+                </div>
+                <!-- end of notification card for waiter -->
             </div>
-            <h5 class="card-title"> استدعاء ويتر لطاولة </h5>
-            <h6 class="card-subtitle my-3 text-light">  </h6>
-            <!--<a href="#" class="noitification-card-close btn btn-primary mt-3">اغلاق </a>-->
-            <button type="button" class="noitification-modal-close btn btn-primary mt-3" data-bs-dismiss="modal">اغلاق</button>
         </div>
     </div>
-    <!-- end of notification card for waiter -->
-    </div>
-  </div>
-</div>
 
     <!--loading effects -->
     <div class="loading-screen" id="loadingScreen">
@@ -501,8 +506,8 @@
                 <div class="col-md-1">
                     <div class="languages">
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 English
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
@@ -562,8 +567,8 @@
                                 @endcan
                                 @can('branch_reservations')
                                     <li class="nav-item resver">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
-                                            onclick="resver()">
+                                        <a href="{{ route('ajaxCalender') }}"
+                                            class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link">
                                             <i class="fa-solid fa-utensils"></i>
                                             <span>الحجوزات</span>
                                         </a>
@@ -645,7 +650,7 @@
                 );
             });
 
-            $('.noitification-modal-close').on('click', function(){
+            $('.noitification-modal-close').on('click', function() {
                 $('.notification-modal').removeClass('active-notification show');
             });
         });
@@ -874,7 +879,7 @@
                 });
             });
 
-            $('.home-link').on('click', function(){
+            $('.home-link').on('click', function() {
                 $('.main-from-home').removeClass('col-md-8').addClass('col-md-11');
                 console.log('hhhhhhhhhhhhhhhhhh');
             });
@@ -962,33 +967,33 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-<script>
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
 
-    var pusher = new Pusher('0de470f391dd841845ff', {
-        cluster: 'eu'
-    });
-    var channel = pusher.subscribe('newOrdersDigitalMenu');
-    channel.bind('realtimeBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
-        var orderData = JSON.parse(JSON.stringify(data));
+        var pusher = new Pusher('0de470f391dd841845ff', {
+            cluster: 'eu'
+        });
+        var channel = pusher.subscribe('newOrdersDigitalMenu');
+        channel.bind('realtimeBranchID_' + {{ Auth::user()->branch_id }}, function(data) {
+            var orderData = JSON.parse(JSON.stringify(data));
 
-        var table = data.config.table_id;
-        console.log(table);
-        $('#waiter-notification .card-subtitle').text(table); // Update the subtitle text
-        $('#waiter-notification').modal('show'); // Use .modal('show') to open the modal
-    });
-</script>
- <script>
-     $( document ).ready(function() {
-         $('.home-link').on('click', function(){
-             console.log( "ready!" );
-             $('.main-from-home').removeClass('col-md-8');
-             
-         });
-        
-    });
- </script>
+            var table = data.config.table_id;
+            console.log(table);
+            $('#waiter-notification .card-subtitle').text(table); // Update the subtitle text
+            $('#waiter-notification').modal('show'); // Use .modal('show') to open the modal
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.home-link').on('click', function() {
+                console.log("ready!");
+                $('.main-from-home').removeClass('col-md-8');
+
+            });
+
+        });
+    </script>
 </body>
 
 </html>

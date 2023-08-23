@@ -1,59 +1,62 @@
-   <style>
-       .fc-day-number {
-           color: #fff;
-       }
+   @extends('branch.parent')
+   @section('contentFront')
+       <style>
+           .fc-day-number {
+               color: #fff;
+           }
 
-       .fc-widget-header thead tr {
-           color: #fff;
-           font-size: 20px;
-       }
+           .fc-widget-header thead tr {
+               color: #fff;
+               font-size: 20px;
+           }
 
-       tbody td {
-           border-radius: 0;
-       }
+           tbody td {
+               border-radius: 0;
+           }
 
-       .fc-unthemed td.fc-today .fc-day-number {
-           color: #fff;
-       }
+           .fc-unthemed td.fc-today .fc-day-number {
+               color: #fff;
+           }
 
-       .fc-state-active,
-       .fc-state-disabled,
-       .fc-state-down,
-       .fc-state-top,
-       .fc-state-hover {
-           color: #fff !important;
-           background-color: #e5772a !important;
-       }
+           .fc-state-active,
+           .fc-state-disabled,
+           .fc-state-down,
+           .fc-state-top,
+           .fc-state-hover {
+               color: #fff !important;
+               background-color: #e5772a !important;
+           }
 
-       .fc-state-hover {
-           background-position: 0 2.1em !important;
-       }
+           .fc-state-hover {
+               background-position: 0 2.1em !important;
+           }
 
-       tbody td:hover {
-           border: 1px solid #ddd;
-       }
+           tbody td:hover {
+               border: 1px solid #ddd;
+           }
 
-       .fc-unthemed td.fc-today {
-           background-color: #e5772a !important;
-       }
+           .fc-unthemed td.fc-today {
+               background-color: #e5772a !important;
+           }
 
-       tbody tr {
-           color: #fff;
-       }
+           tbody tr {
+               color: #fff;
+           }
 
-       .fc-event,
-       .fc-event-dot {
-           background-color: #d59161 !important;
-       }
-   </style>
-   <div id="mainPage" class="reves-main">
-       <div class="container mt-5">
-           <div id="calendar">
+           .fc-event,
+           .fc-event-dot {
+               background-color: #d59161 !important;
+           }
+       </style>
+       <div id="mainPage" class="reves-main">
+           <div class="container mt-5">
+               <div id="calendar">
+               </div>
            </div>
        </div>
-   </div>
-   <meta name="csrf-token" content="{{ csrf_token() }}" />
-   @csrf
+       <meta name="csrf-token" content="{{ csrf_token() }}" />
+       @csrf
+   @endsection
    <!-- FullCalendar CSS -->
    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
    <link rel="stylesheet" type="text/css"
@@ -108,7 +111,7 @@
                },
 
            });
-           
+
            $('#mainPage').removeClass('col-md-11').addClass('col-md-8');
 
        });
