@@ -323,65 +323,62 @@ class PosController extends Controller
     }
     public function tableSlots(Request $request)
     {
-        $now = Carbon::now()->setTimezone('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+$now = Carbon::now()->setTimezone('Asia/Riyadh'); // Set the time zone to Saudi Arabia
 
-        // Query to get all reservations for today
-        $reservations = Reservation::where('table_id', $request->table_id)
-        ->where(function ($query) use ($now) {
-            $query->whereDate('date', $now->toDateString())
-                ->whereTime('date', '>=', $now->toTimeString());
-        })
-            ->orderBy('date')
-            ->get();
+// Query to get all reservations for today
+$reservations = Reservation::where('table_id', $request->table_id)
+    ->where(function ($query) use ($now) {
+        $query->whereDate('date', $now->toDateString())
+            ->whereTime('date', '>=', $now->toTimeString());
+    })
+    ->orderBy('date')
+    ->get();
 
-        $package = Package::find($request->packageId);
-        $minutesPerPackage = $package->time;
+$package = Package::find($request->packageId);
+$minutesPerPackage = $package->time;
 
-        // Set the time zone for generating time slots
-        Carbon::setTimezone('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+// Generate time slots based on the package minutes
+$startTime = Carbon::createFromTime(0, 0, 0)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+$endTime = Carbon::createFromTime(23, 59, 59)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+$timeSlots = [];
 
-        // Generate time slots based on the package minutes
-        $startTime = Carbon::createFromTime(0, 0, 0);
-        $endTime = Carbon::createFromTime(23, 59, 59);
-        $timeSlots = [];
+$currentTime = clone $startTime;
+while ($currentTime->lte($endTime)) {
+    $endTimeSlot = clone $currentTime;
+    $endTimeSlot->addMinutes($minutesPerPackage);
 
-        $currentTime = clone $startTime;
-        while ($currentTime->lte($endTime)) {
-            $endTimeSlot = clone $currentTime;
-            $endTimeSlot->addMinutes($minutesPerPackage);
+    // Check if the time slot is in the future
+    if ($endTimeSlot->isFuture()) {
+        $timeSlots[] = [
+            'start' => $currentTime->format('g:i A'),
+            'end' => $endTimeSlot->format('g:i A'),
+        ];
+    }
 
-            // Check if the time slot is in the future
-            if ($endTimeSlot->isFuture()) {
-                $timeSlots[] = [
-                    'start' => $currentTime->format('g:i A'),
-                    'end' => $endTimeSlot->format('g:i A'),
-                ];
-            }
+    $currentTime->addMinutes($minutesPerPackage);
+}
 
-            $currentTime->addMinutes($minutesPerPackage);
+// Calculate the unavailable time slots
+$unavailableSlots = [];
+foreach ($reservations as $reservation) {
+    $start = Carbon::parse($reservation->date)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+    $end = Carbon::parse($reservation->end)->tz('Asia/Riyadh'); // Set the time zone to Saudi Arabia
+
+    $unavailableSlots[] = [
+        'start' => $start->format('g:i A'),
+        'end' => $end->format('g:i A'),
+    ];
+}
+
+// Calculate the available time slots by removing reserved slots from all slots
+$availableSlots = array_filter($timeSlots, function ($slot) use ($unavailableSlots) {
+    foreach ($unavailableSlots as $unavailableSlot) {
+        if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
+            return false; // Slot is reserved, so it's not available
         }
-
-        // Calculate the unavailable time slots
-        $unavailableSlots = [];
-        foreach ($reservations as $reservation) {
-            $start = Carbon::parse($reservation->date);
-            $end = Carbon::parse($reservation->end);
-
-            $unavailableSlots[] = [
-                'start' => $start->format('g:i A'),
-                'end' => $end->format('g:i A'),
-            ];
-        }
-
-        // Calculate the available time slots by removing reserved slots from all slots
-        $availableSlots = array_filter($timeSlots, function ($slot) use ($unavailableSlots) {
-            foreach ($unavailableSlots as $unavailableSlot) {
-                if ($slot['start'] === $unavailableSlot['start'] && $slot['end'] === $unavailableSlot['end']) {
-                    return false; // Slot is reserved, so it's not available
-                }
-            }
-            return true; // Slot is available
-        });
+    }
+    return true; // Slot is available
+});
 
 // Now you can use the $availableSlots and $unavailableSlots arrays as needed
 
