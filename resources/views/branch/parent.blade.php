@@ -726,20 +726,20 @@
             });
         }
 
-        function resver() {
-            $('.nav-item.active').removeClass('active');
+        // function resver() {
+        //     $('.nav-item.active').removeClass('active');
 
-            // Add active class to "الحجوزات" link
-            $('.resver').addClass('active');
-            $('#mainPage').empty(); // Clear the previous page content
-            $.get('/branch/resver/ajax', {}).done(function(data) {
-                $('#mainPage').html(data); // Show the new content
-            }).done(function() {
-                $('#casher-section').hide(); // Hide the casher section
-                $('#reservSideContainer').show();
-                // $('#reserv-main-section').show(); // Show the reserv main section
-            });
-        }
+        //     // Add active class to "الحجوزات" link
+        //     $('.resver').addClass('active');
+        //     $('#mainPage').empty(); // Clear the previous page content
+        //     $.get('/branch/resver/ajax', {}).done(function(data) {
+        //         $('#mainPage').html(data); // Show the new content
+        //     }).done(function() {
+        //         $('#casher-section').hide(); // Hide the casher section
+        //         $('#reservSideContainer').show();
+        //         // $('#reserv-main-section').show(); // Show the reserv main section
+        //     });
+        // }
 
         function casher() {
             $('.nav-item.active').removeClass('active');
