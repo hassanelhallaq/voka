@@ -1,6 +1,6 @@
 <div id="hal">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div id="mainPage">
                 <div class="col-md-12">
                     <div class="reservation-tabs all-halls card card-nav-tabs card-plain ">
@@ -103,7 +103,7 @@
                                                                                     $formattedTime = Carbon\Carbon::createFromFormat('g:i A', $tables->reservation->time)->format('H:i');
                                                                                     $reservationDateTime = $tables->reservation->date;
                                                                                 }
-
+                                                                                
                                                                             @endphp
                                                                             <p class="hall-name"> الوقت المنقضى</p>
                                                                             <div class="countdown-timer"
@@ -323,10 +323,10 @@
                                                                                             class="rev-item d-flex w-100  align-items-start">
                                                                                             @php
                                                                                                 $dateString = $tables->reservation->date;
-
+                                                                                                
                                                                                                 // Create a DateTime object from the date string
                                                                                                 $date = new DateTime($dateString);
-
+                                                                                                
                                                                                                 // Format the time as desired (e.g., "H:i")
                                                                                                 $formattedTime = $date->format('h:i A');
                                                                                             @endphp
@@ -357,7 +357,7 @@
                                                                                 @endif
                                                                                 @php
                                                                                     $now = Carbon\Carbon::now();
-
+                                                                                    
                                                                                     // Query to get all reservations for today
                                                                                     $reservations = App\Models\Reservation::where('table_id', $tables->id)
                                                                                         ->where(function ($query) use ($now) {
@@ -365,24 +365,24 @@
                                                                                         })
                                                                                         ->orderBy('date')
                                                                                         ->get();
-
+                                                                                    
                                                                                     $packages = $tables->packages;
                                                                                     foreach ($packages as $key => $package) {
                                                                                         # code...
-
+                                                                                    
                                                                                         $package = App\Models\Package::find($package->id);
                                                                                         $minutesPerPackage = $package->time;
-
+                                                                                    
                                                                                         // Generate time slots based on the package minutes
                                                                                         $startTime = Carbon\Carbon::createFromTime(0, 0, 0);
                                                                                         $endTime = Carbon\Carbon::createFromTime(23, 59, 59);
                                                                                         $timeSlots = [];
-
+                                                                                    
                                                                                         $currentTime = clone $startTime;
                                                                                         while ($currentTime->lte($endTime)) {
                                                                                             $endTimeSlot = clone $currentTime;
                                                                                             $endTimeSlot->addMinutes($minutesPerPackage);
-
+                                                                                    
                                                                                             // Check if the time slot is in the past
                                                                                             if ($endTimeSlot->isFuture()) {
                                                                                                 $timeSlots[] = [
@@ -390,18 +390,18 @@
                                                                                                     'end' => $endTimeSlot->format('g:i A'),
                                                                                                 ];
                                                                                             }
-
+                                                                                    
                                                                                             $currentTime->addMinutes($minutesPerPackage);
                                                                                         }
                                                                                         // Calculate the available and unavailable time slots
                                                                                         $availableSlots = [];
                                                                                         $unavailableSlots = [];
-
+                                                                                    
                                                                                         $prevEndTime = $startTime;
                                                                                         foreach ($reservations as $reservation) {
                                                                                             $start = Carbon\Carbon::parse($reservation->date);
                                                                                             $end = Carbon\Carbon::parse($reservation->end);
-
+                                                                                    
                                                                                             if ($prevEndTime->lt($start)) {
                                                                                                 $availableSlots[] = [
                                                                                                     'start' => $prevEndTime->format('g:i A'),
@@ -412,7 +412,7 @@
                                                                                                 'start' => $start->format('g:i A'),
                                                                                                 'end' => $end->format('g:i A'),
                                                                                             ];
-
+                                                                                    
                                                                                             $prevEndTime = $end;
                                                                                         }
                                                                                         if ($prevEndTime->lt($endTime)) {
@@ -532,7 +532,7 @@
                                                                         ->where('is_done', 0)
                                                                         ->with('products')
                                                                         ->first();
-
+                                                                
                                                                     // Wrap the related products in a collection (even if there's only one result)
                                                                     if ($orders != null && $orders->products->count() != 0) {
                                                                         // Calculate total order prices using the map function on the products collection
