@@ -357,7 +357,8 @@ class PosController extends Controller
 
             $currentTime->addMinutes($minutesPerPackage);
         }
-        // Calculate the available and unavailable time slots
+
+        // Calculate the available time slots
         $availableSlots = [];
         $unavailableSlots = [];
 
@@ -367,10 +368,12 @@ class PosController extends Controller
             $end = Carbon::parse($reservation->end);
 
             if ($prevEndTime->lt($start)) {
-                $availableSlots[] = [
-                    'start' => $prevEndTime->format('g:i A'),
-                    'end' => $start->format('g:i A'),
-                ];
+                if ($start->isFuture()) {
+                    $availableSlots[] = [
+                        'start' => $prevEndTime->format('g:i A'),
+                        'end' => $start->format('g:i A'),
+                    ];
+                }
             }
             $unavailableSlots[] = [
                 'start' => $start->format('g:i A'),
@@ -380,10 +383,12 @@ class PosController extends Controller
             $prevEndTime = $end;
         }
         if ($prevEndTime->lt($endTime)) {
-            $availableSlots[] = [
-                'start' => $prevEndTime->format('g:i A'),
-                'end' => $endTime->format('g:i A'),
-            ];
+            if ($endTime->isFuture()) {
+                $availableSlots[] = [
+                    'start' => $prevEndTime->format('g:i A'),
+                    'end' => $endTime->format('g:i A'),
+                ];
+            }
         }
 
         // return view('reservations.show', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
