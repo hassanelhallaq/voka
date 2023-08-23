@@ -757,7 +757,7 @@
             // Call the 'store' function to handle the form data submission
             axios.post('/branch/reservations', formData)
                 .then(function(response) {
-                    showMessage(response.data)
+
                     var reservationId = response.data.reservation.id;
                     updateReservationDetails(reservationId);
                     // Add onClick event to the "تفعيل الحجز" button
@@ -792,7 +792,7 @@
             // Call the 'store' function to handle the form data submission
             axios.post('/branch/reservations', formData)
                 .then(function(response) {
-                    showMessage(response.data)
+                    
                     var reservationId = response.data.reservation.id;
                     updateReservationDetails(reservationId);
                     // Add onClick event to the "تفعيل الحجز" button
