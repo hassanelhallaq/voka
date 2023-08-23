@@ -424,10 +424,7 @@ class PosController extends Controller
         $table->update();
         $reservation->status = 'تم الحضور';
         $isSaved =   $reservation = $reservation->update();
-
-
-
-        return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
+        return response()->json(['icon' => 'success', 'title' => 'created successfully'], $isSaved ? 201 : 400);
     }
     public function closeTable($id)
     {
@@ -442,7 +439,6 @@ class PosController extends Controller
             $order->update();
         }
         $reservation = $reservation->update();
-
-        return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
+        return response()->json(['icon' => 'success', 'title' => 'created successfully'], $isSaved ? 201 : 400);
     }
 }

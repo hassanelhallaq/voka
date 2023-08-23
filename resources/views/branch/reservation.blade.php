@@ -37,10 +37,12 @@
             border: none;
             margin-bottom: 10px;
         }
+
         .modal-backdrop.show {
             display: none !important;
         }
-              /*-------------------------------- loading css ----------------------------------------*/
+
+        /*-------------------------------- loading css ----------------------------------------*/
         .loading-screen {
             position: fixed;
             top: 0;
@@ -123,7 +125,8 @@
                 transform: translate(24px, 0);
             }
         }
-              /*--------------------------------------------- css for the lock screen ----------------------------------------*/
+
+        /*--------------------------------------------- css for the lock screen ----------------------------------------*/
         .closed-screen {
             width: 100%;
             height: 100vh;
@@ -149,10 +152,12 @@
             background-color: #f0f0f0;
             direction: ltr;
         }
-         #waiter-notification {
-    display: none;
-    /* Other modal styles */
-}
+
+        #waiter-notification {
+            display: none;
+            /* Other modal styles */
+        }
+
         .pin-container {
             text-align: center;
             padding: 20px;
@@ -206,7 +211,7 @@
 </head>
 
 <body>
-    
+
     <div class="closed-screen">
         <div class="lock-screen">
             <div class="pin-container">
@@ -335,10 +340,9 @@
                                         class="s-filter btn btn-lg btn-primary"> الغاء الحجز </a>
                                     <a href="{{ route('branch.home') }}" type="button"
                                         class="s-filter btn btn-lg btn-primary my-3"> عرض الصالة </a>
-                                    <button type="button"
-                                        class="s-filter btn btn-lg btn-primary close-the-screen"> 
+                                    <button type="button" class="s-filter btn btn-lg btn-primary close-the-screen">
                                         اقفال الشاشة
-                                 </button>
+                                    </button>
                                 </div>
                             </li>
                             <li class="nav-item py-3 show-content no-border" data-id="#pay" data-v="0">
@@ -503,7 +507,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary register-and-close" onclick="storeReaervation()"
-                        style="margin-left: 10px;" >تسجيل</button>
+                        style="margin-left: 10px;">تسجيل</button>
                     <button type="button" class="btn btn-primary register-and-close"
                         onclick="storeReaervationActive()" style="margin-left: 10px;">تسجيل وتغعيل</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا </button>
@@ -753,6 +757,7 @@
             // Call the 'store' function to handle the form data submission
             axios.post('/branch/reservations', formData)
                 .then(function(response) {
+                    showMessage(response.data)
                     var reservationId = response.data.reservation.id;
                     updateReservationDetails(reservationId);
                     // Add onClick event to the "تفعيل الحجز" button
@@ -787,6 +792,7 @@
             // Call the 'store' function to handle the form data submission
             axios.post('/branch/reservations', formData)
                 .then(function(response) {
+                    showMessage(response.data)
                     var reservationId = response.data.reservation.id;
                     updateReservationDetails(reservationId);
                     // Add onClick event to the "تفعيل الحجز" button
@@ -801,6 +807,17 @@
                     $('#pill').modal('show'); // Show the reserv main section
 
                 })
+        }
+
+        function showMessage(data) {
+            console.log(data);
+            Swal.fire({
+                position: 'center',
+                icon: data.icon,
+                title: data.title,
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
 
         function generateReservationHTML(reservation) {
@@ -881,7 +898,7 @@
             $('#reservation-details button[disabled]').prop('disabled', false);
             $('#reservation-details button[data-bs-target="#pill"]').removeAttr('disabled');
             $('#reservation-details button[data-bs-target="#activate-reservation-btn"]').removeAttr('disabled');
-
+            $('#add-booking').prop('disabled', true);
 
         }
 
@@ -901,7 +918,7 @@
 
         $('.register-and-close').on('click', function() {
             $('.modal-backdrop.show').hide();
-            
+
             $('.modal-backdrop.show').hide();
             $('#pill').removeClass('dis-none').addClass('show');
 
@@ -910,22 +927,22 @@
         $('.bill-print').on('click', function() {
             $('#pill').removeClass('dis-none');
         });
-        
-        
-        
-        
-             $('.register-and-close').on('click', function() {
-            
-                $('#modalPay').modal('hide');
-                $('.fade.show').hide();
-            });
+
+
+
+
+        $('.register-and-close').on('click', function() {
+
+            $('#modalPay').modal('hide');
+            $('.fade.show').hide();
+        });
     </script>
     <script>
         var dt = new Date().toLocaleTimeString();
         document.getElementById('date-time').value = dt;
     </script>
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             $('.close-the-screen').on('click', function() {
                 $('.closed-screen').addClass('opened-screen');
                 $('.lock-screen').fadeIn();
@@ -954,7 +971,7 @@
                     $pinInput.val(currentPin + key);
                 }
             });
-         });
+        });
     </script>
 </body>
 

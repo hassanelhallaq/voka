@@ -322,7 +322,7 @@
                                                                     <p class="hall-name"> المدة</p>
                                                                     <span
                                                                         class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
-                                                                        ساعة </span>
+                                                                        دقيقة </span>
                                                                 </div>
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -1274,7 +1274,7 @@
                                                                     <p class="hall-name"> المدة</p>
                                                                     <span
                                                                         class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
-                                                                        ساعة </span>
+                                                                        دقيقة </span>
                                                                 </div>
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -2507,7 +2507,7 @@
                                                                     <p class="hall-name"> المدة</p>
                                                                     <span
                                                                         class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
-                                                                        ساعة </span>
+                                                                        دقيقة </span>
                                                                 </div>
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -3499,7 +3499,7 @@
                                                                     <p class="hall-name"> المدة</p>
                                                                     <span
                                                                         class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
-                                                                        ساعة </span>
+                                                                        دقيقة </span>
                                                                 </div>
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -4480,7 +4480,7 @@
                                                                     <p class="hall-name"> المدة</p>
                                                                     <span
                                                                         class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
-                                                                        ساعة </span>
+                                                                        دقيقة </span>
                                                                 </div>
                                                                 <div
                                                                     class="card-item body-time d-flex justify-content-between">
@@ -5481,7 +5481,7 @@
                                                         <p class="hall-name"> المدة</p>
                                                         <span
                                                             class="sta">{{ $table->reservation != null ? $table->reservation->minutes : 0 }}
-                                                            ساعة </span>
+                                                            دقيقة </span>
                                                     </div>
                                                     <div class="card-item body-time d-flex justify-content-between">
                                                         <p class="hall-name"> الحالة</p>
@@ -6613,7 +6613,7 @@
     //         x.style.display = "block";
     //     }
     //
-    
+
       $(document).ready(function() {
 
          $('.home-btn').on('click', function(){
@@ -6621,10 +6621,10 @@
             var tabId = $(this).data('tab');
             $('.home-table-bar-info').removeClass('active-tab').addClass('hidden-tab');
             $(tabId).addClass('active-tab').removeClass('hidden-tab');
-        });   
-        
-        
-        
+        });
+
+
+
         $('.table-btn-info').on('click', function() {
             var newId = $(this).data('id');
             $('.home-side-place').empty();
@@ -6632,8 +6632,8 @@
             $(newId).show();
             console.log($(newId));
         });
-        
-      
+
+
 
     });
 </script>

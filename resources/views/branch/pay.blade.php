@@ -89,7 +89,7 @@
                             <div class="payment-btn my-3 text-center">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button class="add-booking btn btn-primary w-100" type="button" data-bs-toggle="modal"
+                                        <button class="add-booking btn btn-primary w-100" type="button" id="add-booking" data-bs-toggle="modal"
                                             data-bs-target="#modalPay">
                                             تسجيل الطلب
                                         </button>
