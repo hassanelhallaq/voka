@@ -279,6 +279,11 @@ class PosController extends Controller
             }
 
             return response()->json($newData);
+        } else {
+
+            $newData = [];
+            $clients = [];
+            $reservationsType = [];
         }
         return view('branch.reserv', compact('newData'));
     }
