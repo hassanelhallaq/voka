@@ -323,19 +323,22 @@ class PosController extends Controller
     }
     public function tableSlots(Request $request)
     {
-        $now = Carbon::now();
+        $now = Carbon::now()->setTimezone('Asia/Riyadh'); // Set the time zone to Saudi Arabia
 
         // Query to get all reservations for today
         $reservations = Reservation::where('table_id', $request->table_id)
-            ->where(function ($query) use ($now) {
-                $query->whereDate('date', $now->toDateString())
-                    ->whereTime('date', '>=', $now->toTimeString());
-            })
+        ->where(function ($query) use ($now) {
+            $query->whereDate('date', $now->toDateString())
+                ->whereTime('date', '>=', $now->toTimeString());
+        })
             ->orderBy('date')
             ->get();
 
         $package = Package::find($request->packageId);
         $minutesPerPackage = $package->time;
+
+        // Set the time zone for generating time slots
+        Carbon::setTimezone('Asia/Riyadh'); // Set the time zone to Saudi Arabia
 
         // Generate time slots based on the package minutes
         $startTime = Carbon::createFromTime(0, 0, 0);
@@ -379,6 +382,9 @@ class PosController extends Controller
             }
             return true; // Slot is available
         });
+
+// Now you can use the $availableSlots and $unavailableSlots arrays as needed
+
 
         return  $render = view('branch.time_slots', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
         // return response()->view('branch.calender');
