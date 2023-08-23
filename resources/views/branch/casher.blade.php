@@ -59,8 +59,11 @@
                       <tbody>
 
                           <tr>
-                              @foreach ($cashers as $casher)
+                              @foreach ($cashers as $i => $casher)
                           <tr>
+                              <td>
+                                  {{ $i + 1 }}
+                              </td>
                               <td>
                                   {{ $casher->branch->name }}
                               </td>
