@@ -260,9 +260,13 @@ class PosController extends Controller
     }
     public function ajaxCalender(Request $request)
     {
-        $data = Reservation::whereDate('date', '>=', $request->start)
+
+        $data = Reservation::whereBetween('date', [Carbon::now()->subMonth(2), Carbon::now()->addMonth(6)])
             ->get();
+
         if ($request->ajax()) {
+            $data = Reservation::whereDate('date', '>=', $request->start)
+                ->get();
             $newData = [];
             foreach ($data as $index => $item) {
                 $reservationDateTime = $item->date;
