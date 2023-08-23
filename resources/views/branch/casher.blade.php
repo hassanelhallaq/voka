@@ -57,7 +57,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          
+
                           <tr>
                               @foreach ($cashers as $casher)
                           <tr>
@@ -95,7 +95,7 @@
                                   </button>
                                   <button type="button" class="btn btn-secondary"
                                       data-bs-dismiss="modal">اغلاق</button>
-                                         <div class="modal fade" id="inventory-modal" tabindex="-1"
+                                  <div class="modal fade" id="inventory-modal" tabindex="-1"
                                       aria-labelledby="inventory-modalLabel" aria-hidden="true">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
@@ -163,68 +163,14 @@
                                       </div>
                                       <div class="col-md-5 pt-5">
                                           <div class="radios d-flex d-flex justify-content-around">
-                                              <input type="radio" id="morning" name="fav_language" value="morning">
+                                              <input type="radio" id="morning" name="shift_type" value="morning">
                                               <label for="morning">شفت صباحى</label>
-                                              <input type="radio" id="evening" name="fav_language" value="evening">
+                                              <input type="radio" id="evening" name="shift_type" value="evening">
                                               <label for="evening">شفت مسائى</label>
-                                              <input type="radio" id="allDay" name="fav_language"
-                                                  value="allDay">
+                                              <input type="radio" id="allDay" name="shift_type" value="allDay">
                                               <label for="allDay">دوام كامل</label>
-                                              <!--<div class="form-check">-->
-                                              <!--  <input type="radio" class="btn-check" id="btn-check-outlined1" autocomplete="off">-->
-                                              <!--  <label class="btn btn-outline-primary" for="btn-check-outlined1">شفت صباحى </label><br>-->
-                                              <!--</div>-->
-                                              <!--<div class="form-check">-->
-                                              <!--  <input type="radio" class="btn-check" id="btn-check-outlined2" autocomplete="off">-->
-                                              <!--  <label class="btn btn-outline-primary" for="btn-check-outlined2">شفت مسائى </label><br>-->
-                                              <!--</div>-->
-                                              <!-- <div class="form-check">-->
-                                              <!--  <input type="radio" class="btn-check" id="btn-check-outlined3" autocomplete="off">-->
-                                              <!--  <label class="btn btn-outline-primary" for="btn-check-outlined3"> دوام كامل </label><br>-->
-                                              <!--</div>-->
-                                              <!--<div class="checkbox-wrapper-33">-->
-                                              <!--    <label class="checkbox">-->
-                                              <!--        <input type="radio" id="checkbox1" value="شفت صباحى"-->
-                                              <!--            class="checkbox__trigger visuallyhidden">-->
-                                              <!--        <span class="checkbox__symbol">-->
-                                              <!--            <svg xmlns="http://www.w3.org/2000/svg" version="1"-->
-                                              <!--                viewBox="0 0 28 28" height="28px" width="28px"-->
-                                              <!--                class="icon-checkbox" aria-hidden="true">-->
-                                              <!--                <path d="M4 14l8 7L24 7"></path>-->
-                                              <!--            </svg>-->
-                                              <!--        </span>-->
-                                              <!--        <p class="checkbox__textwrapper">شفت صباحى</p>-->
-                                              <!--    </label>-->
-                                              <!--</div>-->
-                                              <!--<div class="checkbox-wrapper-33">-->
-                                              <!--    <label class="checkbox">-->
-                                              <!--        <input type="radio" id="checkbox2" value="شفت مسائي"-->
-                                              <!--            class="checkbox__trigger visuallyhidden">-->
-                                              <!--        <span class="checkbox__symbol">-->
-                                              <!--            <svg xmlns="http://www.w3.org/2000/svg" version="1"-->
-                                              <!--                viewBox="0 0 28 28" height="28px" width="28px"-->
-                                              <!--                class="icon-checkbox" aria-hidden="true">-->
-                                              <!--                <path d="M4 14l8 7L24 7"></path>-->
-                                              <!--            </svg>-->
-                                              <!--        </span>-->
-                                              <!--        <p class="checkbox__textwrapper">شفت مسائي</p>-->
-                                              <!--    </label>-->
-                                              <!--</div>-->
-                                              <!--<div class="checkbox-wrapper-33">-->
-                                              <!--    <label class="checkbox">-->
-                                              <!--        <input type="radio" id="checkbox3" value="دوام كامل"-->
-                                              <!--            class="checkbox__trigger visuallyhidden">-->
-                                              <!--        <span class="checkbox__symbol">-->
-                                              <!--            <svg xmlns="http://www.w3.org/2000/svg" version="1"-->
-                                              <!--                viewBox="0 0 28 28" height="28px" width="28px"-->
-                                              <!--                class="icon-checkbox" aria-hidden="true">-->
-                                              <!--                <path d="M4 14l8 7L24 7"></path>-->
-                                              <!--            </svg>-->
-                                              <!--        </span>-->
-                                              <!--        <p class="checkbox__textwrapper">دوام كامل </p>-->
-                                              <!--    </label>-->
-                                              <!--</div>-->
                                           </div>
+
 
 
                                       </div>
@@ -491,24 +437,16 @@
       }
 
 
-      const checkboxes = document.querySelectorAll('.checkbox__trigger');
-      let selectedValue = ''; // Initialize the selectedValue variable
 
-      // Function to handle the selected value
-      function handleSelectedValue(value) {
-          selectedValue = value; // Update the selectedValue variable with the selected value
-      }
+      let selectedValue = ''; // Variable to store the selected value
 
-      // Attach a click event listener to each checkbox
-      checkboxes.forEach(checkbox => {
-          checkbox.addEventListener('click', function() {
-              if (this.checked) {
-                  const value = this.value; // Get the selected value
-                  handleSelectedValue(value); // Call the function to update selectedValue
-              }
+      // Event listener for radio buttons
+      const radioButtons = document.querySelectorAll('input[name="shift_type"]');
+      radioButtons.forEach(button => {
+          button.addEventListener('change', function() {
+              selectedValue = this.value; // Update the selected value
           });
       });
-      var avatar1 = new KTImageInput('kt_image_1');
 
       function performStore() {
 
