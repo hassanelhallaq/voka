@@ -337,43 +337,20 @@ class PosController extends Controller
         $package = Package::find($request->packageId);
         $minutesPerPackage = $package->time;
 
-        // Generate time slots based on the package minutes
-        $startTime = Carbon::createFromTime(0, 0, 0);
-        $endTime = Carbon::createFromTime(23, 59, 59);
-        $timeSlots = [];
-
-        $currentTime = clone $startTime;
-        while ($currentTime->lte($endTime)) {
-            $endTimeSlot = clone $currentTime;
-            $endTimeSlot->addMinutes($minutesPerPackage);
-
-            // Check if the time slot is in the past
-            if ($endTimeSlot->isFuture()) {
-                $timeSlots[] = [
-                    'start' => $currentTime->format('g:i A'),
-                    'end' => $endTimeSlot->format('g:i A'),
-                ];
-            }
-
-            $currentTime->addMinutes($minutesPerPackage);
-        }
-
         // Calculate the available time slots
         $availableSlots = [];
         $unavailableSlots = [];
 
-        $prevEndTime = $startTime;
+        $prevEndTime = $now; // Start with the current time
         foreach ($reservations as $reservation) {
             $start = Carbon::parse($reservation->date);
             $end = Carbon::parse($reservation->end);
 
             if ($prevEndTime->lt($start)) {
-                if ($start->isFuture()) {
-                    $availableSlots[] = [
-                        'start' => $prevEndTime->format('g:i A'),
-                        'end' => $start->format('g:i A'),
-                    ];
-                }
+                $availableSlots[] = [
+                    'start' => $prevEndTime->format('g:i A'),
+                    'end' => $start->format('g:i A'),
+                ];
             }
             $unavailableSlots[] = [
                 'start' => $start->format('g:i A'),
@@ -382,14 +359,16 @@ class PosController extends Controller
 
             $prevEndTime = $end;
         }
+
+        $endTime = Carbon::createFromTime(23, 59, 59);
         if ($prevEndTime->lt($endTime)) {
-            if ($endTime->isFuture()) {
-                $availableSlots[] = [
-                    'start' => $prevEndTime->format('g:i A'),
-                    'end' => $endTime->format('g:i A'),
-                ];
-            }
+            $availableSlots[] = [
+                'start' => $prevEndTime->format('g:i A'),
+                'end' => $endTime->format('g:i A'),
+            ];
         }
+
+        // Now you can use the $availableSlots and $unavailableSlots arrays as needed
 
         // return view('reservations.show', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
         return  $render = view('branch.time_slots', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
