@@ -757,7 +757,7 @@
             // Call the 'store' function to handle the form data submission
             axios.post('/branch/reservations', formData)
                 .then(function(response) {
-
+                    showMessage(response.data);
                     var reservationId = response.data.reservation.id;
                     updateReservationDetails(reservationId);
                     // Add onClick event to the "تفعيل الحجز" button
@@ -792,7 +792,7 @@
             // Call the 'store' function to handle the form data submission
             axios.post('/branch/reservations', formData)
                 .then(function(response) {
-                    
+                    showMessage(response.data);
                     var reservationId = response.data.reservation.id;
                     updateReservationDetails(reservationId);
                     // Add onClick event to the "تفعيل الحجز" button
@@ -905,7 +905,7 @@
         function activateReservation(reservationId) {
             // Perform actions related to activating the reservation using the reservationId
             let formData = new FormData();
-            store('/branch/active/reservation/' + reservationId, formData)
+            storepart('/branch/active/reservation/' + reservationId, formData)
             // You can replace the console.log with your desired logic
         }
         // Add event listener to form submission

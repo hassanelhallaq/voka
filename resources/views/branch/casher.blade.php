@@ -473,7 +473,7 @@
           formData.append('date', document.getElementById('date').value);
           formData.append('remarks', document.getElementById('remarks').value);
           formData.append('shift_type', selectedValue); // Use the selectedValue here
-          store('/branch/casher/store', formData, '/branch/casher/create')
+          storepart('/branch/casher/store', formData, '/branch/casher/create')
       }
   </script>
   <script>
