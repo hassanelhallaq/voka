@@ -57,32 +57,13 @@
        <meta name="csrf-token" content="{{ csrf_token() }}" />
        @csrf
    @endsection
-   <!-- FullCalendar CSS -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
-   <link rel="stylesheet" type="text/css"
-       href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.print.css" media="print">
+
 
    <!-- jQuery -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
    <!-- Moment.js -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-   <!-- FullCalendar JavaScript -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-   <script src="{{ asset('front/js/jquery.js') }}"></script>
-   <script src="https://unpkg.com/@popperjs/core@2"></script>
-   <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
-       integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous">
-   </script>
-   <script src="{{ asset('front/js/date.js') }}"></script>
-   <script src="{{ asset('front/js/bootstrap-clockpicker.min.js') }}"></script>
-   <script src="{{ asset('front/js/main.js') }}"></script>
    <script>
        $(document).ready(function() {
            $.ajaxSetup({
