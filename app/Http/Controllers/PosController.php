@@ -370,7 +370,8 @@ class PosController extends Controller
 
         // Now you can use the $availableSlots and $unavailableSlots arrays as needed
 
-        // return view('reservations.show', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
+        // Generate the time slots for HTML integration
+        $timeSlots = $availableSlots;
         return  $render = view('branch.time_slots', compact('availableSlots', 'unavailableSlots', 'timeSlots'));
         // return response()->view('branch.calender');
     }
