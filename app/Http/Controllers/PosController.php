@@ -21,23 +21,18 @@ class PosController extends Controller
 {
     public function home()
     {
-        // $halles = Lounge::with(['tables' => function ($q) {
-        //     $q->with(['reservation' => function ($q) {
-        //         $now = Carbon::now(); // Get the current date and time
-        //         $q->with(['package' => function ($q) use ($now) {
-        //             $q->select('id', 'time', 'name', 'price'); // Select the necessary columns from the package table
-        //         }])
-        //             ->where('status', '!=', 'انتهى');
-        //     }]);
-        // }])->where('branch_id', Auth::user()->branch_id)->get();
+        $currentDatetime = Carbon::now()->setTimezone('Asia/Riyadh');
+
         $halles = Lounge::with(['tables' => function ($q) {
             $q->with(['reservation' => function ($q) {
-                $q->where('status', '!=', 'انتهى');
+                $q->where('status', '!=', 'انتهى')->where('date', '<=', now()) // Check if start date is before or equal to now
+                    ->where('end', '>=', now());
             }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
         $loungesSortOne = Lounge::where('sort', 1)->with(['tables' => function ($q) {
             $q->with(['reservation' => function ($q) {
-                $q->where('status', '!=', 'انتهى');
+                $q->where('status', '!=', 'انتهى')->where('date', '<=', now()) // Check if start date is before or equal to now
+                    ->where('end', '>=', now());
             }]);
         }])
             ->where('branch_id', Auth::user()->id)
@@ -45,7 +40,8 @@ class PosController extends Controller
 
         $loungesSortow = Lounge::where('sort', 2)->with(['tables' => function ($q) {
             $q->with(['reservation' => function ($q) {
-                $q->where('status', '!=', 'انتهى');
+                $q->where('status', '!=', 'انتهى')->where('date', '<=', now()) // Check if start date is before or equal to now
+                    ->where('end', '>=', now());
             }]);
         }])
             ->where('branch_id', Auth::user()->id)
@@ -56,7 +52,8 @@ class PosController extends Controller
         $secondHalfTwo = $loungesSortow->tables->slice($halfCount);
         $loungesSorThree = Lounge::where('sort', 4)->with(['tables' => function ($q) {
             $q->with(['reservation' => function ($q) {
-                $q->where('status', '!=', 'انتهى');
+                $q->where('status', '!=', 'انتهى')->where('date', '<=', now()) // Check if start date is before or equal to now
+                    ->where('end', '>=', now());
             }]);
         }])
             ->where('branch_id', Auth::user()->id)
@@ -65,7 +62,8 @@ class PosController extends Controller
 
         $loungesSortowSilver = Lounge::where('sort', 3)->with(['tables' => function ($q) {
             $q->with(['reservation' => function ($q) {
-                $q->where('status', '!=', 'انتهى');
+                $q->where('status', '!=', 'انتهى')->where('date', '<=', now()) // Check if start date is before or equal to now
+                    ->where('end', '>=', now());
             }]);
         }])
             ->where('branch_id', Auth::user()->id)
@@ -74,8 +72,8 @@ class PosController extends Controller
         $halfCountSilver = ceil($loungesSortowSilver->tables->count() / 2);
         $firstHalfSilverTwo = $loungesSortowSilver->tables->slice(0, $halfCountSilver);
         $secondHalfSilverTwo = $loungesSortowSilver->tables->slice($halfCountSilver);
-
-        return response()->view('branch.home', compact('halles', 'loungesSortOne', 'loungesSorThree', 'loungesSortow', 'loungesSortowSilver', 'firstHalfTwo', 'secondHalfTwo', 'secondHalfSilverTwo', 'firstHalfSilverTwo'));
+        $tables = Table::where('branch_id', Auth::user()->id)->get();
+        return response()->view('branch.home', compact('halles', 'tables', 'loungesSortOne', 'loungesSorThree', 'loungesSortow', 'loungesSortowSilver', 'firstHalfTwo', 'secondHalfTwo', 'secondHalfSilverTwo', 'firstHalfSilverTwo'));
 
         // return response()->view('branch.home', compact('halles'));
     }
@@ -185,7 +183,7 @@ class PosController extends Controller
             }]);
         }])->where('branch_id', Auth::user()->branch_id)->get();
 
-        return  $render = view('branch._halls', compact('halles'));
+        return view('branch._halls', compact('halles'));
     }
     public function hallsNew()
     {
@@ -346,8 +344,7 @@ class PosController extends Controller
         // Query to get all reservations for today
         $reservations = Reservation::where('table_id', $request->table_id)
             ->where(function ($query) use ($now) {
-                $query->whereDate('date', $now->toDateString())
-                    ->whereTime('date', '>=', $now->toTimeString());
+                $query->whereDate('date', $now);
             })
             ->orderBy('date')
             ->get();
@@ -412,22 +409,37 @@ class PosController extends Controller
         $reservationPayment = Reservation::whereDate('date', Carbon::today())->with('table')->whereHas('table', function ($q) {
             $q->where('branch_id', Auth::user()->id);
         });
+        $visa = Reservation::whereDate('date', Carbon::today())->where('payment_type', "بطاقة ائتمان")->with('table')->whereHas('table', function ($q) {
+            $q->where('branch_id', Auth::user()->id);
+        })->sum('price');
         $cash = $reservationPayment->where('payment_type', 'كاش')->sum('price');
-        $visa = $reservationPayment->where('payment_type', 'بطاقة ائتمان')->sum('price');
+        // $visa = $reservationPayment->where('payment_type', "بطاقة ائتمان")->sum('price');
         $online = $reservationPayment->where('payment_type', 'online')->sum('price');
-        $point = $reservationPayment->where('payment_type', 'المحفظة')->sum('price');
+        $point = Reservation::whereDate('date', Carbon::today())->with('table')->whereHas('table', function ($q) {
+            $q->where('branch_id', Auth::user()->id);
+        })->sum('price');
+        $order = $sumProductQuantity = OrderProduct::whereDate('created_at', Carbon::today())->where('payment_type', '!=', 'دفع إلكتروني')
+            ->sum(DB::raw('price * quantity'));
 
-        return view('branch.casher', compact('visa', 'cash', 'online', 'cashers'))->render();
+        return view('branch.casher', compact('visa', 'cash', 'online', 'cashers', 'order', 'point'));
     }
 
     public function activeTable($id)
     {
+          $reservation =  Reservation::where('table_id', $id)->where('status', '!=', 'انتهى')
+            ->where('date', '<=', now())
+            ->where('end', '>=', now())->first();
+            if($reservation){
         $table = Table::find($id);
         $table->status = 'in_service';
         $isSaved = $table->update();
-        $reservation =  $table->reservation;
+      
         $reservation->status = 'تم الحضور';
         $reservation = $reservation->update();
+            }else{
+                      return response()->json(['icon' => 'error', 'title' => ' created faild'], $isSaved ? 201 : 400);
+  
+            }
 
         return response()->json(['icon' => 'success', 'title' => ' created successfully'], $isSaved ? 201 : 400);
     }
@@ -439,7 +451,8 @@ class PosController extends Controller
         $table->status = 'in_service';
         $table->update();
         $reservation->status = 'تم الحضور';
-        $isSaved =   $reservation = $reservation->update();
+        $isSaved =
+            $reservation->update();
         return response()->json(['icon' => 'success', 'title' => 'created successfully'], $isSaved ? 201 : 400);
     }
     public function closeTable($id)
@@ -447,7 +460,10 @@ class PosController extends Controller
         $table = Table::find($id);
         $table->status = 'available';
         $isSaved = $table->update();
-        $reservation =  $table->reservation;
+
+        $reservation =  Reservation::where('table_id', $id)->where('status', '!=', 'انتهى')
+            ->where('date', '<=', now())
+            ->where('end', '>=', now())->first();
         $reservation->status = 'انتهى';
         $order = Order::where([['table_id', $reservation->table_id], ['package_id', $reservation->package_id], ['is_done', 0]])->first();
         if ($order) {

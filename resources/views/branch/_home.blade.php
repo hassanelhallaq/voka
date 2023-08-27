@@ -115,9 +115,9 @@
   </style>
   <div id="mainPage">
       <div class="col-md-12">
-          <div class="container">
+          <div class="container-fluid">
               <div class="row">
-                  <div class="col-md-2">
+                  <div class="col-md-1">
                       <div class="filter-btns d-flex flex-column mt-3  mb-2">
                           <div class="btn-group d-flex flex-column" role="group" aria-label="Basic example">
                               @foreach ($halles as $key => $item)
@@ -140,7 +140,7 @@
                   </div>
               
               <!-- salone table  -->
-                <div class="col-md-10">
+                <div class="col-md-11">
                     <div class="row home-card mt-3 active-salon" id="salon{{ $item->id }}">
                   <div class="col-md-9">
                       <div class="other d-flex flex-column">

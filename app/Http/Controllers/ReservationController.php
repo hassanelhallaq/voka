@@ -27,7 +27,7 @@ class ReservationController extends Controller
         if (!$validator->fails()) {
             $package = Package::find($request->package_id);
             $wallet = Wallet::where('client_id', $request->client_id)->first();
-            $price = $package->price * .15;
+            $price = $package->price ;
             if (!$wallet && $request->payment == 'المحفظة') {
                 return response()->json(['icon' => 'error', 'title' => 'رصيد محفظتك لا يكفي'], 400);
             }
@@ -59,6 +59,7 @@ class ReservationController extends Controller
             $formattedEndDatetime = $endDate->format('Y-m-d H:i:s');  // Output: e.g., 2023-08-05 17:17:00
 
             // Now you can use the formatted start and end time values as needed
+            $currentDatetime = Carbon::now()->setTimezone('Asia/Riyadh'); // Current datetime
 
             // Now you have start and end DateTime objects with date and time information
             $reservation = new Reservation();
@@ -72,8 +73,11 @@ class ReservationController extends Controller
             $reservation->end = $formattedEndDatetime;
             $reservation->time_end = $formattedEndTime;
             $reservation->note = $request->note;
-            $reservation->status = $request->status;
-            $reservation->payment_type = $request->payment;
+if ($currentDatetime >= $startDate && $currentDatetime <= $endDate) {
+                $reservation->status = $request->status;
+            } else {
+                $reservation->status = 'مؤكد';
+            }            $reservation->payment_type = $request->payment;
             $isSaved = $reservation->save();
 
             $order = new Order();
@@ -98,9 +102,13 @@ class ReservationController extends Controller
                 $walletAction->type   = 'Discount';
                 $walletAction->save();
             }
-            $table = Table::find($request->table_id);
-            $table->status = 'in_service';
-            $table->update();
+       
+              $currentDatetime = Carbon::now()->setTimezone('Asia/Riyadh'); // Current datetime
+            if ($request->status == 'تم الحضور' && $currentDatetime >= $startDate && $currentDatetime <= $endDate) {
+                $table = Table::find($request->table_id);
+                $table->status = 'in_service';
+                $table->update();
+            }
             $reservation->load('client', 'package', 'table');
 
             return ['reservation' => $reservation];

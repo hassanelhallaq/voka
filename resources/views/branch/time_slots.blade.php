@@ -11,10 +11,10 @@
                 }
             @endphp
             @if ($slotClosed)
-                <div class="btn btn-lg btn-danger time-slot btn-clock"
+                <button class="btn btn-lg btn-info time-slot btn-clock" 
                     data-choos="{{ $slot['start'] }} - {{ $slot['end'] }}" data-id="#pay" disabled>
                     {{ $slot['start'] }} - {{ $slot['end'] }}
-                </div>
+                </button>
             @else
                 <div class="btn btn-lg btn-success time-slot change-content btn-clock"
                     data-choos="{{ $slot['start'] }} - {{ $slot['end'] }}" data-id="#pay">

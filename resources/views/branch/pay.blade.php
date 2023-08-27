@@ -111,11 +111,11 @@
                                             طباعة الفاتورة
                                         </button>
                                     </div>
-                                    <div class="col-md-6">
-                                        <button class="change-salon btn btn-primary w-100" type="button" data-id="#all-packages" disabled >
-                                            تغيير الصالة
-                                        </button>
-                                    </div>
+                                    <!--<div class="col-md-6">-->
+                                    <!--    <button class="change-salon btn btn-primary w-100" type="button" data-id="#all-packages" disabled >-->
+                                    <!--        تغيير الصالة-->
+                                    <!--    </button>-->
+                                    <!--</div>-->
                                 </div>
 
                             </div>

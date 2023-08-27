@@ -691,53 +691,9 @@ $('.reserv-date').on('click', function(){
       }
     });
 
-    $('.note-save').on('click', function(e) {
-      e.preventDefault();
-      var noteInputValue = $('.note-input').val();
-      var listItem = $('<li class="list-group-item note-list d-flex justify-content-between align-items-start">');
-      var noteContent = $('<div class="me-2 ms-auto">').append($('<div class="note-input fw-bold">').text(noteInputValue));
-      var closeButton = $('<button type="button" class="note-remove btn btn-dark text-light">حذف</button>');
-
-      $('.no-notes').remove();
-      listItem.append(noteContent, closeButton);
-      $('.note-lists').append(listItem);
-      $('.note-input').val('') ;
-
-      closeButton.on('click', function() {
-        listItem.animate({
-          left: '-100%',
-          opacity: 0
-        }, 500, function() {
-          listItem.remove();
-        });
-      });
-    });
 
 
 
-
-       //  getting table id
-    //   $('.new-reservation-tables .card').on('click', function(){
-    //       console.log('table name');
-    //     $('.new-reservation-tables .card').removeClass('active-card');
-    //     $(this).addClass('active-card');
-    //     var cardTitle = $(this).find('.card-title').text();
-    //     $('.table-name').text(cardTitle)
-
-    //     var itemId = $(this).data('choosen');
-    //     $('.table-name').attr('data-choos', itemId);
-    //   });
-
-    //  getting guest  id
-    // $('.gust-cards .card').on('click', function(event) {
-    //   event.stopPropagation();
-
-    //   var personeName = $(this).find('.card-title');
-    //   $('.guest-name').text(personeName.text());
-
-    //   var itemId = $(this).data('choosen');
-    //   $('.guest-name').attr('data-choos', itemId);
-    // });
 
     var newReservationData = {
       packageId: $('.package-name').data('data-choos'),
@@ -800,13 +756,34 @@ $('.reserv-date').on('click', function(){
   });
 
 
+    
+     // Load 'branch.reservSide' view using jQuery's $.get() method
+    $.get('/branch/path/to/branch.reservSide', function(data) {
+        // Once the view is loaded, place its content inside the container
+        // $('#reservSideContainer').html(data);
+        // Hide the container after loading the view
+        $('#reservSideContainer').hide();
+    });
 
+    $('.noitification-card-close').on('click', function() {
+        var notificationCard = $('.noitification-card');
 
-//   $('.voka-slider').slick({
-//       infinite: true,
-//       slidesToShow: 3,
-//       slidesToScroll: 3
-//     });
+        // استخدام animate() لتحريك العنصر إلى اليمين ثم إخفائه
+        notificationCard.animate({
+                left: '100%'
+            }, // يمكنك ضبط القيمة حسب الحاجة
+            {
+                duration: 500, // مدة الانزلاق بالميلي ثانية
+                complete: function() {
+                    notificationCard.hide(); // بعد اكتمال الانزلاق، قم بإخفاء العنصر
+                }
+            }
+        );
+    });
+
+    $('.noitification-modal-close').on('click', function() {
+        $('.notification-modal').removeClass('active-notification show');
+    });
 
 
 

@@ -549,8 +549,8 @@
                             <ul class="navbar-nav justify-content-center flex-grow-1">
                                 @can('branch_home')
                                     <li class="nav-item home active">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link home-link active"
-                                            aria-current="page" onclick="home()">
+                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center  home-link active"
+                                            aria-current="page" href="{{ route('branch.home') }}">
                                             <i class="fa-solid fa-house"></i>
                                             <span>الرئيسية</span>
                                         </a>
@@ -558,8 +558,8 @@
                                 @endcan
                                 @can('branch_tables')
                                     <li class="nav-item halls dropdown">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
-                                            onclick="halls()" role="button">
+                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center "
+                                            href="{{ route('branch.halls') }}" role="button">
                                             <i class="fa-solid fa-table-cells-large"></i>
                                             <span>الطاولات</span>
                                         </a>
@@ -568,7 +568,7 @@
                                 @can('branch_reservations')
                                     <li class="nav-item resver">
                                         <a href="{{ route('ajaxCalender') }}"
-                                            class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link">
+                                            class="nav-link d-flex flex-column justify-content-center align-items-center ">
                                             <i class="fa-solid fa-utensils"></i>
                                             <span>الحجوزات</span>
                                         </a>
@@ -590,7 +590,7 @@
                                 </li> --}}
                                 @can('branch_menu')
                                     <li class="nav-item product">
-                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link"
+                                        <a class="nav-link d-flex flex-column justify-content-center align-items-center "
                                             onclick="products()">
                                             <i class="fa-solid fa-clipboard-list "></i>
                                             <span>القائمة</span>
@@ -599,8 +599,8 @@
                                 @endcan
                                 @can('branch_casher')
                                     <li class="nav-item  casher">
-                                        <a onclick="casher()"
-                                            class="nav-link d-flex flex-column justify-content-center align-items-center menu-nav-link">
+                                        <a  href="{{ route('casher.create') }}"
+                                            class="nav-link d-flex flex-column justify-content-center align-items-center ">
                                             <i class="fa-solid fa-clipboard-list "></i>
                                             <span>الجرد</span>
                                         </a>
@@ -652,6 +652,12 @@
 
             $('.noitification-modal-close').on('click', function() {
                 $('.notification-modal').removeClass('active-notification show');
+            });
+            
+            
+            $('.sidenav .nav-item').on('click', function(){
+                $('.sidenav .nav-item').removeClass('active');
+                $(this).addClass('active');
             });
         });
 
@@ -741,20 +747,20 @@
         //     });
         // }
 
-        function casher() {
-            $('.nav-item.active').removeClass('active');
+        // function casher() {
+        //     $('.nav-item.active').removeClass('active');
 
-            // Add active class to "الحجوزات" link
-            $('.casher').addClass('active');
-            $('#mainPage').empty(); // Clear the previous page content
-            $.get('/branch/casher/create', {}).done(function(data) {
-                $('#mainPage').html(data); // Show the new content
-            }).done(function() {
-                $('#casher-section').hide(); // Hide the casher section
-                $('#reservSideContainer').hide();
-                // $('#reserv-main-section').show(); // Show the reserv main section
-            });
-        }
+        //     // Add active class to "الحجوزات" link
+        //     $('.casher').addClass('active');
+        //     $('#mainPage').empty(); // Clear the previous page content
+        //     $.get('/branch/casher/create', {}).done(function(data) {
+        //         $('#mainPage').html(data); // Show the new content
+        //     }).done(function() {
+        //         $('#casher-section').hide(); // Hide the casher section
+        //         $('#reservSideContainer').hide();
+        //         // $('#reserv-main-section').show(); // Show the reserv main section
+        //     });
+        // }
     </script>
 
     <div class="closed-screen">
@@ -928,33 +934,33 @@
             });
 
 
-            $(document).ready(function() {
-                $(".menu-nav-link").on("click", function(event) {
-                    event.preventDefault(); // منع سلوك الرابط الافتراضي
+            // $(document).ready(function() {
+            //     $(".menu-nav-link").on("click", function(event) {
+            //         event.preventDefault(); // منع سلوك الرابط الافتراضي
 
-                    var loadingScreen = $("#loadingScreen");
+            //         var loadingScreen = $("#loadingScreen");
 
-                    loadingScreen.css("display", "flex"); // عرض شاشة التحميل
+            //         loadingScreen.css("display", "flex"); // عرض شاشة التحميل
 
-                    // محاكاة تأخير التحميل باستخدام setTimeout
-                    setTimeout(function() {
-                        var clickedLink = $(event.target).closest("a");
+            //         // محاكاة تأخير التحميل باستخدام setTimeout
+            //         setTimeout(function() {
+            //             var clickedLink = $(event.target).closest("a");
 
-                        if (clickedLink.hasClass("home")) {
-                            home();
-                        } else if (clickedLink.hasClass("halls")) {
-                            halls();
-                        } else if (clickedLink.hasClass("resver")) {
-                            resver();
-                        }
-                        // وهكذا يمكنك إضافة الصفحات الأخرى هنا
+            //             if (clickedLink.hasClass("home")) {
+            //                 home();
+            //             } else if (clickedLink.hasClass("halls")) {
+            //                 halls();
+            //             } else if (clickedLink.hasClass("resver")) {
+            //                 resver();
+            //             }
+            //             // وهكذا يمكنك إضافة الصفحات الأخرى هنا
 
-                        // إخفاء شاشة التحميل بعد اكتمال الإجراءات
-                        loadingScreen.css("display", "none");
+            //             // إخفاء شاشة التحميل بعد اكتمال الإجراءات
+            //             loadingScreen.css("display", "none");
 
-                    }, 3000); // محاكاة توقيت التحميل
-                });
-            });
+            //         }, 3000); // محاكاة توقيت التحميل
+            //     });
+            // });
 
             // $('.home-link').on('click', function() {
             //     $('.main-from-home').removeClass('col-md-8'));

@@ -205,7 +205,9 @@
         .numeric-key:hover {
             background-color: #ccc;
         }
-
+        .quick-reservation #allguests {
+            display: block;
+        }
         /*----------------------------------------------end of the lock screen css code ----------------------------------------*/
         
         .subscribe-checkbox input[type="checkbox"], input[type="radio"] {
@@ -259,37 +261,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="side-nav side-items">
-                            <li class="nav-item py-3 show-content active-list" data-id="#all-packages" data-v="0">
-                                <a class="nav-link" href="#">
-                                    <div class="d-flex w-100">
-                                        <div class="icon text-right">
-                                            <i class="fa-solid fa-box-open"></i> الباقات
-                                        </div>
-                                        <div class="guests package-name text-center">
-                                            اختار الباقة
-                                        </div>
-                                        <div class="chevro text-left">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item py-3 show-content" data-id="#all-tables" data-v="0">
-                                <a class="nav-link" href="#">
-                                    <div class="d-flex w-100 ">
-                                        <div class="icon text-right">
-                                            <i class="fa-solid fa-border-top-left"></i> الطاولة
-                                        </div>
-                                        <div class="table-name guests text-center">
-                                            اختار الطاولة
-                                        </div>
-                                        <div class="chevro text-left">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                    </div>
-
-                                </a>
-                            </li>
+                         
                             <li class="nav-item py-3 show-content" data-id="#allguests" data-v="0">
                                 <a class="nav-link" href="#">
                                     <div class="d-flex w-100">
@@ -355,41 +327,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-9">
-                        <div class="reservation-tabs" id="all-packages">
-                            <div class="container ">
-                                <div class="row">
-                                    <!--<div class="col-md-2"></div>-->
-                                    @foreach ($packages as $package)
-                                        <div class="col-md-4">
-                                            <div class="card catch-id  btn-dark  text-center" id="package-input"
-                                                data-choosen="{{ $package->id }}">
-                                                <div class="card-body">
-                                                    <h2 class="card-title">{{ $package->name }}</h2>
-                                                    <p class="card-text package-text mt-2">باقة {{ $package->time }}
-                                                        ساعة مع
-                                                        {{ $package->price }} نقطة رصيد</p>
-
-                                                    <label data-id="#all-tables"
-                                                        class="choos-btn btn change-content btn-primary mt-4 pr-4"
-                                                        for="package_id" onclick="pack({{ $package->id }})">
-                                                        <input type="radio" value="{{ $package->id }}"
-                                                            id="package_{{ $package->id }}" style="display: none;">
-                                                        <input type="hidden" id="packageprice" name="packageprice"
-                                                            value="{{ $package->price }}">
-                                                        اختر الباقة
-                                                    </label>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <div class="reservation-tabs halls-tab card card-nav-tabs card-plain " id="all-tables">
-                            @include('branch._halles_branch')
-                        </div>
+                    <div class="col-md-9 quick-reservation">
                         <div class="reservation-tabs" id="allguests">
                             <div class="container pt-3">
                                 <!--<div class="row">-->

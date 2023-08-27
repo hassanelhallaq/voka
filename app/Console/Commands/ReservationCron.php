@@ -42,7 +42,7 @@ class ReservationCron extends Command
             $reservationEndTime = $reservation->end;
 
             // Check if the new end time has passed
-            if ($currentDateTime >= $reservationEndTime) {
+            if ($currentDateTime <= $reservationEndTime) {
                 log::info($currentDateTime . '_' . $reservationEndTime . 't');
                 // If the end time has passed, update the reservation status to 'انتهى' (or 'ended')
                 $reservation->status = 'انتهى';

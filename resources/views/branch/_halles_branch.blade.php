@@ -65,13 +65,13 @@
                                                 <span class="sta"> 2 اشخاص</span>
                                             </div>
                                             <div class="body-time d-flex justify-content-between">
-                                                <p class="hall-name"> لا يوجد تاريخ</p>
-                                                <span class="sta"> لا يوجد توقيت </span>
+                                                <!--<p class="hall-name"> لا يوجد تاريخ</p>-->
+                                                <!--<span class="sta"> لا يوجد توقيت </span>-->
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <p class="hall-name">لا يوجد رصيد</p>
-                                            <span class="sta"> لا يوجد رصيد متبقى </span>
+                                            <!--<p class="hall-name">لا يوجد رصيد</p>-->
+                                            <!--<span class="sta"> لا يوجد رصيد متبقى </span>-->
                                         </div>
                                     </div>
                                 </div>
